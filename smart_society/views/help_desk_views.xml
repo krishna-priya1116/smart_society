@@ -1,0 +1,249 @@
+<odoo>
+    <record id="help_desk_list" model="ir.ui.view">
+        <field name="name">help.desk.list</field>
+        <field name="model">help.desk</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="tower_id"/>
+
+            </list>
+        </field>
+    </record>
+
+    <record id="help_desk_form" model="ir.ui.view">
+        <field name="name">help.desk.form</field>
+        <field name="model">help.desk</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="tower_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Complaints">
+                            <field name="complaint_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="create_date"/>
+                                    <field name="flat_id"/>
+                                    <field name="resident_id"/>
+                                    <field name="description"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notice">
+                            <field name="notice_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="tower_id"/>
+                                    <field name="create_date"/>
+                                    <field name="description"/>
+                                </list>
+                            </field>
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="complaint_desk_list" model="ir.ui.view">
+        <field name="name">complaint.desk.list</field>
+        <field name="model">complaint.desk</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="resident_id"/>
+                <field name="tower_id"/>
+                <field name="flat_id"/>
+                <field name="description" optional="hide"/>
+                <field name="stage"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="complaint_desk_form_view" model="ir.ui.view">
+        <field name="name">complaint.desk.form</field>
+        <field name="model">complaint.desk</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- Action buttons — shown based on current stage -->
+                    <button name="action_send"
+                            string="Send Complaint"
+                            type="object"
+                            class="btn-primary"
+                            invisible="stage != 'draft'"/>
+
+                    <button name="action_process"
+                            string="Mark On Process"
+                            type="object"
+                            class="btn-primary"
+                            invisible="stage not in ('send', 'hold')"/>
+
+                    <button name="action_hold"
+                            string="Put On Hold"
+                            type="object"
+                            invisible="stage not in ('send', 'on_process')"/>
+
+                    <button name="action_resolve"
+                            string="Mark Resolved"
+                            type="object"
+                            class="btn-success"
+                            invisible="stage not in ('on_process', 'hold')"/>
+
+                    <button name="action_reject"
+                            string="Reject"
+                            type="object"
+                            class="btn-danger"
+                            invisible="stage in ('resolve', 'reject')"/>
+
+                    <button name="action_reset_draft"
+                            string="Reset to Draft"
+                            type="object"
+                            invisible="stage not in ('reject', 'hold')"/>
+
+                    <field name="stage" widget="statusbar"
+                           statusbar_visible="draft,send,on_process,resolve"
+                           options="{'clickable': '0'}"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="resident_id"/>
+                            <field name="flat_id"/>
+                            <field name="tower_id"/>
+                        </group>
+                        <group>
+                            <field name="to_committee"/>
+                            <field name="help_desk_id"/>
+                            <field name="description"/>
+                            <field name="proof" widget="image"/>
+                        </group>
+                    </group>
+                </sheet>
+
+                <!--            <div class="oe_chatter">-->
+                <!--                <field name="message_follower_ids"/>-->
+                <!--                <field name="activity_ids"/>-->
+                <!--                <field name="message_ids"/>-->
+                <!--            </div>-->
+            </form>
+        </field>
+    </record>
+    <!--    <record id="complaint_desk_form" model="ir.ui.view">-->
+    <!--        <field name="name">complaint.desk.form</field>-->
+    <!--        <field name="model">complaint.desk</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <form>-->
+    <!--                <header>-->
+    <!--                    <button name="send_complaint" type="object" string="Send" class="oe_stat_button"/>-->
+    <!--                    <button name="cancel_complaint" type="object" string="Cancel" class="oe_stat_button"/>-->
+    <!--                    <button name="draft_complaint" type="object" string="Draft" class="oe_stat_button"/>-->
+
+    <!--                    <field name="stage" widget="statusbar"-->
+    <!--                           statusbar_visible="send,draft,cancel,approved"/>-->
+    <!--&lt;!&ndash;                    groups="base.group_system"&ndash;&gt;-->
+    <!--                </header>-->
+    <!--                <sheet>-->
+    <!--                    &lt;!&ndash;                    name tower_id flat_id resident_id description to_committee help_desk_id stage proof&ndash;&gt;-->
+    <!--                    <group>-->
+    <!--                        <field name="name"/>-->
+    <!--                        <field name="resident_id"/>-->
+    <!--                        <field name="flat_id"/>-->
+    <!--                        <field name="tower_id"/>-->
+    <!--                        <field name="description"/>-->
+    <!--                        <field name="help_desk_id"/>-->
+    <!--                        <field name="to_committee"/>-->
+    <!--                        &lt;!&ndash;                    <field name="stage"/>&ndash;&gt;-->
+    <!--                        <field name="proof"/>-->
+    <!--                    </group>-->
+    <!--                </sheet>-->
+    <!--            <chatter/>-->
+
+    <!--            </form>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+    <record id="notice_board_list" model="ir.ui.view">
+        <field name="name">notice.board.list</field>
+        <field name="model">notice.board</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="tower_id"/>
+                <field name="create_date"/>
+                <field name="description"/>
+                <field name="help_desk_id"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="notice_board_form" model="ir.ui.view">
+        <field name="name">notice.board.form</field>
+        <field name="model">notice.board</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="send_notice" type="object" string="Send" class="oe_stat_button"/>
+                    <button name="cancel_notice" type="object" string="Cancel" class="oe_stat_button"/>
+                    <button name="draft_notice" type="object" string="Draft" class="oe_stat_button"/>
+                    <field name="stage" widget="statusbar" statusbar_visible="send,draft,cancel"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="tower_id" widget="many2many_tags"/>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="create_date"/>
+                            <field name="help_desk_id" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="event_announcement_form" model="ir.ui.view">
+        <field name="name">event.announcement.form</field>
+        <field name="model">event.announcement</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="send_event" type="object" string="Send" class="oe_stat_button"/>
+                    <button name="cancel_event" type="object" string="Cancel" class="oe_stat_button"/>
+                    <button name="draft_event" type="object" string="Draft" class="oe_stat_button"/>
+                    <field name="stage" widget="statusbar" statusbar_visible="send,draft,cancel"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="tower_id" widget="many2many_tags"/>
+                        </group>
+                        <!--                        <field name="event_date" widget="date"/>-->
+                        <group>
+                            <field name="event_time_start"/>
+                            <field name="event_time_end"/>
+                            <field name="event_place"/>
+                            <field name="society_id"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,223 @@
+<odoo>
+    <record id="gym_booking_list" model="ir.ui.view">
+        <field name="name">gym.booking.list</field>
+        <field name="model">gym.booking</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="resident_id"/>
+                <field name="flat_id" optional="hide"/>
+                <field name="shift"/>
+                <field name="gym_for_days" optional="hide"/>
+                <field name="gym_for_months" optional="hide"/>
+                <field name="days" optional="hide"/>
+                <field name="months" optional="hide"/>
+                <field name="gym_booking_charge"/>
+                <field name="total_charge"/>
+                <field name="is_occupied"/>
+                <field name="slots"/>
+
+            </list>
+        </field>
+    </record>
+    <record id="gym_booking_form" model="ir.ui.view">
+        <field name="name">gym.booking.form</field>
+        <field name="model">gym.booking</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="resident_id"/>
+                            <field name="flat_id"/>
+                            <field name="shift"/>
+                            <field name="gym_for_days" invisible="gym_for_months"/>
+                            <field name="gym_for_months" invisible="gym_for_days"/>
+                            <field name="days" invisible="gym_for_months"/>
+                            <field name="months" invisible="gym_for_days"/>
+                        </group>
+                        <group>
+                            <field name="gym_booking_charge"/>
+                            <field name="total_charge"/>
+                            <field name="is_occupied"/>
+                            <field name="slots"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="guesthouse_booking_list" model="ir.ui.view">
+        <field name="name">guesthouse.booking.list</field>
+        <field name="model">guesthouse.booking</field>
+        <field name="arch" type="xml">
+            <list>
+                <!--                <field name="name"/>-->
+                <field name="guest_house_id"/>
+                <field name="member_count"/>
+                <field name="total_charge"/>
+                <field name="price_per_person" optional="hide"/>
+                <field name="check_in_date" optional="hide"/>
+                <field name="check_out_date" optional="hide"/>
+                <field name="is_occupied"/>
+                <field name="days_booked"/>
+            </list>
+        </field>
+    </record>
+    <record id="guesthouse_booking_form" model="ir.ui.view">
+        <field name="name">guesthouse.booking.form</field>
+        <field name="model">guesthouse.booking</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                        <button name="action_checkout" type="object" string="Check Out" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="guest_house_id"/>
+                            <field name="member_count"/>
+                            <field name="total_charge"/>
+                            <field name="price_per_person"/>
+                        </group>
+
+                        <group>
+                            <field name="check_in_date"/>
+                            <field name="check_out_date"/>
+                            <field name="is_occupied"/>
+                            <field name="days_booked"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Booked Members">
+                            <field name="booking_members_ids">
+                                <list editable="bottom">
+                                    <!--                                    <field name="guesthouse_booking_id"/>-->
+                                    <field name="member_name"/>
+                                    <field name="member_age"/>
+                                    <field name="member_mobile"/>
+                                    <field name="member_id_proof"/>
+                                    <field name="emergency_number"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Booked Members History">
+                            <field name="members_history_ids">
+                                <list editable="bottom">
+                                    <!--                                    <field name="guesthouse_booking_id"/>-->
+                                    <field name="member_name"/>
+                                    <field name="member_age"/>
+                                    <field name="member_mobile"/>
+                                    <field name="member_id_proof"/>
+                                    <field name="emergency_number"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="guesthouse_booking_members_list" model="ir.ui.view">
+        <field name="name">guesthouse.booking.members.list</field>
+        <field name="model">guesthouse.booking.members</field>
+        <field name="arch" type="xml">
+            <list>
+                <!--                <field name="guesthouse_booking_id"/>-->
+                <field name="member_name"/>
+                <field name="member_age"/>
+                <field name="member_mobile"/>
+                <field name="member_id_proof" optional="hide"/>
+                <field name="emergency_number"/>
+            </list>
+        </field>
+    </record>
+    <record id="guesthouse_booking_members_form" model="ir.ui.view">
+        <field name="name">guesthouse.booking.members.form</field>
+        <field name="model">guesthouse.booking.members</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <!--                       <field name="name"/>-->
+                        <group>
+                            <field name="guesthouse_booking_id"/>
+                            <field name="member_name"/>
+                            <field name="member_age"/>
+                        </group>
+                        <group>
+                            <field name="member_mobile"/>
+                            <field name="member_id_proof"/>
+                            <field name="emergency_number"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="guesthouse_members_history_list" model="ir.ui.view">
+        <field name="name">guesthouse.members.history.list</field>
+        <field name="model">guesthouse.members.history</field>
+        <field name="arch" type="xml">
+            <list>
+                <!--                <field name="gh_booking_member_id"/>-->
+                <field name="member_name"/>
+                <field name="member_age"/>
+                <field name="member_mobile"/>
+                <field name="member_id_proof" optional="hide"/>
+                <field name="emergency_number"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="guesthouse_members_history_form" model="ir.ui.view">
+        <field name="name">guesthouse.members.history.form</field>
+        <field name="model">guesthouse.members.history</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <!--                        <field name="gh_booking_member_id"/>-->
+                        <field name="member_name"/>
+                        <field name="member_age"/>
+                        <field name="member_mobile"/>
+                        <field name="member_id_proof"/>
+                        <field name="emergency_number"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="clubhouse_booking_list" model="ir.ui.view">
+        <field name="name">clubhouse.booking.list</field>
+        <field name="model">clubhouse.booking</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="resident_id"/>
+                <field name="cbh_booking_charge_id"/>
+                <!--                <field name="price_per_person"/>-->
+            </list>
+        </field>
+    </record>
+    <record id="clubhouse_booking_form" model="ir.ui.view">
+        <field name="name">clubhouse.booking.list</field>
+        <field name="model">clubhouse.booking</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="resident_id"/>
+                        <field name="cbh_booking_charge_id"/>
+                        <!--                        <field name="price_per_person"/>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,441 @@
+<odoo>
+    <!--    society list -->
+    <record id="view_society_setup_list" model="ir.ui.view">
+        <field name="name">society.setup.list</field>
+        <field name="model">society.setup</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="society_reg_number"/>
+                <field name="society_address"/>
+                <!--                <field name="city"/>-->
+                <field name="country_id"/>
+                <field name="state_id"/>
+                <field name="pincode"/>
+                <!--            <field name="society_owner" widget="Many2one"/>-->
+            </list>
+        </field>
+    </record>
+
+    <!--    society form -->
+    <record id="view_society_setup_form" model="ir.ui.view">
+        <field name="name">society.setup.form</field>
+        <field name="model">society.setup</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="society_reg_number"/>
+                            <field name="society_address"/>
+                            <field name="country_id" placeholder="Country" class="o_address_country"
+                                   options='{"no_open": True, "no_create": True}'/>
+                            <field name="state_id" domain="[('country_id','=',country_id)]" options='{"no_create":True}'
+                                   widget="Many2one"/>
+                            <!--                        <field name="city_id" domain="[('country_id','=',country_id),('state_id','=',state_id)]" options="{'no_create':True}" widget="Many2one"/>-->
+                            <field name="pincode"/>
+                        </group>
+                        <group>
+                            <field name="tower_count"/>
+                            <field name="has_gym"/>
+                            <field name="location_gym" invisible="not has_gym"/>
+                            <field name="gym_capacity" invisible="not has_gym"/>
+                            <field name="gym_booking_charge" invisible="not has_gym"/>
+                            <field name="has_clubhouse"/>
+                            <field name="location_cb" invisible="not has_clubhouse"/>
+                            <field name="cbh_booking_charge" invisible="not has_clubhouse"/>
+                        </group>
+                        <!--                        <field name="has_guesthouse"/>-->
+                    </group>
+                    <notebook>
+                        <page string="Towers in society">
+                            <field name="society_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="no_of_lifts"/>
+                                    <field name="stair_case"/>
+                                    <field name="fire_exit"/>
+                                    <field name="parking_area"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="gym slots">
+                            <field name="gym_slot_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="shift"/>
+                                    <field name="gym_booking_charge"/>
+                                    <field name="is_occupied"/>
+                                    <field name="resident_id"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Society rules">
+                            <h2>Common Society Rules and RegulationsMaintenance Payments</h2>
+                            <p>Residents must pay monthly or quarterly maintenance fees by the due date,
+                                often with penalties for late payments.
+                                <br/>
+                                <b>Parking Regulations:</b>
+                                Parking spaces are allocated by the society;
+                                unauthorized parking in visitor or other resident spots is generally prohibited.
+                                <br/>
+                                <b>Noise and Quiet Hours:</b>
+                                Restrictions are often placed on loud music or renovations,
+                                especially during designated quiet hours, to ensure peace.
+                                <br/>
+                                <b>Security and Guests:</b>
+                                Guest entry is regulated.
+                                <br/>
+                                Tenants must register with security and ensure tenant verification is completed.
+                                <br/>
+                                <b>Common Area Usage:</b>Use of gym, clubhouse, and swimming pool is governed by
+                                specific hours and usage fees.
+                                <br/>
+                                Use of common spaces (corridors, terrace) for personal storage or gatherings is usually
+                                banned.
+                                <br/>
+                                <b>Waste Disposal:</b>
+                                Mandatory waste segregation into dry/wet categories is standard practice.
+                                <br/>
+                                Rights and Duties of MembersRight to Vote: Members have the right to elect the Governing
+                                Body
+                                and vote on major decisions.
+                                <br/>
+                                <b>Right to Information:</b>
+                                Members can inspect financial documents and committee meeting minutes.
+                                <br/>
+                                <b>Duty to Comply:</b>
+                                Members must adhere to the society's bye-laws and pay fees on time.
+                                <br/>
+                                <b>Conflict Resolution:</b>Disputes are often settled via a general body meeting or
+                                referred to
+                                the Registrar of Co-operative Societies.Legal Basis
+                            </p>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--    tower list-->
+    <record id="view_society_tower_list" model="ir.ui.view">
+        <field name="name">society.tower.list</field>
+        <field name="model">society.tower</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="no_of_lifts" optional="hide"/>
+                <field name="stair_case" optional="hide"/>
+                <field name="fire_exit" optional="hide"/>
+                <field name="parking_area" optional="hide"/>
+                <field name="society_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!--   tower form-->
+    <record id="view_society_tower_form" model="ir.ui.view">
+        <field name="name">society.tower.form</field>
+        <field name="model">society.tower</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="no_of_lifts"/>
+                            <field name="stair_case"/>
+                            <field name="fire_exit"/>
+                            <field name="parking_area"/>
+                        </group>
+                        <group>
+                            <field name="society_id" widget="Many2one"/>
+                            <!--                        <field name="flat_count"/>-->
+                            <field name="flat_floors"/>
+                            <field name="flat_rows_one_floor"/>
+                            <field name="has_guesthouse"/>
+                            <field name="guesthouse_count" invisible="not has_guesthouse"/>
+                        </group>
+
+                        <!--                        <field name="block"/>-->
+                    </group>
+                    <notebook>
+                        <page string="flats in tower">
+                            <field name="tower_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="flat_type"/>
+                                    <field name="block"/>
+                                    <field name="floor_no"/>
+                                    <field name="no_of_rooms"/>
+                                    <field name="flat_status"/>
+                                    <field name="balcony_count" optional="hide"/>
+                                    <field name="bathroom_count" optional="hide"/>
+                                    <field name="area" optional="hide"/>
+                                    <field name="facing_direction" optional="hide"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="guest_house" invisible=" not has_guesthouse">
+                            <field name="gh_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="tower_id"/>
+                                    <field name="floor_number"/>
+                                    <!--                                    <field name="price_per_person"/>-->
+                                    <field name="flat_type"/>
+                                </list>
+                            </field>
+                        </page>
+
+
+                        <page string="Events">
+                            <field name="event_ids">
+                                <!--                                 domain="[('tower_id','=',tower_id)]"-->
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <!--                                    <field name="event_date"/>-->
+                                    <field name="event_time_start"/>
+                                    <field name="event_time_end"/>
+                                    <field name="event_place"/>
+                                    <field name="stage"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--   flat list -->
+    <record id="view_society_flat_list" model="ir.ui.view">
+        <field name="name">society.flat.list</field>
+        <field name="model">society.flat</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="tower_id"/>
+                <field name="flat_type"/>
+                <field name="block"/>
+                <field name="floor_no"/>
+                <field name="area"/>
+                <field name="facing_direction"/>
+                <field name="flat_status"/>
+                <field name="no_of_rooms"/>
+                <field name="balcony_count"/>
+                <field name="bathroom_count"/>
+            </list>
+        </field>
+    </record>
+
+    <!--flat form -->
+    <record id="view_society_flat_form" model="ir.ui.view">
+        <field name="name">society.flat.form</field>
+        <field name="model">society.flat</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="tower_id" widget="Many2one"/>
+                            <field name="flat_type"/>
+                            <field name="block"/>
+                            <field name="floor_no"/>
+                        </group>
+                        <group>
+                            <field name="area"/>
+                            <field name="facing_direction"/>
+                            <field name="flat_status"/>
+                            <field name="no_of_rooms"/>
+                            <field name="balcony_count"/>
+                            <field name="bathroom_count"/>
+                        </group>
+
+
+                    </group>
+                    <notebook>
+                        <page string="Member details">
+                            <field name="flat_member_ids">
+                                <list editable="bottom">
+                                    <field name="display_name" column_invisible="True"/>
+                                    <field name="partner_id"/>
+                                    <!--                                    <field name="name"/>-->
+                                    <field name="age"/>
+                                    <field name="mobile_number"/>
+                                    <field name="emergency_contacts"/>
+                                    <field name="resident_type"/>
+                                    <field name="vehicle_count"/>
+
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="vehicle details">
+                            <field name="vehicle_ids">
+                                <list editable="bottom">
+                                    <field name="vehicle_number"/>
+                                    <field name="vehicle_type"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Parking slots">
+                            <field name="parking_slot_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="tower_id" optional="hide"/>
+                                    <field name="parking_id" optional="hide"/>
+                                    <field name="parking_place"/>
+                                    <field name="parking_type"/>
+                                    <field name="flat_id" domain="[('tower_id','=',tower_id)]"/>
+                                    <field name="is_occupied"/>
+                                    <!--                                    <field name="active"/>-->
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_society_flat_kanban" model="ir.ui.view">
+        <field name="name">society.flat.kanban</field>
+        <field name="model">society.flat</field>
+        <field name="arch" type="xml">
+            <kanban sample="1" default_order="create_date desc" default_group_by="flat_status"
+                    records_draggable="true">
+                <field name="name"/>
+                <field name="floor_no"/>
+                <field name="flat_status"/>
+                <progressbar field="flat_status" colors='{"low": "success", "medium": "warning", "high": "danger"}'
+                             sum_field="flat.count"
+                             help="This bar allows to filter the priority"/>
+                <templates>
+                    <t t-name="menu">
+                        <t t-if="widget.editable">
+                            <a role="menuitem" type="open" class="dropdown-item">Edit</a>
+                        </t>
+                        <t t-if="widget.deletable">
+                            <a role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                        </t>
+                        <div role="separator" class="dropdown-divider">
+
+                        </div>
+                    </t>
+                    <t t-name="card" class="pe-2">
+                        <div class="oe_kanban_card">
+
+                            <main class="col-10 pe-2">
+                                <div class="d-flex mb-1 h5">
+                                    <field name="name"/>
+                                </div>
+                            </main>
+                            <div class="mt-1">
+                                <span class="d-flex align-items-center gap-2">
+                                    <field name="flat_type" string="Flat Type"/>
+                                </span>
+                            </div>
+                        </div>
+                        <footer class="pt-1 mt-0">
+                            <div class="d-flex mt-auto">
+                                <field name="flat_status" widget="priority" class="me-2"/>
+                            </div>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id="view_society_committee_list" model="ir.ui.view">
+        <field name="name">society.committee.list</field>
+        <field name="model">society.committee</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="tower_id"/>
+                <field name="committee_name_id"/>
+                <field name="chairman_id"/>
+                <field name="secretary_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_society_committee_form" model="ir.ui.view">
+        <field name="name">society.committee.form</field>
+        <field name="model">society.committee</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                    <field name="tower_id"/>
+                    <field name="committee_name_id" widget="many2many_tags"/>
+                    <field name="chairman_id"/>
+                    <field name="secretary_id"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_guest_house_list" model="ir.ui.view">
+        <field name="name">society.guesthouse.list</field>
+        <field name="model">society.guesthouse</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="tower_id"/>
+                <field name="floor_number"/>
+                <!--                <field name="price_per_person"/>-->
+                <field name="flat_type"/>
+            </list>
+        </field>
+    </record>
+
+        <record id="view_guest_house_form" model="ir.ui.view">
+        <field name="name">society.guesthouse.form</field>
+        <field name="model">society.guesthouse</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        <group>
+                        <field name="name"/>
+                        <field name="floor_number"/>
+                        <field name="gh_booking_charge"/>
+                        <field name="flat_type"/>
+                        </group>
+                        <group>
+                            <field name="gh_status"/>
+                            <field name="tower_id"/>
+                            <field name="price_per_person"/>
+                            <field name="is_occupied"/>
+                        </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field></record>
+
+    <record id="view_gym_slots" model="ir.ui.view">
+        <field name="name">gym.slots.list</field>
+        <field name="model">gym.slots</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="shift"/>
+                <field name="gym_booking_charge"/>
+                <field name="resident_id"/>
+                <field name="is_occupied"/>
+            </list>
+        </field>
+    </record>
+
+
+</odoo>

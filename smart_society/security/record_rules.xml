@@ -1,0 +1,145 @@
+<odoo>
+    <data noupdate="1">
+        <record id="vehicle_user_rule" model="ir.rule">
+            <field name="name">Resident Own Vehicles</field>
+            <field name="model_id" ref="model_vehicle_registrations"/>
+            <field name="groups" eval="[(4, ref('smart_society.group_registration_user'))]"/>
+            <field name="domain_force">[('owner_id', '=', user.id)]</field>
+            <field name="perm_read" eval="True"/>
+        </record>
+
+        <record id="complaint_user_rule" model="ir.rule">
+            <field name="name">Resident Own Complaints</field>
+            <field name="model_id" ref="model_complaint_desk"/>
+            <field name="groups" eval="[(4, ref('smart_society.group_registration_user')),(4,ref('base.group_portal'))]"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+
+        </record>
+
+        <record id="all_complaints_admin_rule" model="ir.rule">
+            <field name="name">All Complaints</field>
+            <field name="model_id" ref="model_complaint_desk"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+
+        </record>
+
+        <record id="views_own_profile_rule" model="ir.rule">
+            <field name="name">View Profile</field>
+            <field name="model_id" ref="model_resident_registrations"/>
+            <field name="groups" eval="[(4, ref('smart_society.group_registration_user'))]"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+        </record>
+
+        <record id="rule_resident_own_maintenance" model="ir.rule">
+            <field name="name">Resident Own Maintenance</field>
+            <field name="model_id" ref="model_society_maintenance"/>
+            <field name="groups" eval="[(4, ref('smart_society.group_registration_user'))]"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+<!--            <field name="domain_force">[('flat_id', '=', user.flat_id.id)]</field>-->
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="visitor_security_rule" model="ir.rule">
+            <field name="name">Security Visitor Access</field>
+            <field name="model_id" ref="model_visitor_registrations"/>
+            <field name="groups" eval="[(4, ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+
+        <record id="portal_complaint_rule" model="ir.rule">
+            <field name="name">Own Complaint</field>
+            <field name="model_id" ref="model_complaint_desk"/>
+            <field name="groups" eval="[(4,ref('base.group_portal'))]"/>
+            <field name="domain_force">[('user_id','=',user.id)]</field>
+        </record>
+    </data>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--        <field name="res_model">resident.registrations</field>-->
+<!--        <field name="view_mode">list,form</field>-->
+<!--        <filter name="my_team" string="My Team" domain="[('parent_id.user_id', '=', uid)]"/>-->
+<!--        <filter name="my_profile" string="My Profile" domain="[('partner_id.user_ids','in',[uid])]"/>-->
+
+<!--        <record id="view_profile_own" model="ir.rule">-->
+<!--            <field name="name">Profile</field>-->
+<!--            <field name="model_id" ref="model_resident_registrations"/>-->
+<!--            <field name="groups" eval="[(4, ref('smart_society.group_registration_user'))]"/>-->
+<!--            <field name="domain_force">[('user_id', '=', user.id)]</field>-->
+<!--            <field name="perm_read" eval="True"/>-->
+<!--            <field name="perm_write" eval="False"/>-->
+<!--            <field name="perm_create" eval="False"/>-->
+<!--            <field name="perm_unlink" eval="False"/>-->
+<!--        </record>-->
+
+
+<!--        <record id="society_registration_rule_society" model="ir.rule">-->
+<!--            <field name="name">Society Registration</field>-->
+<!--            <field name="model_id" ref="smart_society.model_society_setup"/>-->
+<!--            <field name="groups" eval="[(4, ref('smart_society.group_registration_committee'))]"/>-->
+<!--        </record>-->
+
+<!--        <record id="society_registration_rule_flat" model="ir.rule">-->
+<!--            <field name="name">Flat</field>-->
+<!--            <field name="model_id" ref="smart_society.model_society_flat"/>-->
+<!--            <field name="groups" eval="[(4, ref('smart_society.group_registration_committee'))]"/>-->
+<!--        </record>-->
+
+<!--        <record id="society_registration_rule_resident" model="ir.rule">-->
+<!--            <field name="name">Resident</field>-->
+<!--            <field name="model_id" ref="smart_society.model_resident_registrations"/>-->
+<!--            <field name="groups" eval="[(4, ref('smart_society.group_registration_committee'))]"/>-->
+<!--        </record>-->
+<!--        &lt;!&ndash;    vehicle.registrations&ndash;&gt;-->
+<!--        <record id="society_registration_rule_vehicle" model="ir.rule">-->
+<!--            <field name="name">Vehicle</field>-->
+<!--            <field name="model_id" ref="smart_society.model_vehicle_registrations"/>-->
+<!--            <field name="groups" eval="[(4, ref('smart_society.group_registration_committee'))]"/>-->
+<!--        </record>-->
+
+<!--        <record id="society_registration_rule_security_guard" model="ir.rule">-->
+<!--            <field name="name">Security</field>-->
+<!--            <field name="model_id" ref="smart_society.model_security_guard"/>-->
+<!--            <field name="groups" eval="[(4, ref('smart_society.group_registration_committee'))]"/>-->
+
+<!--        </record>-->
+<!--        <record id="group_registration_committee" model="res.groups">-->
+<!--            <field name="name">Committee</field>-->
+<!--            <field name="implied_ids" eval="[-->
+<!--        (4, ref('smart_society.group_society_registration')),-->
+<!--        (4, ref('smart_society.group_registration_user'))-->
+<!--    ]"/>-->
+<!--        </record>-->
+
+
+
+
+
+
+
+<!--        <record id="base_user_root" model="res.users">-->
+<!--            &lt;!&ndash; Replace 'module_name.group_id' with the actual external ID of the group &ndash;&gt;-->
+<!--            <field name="groups_ids" eval="[(4, ref('smart_society.group_registration_user'))]"/>-->
+<!--        </record>-->

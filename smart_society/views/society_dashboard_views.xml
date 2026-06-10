@@ -1,0 +1,191 @@
+<odoo>
+    <record id="view_dashboard_home_forms" model="ir.ui.view">
+        <field name="name">society.dashboard.form</field>
+        <field name="model">society.dashboard</field>
+        <field name="arch" type="xml">
+            <form string="Smart Society Dashboard">
+                <sheet>
+                    <group>
+                        <div class="oe_title">
+                            <h1>Society Dashboard</h1>
+                        </div>
+                        <group>
+                            <div class="row g-2">
+                                <div class="col-3">
+                                    <button type="object" name="sos_alerts"
+                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"
+                                            style="width:100%; height:70px;">Emergency SOS Alert
+                                    </button>
+                                </div>
+                                <div class="col-3">
+                                    <button type="object" name="fire_alerts"
+                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"
+                                            style="width:100%; height:70px;">Emergency FIRE Alert
+                                    </button>
+                                </div>
+                                <div class="col-3">
+                                    <button type="object" name="medical_panic_buttons"
+                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"
+                                            style="width:100%; height:70px;">
+                                        Medical/Panic Button
+                                    </button>
+                                </div>
+                                <div class="col-3">
+                                    <button type="object" name="emergency_broadcast"
+                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"
+                                            style="width:100%; height:70px;"
+                                            groups="smart_society.group_registration_committee,smart_society.group_registration_administration">
+                                        Emergency Broadcast Button
+                                    </button>
+                                </div>
+                            </div>
+                        </group>
+                        <group col="4">
+                            <field name="total_notices" readonly="1"/>
+                            <field name="total_events" readonly="1"/>
+                            <field name="total_complaints" readonly="1"/>
+                            <field name="total_visitors" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+
+                        <!-- Notices -->
+                        <page string="Notices">
+                            <field name="notice_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="description"/>
+                                    <field name="create_date"/>
+                                    <field name="stage"/>
+                                </list>
+                            </field>
+                        </page>
+                        <!-- Events -->
+                        <page string="Events">
+                            <field name="event_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="event_time_start"/>
+                                    <field name="event_time_end"/>
+                                    <field name="event_place"/>
+                                    <field name="stage"/>
+                                </list>
+                            </field>
+                        </page>
+                        <!-- Complaints -->
+                        <page string="Complaints">
+                            <field name="complaint_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="resident_id"/>
+                                    <field name="tower_id"/>
+                                    <field name="flat_id"/>
+                                    <field name="stage"/>
+                                    <field name="create_date"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+<!--    <record id="society_alert_wizard_list_save" model="ir.ui.view">-->
+<!--        <field name="name">society.alert.save.list</field>-->
+<!--        <field name="model">society.alert.save</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <list default_order="datetime desc">-->
+<!--                <field name="name"/>-->
+<!--                <field name="description" optional="hide"/>-->
+<!--                <field name="flat_id"/>-->
+<!--                <field name="tower_id"/>-->
+<!--                <field name="user_id"/>-->
+<!--                <field name="location"/>-->
+<!--                <field name="alert_type" optional="hide"/>-->
+<!--                <field name="datetime"/>-->
+<!--            </list>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="society_alert_wizard_form_save" model="ir.ui.view">-->
+<!--        <field name="name">society.alert.save.form</field>-->
+<!--        <field name="model">society.alert.save</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Alert">-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <field name="name"/>-->
+<!--                        <field name="description"/>-->
+<!--                        <field name="to_committee"/>-->
+<!--                        <field name="flat_id"/>-->
+<!--                        <field name="tower_id"/>-->
+<!--                        <field name="user_id"/>-->
+<!--                        <field name="location"/>-->
+<!--                        <field name="alert_type"/>-->
+<!--                        <field name="datetime"/>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--                <chatter/>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+<!--    <record id="society_emergency_broadcast_wizard_list_save" model="ir.ui.view">-->
+<!--        <field name="name">emergency.broadcast.save.list</field>-->
+<!--        <field name="model">emergency.broadcast.save</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <list default_order="datetime desc">-->
+<!--                <field name="name"/>-->
+<!--                <field name="description"/>-->
+<!--                <field name="tower_ids"/>-->
+<!--                <field name="flat_ids"/>-->
+<!--                <field name="datetime"/>-->
+<!--            </list>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="society_emergency_broadcast_wizard_save" model="ir.ui.view">-->
+<!--        <field name="name">emergency.broadcast.save.form</field>-->
+<!--        <field name="model">emergency.broadcast.save</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Emergency">-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <field name="name"/>-->
+<!--                        <field name="description"/>-->
+<!--                        <field name="tower_ids" widget="many2many_tags"/>-->
+<!--                        <field name="flat_ids" widget="many2many_tags" invisible="tower_ids"/>-->
+<!--                        <field name="datetime"/>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--                <chatter/>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+</odoo>
+
+
+        <!--                                <div class="col-3" style="cursor:pointer;" name="fire_alert">-->
+        <!--                                    <div class="card bg-danger-subtle border-danger border-2 rounded-3 text-center shadow-sm py-2 px-2"-->
+        <!--                                         style="height:70px;">-->
+        <!--                                        <div class="text-danger fw-bold small">Fire Alert</div>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+
+        <!--                                <div class="col-3" style="cursor:pointer;" action="medical_panic_button">-->
+        <!--                                    <div class="card bg-danger-subtle border-danger border-2 rounded-3 text-center shadow-sm py-2 px-2"-->
+        <!--                                         style="height:70px;">-->
+        <!--                                        <div class="text-danger fw-bold small">Medical / Panic</div>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+
+        <!--                                <div class="col-3" style="cursor:pointer;" action="emergency_broadcast">-->
+        <!--                                    <div class="card bg-danger-subtle border-danger border-2 rounded-3 text-center shadow-sm py-2 px-2"-->
+        <!--                                         style="height:70px;">-->
+        <!--                                        <div class="text-danger fw-bold small">Emergency Broadcast</div>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->

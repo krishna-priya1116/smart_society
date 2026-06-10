@@ -1,0 +1,134 @@
+<odoo>
+
+    <record id="view_resident_registrations_list" model="ir.ui.view">
+        <field name="name">resident.registrations.list</field>
+        <field name="model">resident.registrations</field>
+
+        <field name="arch" type="xml">
+            <list>
+                <!--                <field name="name"/>-->
+                <field name="partner_id"/>
+                <field name="mobile_number"/>
+                <field name="user_id"/>
+                <field name="email"/>
+                <field name="flat_id"/>
+                <!--               domain="[('flat_status','=','vacant')]" <field name="vehicle_count" optional="hide"/>-->
+                <field name="id_proof" optional="hide"/>
+                <field name="emergency_contacts" optional="hide"/>
+                <field name="resident_type" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_resident_registration_form" model="ir.ui.view">
+        <field name="name">resident.registrations.form</field>
+        <field name="model">resident.registrations</field>
+        <!--        <field name="domain">[('user_id', 'in', to_committee.ids)]</field>-->
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <!--                        <field name="name"/>-->
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="age"/>
+                            <field name="user_id"/>
+                            <field name="mobile_number"/>
+                            <field name="email"/>
+                            <field name="flat_id"/>
+                            <field name="tower_id"/>
+                        </group>
+                        <group>
+                            <field name="has_vehicle"/>
+                            <field name="vehicle_count" invisible="not has_vehicle"/>
+                            <field name="id_proof"/>
+                            <field name="emergency_contacts"/>
+                            <field name="resident_type"/>
+                            <field name="real_owner" invisible="resident_type not in ['tenant','temporary_resident']"/>
+                            <field name="tenant_certificate" invisible="resident_type not in 'tenant'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="vehicle details" invisible="not has_vehicle">
+                            <field name="vehicle_ids">
+                                <list editable="bottom">
+                                    <field name="vehicle_number"/>
+                                    <field name="vehicle_type"/>
+                                    <field name="color"/>
+                                    <field name="is_inside"/>
+                                    <!--                                    <field name="parking_slot_id"/>-->
+                                </list>
+                            </field>
+                        </page>
+                        <!--                        <page string="vehicle allocation" invisible="not has_vehicle">-->
+                        <!--                            <field name="vehicle_allocation_ids">-->
+                        <!--                                <list editable="bottom">-->
+                        <!--                                    <field name="resident_id"/>-->
+                        <!--                                    <field name="vehicle_ids"/>-->
+                        <!--                                    <field name="parking_slot"/>-->
+                        <!--                                    <field name="security_id"/>-->
+                        <!--                                </list>-->
+                        <!--                            </field>-->
+                        <!--                        </page>-->
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_security_guard_list" model="ir.ui.view">
+        <field name="name">security.guard.list</field>
+        <field name="model">security.guard</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="security_id"/>
+                <field name="tower_id"/>
+                <field name="mobile_number"/>
+                <field name="email"/>
+                <field name="age"/>
+                <field name="aadhaar_number" optional="hide"/>
+                <field name="pan_number" optional="hide"/>
+                <field name="address" optional="hide"/>
+                <field name="shift"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_security_guard_form" model="ir.ui.view">
+        <field name="name">security.guard.form</field>
+        <field name="model">security.guard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="security_id"/>
+                            <field name="tower_id"/>
+                            <field name="mobile_number"/>
+                            <field name="email"/>
+                        </group>
+                        <group>
+                            <field name="age"/>
+                            <field name="aadhaar_number"/>
+                            <field name="pan_number"/>
+                            <field name="address"/>
+                            <field name="shift"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
+        <!--name,mobile_number,email,flat_number,id_proof,vehicle_count,-->
+
+        <!--            <field name="name"/>-->
+        <!--            <field name="mobile_number"/>-->
+        <!--            <field name="email"/>-->
+        <!--            <field name="flat_number" widget="Many2one"/>-->
+        <!--            <field name="vehicle_details" optional="hide"/>-->
+        <!--            <field name="id_proof" optional="hide"/>-->
+        <!--            <field name="emergency_contacts" optional="hide"/>-->
+        <!--            <field name="deadline_date"/>-->
+        <!--            <field name="resident_type" optional="hide"/>-->

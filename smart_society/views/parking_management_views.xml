@@ -1,0 +1,114 @@
+<odoo>
+    <record id="parking_management_view_list" model="ir.ui.view">
+        <field name="name">parking.management.list</field>
+        <field name="model">parking.management</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="tower_id"/>
+                <field name="parking_place"/>
+                <field name="resident_parking"/>
+                <field name="visitor_parking"/>
+                <field name="ev_parking"/>
+                <field name="other_parking"/>
+                <field name="parking_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="parking_management_view_form" model="ir.ui.view">
+        <field name="name">parking.management.form</field>
+        <field name="model">parking.management</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="tower_id"/>
+                            <field name="parking_place"/>
+                            <field name="resident_parking"/>
+                            <field name="visitor_parking"/>
+                            <field name="ev_parking"/>
+                        </group>
+                        <group>
+                            <field name="other_parking"/>
+                            <field name="parking_count"/>
+                            <field name="total_slot"/>
+                            <field name="available_slot"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Parking slots">
+                            <field name="parking_slot_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="parking_type"/>
+                                    <field name="parking_place"/>
+                                    <!--                                    <field name="vehicle_id"/>-->
+                                    <field name="is_occupied"/>
+                                    <field name="flat_id"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="parking_management_view_list" model="ir.ui.view">
+        <field name="name">vehicle.tracking.list</field>
+        <field name="model">vehicle.tracking</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="person_type"/>
+                <field name="flat_id"/>
+                <field name="tower_id"/>
+                <field name="flat_id"/>
+                <field name="entry_time"/>
+                <field name="exit_time"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="vehicle_tracking_view_form" model="ir.ui.view">
+        <field name="name">vehicle.tracking.form</field>
+        <field name="model">vehicle.tracking</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="person_type"/>
+                            <field name="resident_id" invisible="person_type not in 'resident'"/>
+                            <!--                        domain="[('person_type','in','resident')]"-->
+                            <field name="visitor_id" invisible="person_type not in 'visitor'"/>
+                            <!--                        domain="[('person_type','in','visitor')]"-->
+                            <field name="visitor_phone" invisible="person_type in 'resident'"/>
+                            <field name="visiting_flat" invisible="person_type in 'resident'"/>
+                            <field name="visiting_tower" invisible="person_type in 'resident'"/>
+                            <field name="flat_id" invisible="person_type not in 'resident'"/>
+                            <field name="tower_id" invisible="person_type not in 'resident'"/>
+                            <field name="visit_purpose" invisible="person_type not in 'other'"/>
+                        </group>
+                        <group>
+                            <field name="entry_time"/>
+                            <field name="exit_time"/>
+                            <field name="has_vehicle"/>
+                            <field name="vehicle_id" invisible="not has_vehicle" domain="[('flat_id','=',flat_id)]"/>
+                            <field name="parking_type" invisible="not has_vehicle"/>
+                            <field name="parking_slot_id" invisible="not has_vehicle or person_type in 'resident'"
+                                   domain="['&amp;',('parking_type','=',parking_type),('is_occupied','=',False)]"/>
+                            <!--                        <field name="is_occupied" invisible="not has_vehicle"/> domain="[('parking_type','=',parking_type)]"-->
+                            <field name="security_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

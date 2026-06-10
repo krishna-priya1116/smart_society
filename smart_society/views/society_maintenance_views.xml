@@ -1,0 +1,101 @@
+<odoo>
+    <record id="view_society_maintenance_list" model="ir.ui.view">
+        <field name="name">society.maintenance.list</field>
+        <field name="model">society.maintenance</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="flat_id"/>
+                <field name="tower_id"/>
+                <field name="month"/>
+                <field name="year"/>
+                <field name="due_date"/>
+                <field name="maintenance_amount"/>
+                <field name="penalty_amount"/>
+                <field name="total_amount"/>
+                <field name="is_paid"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_society_maintenance_form" model="ir.ui.view">
+        <field name="name">society.maintenance.form</field>
+        <field name="model">society.maintenance</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_mark_paid" string="Paid" type="object"
+                            class="btn-primary" invisible="state == 'paid'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="unpaid,paid"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                        <field name="flat_id"/>
+                        <field name="resident_id" widget="many2many_tags"/>
+                        <field name="tower_id" readonly="1"/>
+                        <field name="maintenance_bill_id"/>
+                        <field name="month"/>
+                        <field name="year"/>
+                        <field name="due_date"/>
+                            </group>
+                        <group>
+                        <field name="payment_date"/>
+                        <field name="maintenance_amount"/>
+                        <field name="penalty_per_day"/>
+                        <field name="penalty_amount"/>
+                        <field name="total_amount"/>
+                        <field name="invoice_id"/>
+                            </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="view_maintenance_bill_list" model="ir.ui.view">
+        <field name="name">maintenance.bill.list</field>
+        <field name="model">maintenance.bill</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="tower_id"/>
+                <field name="maintenance_amount"/>
+                <field name="penalty_per_day"/>
+                <field name="due_day"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_maintenance_bill_form" model="ir.ui.view">
+        <field name="name">maintenance.bill.form</field>
+        <field name="model">maintenance.bill</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="generate_monthly_bills" string="Generate Bills"
+                            type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="tower_id"/>
+                        <field name="maintenance_amount"/>
+                        <field name="penalty_per_day"/>
+                        <field name="due_day"/>
+                    </group>
+                    <notebook>
+                        <page string="Generated Bills">
+                            <field name="maintenance_ids">
+                                <list>
+                                    <field name="flat_id"/>
+                                    <field name="due_date"/>
+                                    <field name="total_amount"/>
+                                    <field name="is_paid"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

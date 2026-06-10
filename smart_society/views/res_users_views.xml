@@ -1,0 +1,17 @@
+<odoo>
+    <record id="view_res_users_form_inherit_society" model="ir.ui.view">
+        <field name="name">res.users.form.inherit.society</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="User Settings" name="task_settings">
+                    <group>
+<!--                        <field name="task_visibility" widget="radio" string="Task Access"/>-->
+                        <field name="admin" widget="radio" string="Admin" domain="[('user_id','=',admin)]"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

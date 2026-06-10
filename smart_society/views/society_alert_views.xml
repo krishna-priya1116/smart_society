@@ -1,0 +1,106 @@
+<odoo>
+
+    <record id="society_alerts_list" model="ir.ui.view">
+        <field name="name">resident.alerts.list</field>
+        <field name="model">resident.alerts</field>
+        <field name="arch" type="xml">
+            <list default_order="create_date desc">
+                <field name="name"/>
+                <field name="alert_from"/>
+                <field name="description" optional="hide"/>
+                <field name="flat_id"/>
+<!--                <field name="tower_id"/>-->
+                <field name="user_id"/>
+                <field name="location"/>
+                <field name="alert_type" optional="hide"/>
+                <field name="create_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="society_alerts_form"  model="ir.ui.view">
+        <field name="name">resident.alerts.form</field>
+        <field name="model">resident.alerts</field>
+        <field name="arch" type="xml">
+            <form string="Alert">
+                <header>
+                    <button name="action_send_email"
+                            string="Send"
+                            type="object"
+                            class="btn btn-primary"/>
+                    <button special="cancel" string="Cancel"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="alert_from"/>
+                            <field name="description"/>
+                        </group>
+
+                        <group string="Select Who All To Inform">
+                        <field name="to_committee"/>
+                        <field name="tower_id" widget="many2many_tags" invisible="flat_id"/>
+                        <field name="flat_id" widget="many2many_tags" invisible="tower_id"/>
+                        <field name="security_id" widget="many2many_tags"/>
+                        <field name="resident_id" widget="many2many_tags"/>
+                        </group>
+<!--                        <field name="tower_id" widget="many2many_tags" invisible="flat_id"/>-->
+<!--                        <field name="user_id"/>-->
+                        <group>
+                            <field name="location"/>
+                            <field name="alert_type"/>
+                            <field name="create_date"/>
+                        </group>
+
+                    </group>
+                </sheet>
+
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="society_emergency_broadcasts_list" model="ir.ui.view">
+        <field name="name">emergency.broadcasts.list</field>
+        <field name="model">emergency.broadcasts</field>
+        <field name="arch" type="xml">
+            <list default_order="create_date desc">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="tower_ids" />
+                <field name="flat_ids"/>
+                <field name="create_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="society_emergency_broadcasts_form" model="ir.ui.view">
+        <field name="name">emergency.broadcasts.form</field>
+        <field name="model">emergency.broadcasts</field>
+        <field name="arch" type="xml">
+            <form string="Emergency">
+                <header>
+                    <button name="action_send_broadcast"
+                            string="Send"
+                            type="object"
+                            class="btn btn-primary"/>
+                    <button special="cancel" string="Cancel"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="tower_ids" widget="many2many_tags"/>
+                        <field name="flat_ids" widget="many2many_tags" invisible="tower_ids"/>
+                        <field name="create_date"/>
+                    </group>
+                </sheet>
+
+                <chatter/>
+            </form>
+        </field>
+    </record>
+</odoo>
