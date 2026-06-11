@@ -55,7 +55,7 @@
                                     <field name="vehicle_number"/>
                                     <field name="vehicle_type"/>
                                     <field name="color"/>
-                                    <field name="is_inside"/>
+<!--                                    <field name="is_inside"/>-->
                                     <!--                                    <field name="parking_slot_id"/>-->
                                 </list>
                             </field>

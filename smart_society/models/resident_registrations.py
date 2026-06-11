@@ -42,7 +42,7 @@ class ResidentRegistrations(models.Model):
                 ('email','=',record.email),
             ],limit=1)
             print('\n\n\n............check_partner..........',check_partner)
-            if not check_partner and record.email or record.mobile_number:
+            if not check_partner and (record.email or record.mobile_number):
                 user=self.env['res.users'].create({
                     'name':record.name,
                     # .partner_id
@@ -156,7 +156,7 @@ class SecurityGuard(models.Model):
     # email=fields.Char(string='Email',readonly=False,required=True)
     age = fields.Integer(string='Age', required=True,readonly=False)
     # mobile_number = fields.Char(string='Mobile Number', readonly=False,required=True)
-    aadhaar_number=fields.Char(string='Aadhar Number', required=True)
+    aadhaar_number=fields.Char(string='Aadhaar Number', required=True)
     pan_number=fields.Char(string='Pan Number', required=True)
     address=fields.Char(string='Address', required=True)
     shift=fields.Selection([('morning','Morning Shift'),('night','Night Shift')])
@@ -219,11 +219,31 @@ class VisitorRegistrations(models.Model):
     name=fields.Char(related='partner_id.name')
     mobile_number = fields.Char(string='Mobile Number', required=True)
     has_vehicle=fields.Boolean(string='Has Vehicle',default=False)
-    vehicle_number=fields.Char(string='Vehicle Number', required=True)
+    vehicle_number=fields.Char(string='Vehicle Number',compute='vehicle_number_validation', required=True)
 
 
 
 
+    @api.constrains('mobile_number')
+    def check_mobile_number(self):
+        for registration in self:
+            if not registration.mobile_number:
+                print('.................................',registration.mobile_number)
+                raise ValidationError('enter mobile number')
+            if registration.mobile_number:
+                regex=r'^\d{10}$'
+                if not re.match(regex,registration.mobile_number):
+                    raise ValidationError('enter 10 digit mobile number')
+
+    @api.constrains('vehicle_number','vehicle_type')
+    def vehicle_number_validation(self):
+        regex=r'^[A-Z]{2}[ ]?[0-9]{2}[ ]?[A-Z]{1,2}[ ]?[0-9]{4}$'
+        for record in self:
+            if not record.vehicle_number:
+                raise ValidationError('Enter Proper Vehicle Number')
+            else:
+                if not re.match(regex, record.vehicle_number) or not record.vehicle_number:
+                    raise ValidationError('Vehicle Number Error')
 
 
 

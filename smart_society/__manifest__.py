@@ -21,6 +21,7 @@
         'views/society_maintenance_views.xml',
         'data/mail_template_data.xml',
         'data/ir_cron_data.xml',
+        'data/smart_society_demo.xml',
     ],
 
 

@@ -1,4 +1,6 @@
 import random
+import re
+
 from odoo import fields,models,api
 from odoo.exceptions import ValidationError
 
@@ -204,18 +206,20 @@ class VehicleTracking(models.Model):
 
     # parking_id=fields.Many2one('parking.management',string='Parking')
     # name=fields.Char(string='Vehicle Tracking')
-    person_type=fields.Selection(string='Person type',selection=[('resident','Resident'),('visitor','Visitor'),('other','Other')])
+    person_type=fields.Selection(string='Person type',selection=[('resident','Resident'),('visitor','Visitor'),('other','Other')],required=True)
     resident_id=fields.Many2one('resident.registrations',string='Resident')
     visitor_id=fields.Many2one('visitor.registrations',string='Visitor')
     # , required = True
     # tower_id=fields.Many2one('society.tower',string='Tower')'resident.registrations',
     # flat_id=fields.Many2one('society.flat',string='Flat')'resident.registrations',
+
     flat_id=fields.Many2one(related='resident_id.flat_id',string='Flat')
     tower_id=fields.Many2one(related='flat_id.tower_id',string='Tower')
 
-    visitor_phone=fields.Char(string='Phone number',required=True)
+    visitor_phone=fields.Char(string='Phone number',compute="",required=True)
     has_vehicle=fields.Boolean(string='Has Vehicle',default=False)
     vehicle_id = fields.Many2one('vehicle.registrations', string='Vehicle')
+    vehicle_number=fields.Char(related="vehicle_id.vehicle_number",string='Vehicle number')
     entry_time = fields.Datetime(string='Entry Time',required=True,default=fields.Datetime.now)
     exit_time = fields.Datetime(string='Exit Time')
     # parking_type = fields.Selection(string='Parking Type', selection=[
@@ -260,7 +264,7 @@ class VehicleTracking(models.Model):
                 elif record.flat_id:
                     print(slot_occupied.write({'is_occupied': True}))
 
-    @api.onchange('person_type')
+    @api.constrains('person_type')
     def assign_parking_type(self):
         for record in self:
             if record.person_type=='resident' or record.resident_id:
@@ -279,7 +283,7 @@ class VehicleTracking(models.Model):
 
 
 
-                # if record.parking_slot_id:
+            # if record.parking_slot_id:
                 #     # record.is_occupied=True
                 #     print('\n\n\n.....record.parking_slot_id.id..................',record.parking_slot_id.id)
                 #     slot_occupied=self.env['parking.slot'].search([

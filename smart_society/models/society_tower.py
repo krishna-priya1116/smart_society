@@ -6,14 +6,14 @@ class Tower(models.Model):
     _description = 'Towers in society'
 
     name = fields.Char(string='Tower Name', required=True)
-    tower_ids = fields.One2many('society.flat', 'tower_id', required=True)
+    tower_ids = fields.One2many('society.flat', 'tower_id')
     no_of_lifts = fields.Integer(string='No of Lifts')
     stair_case = fields.Integer(string='Stair Case')
     fire_exit = fields.Integer(string='Fire Exit')
     parking_area = fields.Integer(string='Parking Area count')
-    society_id = fields.Many2one('society.setup', required=True)
-    vehicle_ids = fields.One2many('vehicle.registrations', 'tower_id', required=True)
-    resident_id = fields.Many2one('resident.registrations', required=True)
+    society_id = fields.Many2one('society.setup')
+    vehicle_ids = fields.One2many('vehicle.registrations', 'tower_id')
+    resident_id = fields.Many2one('resident.registrations')
     event_ids = fields.Many2many('event.announcement', 'tower_event_rel', 'tower_id', 'event_id', string='Events')
     # flat_count = fields.Integer(string='Flat Count')
     flat_floors = fields.Integer(string='Flat Floors')
@@ -25,7 +25,7 @@ class Tower(models.Model):
                                         ('N', 'N')])
     has_guesthouse = fields.Boolean(string='Has Guest House')
     guesthouse_count = fields.Integer(string='Guest House Count')
-    gh_ids = fields.One2many('society.guesthouse', 'tower_id', required=True)
+    gh_ids = fields.One2many('society.guesthouse', 'tower_id')
 
 
 

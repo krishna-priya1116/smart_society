@@ -106,9 +106,6 @@ class ResidentAlerts(models.Model):
             )
 
 
-
-
-
 class EmergencyBroadcasts(models.Model):
     _name='emergency.broadcasts'
     _description='Emergency Broadcast'

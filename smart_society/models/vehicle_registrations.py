@@ -15,11 +15,11 @@ class VehicleRegistrations(models.Model):
                              selection=[('2wheeler','2 Wheeler'),('3wheeler','3 Wheeler'),('4wheeler','4 Wheeler'),
                                       ('other','Other')],required=True)
     color = fields.Char(string='Vehicle Color')
-    resident_id=fields.Many2one('resident.registrations')
+    resident_id=fields.Many2one('resident.registrations',string="Owner")
     tower_id=fields.Many2one('society.tower')
     parking_slot_id=fields.Many2one('parking.slot',string='Parking Slot')
     flat_id = fields.Many2one('society.flat',related='resident_id.flat_id',store=True)
-    is_inside = fields.Boolean(default=False)
+    # is_inside = fields.Boolean(default=False)
     owner_id=fields.Many2one('res.users',string='Owner',default=lambda self:self.env.user)
 
     _sql_constraints = [('vehicle_unique','unique(vehicle_number)','Vehicle Number must be unique!')]
