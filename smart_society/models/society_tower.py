@@ -44,13 +44,14 @@ class Tower(models.Model):
                 for row in list1:
                     print('............row............', row)
                     exist_flat = self.env['society.flat'].search([
-                        ('name', '=', f't{record.name[-1]}-flat{flat + 101}-{row}'),
+                        ('name', '=', f'{record.society_id.id}-t{record.name[-1]}-flat{flat + 101}-{row}'),
+                        ('tower_id','=',record.id),
                     ])
                     # print('\n\n\n..................exist_flat..............................', exist_flat)
                     if not exist_flat:
                         print('\n\n\n...............if not exist_flat...............................', exist_flat)
                         self.env['society.flat'].create({
-                            'name': f't{record.name[-1]}-flat{flat + 101}-{row}',
+                            'name': f'{record.society_id}-t{record.name[-1]}-flat{flat + 101}-{row}',
                             'tower_id': record.id,
                             'floor_no': f'{flat + 1}',
                             # 'block':record.block, .tower_ids
@@ -61,6 +62,7 @@ class Tower(models.Model):
             for gh in range(record.guesthouse_count):
                 search_gh = self.env['society.guesthouse'].search([
                     ('name', '=', f't{record.name[-1]}-GuestHouse{gh + 1}'),
+                    ('tower_id', '=', record.id),
                 ], limit=1)
                 print('\n\n\n....................search_gh........................', search_gh)
                 print('\n\n\n.....................,gh...........................', gh)

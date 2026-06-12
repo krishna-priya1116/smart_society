@@ -163,7 +163,7 @@ class GymBooking(models.Model):
     gym_booking_charge=fields.Float(related='society_id.gym_booking_charge',string='Gym Booking Charge/day')
     total_charge=fields.Float(string='Total Charge')
     is_occupied=fields.Boolean(string='Is Occupied')
-    slots=fields.Many2one('gym.slots',string='Slots')
+    # slots=fields.Many2one('gym.slots',string='Slots')
 
     @api.depends('days','months')
     def _compute_booking_charge(self):

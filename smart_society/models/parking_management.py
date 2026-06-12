@@ -11,6 +11,7 @@ class ParkingManagement(models.Model):
 
     name=fields.Char(string='Parking name',required=True)
     tower_id=fields.Many2one('society.tower',string='Tower',required=True)
+    society_id=fields.Many2one('society.setup')
     parking_place=fields.Selection(string='Parking Place',selection=[
         ('basement1','Basement 1'),('basement2','Basement 2'),('ground','Ground')
     ],required=True)
@@ -66,14 +67,14 @@ class ParkingManagement(models.Model):
                 exist_slot=self.env['parking.slot'].search([
                     ('parking_id','=',park.id),
                     ('tower_id','=',park.tower_id.id),
-                    ('name','=',f'res-{park.parking_place}-t{park.tower_id.id}-{i + 1}'),
+                    ('name','=',f'res-{park.parking_place}-{park.society_id.id}-t{park.tower_id.id}-{i + 1}'),
                 ])
                 if not exist_slot:
                     self.env['parking.slot'].create({
                         'parking_id': park.id,
                         'tower_id':park.tower_id.id,
                         # 'name':f'res-{park.parking_place[0-5]}-t{park.tower_id}-{park.resident_parking+i+1}',
-                        'name': f'res-{park.parking_place}-t{park.tower_id.id}-{i + 1}',
+                        'name': f'res-{park.parking_place}-{park.society_id.id}-t{park.tower_id.id}-{i + 1}',
                         'parking_place':park.parking_place,
                         'parking_type': 'resident_parking',
                     })
@@ -216,7 +217,7 @@ class VehicleTracking(models.Model):
     flat_id=fields.Many2one(related='resident_id.flat_id',string='Flat')
     tower_id=fields.Many2one(related='flat_id.tower_id',string='Tower')
 
-    visitor_phone=fields.Char(string='Phone number',compute="",required=True)
+    visitor_phone=fields.Char(string='Phone number',compute="")
     has_vehicle=fields.Boolean(string='Has Vehicle',default=False)
     vehicle_id = fields.Many2one('vehicle.registrations', string='Vehicle')
     vehicle_number=fields.Char(related="vehicle_id.vehicle_number",string='Vehicle number')
@@ -237,7 +238,7 @@ class VehicleTracking(models.Model):
         ('other_parking','Other Parking'),
         ('ev_charging','Ev Charging'),('other', 'Other')
     ])
-    visit_purpose=fields.Char(string='Visit Purpose',required=True)
+    visit_purpose=fields.Char(string='Visit Purpose')
 
 
     @api.constrains('person_type','resident_id','flat_id','tower_id','parking_slot_id','entry_time','exit_time')
@@ -274,9 +275,13 @@ class VehicleTracking(models.Model):
                 record.parking_type='visitor_parking'
                 if not record.visiting_tower and not record.visiting_flat:
                     raise ValidationError('Visiting tower or flat is required!')
+                if not record.visit_purpose:
+                    raise ValidationError('Visiting Purpose required')
 
             if record.person_type=='other':
                 record.parking_type='other_parking'
+                if not record.visit_purpose:
+                    raise ValidationError('Visiting Purpose required')
 
 
 

@@ -128,11 +128,11 @@
         <field name="view_mode">list,form</field>
     </record>
 
-    <record id="gym_slot_action" model="ir.actions.act_window">
-        <field name="name">Gym Slots</field>
-        <field name="res_model">gym.slots</field>
-        <field name="view_mode">list,form</field>
-    </record>
+<!--    <record id="gym_slot_action" model="ir.actions.act_window">-->
+<!--        <field name="name">Gym Slots</field>-->
+<!--        <field name="res_model">gym.slots</field>-->
+<!--        <field name="view_mode">list,form</field>-->
+<!--    </record>-->
 
     <record id="clubhouse_booking_action" model="ir.actions.act_window">
         <field name="name">Clubhouse Booking</field>

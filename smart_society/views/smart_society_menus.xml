@@ -129,9 +129,9 @@
         parent="smart_society_booking" action="clubhouse_booking_action"
         groups="smart_society.group_registration_committee,smart_society.group_registration_security,smart_society.group_registration_administration"/>
 
-    <menuitem id="smart_society_gym_slots" name="Gym slots"
-        parent="smart_society_booking" action="gym_slot_action"
-        groups="smart_society.group_registration_committee,smart_society.group_registration_security,smart_society.group_registration_administration"/>
+<!--    <menuitem id="smart_society_gym_slots" name="Gym slots"-->
+<!--        parent="smart_society_booking" action="gym_slot_action"-->
+<!--        groups="smart_society.group_registration_committee,smart_society.group_registration_security,smart_society.group_registration_administration"/>-->
 
     </data>
 </odoo>

@@ -15,7 +15,7 @@ class SocietyDashboard(models.Model):
     notice_ids = fields.Many2many('notice.board',compute='_compute_dashboard_data')
     event_ids = fields.Many2many('event.announcement',compute='_compute_dashboard_data')
     complaint_ids = fields.Many2many('complaint.desk',compute='_compute_dashboard_data')
-    alert_type = fields.Selection(required=True, selection=[('sos_alert', 'SOS Alert'), ('fire_alert', 'Fire Alert'),
+    alert_type = fields.Selection(selection=[('sos_alert', 'SOS Alert'), ('fire_alert', 'Fire Alert'),
             ('panic_alert', 'Panic Alert'),('emergency_alert', 'Emergency Alert'),
             ('emergency_broadcast','Emergency Broadcast')])
 
@@ -32,7 +32,8 @@ class SocietyDashboard(models.Model):
                 'default_alert_type': 'sos_alert',
                 'default_name': 'SOS Alert',
             },
-            'groups': [(4, self.env.ref('smart_society.group_registration_user').id),
+            'groups': [(4,self.env.ref('smart_society.group_registration_administration').id),
+                        (4, self.env.ref('smart_society.group_registration_user').id),
                        (4, self.env.ref('smart_society.group_registration_committee').id),
                        (4, self.env.ref('smart_society.group_registration_security').id)],
         }
@@ -51,10 +52,11 @@ class SocietyDashboard(models.Model):
                 'default_alert_type': 'fire_alert',
                 'default_name': 'Fire Alert',
             },
-            'groups': [(4, self.env.ref('smart_society.group_registration_user').id),
+            'groups': [(4, self.env.ref('smart_society.group_registration_administration').id),
+                       (4, self.env.ref('smart_society.group_registration_user').id),
                        (4, self.env.ref('smart_society.group_registration_committee').id),
-                       (4, self.env.ref('smart_society.group_registration_security').id)],        }
-
+                       (4, self.env.ref('smart_society.group_registration_security').id)],
+        }
     def medical_panic_buttons(self):
         # self.ensure_one()
         # for record in self:
@@ -69,7 +71,8 @@ class SocietyDashboard(models.Model):
                 'default_alert_type': 'panic_alert',
                 'default_name': 'Panic Alert',
             },
-            'groups': [(4, self.env.ref('smart_society.group_registration_user').id),
+            'groups': [(4, self.env.ref('smart_society.group_registration_administration').id),
+                       (4, self.env.ref('smart_society.group_registration_user').id),
                        (4, self.env.ref('smart_society.group_registration_committee').id),
                        (4, self.env.ref('smart_society.group_registration_security').id)],
         }
@@ -85,11 +88,12 @@ class SocietyDashboard(models.Model):
             'view_mode': 'form',
             'target': 'new',
             'context': {
-                'default_alert_type': 'emergency_alert',
+                # 'default_alert_type': 'emergency_alert',
                 'default_name': 'Emergency Alert',
             },
-            'groups': [(4, self.env.ref('smart_society.group_registration_user').id),
-                (4, self.env.ref('smart_society.group_registration_committee').id),
+            'groups': [(4, self.env.ref('smart_society.group_registration_administration').id),
+                       (4, self.env.ref('smart_society.group_registration_user').id),
+                       (4, self.env.ref('smart_society.group_registration_committee').id),
                        (4, self.env.ref('smart_society.group_registration_security').id)],
         }
 
@@ -128,7 +132,7 @@ class SocietyDashboard(models.Model):
             record.notice_ids = self.env['notice.board'].search([],order='create_date desc')
             record.event_ids = self.env['event.announcement'].search([],order='event_time_start asc')
             # Complaints
-            if self.env.user.has_group('smart_society.group_registration_user'):
+            if self.env.user.has_group('base.group_portal'):
                 resident = self.env['resident.registrations'].search([
                     ('partner_id', '=', self.env.user.partner_id.id)
                 ], limit=1)

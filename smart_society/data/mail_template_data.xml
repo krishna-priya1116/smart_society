@@ -10,10 +10,18 @@
         <field name="auto_delete" eval="True"/>
         <field name="body_html" type="html">
             <div>
-                Dear Committee Members,<br/><br/>A new complaint has been raised.
-                <br/><br/><strong>Complaint:</strong>
-                <t t-out="object.name"/><br/><strong>Description:</strong>
-                <t t-out="object.description"/><br/><br/>Thank You.
+                Dear Committee Members,
+                <br/>
+                <br/>A new complaint has been raised.
+                <br/>
+                <br/>
+                <strong>Complaint:</strong>
+                <t t-out="object.name"/>
+                <br/>
+                <strong>Description:</strong>
+                <t t-out="object.description"/>
+                <br/>
+                <br/>Thank You.
             </div>
         </field>
     </record>
@@ -22,15 +30,25 @@
         <field name="name">Notice: Send Email</field>
         <field name="model_id" ref="smart_society.model_notice_board"/>
         <field name="subject">Notice Notification- {{ object.name or 'Notice'}}</field>
-<!--        <field name="email_to">{{ object.resident_emails }}</field>-->
-                <field name="email_to">{{ object.notice_emails }}</field>
+        <!--        <field name="email_to">{{ object.resident_emails }}</field>-->
+        <field name="email_to">{{ object.notice_emails }}</field>
 
         <field name="auto_delete" eval="True"/>
         <field name="body_html" type="html">
             <div>
-                Dear Residents <br/><br/><strong>Notice :</strong><br/><br/>
-                Date: <t t-out="object.create_date"/><br/><br/>
-                <t t-out="object.description"/><br/><br/>Thank You.
+                Dear Residents
+                <br/>
+                <br/>
+                <strong>Notice :</strong>
+                <br/>
+                <br/>
+                Date:
+                <t t-out="object.create_date"/>
+                <br/>
+                <br/>
+                <t t-out="object.description"/>
+                <br/>
+                <br/>Thank You.
             </div>
         </field>
     </record>
@@ -38,18 +56,33 @@
     <record id="event_email_template_smart_society" model="mail.template">
         <field name="name">Event: Send Email</field>
         <field name="model_id" ref="smart_society.model_event_announcement"/>
-        <field name="subject">Event  Notification- {{ object.name or 'Event'}}</field>
-<!--        <field name="email_to">{{ object.event_emails }}</field>-->
+        <field name="subject">Event Notification- {{ object.name or 'Event'}}</field>
+        <!--        <field name="email_to">{{ object.event_emails }}</field>-->
         <field name="auto_delete" eval="True"/>
         <field name="body_html" type="html">
             <div>
 
-                Dear Residents, <br/><br/>
-                <strong>Event :</strong><t t-out="object.name"/><br/><br/>
-                Event Start Date: <t t-out="object.event_time_start"/><br/>
-                Event End Date: <t t-out="object.event_time_end"/><br/><br/>
-                Event Place: <t t-out="object.event_place"/><br/><br/>
-                <t t-out="object.description"/><br/><br/>Thank You.
+                Dear Residents,
+                <br/>
+                <br/>
+                <strong>Event :</strong>
+                <t t-out="object.name"/>
+                <br/>
+                <br/>
+                Event Start Date:
+                <t t-out="object.event_time_start"/>
+                <br/>
+                Event End Date:
+                <t t-out="object.event_time_end"/>
+                <br/>
+                <br/>
+                Event Place:
+                <t t-out="object.event_place"/>
+                <br/>
+                <br/>
+                <t t-out="object.description"/>
+                <br/>
+                <br/>Thank You.
             </div>
         </field>
     </record>
@@ -58,65 +91,103 @@
         <field name="name">Alert: Send Email</field>
         <field name="model_id" ref="smart_society.model_resident_alerts"/>
         <field name="subject">Alert Notification - {{ object.name or 'Alerts'}}</field>
-       <field name="email_from">{{ user.email_formatted }}</field>
+        <field name="email_from">{{ user.email_formatted }}</field>
         <field name="email_to">{{ object.committee_emails }}</field>
         <field name="auto_delete" eval="True"/>
         <field name="body_html" type="html">
             <div>
-                Dear Committee Members,<br/>
-                <br/><br/><strong>Alert :</strong>
-                <t t-out="object.name"/><br/><strong>Description:</strong>
+                Dear Committee Members,
+                <br/>
+                <br/>
+                <br/>
+                <strong>Alert :</strong>
+                <t t-out="object.name"/>
+                <br/>
+                <strong>Description:</strong>
 
-                <t t-out="object.description"/><br/><strong>Flat:</strong>
+                <t t-out="object.description"/>
+                <br/>
+                <strong>Flat:</strong>
                 <t t-out="', '.join(object.flat_id.mapped('name'))"/>
-<!--                    <ul>-->
-<!--                    {% for member in object.flat_id %}-->
-<!--                        <li>{{ member.name }}</li>-->
-<!--                    {% endfor %}-->
-<!--                    </ul>-->
-                 <br/><strong>resident</strong>
-                <t t-out="object.user_id.name"/><br/><strong>Location:</strong>
-                <t t-out="object.location"/><br/><strong>datetime:</strong>
-                <t t-out="object.create_date"/><br/><br/>
+                <!--                    <ul>-->
+                <!--                    {% for member in object.flat_id %}-->
+                <!--                        <li>{{ member.name }}</li>-->
+                <!--                    {% endfor %}-->
+                <!--                    </ul>-->
+                <br/>
+                <strong>resident</strong>
+                <t t-out="object.user_id.name"/>
+                <br/>
+                <strong>Location:</strong>
+                <t t-out="object.location"/>
+                <br/>
+                <strong>datetime:</strong>
+                <t t-out="object.create_date"/>
+                <br/>
+                <br/>
 
             </div>
         </field>
     </record>
 
-    <record id="emergency_broadcasts_email_template"  model="mail.template">
+    <record id="emergency_broadcasts_email_template" model="mail.template">
         <field name="name">Emergency Broadcast</field>
         <field name="model_id" ref="smart_society.model_emergency_broadcasts"/>
         <field name="subject">Emergency Broadcast - {{ object.name }}</field>
         <field name="email_from">{{ user.email_formatted }}</field>
         <field name="email_to">{{ object.resident_emails }}</field>
-         <field name="body_html" type="html">
-            <div>Dear Residents,,<br/><br/>Alert!!!
-                <br/><br/><strong>Alert :</strong><br/><br/><strong>Title:</strong>
-                <t t-out="object.name"/><br/><br/><strong>Description:</strong>
-                <t t-out="object.description"/><br/><br/><strong>Date and Time:</strong>
+        <field name="body_html" type="html">
+            <div>Dear Residents,,
+                <br/>
+                <br/>Alert!!!
+                <br/>
+                <br/>
+                <strong>Alert :</strong>
+                <br/>
+                <br/>
+                <strong>Title:</strong>
+                <t t-out="object.name"/>
+                <br/>
+                <br/>
+                <strong>Description:</strong>
+                <t t-out="object.description"/>
+                <br/>
+                <br/>
+                <strong>Date and Time:</strong>
                 <t t-out="object.create_date"/>
             </div>
         </field>
     </record>
 
-        <record id="maintenance_email_template_smart_society" model="mail.template">
+    <record id="maintenance_email_template_smart_society" model="mail.template">
         <field name="name">Maintenance: Send Email</field>
         <field name="model_id" ref="smart_society.model_society_maintenance"/>
-        <field name="subject">Maintenance Bill Notification- {{ object.maintenance_bill_id.name or 'Maintenance bill'}}</field>
+        <field name="subject">Maintenance Bill Notification- {{ object.maintenance_bill_id.name or 'Maintenance
+            bill'}}
+        </field>
         <field name="email_from">{{ user.email_formatted }}</field>
 
         <field name="email_to">{{ object.resident_emails }}</field>
         <field name="auto_delete" eval="True"/>
         <field name="body_html" type="html">
             <div>
-                Dear Residents:<t t-out="object.resident_id.name"/><br/><br/>
+                Dear Residents:
+<!--                <t t-out="object.resident_id.name"/>-->
+                <br/>
+                <br/>
                 <strong>Maintenance bill:</strong>
-                <br/><br/>Flat:
-                <t t-out="object.flat_id.name"/><br/>Due Date:
-                <t t-out="object.due_date"/><br/>Amount:
-                <t t-out="object.maintenance_amount"/><br/>Penalty Amount:
-                <t t-out="object.penalty_amount"/><br/>Total Amount:
-                <t t-out="object.total_amount"/><br/>Status:
+                <br/>
+                <br/>Flat:
+                <t t-out="object.flat_id.name"/>
+                <br/>Due Date:
+                <t t-out="object.due_date"/>
+                <br/>Amount:
+                <t t-out="object.maintenance_amount"/>
+                <br/>Penalty Amount:
+                <t t-out="object.penalty_amount"/>
+                <br/>Total Amount:
+                <t t-out="object.total_amount"/>
+                <br/>Status:
                 <t t-out="object.state"/>
             </div>
         </field>
@@ -124,20 +195,20 @@
 </odoo>
 
 
-<!--                <t t-out="','.join([str(i) for i in object.flat_id.ids]) if flat_id else '' "/><br/><strong>Resident:</strong>-->
+        <!--                <t t-out="','.join([str(i) for i in object.flat_id.ids]) if flat_id else '' "/><br/><strong>Resident:</strong>-->
 
-<!--                                            <div t-if="field.selection_ids">-->
-<!--                                <span>- selection = [-->
-<!--                                    <t t-foreach="field.selection_ids" t-as="selection">-->
-<!--                                        (<span t-field="selection.value"/>, <span t-field="selection.name"/>),-->
-<!--                                    </t>]-->
-<!--                                </span>-->
-<!--                            </div>-->
-<!--                -->
-<!--                -->
-<!--                            <div class="mt16" t-if="not cancel and impacted_pickings">-->
-<!--                <p>Impacted Transfer(s):</p>-->
-<!--                <ul t-foreach="impacted_pickings" t-as="picking">-->
-<!--                    <li><a href="#" data-oe-model="stock.picking" t-att-data-oe-id="picking.id"><t t-esc="picking.name"/></a></li>-->
-<!--                </ul>-->
-<!--            </div>-->
+        <!--                                            <div t-if="field.selection_ids">-->
+        <!--                                <span>- selection = [-->
+        <!--                                    <t t-foreach="field.selection_ids" t-as="selection">-->
+        <!--                                        (<span t-field="selection.value"/>, <span t-field="selection.name"/>),-->
+        <!--                                    </t>]-->
+        <!--                                </span>-->
+        <!--                            </div>-->
+        <!--                -->
+        <!--                -->
+        <!--                            <div class="mt16" t-if="not cancel and impacted_pickings">-->
+        <!--                <p>Impacted Transfer(s):</p>-->
+        <!--                <ul t-foreach="impacted_pickings" t-as="picking">-->
+        <!--                    <li><a href="#" data-oe-model="stock.picking" t-att-data-oe-id="picking.id"><t t-esc="picking.name"/></a></li>-->
+        <!--                </ul>-->
+        <!--            </div>-->

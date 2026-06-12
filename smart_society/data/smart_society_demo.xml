@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+<!--        <record id="city_ahmedabad" model="res.city">-->
+<!--            <field name="name">Ahmedabad</field>-->
+<!--            <field name="state_id" ref="base.state_in_gj"/>-->
+<!--            <field name="country_id" ref="base.in"/>-->
+<!--        </record>-->
         <!--        society-->
         <record id="society_setup_demo1" model="society.setup">
             <field name="name">Green Vally Society</field>
             <field name="society_reg_number">GVS001</field>
             <field name="society_address">SG Highway, Ahmedabad</field>
+            <field name="street">Street1</field>
+            <field name="street2">Street2</field>
             <field name="country_id" ref="base.in"/>
             <field name="state_id" ref="base.state_in_gj"/>
-            <field name="pincode">380015</field>
+            <field name="city">Ahmedabad</field>
+            <field name="zip">380015</field>
             <field name="tower_count">3</field>
             <field name="has_gym">True</field>
             <field name="location_gym">Ground Floor</field>
@@ -31,7 +39,7 @@
             <field name="flat_rows_one_floor">4</field>
             <field name="has_guesthouse">True</field>
             <field name="guesthouse_count">4</field>
-<!--            <field name="sequence">1</field>-->
+            <!--            <field name="sequence">1</field>-->
         </record>
 
         <!--        society tower 2-->
@@ -46,7 +54,7 @@
             <field name="flat_rows_one_floor">4</field>
             <field name="has_guesthouse">True</field>
             <field name="guesthouse_count">4</field>
-<!--            <field name="sequence">2</field>-->
+            <!--            <field name="sequence">2</field>-->
 
         </record>
 
@@ -62,7 +70,7 @@
             <field name="flat_rows_one_floor">4</field>
             <field name="has_guesthouse">True</field>
             <field name="guesthouse_count">4</field>
-<!--            <field name="sequence">3</field>-->
+            <!--            <field name="sequence">3</field>-->
 
         </record>
 
@@ -79,8 +87,8 @@
             <field name="no_of_rooms">2</field>
             <field name="balcony_count">1</field>
             <field name="bathroom_count">1</field>
-<!--            <field name="parking_slot_ids" ref="parking_slot_demo1"/>-->
-<!--            <field name="sequence">1</field>-->
+            <!--            <field name="parking_slot_ids" ref="parking_slot_demo1"/>-->
+            <!--            <field name="sequence">1</field>-->
         </record>
 
         <!--        society tower 1 flat-->
@@ -96,8 +104,8 @@
             <field name="no_of_rooms">2</field>
             <field name="balcony_count">1</field>
             <field name="bathroom_count">1</field>
-<!--            <field name="sequence">2</field>-->
-<!--            <field name="parking_slot_ids" ref="parking_slot_demo2"/>-->
+            <!--            <field name="sequence">2</field>-->
+            <!--            <field name="parking_slot_ids" ref="parking_slot_demo2"/>-->
 
         </record>
 
@@ -114,9 +122,9 @@
             <field name="no_of_rooms">3</field>
             <field name="balcony_count">1</field>
             <field name="bathroom_count">2</field>
-<!--            <field name="parking_slot_ids" ref="parking_slot_demo3"/>-->
+            <!--            <field name="parking_slot_ids" ref="parking_slot_demo3"/>-->
 
-<!--            <field name="sequence">3</field>-->
+            <!--            <field name="sequence">3</field>-->
 
         </record>
 
@@ -133,8 +141,8 @@
             <field name="no_of_rooms">2</field>
             <field name="balcony_count">1</field>
             <field name="bathroom_count">1</field>
-<!--            <field name="parking_slot_ids" ref="parking_slot_demo4"/>-->
-<!--            <field name="sequence">4</field>-->
+            <!--            <field name="parking_slot_ids" ref="parking_slot_demo4"/>-->
+            <!--            <field name="sequence">4</field>-->
         </record>
 
         <!--        society tower 3 flat-->
@@ -150,8 +158,8 @@
             <field name="no_of_rooms">2</field>
             <field name="balcony_count">1</field>
             <field name="bathroom_count">1</field>
-<!--            <field name="parking_slot_ids" ref="parking_slot_demo5"/>-->
-<!--            <field name="sequence">5</field>-->
+            <!--            <field name="parking_slot_ids" ref="parking_slot_demo5"/>-->
+            <!--            <field name="sequence">5</field>-->
         </record>
 
         <!--        society tower 3 flat-->
@@ -167,8 +175,8 @@
             <field name="no_of_rooms">2</field>
             <field name="balcony_count">1</field>
             <field name="bathroom_count">1</field>
-<!--            <field name="parking_slot_ids" ref="parking_slot_demo6"/>-->
-<!--            <field name="sequence">6</field>-->
+            <!--            <field name="parking_slot_ids" ref="parking_slot_demo6"/>-->
+            <!--            <field name="sequence">6</field>-->
         </record>
 
 
@@ -181,7 +189,7 @@
             <field name="visitor_parking">5</field>
             <field name="ev_parking">3</field>
             <field name="other_parking">2</field>
-<!--            <field name="sequence">1</field>-->
+            <!--            <field name="sequence">1</field>-->
         </record>
 
         <!--        parking management 1-->
@@ -193,7 +201,7 @@
             <field name="visitor_parking">5</field>
             <field name="ev_parking">3</field>
             <field name="other_parking">2</field>
-<!--            <field name="sequence">1</field>-->
+            <!--            <field name="sequence">1</field>-->
         </record>
 
         <!--        parking management 1-->
@@ -205,7 +213,7 @@
             <field name="visitor_parking">5</field>
             <field name="ev_parking">3</field>
             <field name="other_parking">2</field>
-<!--            <field name="sequence">3</field>-->
+            <!--            <field name="sequence">3</field>-->
         </record>
 
         <!--        flat 1 parking slot-->
@@ -289,8 +297,6 @@
         </record>
 
 
-
-
         <record id="resident_vehicle_demo1" model="vehicle.registrations">
             <field name="name">GJ 89 UU 9090</field>
             <field name="vehicle_number">GJ 89 UU 9090</field>
@@ -298,7 +304,7 @@
             <field name="flat_id" ref="society_flat_demo_1"/>
             <field name="tower_id" ref="society_tower_demo_1"/>
             <field name="vehicle_type">4wheeler</field>
-<!--            <field name="resident_id" ref="resident_demo_1"/>-->
+            <!--            <field name="resident_id" ref="resident_demo_1"/>-->
             <field name="parking_slot_id" ref="parking_slot_demo1"/>
         </record>
 
@@ -309,7 +315,7 @@
             <field name="flat_id" ref="society_flat_demo_1"/>
             <field name="tower_id" ref="society_tower_demo_1"/>
             <field name="vehicle_type">2wheeler</field>
-<!--            <field name="resident_id" ref="resident_demo_1"/>-->
+            <!--            <field name="resident_id" ref="resident_demo_1"/>-->
             <field name="parking_slot_id" ref="parking_slot_demo1"/>
         </record>
         <!--        res.partner for resident 1-->
@@ -319,25 +325,37 @@
             <field name="email">nathanial.neaten11@example.com</field>
         </record>
 
+
         <record id="resident_demo_1" model="resident.registrations">
-            <field name="name">Nathanial Neaten</field>
             <field name="partner_id" ref="partner_resident_1"/>
             <field name="age">35</field>
             <field name="flat_id" ref="society_flat_demo_1"/>
-            <field name="tower_id" ref="society_tower_demo_1"/>
-            <field name="mobile_number">9876543210</field>
-            <field name="email">nathanial.neaten11@example.com</field>
             <field name="emergency_contacts">9876500000</field>
             <field name="resident_type">owner</field>
             <field name="has_vehicle">True</field>
             <field name="vehicle_count">2</field>
             <field name="real_owner">Nathanial Neaten</field>
             <field name="vehicle_ids" eval="[(6,0,[ref('resident_vehicle_demo1'),
-                        ref('resident_vehicle_demo2')])]"/>
+                                          ref('resident_vehicle_demo2')])]"/>
         </record>
 
 
-
+        <!--        <record id="resident_demo_1" model="resident.registrations">-->
+        <!--            <field name="name">Nathanial Neaten</field>-->
+        <!--            <field name="partner_id" ref="partner_resident_1"/>-->
+        <!--            <field name="age">35</field>-->
+        <!--            <field name="flat_id" ref="society_flat_demo_1"/>-->
+        <!--            <field name="tower_id" ref="society_tower_demo_1"/>-->
+        <!--            <field name="mobile_number">9876543210</field>-->
+        <!--            <field name="email">nathanial.neaten11@example.com</field>-->
+        <!--            <field name="emergency_contacts">9876500000</field>-->
+        <!--            <field name="resident_type">owner</field>-->
+        <!--            <field name="has_vehicle">True</field>-->
+        <!--            <field name="vehicle_count">2</field>-->
+        <!--            <field name="real_owner">Nathanial Neaten</field>-->
+        <!--            <field name="vehicle_ids" eval="[(6,0,[ref('resident_vehicle_demo1'),-->
+        <!--                        ref('resident_vehicle_demo2')])]"/>-->
+        <!--        </record>-->
 
 
         <!--        res.partner for resident 2-->
@@ -369,7 +387,7 @@
             <field name="flat_id" ref="society_flat_demo_4"/>
             <field name="tower_id" ref="society_tower_demo_2"/>
             <field name="vehicle_type">4wheeler</field>
-<!--            <field name="resident_id" ref="resident_demo_3"/>-->
+            <!--            <field name="resident_id" ref="resident_demo_3"/>-->
             <field name="parking_slot_id" ref="parking_slot_demo4"/>
         </record>
 
@@ -380,7 +398,7 @@
             <field name="flat_id" ref="society_flat_demo_4"/>
             <field name="tower_id" ref="society_tower_demo_2"/>
             <field name="vehicle_type">2wheeler</field>
-<!--            <field name="resident_id" ref="resident_demo_3"/>-->
+            <!--            <field name="resident_id" ref="resident_demo_3"/>-->
             <field name="parking_slot_id" ref="parking_slot_demo4"/>
         </record>
 
@@ -393,7 +411,7 @@
         </record>
 
 
-                <!--        res.partner for resident 4-->
+        <!--        res.partner for resident 4-->
         <record id="partner_resident_4" model="res.partner">
             <field name="name">Audrey Davidson</field>
             <field name="phone">9871691352</field>
@@ -431,8 +449,6 @@
             <field name="real_owner">Audrey Davidson</field>
 
         </record>
-
-
 
 
         <!--        res.partner for resident 5-->
@@ -523,26 +539,58 @@
 
         <record id="partner_committee_1" model="res.partner">
             <field name="name">Jesse Brown</field>
+            <field name="email">jesse.brown98@example.com</field>
+            <field name="phone">6352738171</field>
         </record>
+
+<!--        <record id="user_committee_1" model="res.users">-->
+<!--            <field name="name">Jesse Brown</field>-->
+<!--            <field name="login">jesse.brown98@example.com</field>-->
+<!--            <field name="partner_id" ref="partner_committee_1"/>-->
+<!--        </record>-->
 
         <record id="partner_committee_2" model="res.partner">
             <field name="name">Kim Snyder</field>
+            <field name="email">kim.snyder98@example.com</field>
+            <field name="phone">6352738172</field>
         </record>
+
+<!--        <record id="user_committee_2" model="res.users">-->
+<!--            <field name="name">Kim Snyder</field>-->
+<!--            <field name="login">kim.snyder98@example.com</field>-->
+<!--            <field name="partner_id" ref="partner_committee_2"/>-->
+<!--        </record>-->
 
         <record id="partner_committee_3" model="res.partner">
             <field name="name">Edith Sanchez</field>
+            <field name="email">edith.sanchez98@example.com</field>
+            <field name="phone">6352738173</field>
         </record>
+
+<!--        <record id="user_committee_3" model="res.users">-->
+<!--            <field name="name">Edith Sanchez</field>-->
+<!--            <field name="login">edith.sanchez98@example.com</field>-->
+<!--            <field name="partner_id" ref="partner_committee_3"/>-->
+<!--        </record>-->
+
+
 
         <record id="partner_committee_4" model="res.partner">
             <field name="name">Brandon Freeman</field>
+            <field name="email">brandon.freeman98@example.com</field>
+            <field name="phone">6352738174</field>
         </record>
 
         <record id="partner_committee_5" model="res.partner">
             <field name="name">Nicole Ford</field>
+            <field name="email">nicole.ford98@example.com</field>
+            <field name="phone">6352738175</field>
         </record>
 
         <record id="partner_committee_6" model="res.partner">
             <field name="name">Toni Rhodes</field>
+            <field name="email">toni.rhodes98@example.com</field>
+            <field name="phone">6352738176</field>
         </record>
 
 
@@ -572,7 +620,7 @@
 
         <!-- Tower 3 Committee -->
         <record id="committee_tower_3" model="society.committee">
-            <field name="name">Tower C Committee</field>
+            <field name="name">Tower C</field>
             <field name="tower_id" ref="society_tower_demo_3"/>
             <field name="chairman_id" ref="partner_committee_5"/>
             <field name="secretary_id" ref="partner_committee_6"/>
@@ -632,6 +680,7 @@
         <record id="society_employee_1" model="hr.employee">
             <field name="name">Tina Williamson</field>
             <field name="private_email">tina_williamson11@example.com</field>
+            <field name="private_phone">8273917382</field>
             <field name="sex">female</field>
         </record>
 
@@ -639,6 +688,7 @@
         <record id="society_employee_2" model="hr.employee">
             <field name="name">Marc demo</field>
             <field name="private_email">marc_demo11@example.com</field>
+            <field name="private_phone">8371637281</field>
             <field name="sex">male</field>
         </record>
 
@@ -646,13 +696,14 @@
         <record id="society_employee_3" model="hr.employee">
             <field name="name">Jeffrey Kelly</field>
             <field name="private_email">jeffrey_kelly11@example.com</field>
+            <field name="private_phone">9987037281</field>
             <field name="sex">male</field>
         </record>
 
         <!--        security.guard hr.employee for security 1-->
         <record id="security_demo_1" model="security.guard">
             <field name="security_id" ref="society_employee_1"/>
-            <field name="name">Tina Williamson</field>
+<!--            <field name="name">Tina Williamson</field>-->
             <field name="tower_id" ref="society_tower_demo_1"/>
             <field name="mobile_number">8273917382</field>
             <field name="email">tina_williamson@example11.com</field>
@@ -666,7 +717,7 @@
         <!--        security.guard hr.employee for security 2-->
         <record id="security_demo_2" model="security.guard">
             <field name="security_id" ref="society_employee_2"/>
-            <field name="name">Marc demo</field>
+<!--            <field name="name">Marc demo</field>-->
             <field name="tower_id" ref="society_tower_demo_2"/>
             <field name="mobile_number">8371637281</field>
             <field name="email">marc_demo@example11.com</field>
@@ -680,7 +731,7 @@
         <!--        security.guard hr.employee for security 3-->
         <record id="security_demo_3" model="security.guard">
             <field name="security_id" ref="society_employee_3"/>
-            <field name="name">Jeffrey Kelly</field>
+<!--            <field name="name">Jeffrey Kelly</field>-->
             <field name="tower_id" ref="society_tower_demo_3"/>
             <field name="mobile_number">9987037281</field>
             <field name="email">jeffrey_kelly11@example.com</field>
@@ -691,654 +742,702 @@
             <field name="shift">morning</field>
         </record>
 
-<!--        &lt;!&ndash;        visitor tracking&ndash;&gt;-->
-<!--        <record id="vehicle_tracking_demo1" model="vehicle.tracking">-->
-<!--            <field name="person_type">visitor</field>-->
-<!--            <field name="visitor_id" ref="visitor_demo_1"/>-->
-<!--            <field name="visiting_flat" ref="society_flat_demo_2"/>-->
-<!--            <field name="visiting_tower" ref="society_tower_demo_1"/>-->
-<!--            <field name="visitor_phone">7362736253</field>-->
-<!--            <field name="entry_time">2026-06-9 09:00:00</field>-->
-<!--            &lt;!&ndash;            <field name="exit_time">2026-06-9 16:30:00</field>&ndash;&gt;-->
-<!--            <field name="security_id" ref="security_demo_1"/>-->
-<!--            <field name="has_vehicle">True</field>-->
-<!--            <field name="is_occupied">True</field>-->
-<!--            <field name="vehicle_number">GJ 67 JJ 1827</field>-->
-<!--            <field name="parking_type">visitor_parking</field>-->
-<!--            <field name="parking_slot_id" ref="parking_slot_demo7"/>-->
-<!--        </record>-->
+                <!--        visitor tracking-->
+                <record id="vehicle_tracking_demo1" model="vehicle.tracking">
+                    <field name="person_type">visitor</field>
+                    <field name="visitor_id" ref="visitor_demo_1"/>
+                    <field name="visiting_flat" ref="society_flat_demo_2"/>
+                    <field name="visiting_tower" ref="society_tower_demo_1"/>
+                    <field name="visitor_phone">7362736253</field>
+                    <field name="entry_time">2026-06-09 09:00:00</field>
+                    <!--            <field name="exit_time">2026-06-9 16:30:00</field>-->
+                    <field name="security_id" ref="security_demo_1"/>
+                    <field name="has_vehicle">True</field>
+                    <field name="is_occupied">True</field>
+                    <field name="vehicle_number">GJ 67 JJ 1827</field>
+                    <field name="parking_type">visitor_parking</field>
+                    <field name="visit_purpose">Relative</field>
+                    <field name="parking_slot_id" ref="parking_slot_demo7"/>
 
-<!--        &lt;!&ndash;        visitor tracking&ndash;&gt;-->
-<!--        <record id="vehicle_tracking_demo2" model="vehicle.tracking">-->
-<!--            <field name="person_type">visitor</field>-->
-<!--            <field name="visitor_id" ref="visitor_demo_2"/>-->
-<!--            <field name="visiting_flat" ref="society_flat_demo_1"/>-->
-<!--            <field name="visiting_tower" ref="society_tower_demo_1"/>-->
-<!--            <field name="visitor_phone">8373527381</field>-->
-<!--            <field name="entry_time">2026-06-10 07:00:00</field>-->
-<!--            <field name="exit_time">2026-06-10 12:30:00</field>-->
-<!--            <field name="is_occupied">False</field>-->
-<!--            <field name="security_id" ref="security_demo_1"/>-->
+                </record>
 
-<!--        </record>-->
+                <!--        visitor tracking-->
+                <record id="vehicle_tracking_demo2" model="vehicle.tracking">
+                    <field name="person_type">visitor</field>
+                    <field name="visitor_id" ref="visitor_demo_2"/>
+                    <field name="visiting_flat" ref="society_flat_demo_1"/>
+                    <field name="visiting_tower" ref="society_tower_demo_1"/>
+                    <field name="visitor_phone">8373527381</field>
+                    <field name="has_vehicle">False</field>
+                    <field name="entry_time">2026-06-10 07:00:00</field>
+                    <field name="exit_time">2026-06-10 12:30:00</field>
+                    <field name="is_occupied">False</field>
+                    <field name="visit_purpose">Work Related</field>
+                    <field name="security_id" ref="security_demo_1"/>
 
-<!--        &lt;!&ndash;        visitor tracking&ndash;&gt;-->
-<!--        <record id="vehicle_tracking_demo3" model="vehicle.tracking">-->
-<!--            <field name="person_type">visitor</field>-->
-<!--            <field name="visitor_id" ref="visitor_demo3"/>-->
-<!--            <field name="visiting_flat" ref="society_flat_demo_4"/>-->
-<!--            <field name="visiting_tower" ref="society_tower_demo_2"/>-->
-<!--            <field name="visitor_phone">8362738291</field>-->
-<!--            <field name="entry_time">2026-06-11 10:00:00</field>-->
-<!--            &lt;!&ndash;            <field name="exit_time">2026-06-11 16:00:00</field>&ndash;&gt;-->
-<!--            <field name="security_id" ref="security_demo_2"/>-->
-<!--            <field name="parking_type">visitor_parking</field>-->
-<!--            <field name="is_occupied">True</field>-->
-<!--            <field name="parking_slot_id" ref="parking_slot_demo8"/>-->
-<!--        </record>-->
+                </record>
 
-<!--        &lt;!&ndash;        other tracking&ndash;&gt;-->
-<!--        <record id="vehicle_tracking_demo4" model="vehicle.tracking">-->
-<!--            <field name="person_type">other</field>-->
-<!--            <field name="visit_purpose">Post delivery</field>-->
-<!--            <field name="security_id" ref="security_demo_2"/>-->
-<!--            <field name="flat_id" ref="society_flat_demo_3"/>-->
-<!--            <field name="tower_id" ref="society_tower_demo_2">other</field>-->
-<!--            <field name="entry_time">2026-06-10 9:00:00</field>-->
-<!--            <field name="exit_time">2026-06-10 9:30:0</field>-->
-<!--        </record>-->
+                <!--        visitor tracking-->
+                <record id="vehicle_tracking_demo3" model="vehicle.tracking">
+                    <field name="person_type">visitor</field>
+                    <field name="visitor_id" ref="visitor_demo_3"/>
+                    <field name="visiting_flat" ref="society_flat_demo_4"/>
+                    <field name="visiting_tower" ref="society_tower_demo_2"/>
+                    <field name="visitor_phone">8362738291</field>
+                    <field name="entry_time">2026-06-11 10:00:00</field>
+                    <!--            <field name="exit_time">2026-06-11 16:00:00</field>-->
+                    <field name="has_vehicle">True</field>
+                    <field name="vehicle_number">GJ 77 JJ 5454</field>
+                    <field name="parking_type">visitor_parking</field>
+                    <field name="security_id" ref="security_demo_2"/>
+                    <field name="is_occupied">True</field>
+                    <field name="visit_purpose">Work Related</field>
+                    <field name="parking_slot_id" ref="parking_slot_demo8"/>
+                </record>
 
-<!--        &lt;!&ndash;        resident tracking&ndash;&gt;-->
-<!--        <record id="vehicle_tracking_demo5" model="vehicle.tracking">-->
-<!--            <field name="person_type">resident</field>-->
-<!--            <field name="resident_id" ref="resident_demo_1"/>-->
-<!--            <field name="flat_id" ref="society_flat_demo_1"/>-->
-<!--            <field name="tower_id" ref="society_tower_demo_1"/>-->
-<!--            <field name="entry_time">2026-06-11 9:00:00</field>-->
-<!--            &lt;!&ndash;            <field name="exit_time">2026-06-11 16:30:0</field>&ndash;&gt;-->
-<!--            <field name="has_vehicle">True</field>-->
-<!--            <field name="vehicle_id" ref="resident_vehicle_demo1"/>-->
-<!--            <field name="parking_type">resident_parking</field>-->
-<!--            <field name="parking_slot_id" ref="parking_slot_demo1"/>-->
-<!--            <field name="is_occupied">True</field>-->
-<!--            <field name="security_id" ref="security_demo_1"/>-->
-<!--        </record>-->
-<!--        &lt;!&ndash;        resident tracking&ndash;&gt;-->
-<!--        <record id="vehicle_tracking_demo6" model="vehicle.tracking">-->
-<!--            <field name="person_type">resident</field>-->
-<!--            <field name="resident_id" ref="resident_demo_3"/>-->
-<!--            <field name="flat_id" ref="society_flat_demo_4"/>-->
-<!--            <field name="tower_id" ref="society_tower_demo_2"/>-->
-<!--            <field name="entry_time">2026-06-11 9:00:00</field>-->
-<!--            &lt;!&ndash;            <field name="exit_time">2026-06-11 16:30:0</field>&ndash;&gt;-->
-<!--            <field name="has_vehicle">True</field>-->
-<!--            <field name="vehicle_id" ref="resident_vehicle_demo3"/>-->
-<!--            <field name="parking_type">resident_parking</field>-->
-<!--            <field name="parking_slot_id" ref="parking_slot_demo4"/>-->
-<!--            <field name="is_occupied">True</field>-->
-<!--            <field name="security_id" ref="security_demo_1"/>-->
-<!--        </record>-->
+                <!--        other tracking-->
+<!--                <record id="vehicle_tracking_demo4" model="vehicle.tracking">-->
+<!--                    <field name="person_type">other</field>-->
+<!--                    <field name="visit_purpose">Post delivery</field>-->
+<!--                    <field name="security_id" ref="security_demo_2"/>-->
+<!--                    <field name="flat_id" ref="society_flat_demo_3"/>-->
+<!--                    <field name="tower_id" ref="society_tower_demo_2">other</field>-->
+<!--                    <field name="entry_time">2026-06-10 09:00:00</field>-->
+<!--                    <field name="exit_time">2026-06-10 09:30:0</field>-->
+<!--                </record>-->
 
+<!--                        resident tracking-->
+                <record id="vehicle_tracking_demo5" model="vehicle.tracking">
+                    <field name="person_type">resident</field>
+                    <field name="resident_id" ref="resident_demo_1"/>
+                    <field name="flat_id" ref="society_flat_demo_1"/>
+                    <field name="tower_id" ref="society_tower_demo_1"/>
+                    <field name="entry_time">2026-06-11 09:00:00</field>
+                    <!--            <field name="exit_time">2026-06-11 16:30:0</field>-->
+                    <field name="has_vehicle">True</field>
+                    <field name="vehicle_id" ref="resident_vehicle_demo1"/>
+                    <field name="parking_type">resident_parking</field>
+                    <field name="parking_slot_id" ref="parking_slot_demo1"/>
+                    <field name="is_occupied">True</field>
+                    <field name="security_id" ref="security_demo_1"/>
+                    <field name="visit_purpose">House</field>
 
-<!--        <record id="help_desk_tower1" model="help.desk">-->
-<!--            <field name="name">Tower 1 Helpdesk</field>-->
-<!--            <field name="tower_id" ref="society_tower_demo_1"/>-->
-<!--        </record>-->
-<!--        <record id="help_desk_tower2" model="help.desk">-->
-<!--            <field name="name">Tower 2 Helpdesk</field>-->
-<!--            <field name="tower_id" ref="society_tower_demo_2"/>-->
-<!--        </record>-->
-<!--        <record id="help_desk_tower3" model="help.desk">-->
-<!--            <field name="name">Tower 3 Helpdesk</field>-->
-<!--            <field name="tower_id" ref="society_tower_demo_3"/>-->
-<!--        </record>-->
+                </record>
+<!--                &lt;!&ndash;        resident tracking&ndash;&gt;-->
+                <record id="vehicle_tracking_demo6" model="vehicle.tracking">
+                    <field name="person_type">resident</field>
+                    <field name="resident_id" ref="resident_demo_3"/>
+                    <field name="flat_id" ref="society_flat_demo_4"/>
+                    <field name="tower_id" ref="society_tower_demo_2"/>
+                    <field name="entry_time">2026-06-11 09:00:00</field>
+                    <!--            <field name="exit_time">2026-06-11 16:30:0</field>-->
+                    <field name="has_vehicle">True</field>
+                    <field name="vehicle_id" ref="resident_vehicle_demo3"/>
+                    <field name="parking_type">resident_parking</field>
+                    <field name="parking_slot_id" ref="parking_slot_demo4"/>
+                    <field name="is_occupied">True</field>
+                    <field name="visit_purpose">House</field>
+                    <field name="security_id" ref="security_demo_2"/>
+                </record>
 
 
-<!--        <record id="resident_demo_1_complaint1" model="complaint.desk">-->
-<!--            <field name="name">Water Leakage</field>-->
-<!--            <field name="description">I am writing to report a concerning water-->
-<!--                leakage issue affecting my property.Location of Leak:-->
-<!--                [e.g., The ceiling of my master bathroom / Wall shared with-->
-<!--                t1-falt101 / Overhead terrace]Details and Duration:-->
-<!--                [e.g., Water has been dripping continuously since yesterday-->
-<!--                afternoon. The flow is steady/heavy.]Impact: The leakage is-->
-<!--                causing damp walls and poses a risk to my electrical fixtures-->
-<!--                and furniture.Please arrange for a plumber to inspect and fix-->
-<!--                the root cause at the earliest to prevent further structural-->
-<!--                damage to the building. You can contact me at [9876767865]-->
-<!--                to coordinate a time.-->
-<!--            </field>-->
-<!--            <field name="create_date">2026-06-11 9:00:00</field>-->
-<!--            <field name="to_committee" ref="committee_tower_1"/>-->
-<!--            <field name="help_desk_id" ref="help_desk_tower1"/>-->
-<!--            <field name="resident_id" ref="resident_demo_1"/>-->
-<!--            <field name="flat_id" ref="society_flat_demo_1"/>-->
-<!--            <field name="tower_id" ref="society_tower_demo_1"/>-->
-<!--            <field name="stage">on_process</field>-->
-<!--        </record>-->
-
-<!--        <record id="resident_demo_3_complaint3" model="complaint.desk">-->
-<!--            <field name="name">Lift Problem</field>-->
-<!--            <field name="description">I am writing to report a concerning lift-->
-<!--                issue affecting my property.Location of Lift: Tower 3-->
-<!--                Impact: The Lift is-->
-<!--                getting stuck between .Please arrange for a technician to inspect and fix-->
-<!--                the root cause at the earliest to prevent further-->
-<!--                damage to the building. You can contact me at [9872333393]-->
-<!--                to coordinate a time.-->
-<!--            </field>-->
-<!--            <field name="create_date">2026-06-11 9:00:00</field>-->
-<!--            <field name="to_committee" ref="committee_tower_2"/>-->
-<!--            <field name="help_desk_id" ref="help_desk_tower2"/>-->
-<!--            <field name="resident_id" ref="resident_demo_3"/>-->
-<!--            <field name="flat_id" ref="society_flat_demo_4"/>-->
-<!--            <field name="tower_id" ref="society_tower_demo_2"/>-->
-<!--            <field name="stage">hold</field>-->
-<!--        </record>-->
+        <record id="help_desk_tower1" model="help.desk">
+            <field name="name">Tower 1 Helpdesk</field>
+            <field name="tower_id" ref="society_tower_demo_1"/>
+        </record>
+        <record id="help_desk_tower2" model="help.desk">
+            <field name="name">Tower 2 Helpdesk</field>
+            <field name="tower_id" ref="society_tower_demo_2"/>
+        </record>
+        <record id="help_desk_tower3" model="help.desk">
+            <field name="name">Tower 3 Helpdesk</field>
+            <field name="tower_id" ref="society_tower_demo_3"/>
+        </record>
 
 
-<!--        <record id="society_event_demo1" model="event.announcement">-->
-<!--            <field name="name">Annual General Meeting</field>-->
-<!--            <field name="description">-->
-<!--                Discussion of society finances, maintenance updates, future development plans, and election of committee-->
-<!--                members.-->
-<!--            </field>-->
-<!--            <field name="event_place">Tower 1 and Tower 2 ground</field>-->
+        <record id="resident_demo_1_complaint1" model="complaint.desk">
+            <field name="name">Water Leakage</field>
+            <field name="description">I am writing to report a concerning water
+                leakage issue affecting my property.Location of Leak:
+                [e.g., The ceiling of my master bathroom / Wall shared with
+                t1-falt101 / Overhead terrace]Details and Duration:
+                [e.g., Water has been dripping continuously since yesterday
+                afternoon. The flow is steady/heavy.]Impact: The leakage is
+                causing damp walls and poses a risk to my electrical fixtures
+                and furniture.Please arrange for a plumber to inspect and fix
+                the root cause at the earliest to prevent further structural
+                damage to the building. You can contact me at [9876767865]
+                to coordinate a time.
+            </field>
+            <!--            <field name="create_date">2026-06-11 9:00:00</field>-->
+            <field name="to_committee" ref="committee_tower_1"/>
+            <field name="help_desk_id" ref="help_desk_tower1"/>
+            <field name="resident_id" ref="resident_demo_1"/>
+            <field name="flat_id" ref="society_flat_demo_1"/>
+            <field name="tower_id" ref="society_tower_demo_1"/>
+            <field name="stage">on_process</field>
+        </record>
 
-<!--            <field name="tower_id"-->
-<!--                   eval="[(6,0,[ref('society_tower_demo_1'),-->
-<!--                        ref('society_tower_demo_2'),-->
-<!--                        ref('society_tower_demo_3')])]"/>-->
-<!--            <field name="event_time_start">2026-07-05 10:00:00</field>-->
-<!--            <field name="event_time_end">2026-07-05 12:00:00</field>-->
-<!--            <field name="stage">send</field>-->
-<!--        </record>-->
-
-<!--        <record id="society_event_demo2" model="event.announcement">-->
-<!--            <field name="name">Independence Day Celebration</field>-->
-<!--            <field name="description">-->
-<!--                Flag hoisting ceremony followed by cultural performances, games for children, and refreshments for-->
-<!--                residents.-->
-<!--            </field>-->
-<!--            <field name="event_place">Tower 1 and Tower 2 ground</field>-->
-
-<!--            <field name="tower_id"-->
-<!--                   eval="[(6,0,[ref('society_tower_demo_1'),-->
-<!--                        ref('society_tower_demo_2'),-->
-<!--                        ref('society_tower_demo_3')])]"/>-->
-<!--            <field name="event_time_start">2026-08-15 08:00:00</field>-->
-<!--            <field name="event_time_end">2026-08-15 11:00:00</field>-->
-<!--            <field name="stage">send</field>-->
-
-<!--        </record>-->
-
-<!--        <record id="society_event_demo3" model="event.announcement">-->
-<!--            <field name="name">Annual Fest</field>-->
-<!--            <field name="description">-->
-<!--                Community Annual celebration with competition, music, dance performances, and festive dinner.-->
-<!--            </field>-->
-<!--            <field name="event_place">Tower 1 and Tower 2 ground</field>-->
-<!--            <field name="tower_id"-->
-<!--                   eval="[(6,0,[ref('society_tower_demo_1'),-->
-<!--                        ref('society_tower_demo_2'),-->
-<!--                        ref('society_tower_demo_3')])]"/>-->
-<!--            <field name="event_time_start">2026-11-08 18:00:00</field>-->
-<!--            <field name="event_time_end">2026-11-08 22:00:00</field>-->
-<!--            <field name="stage">send</field>-->
-
-<!--        </record>-->
+        <record id="resident_demo_3_complaint3" model="complaint.desk">
+            <field name="name">Lift Problem</field>
+            <field name="description">I am writing to report a concerning lift
+                issue affecting my property.Location of Lift: Tower 3
+                Impact: The Lift is
+                getting stuck between .Please arrange for a technician to inspect and fix
+                the root cause at the earliest to prevent further
+                damage to the building. You can contact me at [9872333393]
+                to coordinate a time.
+            </field>
+            <!--            <field name="create_date">2026-06-11 9:00:00</field>-->
+            <field name="to_committee" ref="committee_tower_2"/>
+            <field name="help_desk_id" ref="help_desk_tower2"/>
+            <field name="resident_id" ref="resident_demo_3"/>
+            <field name="flat_id" ref="society_flat_demo_4"/>
+            <field name="tower_id" ref="society_tower_demo_2"/>
+            <field name="stage">hold</field>
+        </record>
 
 
-<!--        <record id="society_notice_demo1" model="notice.board">-->
-<!--            <field name="name">Water Unavailable</field>-->
-<!--            <field name="tower_id"-->
-<!--                   eval="[(6,0,[ref('society_tower_demo_1'),-->
-<!--                        ref('society_tower_demo_2'),-->
-<!--                        ref('society_tower_demo_3')])]"/>-->
-<!--            <field name="help_desk_id" eval="[(6,0,[ref('help_desk_tower1'),-->
-<!--                        ref('help_desk_tower2'),-->
-<!--                        ref('help_desk_tower3')])]"/>-->
-<!--            <field name="description">Dear Residents,-->
+        <record id="society_event_demo1" model="event.announcement">
+            <field name="name">Annual General Meeting</field>
+            <field name="description">
+                Discussion of society finances, maintenance updates, future development plans, and election of committee
+                members.
+            </field>
+            <field name="event_place">Tower 1 and Tower 2 ground</field>
 
-<!--                Please be informed that the water supply will be temporarily unavailable on 15 June 2026 from 10:00 AM-->
-<!--                to 2:00 PM due to scheduled maintenance work on the main water pipeline. Residents are requested to-->
-<!--                store sufficient water in advance.-->
+            <field name="tower_id"
+                   eval="[(6,0,[ref('society_tower_demo_1'),
+                        ref('society_tower_demo_2'),
+                        ref('society_tower_demo_3')])]"/>
+            <field name="event_time_start">2026-07-05 10:00:00</field>
+            <field name="event_time_end">2026-07-05 12:00:00</field>
+            <field name="stage">send</field>
+        </record>
 
-<!--                We regret the inconvenience and appreciate your cooperation.-->
+        <record id="society_event_demo2" model="event.announcement">
+            <field name="name">Independence Day Celebration</field>
+            <field name="description">
+                Flag hoisting ceremony followed by cultural performances, games for children, and refreshments for
+                residents.
+            </field>
+            <field name="event_place">Tower 1 and Tower 2 ground</field>
 
-<!--                Society Management Committee-->
-<!--            </field>-->
-<!--            <field name="stage">send</field>-->
-<!--        </record>-->
+            <field name="tower_id"
+                   eval="[(6,0,[ref('society_tower_demo_1'),
+                        ref('society_tower_demo_2'),
+                        ref('society_tower_demo_3')])]"/>
+            <field name="event_time_start">2026-08-15 08:00:00</field>
+            <field name="event_time_end">2026-08-15 11:00:00</field>
+            <field name="stage">send</field>
 
-<!--        <record id="society_notice_demo2" model="notice.board">-->
-<!--            <field name="name">Vehicle Parking</field>-->
-<!--            <field name="tower_id"-->
-<!--                   eval="[(6,0,[ref('society_tower_demo_1'),-->
-<!--                        ref('society_tower_demo_2'),-->
-<!--                        ref('society_tower_demo_3')])]"/>-->
-<!--            <field name="help_desk_id" eval="[(6,0,[ref('help_desk_tower1'),-->
-<!--                        ref('help_desk_tower2'),-->
-<!--                        ref('help_desk_tower3')])]"/>-->
-<!--            <field name="description">Dear Residents,-->
+        </record>
 
-<!--                Dear Residents,-->
+        <record id="society_event_demo3" model="event.announcement">
+            <field name="name">Annual Fest</field>
+            <field name="description">
+                Community Annual celebration with competition, music, dance performances, and festive dinner.
+            </field>
+            <field name="event_place">Tower 1 and Tower 2 ground</field>
+            <field name="tower_id"
+                   eval="[(6,0,[ref('society_tower_demo_1'),
+                        ref('society_tower_demo_2'),
+                        ref('society_tower_demo_3')])]"/>
+            <field name="event_time_start">2026-11-08 18:00:00</field>
+            <field name="event_time_end">2026-11-08 22:00:00</field>
+            <field name="stage">send</field>
 
-<!--                All residents are requested to park their vehicles only in the allotted parking spaces. Vehicles parked-->
-<!--                in visitor parking areas or emergency access zones may be subject to penalties. Please ensure that-->
-<!--                parking stickers are displayed properly on your vehicles.-->
-
-<!--                Thank you for your cooperation.-->
-
-<!--                Society Management Committee-->
-<!--            </field>-->
-<!--            <field name="stage">send</field>-->
-<!--        </record>-->
-
-<!--        <record id="resident_alert_demo1" model="resident.alerts">-->
-
-<!--        </record>-->
-
-<!--        <record id="resident_alert_demo_1" model="resident.alerts">-->
-<!--            <field name="name">Fire in Basement Parking</field>-->
-<!--            <field name="description">-->
-<!--                Smoke has been detected in Basement 1 parking area. Immediate attention is required from security-->
-<!--                personnel and residents are advised to avoid the area.-->
-<!--            </field>-->
-
-<!--            <field name="location">Basement 1 Parking</field>-->
-<!--            <field name="alert_type">fire_alert</field>-->
-<!--            <field name="flat_id" eval="[(6,0,[ref('society_flat_demo_1'),-->
-<!--                        ref('society_flat_demo_2')])]"/>-->
-<!--            <field name="tower_id" eval="[(6,0,[ref('society_tower_demo_1')])]"/>-->
-<!--            <field name="security_id" eval="[(6,0,[ref('security_demo_1')])]"/>-->
-<!--            <field name="resident_id" eval="[(6,0,[ref('resident_demo_1'),ref('resident_demo_2')])]"/>-->
-<!--            <field name="to_committee" ref="committee_tower_1"/>-->
-<!--            <field name="create_date">2026-06-10 09:30:00</field>-->
-<!--        </record>-->
-
-<!--        <record id="resident_alert_demo_2" model="resident.alerts">-->
-<!--            <field name="name">Medical Emergency</field>-->
-<!--            <field name="description">-->
-<!--                A resident requires urgent medical assistance at Tower B. Security and emergency contacts have been-->
-<!--                notified.-->
-<!--            </field>-->
-<!--            <field name="location">Flat 203, Tower B</field>-->
-<!--            <field name="alert_type">sos_alert</field>-->
-<!--            <field name="flat_id" eval="[(6,0,[ref('society_flat_demo_3')])]"/>-->
-<!--            <field name="tower_id" eval="[(6,0,[ref('society_tower_demo_2')])]"/>-->
-<!--            <field name="resident_id" eval="[(6,0,[ref('resident_demo_3')])]"/>-->
-<!--            <field name="to_committee" ref="committee_tower_2"/>-->
-<!--            <field name="create_date">2026-06-11 08:15:00</field>-->
-<!--        </record>-->
-
-<!--        <record id="emergency_broadcast_demo1" model="emergency.broadcasts">-->
-<!--            <field name="name">Fire Emergency</field>-->
-<!--            <field name="description">Attention Residents,-->
-
-<!--                A fire emergency has been reported in the Basement Parking Area. All residents are advised to remain-->
-<!--                calm and immediately proceed to the designated assembly point using the nearest safe exit. Do not use-->
-<!--                elevators until further notice.-->
-
-<!--                The fire response team and emergency services have been notified.-->
-
-<!--                Society Emergency Management Team-->
-<!--            </field>-->
-<!--            <field name="tower_ids" eval="[(6,0,[ref('society_tower_demo_1'),-->
-<!--                        ref('society_tower_demo_2'),-->
-<!--                        ref('society_tower_demo_3')])]"/>-->
-<!--            <field name="create_date">2026-06-10 09:30:00</field>-->
-<!--        </record>-->
-
-<!--        <record id="emergency_broadcast_demo2" model="emergency.broadcasts">-->
-<!--            <field name="name">Heavy rainfall</field>-->
-<!--            <field name="description">Attention Residents,-->
-
-<!--                Heavy rainfall and strong winds are expected in the area over the next few hours. Residents are advised-->
-<!--                to stay indoors, secure loose objects on balconies, and avoid unnecessary travel outside the society-->
-<!--                premises.-->
-
-<!--                Please follow updates from the management office for further instructions.-->
-
-<!--                Society Emergency Management Team-->
-<!--            </field>-->
-<!--            <field name="tower_ids" eval="[(6,0,[ref('society_tower_demo_1'),-->
-<!--                        ref('society_tower_demo_2'),-->
-<!--                        ref('society_tower_demo_3')])]"/>-->
-<!--            <field name="create_date">2026-06-20 10:30:00</field>-->
-<!--        </record>-->
-
-<!--        <record id="emergency_broadcast_demo3" model="emergency.broadcasts">-->
-<!--            <field name="name">Security Threat</field>-->
-<!--            <field name="description">Attention Residents,-->
-
-<!--                A security-related incident has been reported near the main entrance. As a precautionary measure, all-->
-<!--                entry and exit gates have been placed under enhanced security monitoring. Residents are requested to-->
-<!--                carry identification and cooperate with security personnel.-->
-
-<!--                Please report any suspicious activity immediately to the security office.-->
-
-<!--                Society Emergency Management Team-->
-<!--            </field>-->
-<!--            <field name="flat_ids" eval="[(6,0,[ref('society_flat_demo_1'),-->
-<!--                        ref('society_flat_demo_2')])]"/>-->
-
-<!--            <field name="create_date">2026-05-01 11:30:00</field>-->
-<!--        </record>-->
-
-<!--        <record id="gym_slot_demo1">-->
-<!--            <field name="name">gym_slot1</field>-->
-<!--            <field name="society_id" ref="society_setup_demo1"/>-->
-<!--            <field name="shift">morning</field>-->
-<!--            <field name="gym_booking_charge">100</field>-->
-<!--            <field name="is_occupied">True</field>-->
-<!--            <field name="resident_id" ref="resident_demo_1"/>-->
-<!--        </record>-->
-<!--        <record id="gym_slot_demo2">-->
-<!--            <field name="name">gym_slot2</field>-->
-<!--            <field name="society_id" ref="society_setup_demo1"/>-->
-<!--            <field name="shift">afternoon</field>-->
-<!--            <field name="gym_booking_charge">100</field>-->
-<!--            <field name="is_occupied">True</field>-->
-<!--            <field name="resident_id" ref="resident_demo_2"/>-->
-
-<!--        </record>-->
-<!--        <record id="gym_slot_demo3">-->
-<!--            <field name="name">gym_slot3</field>-->
-<!--            <field name="society_id" ref="society_setup_demo1"/>-->
-<!--            <field name="shift">morning</field>-->
-<!--            <field name="gym_booking_charge">100</field>-->
-<!--            <field name="is_occupied">True</field>-->
-<!--            <field name="resident_id" ref="resident_demo_3"/>-->
-
-<!--        </record>-->
-<!--        <record id="gym_slot_demo4">-->
-<!--            <field name="name">gym_slot4</field>-->
-<!--            <field name="society_id" ref="society_setup_demo1"/>-->
-<!--            <field name="shift">evening</field>-->
-<!--            <field name="gym_booking_charge">100</field>-->
-<!--        </record>-->
-<!--        <record id="gym_slot_demo5">-->
-<!--            <field name="name">gym_slot5</field>-->
-<!--            <field name="society_id" ref="society_setup_demo1"/>-->
-<!--            <field name="shift">evening</field>-->
-<!--            <field name="gym_booking_charge">100</field>-->
-<!--        </record>-->
+        </record>
 
 
-<!--        <record id="resident_gym_booking" model="gym.booking">-->
-<!--            <field name="name">Morning Gym Session</field>-->
-<!--            <field name="resident_id" ref="resident_demo_1"/>-->
-<!--            <field name="flat_id" ref="society_flat_demo_1"/>-->
-<!--            <field name="society_id" ref="society_setup_demo1"/>-->
-<!--            <field name="shift">morning</field>-->
-<!--            <field name="booked_date">2026-06-10 06:00:00</field>-->
-<!--            <field name="gym_for_days">True</field>-->
-<!--            <field name="days">7</field>-->
-<!--            <field name="total_charge">700</field>-->
-<!--            <field name="is_occupied">True</field>-->
+        <record id="society_notice_demo1" model="notice.board">
+            <field name="name">Water Unavailable</field>
+            <field name="tower_id"
+                   eval="[(6,0,[ref('society_tower_demo_1'),
+                        ref('society_tower_demo_2'),
+                        ref('society_tower_demo_3')])]"/>
+            <field name="help_desk_id" eval="[(6,0,[ref('help_desk_tower1'),
+                        ref('help_desk_tower2'),
+                        ref('help_desk_tower3')])]"/>
+            <field name="description">Dear Residents,
+
+                Please be informed that the water supply will be temporarily unavailable on 15 June 2026 from 10:00 AM
+                to 2:00 PM due to scheduled maintenance work on the main water pipeline. Residents are requested to
+                store sufficient water in advance.
+
+                We regret the inconvenience and appreciate your cooperation.
+
+                Society Management Committee
+            </field>
+            <field name="stage">send</field>
+        </record>
+
+        <record id="society_notice_demo2" model="notice.board">
+            <field name="name">Vehicle Parking</field>
+            <field name="tower_id"
+                   eval="[(6,0,[ref('society_tower_demo_1'),
+                        ref('society_tower_demo_2'),
+                        ref('society_tower_demo_3')])]"/>
+            <field name="help_desk_id" eval="[(6,0,[ref('help_desk_tower1'),
+                        ref('help_desk_tower2'),
+                        ref('help_desk_tower3')])]"/>
+            <field name="description">Dear Residents,
+
+                Dear Residents,
+
+                All residents are requested to park their vehicles only in the allotted parking spaces. Vehicles parked
+                in visitor parking areas or emergency access zones may be subject to penalties. Please ensure that
+                parking stickers are displayed properly on your vehicles.
+
+                Thank you for your cooperation.
+
+                Society Management Committee
+            </field>
+            <field name="stage">send</field>
+        </record>
+
+
+        <record id="resident_alert_demo_1" model="resident.alerts">
+            <field name="name">Fire in Basement Parking</field>
+            <field name="description">
+                Smoke has been detected in Basement 1 parking area. Immediate attention is required from security
+                personnel and residents are advised to avoid the area.
+            </field>
+
+            <field name="location">Basement 1 Parking</field>
+            <field name="alert_type">fire_alert</field>
+            <field name="flat_id" eval="[(6,0,[ref('society_flat_demo_1'),
+                        ref('society_flat_demo_2')])]"/>
+            <field name="tower_id" eval="[(6,0,[ref('society_tower_demo_1')])]"/>
+            <field name="security_id" eval="[(6,0,[ref('security_demo_1')])]"/>
+            <field name="resident_id" eval="[(6,0,[ref('resident_demo_1'),ref('resident_demo_2')])]"/>
+            <field name="to_committee" ref="committee_tower_1"/>
+            <field name="create_date">2026-06-10 09:30:00</field>
+        </record>
+
+        <record id="resident_alert_demo_2" model="resident.alerts">
+            <field name="name">Medical Emergency</field>
+            <field name="description">
+                A resident requires urgent medical assistance at Tower B. Security and emergency contacts have been
+                notified.
+            </field>
+            <field name="location">Flat 203, Tower B</field>
+            <field name="alert_type">sos_alert</field>
+            <field name="flat_id" eval="[(6,0,[ref('society_flat_demo_3')])]"/>
+            <field name="tower_id" eval="[(6,0,[ref('society_tower_demo_2')])]"/>
+            <field name="resident_id" eval="[(6,0,[ref('resident_demo_3')])]"/>
+            <field name="to_committee" ref="committee_tower_2"/>
+            <field name="create_date">2026-06-11 08:15:00</field>
+        </record>
+
+        <record id="emergency_broadcast_demo1" model="emergency.broadcasts">
+            <field name="name">Fire Emergency</field>
+            <field name="description">Attention Residents,
+
+                A fire emergency has been reported in the Basement Parking Area. All residents are advised to remain
+                calm and immediately proceed to the designated assembly point using the nearest safe exit. Do not use
+                elevators until further notice.
+
+                The fire response team and emergency services have been notified.
+
+                Society Emergency Management Team
+            </field>
+            <field name="tower_ids" eval="[(6,0,[ref('society_tower_demo_1'),
+                        ref('society_tower_demo_2'),
+                        ref('society_tower_demo_3')])]"/>
+            <field name="create_date">2026-06-10 09:30:00</field>
+        </record>
+
+        <record id="emergency_broadcast_demo2" model="emergency.broadcasts">
+            <field name="name">Heavy rainfall</field>
+            <field name="description">Attention Residents,
+
+                Heavy rainfall and strong winds are expected in the area over the next few hours. Residents are advised
+                to stay indoors, secure loose objects on balconies, and avoid unnecessary travel outside the society
+                premises.
+
+                Please follow updates from the management office for further instructions.
+
+                Society Emergency Management Team
+            </field>
+            <field name="tower_ids" eval="[(6,0,[ref('society_tower_demo_1'),
+                        ref('society_tower_demo_2'),
+                        ref('society_tower_demo_3')])]"/>
+            <field name="create_date">2026-06-20 10:30:00</field>
+        </record>
+
+        <record id="emergency_broadcast_demo3" model="emergency.broadcasts">
+            <field name="name">Security Threat</field>
+            <field name="description">Attention Residents,
+
+                A security-related incident has been reported near the main entrance. As a precautionary measure, all
+                entry and exit gates have been placed under enhanced security monitoring. Residents are requested to
+                carry identification and cooperate with security personnel.
+
+                Please report any suspicious activity immediately to the security office.
+
+                Society Emergency Management Team
+            </field>
+            <field name="flat_ids" eval="[(6,0,[ref('society_flat_demo_1'),
+                        ref('society_flat_demo_2')])]"/>
+
+            <field name="create_date">2026-05-01 11:30:00</field>
+        </record>
+
+        <record id="gym_slot_demo1" model="gym.slots">
+            <field name="name">gym_slot1</field>
+            <field name="society_id" ref="society_setup_demo1"/>
+            <field name="shift">morning</field>
+            <field name="gym_booking_charge">100</field>
+            <field name="is_occupied">True</field>
+            <field name="resident_id" ref="resident_demo_1"/>
+        </record>
+        <record id="gym_slot_demo2" model="gym.slots">
+            <field name="name">gym_slot2</field>
+            <field name="society_id" ref="society_setup_demo1"/>
+            <field name="shift">afternoon</field>
+            <field name="gym_booking_charge">100</field>
+            <field name="is_occupied">True</field>
+            <field name="resident_id" ref="resident_demo_2"/>
+
+        </record>
+        <record id="gym_slot_demo3" model="gym.slots">
+            <field name="name">gym_slot3</field>
+            <field name="society_id" ref="society_setup_demo1"/>
+            <field name="shift">morning</field>
+            <field name="gym_booking_charge">100</field>
+            <field name="is_occupied">True</field>
+            <field name="resident_id" ref="resident_demo_3"/>
+
+        </record>
+        <record id="gym_slot_demo4" model="gym.slots">
+            <field name="name">gym_slot4</field>
+            <field name="society_id" ref="society_setup_demo1"/>
+            <field name="shift">evening</field>
+            <field name="is_occupied">True</field>
+            <field name="gym_booking_charge">100</field>
+        </record>
+        <record id="gym_slot_demo5" model="gym.slots">
+            <field name="name">gym_slot5</field>
+            <field name="society_id" ref="society_setup_demo1"/>
+            <field name="is_occupied">True</field>
+            <field name="shift">evening</field>
+            <field name="gym_booking_charge">100</field>
+        </record>
+
+
+        <record id="resident_gym_booking1" model="gym.booking">
+            <field name="name">Morning Gym Session</field>
+            <field name="resident_id" ref="resident_demo_1"/>
+            <field name="flat_id" ref="society_flat_demo_1"/>
+            <field name="society_id" ref="society_setup_demo1"/>
+            <field name="shift">morning</field>
+            <field name="booked_date">2026-06-10 06:00:00</field>
+            <field name="gym_for_days">True</field>
+            <field name="days">7</field>
+            <field name="total_charge">700</field>
+            <field name="is_occupied">True</field>
 <!--            <field name="slots" ref="gym_slot_demo1"/>-->
-<!--        </record>-->
+        </record>
 
 
-<!--        <record id="resident_gym_booking" model="gym.booking">-->
-<!--            <field name="name">Afternoon Gym Session</field>-->
-<!--            <field name="resident_id" ref="resident_demo_2"/>-->
-<!--            <field name="flat_id" ref="society_flat_demo_1"/>-->
-<!--            <field name="society_id" ref="society_setup_demo1"/>-->
-<!--            <field name="shift">afternoon</field>-->
-<!--            <field name="booked_date">2026-06-10 06:00:00</field>-->
-<!--            <field name="gym_for_days">True</field>-->
-<!--            <field name="days">10</field>-->
-<!--            <field name="total_charge">1000</field>-->
-<!--            <field name="is_occupied">True</field>-->
+        <record id="resident_gym_booking2" model="gym.booking">
+            <field name="name">Afternoon Gym Session</field>
+            <field name="resident_id" ref="resident_demo_2"/>
+            <field name="flat_id" ref="society_flat_demo_1"/>
+            <field name="society_id" ref="society_setup_demo1"/>
+            <field name="shift">afternoon</field>
+            <field name="booked_date">2026-06-10 06:00:00</field>
+            <field name="gym_for_days">True</field>
+            <field name="days">10</field>
+            <field name="total_charge">1000</field>
+            <field name="is_occupied">True</field>
 <!--            <field name="slots" ref="gym_slot_demo2"/>-->
-<!--        </record>-->
+        </record>
 
-<!--        <record id="resident_gym_booking" model="gym.booking">-->
-<!--            <field name="name">Morning Gym Session</field>-->
-<!--            <field name="resident_id" ref="resident_demo_3"/>-->
-<!--            <field name="flat_id" ref="society_flat_demo_4"/>-->
-<!--            <field name="society_id" ref="society_setup_demo1"/>-->
-<!--            <field name="shift">morning</field>-->
-<!--            <field name="booked_date">2026-06-10 06:00:00</field>-->
-<!--            <field name="gym_for_months">2</field>-->
-<!--            &lt;!&ndash;            <field name="days">7</field>&ndash;&gt;-->
-<!--            <field name="total_charge">10000</field>-->
-<!--            <field name="is_occupied">True</field>-->
+        <record id="resident_gym_booking3" model="gym.booking">
+            <field name="name">Morning Gym Session</field>
+            <field name="resident_id" ref="resident_demo_3"/>
+            <field name="flat_id" ref="society_flat_demo_4"/>
+            <field name="society_id" ref="society_setup_demo1"/>
+            <field name="shift">morning</field>
+            <field name="booked_date">2026-06-10 06:00:00</field>
+            <field name="gym_for_months">2</field>
+            <!--            <field name="days">7</field>-->
+            <field name="total_charge">10000</field>
+            <field name="is_occupied">True</field>
 <!--            <field name="slots" ref="gym_slot_demo3"/>-->
-<!--        </record>-->
+        </record>
 
-<!--        <record id="clubhouse_booking_demo1" model="clubhouse.booking">-->
-<!--            <field name="name">Clubhouse booking</field>-->
-<!--            <field name="resident_id" eval="[(6,0,[ref('resident_demo_3'),-->
-<!--                        ref('resident_demo_4')])]"/>-->
-<!--            <field name="society_id" ref="society_setup_demo1"/>-->
-<!--        </record>-->
-
-
-<!--        <record id="guesthouse_demo1" model="society.guesthouse">-->
-<!--            <field name="name">tower1 guesthouse</field>-->
-<!--            <field name="floor_number">1</field>-->
-<!--            <field name="flat_type">2bhk</field>-->
-<!--            <field name="gh_status">occupied</field>-->
-<!--            <field name="tower_id" ref="society_tower_demo_1"/>-->
-<!--            <field name="price_per_person">440</field>-->
-<!--            <field name="is_occupied">True</field>-->
-<!--        </record>-->
-
-<!--        <record id="guesthouse_demo2" model="society.guesthouse">-->
-<!--            <field name="name">tower2 guesthouse</field>-->
-<!--            <field name="floor_number">1</field>-->
-<!--            <field name="flat_type">3bhk</field>-->
-<!--            <field name="gh_status">occupied</field>-->
-<!--            <field name="tower_id" ref="society_tower_demo_2"/>-->
-<!--            <field name="price_per_person">440</field>-->
-<!--            <field name="is_occupied">True</field>-->
-<!--        </record>-->
-
-<!--        <record id="guesthouse_demo3" model="society.guesthouse">-->
-<!--            <field name="name">tower3 guesthouse</field>-->
-<!--            <field name="floor_number">1</field>-->
-<!--            <field name="flat_type">2bhk</field>-->
-<!--            <field name="gh_status">vacant</field>-->
-<!--            <field name="tower_id" ref="society_tower_demo_3"/>-->
-<!--            <field name="price_per_person">440</field>-->
-<!--            <field name="is_occupied">True</field>-->
-<!--        </record>-->
-
-<!--        <record id="guesthouse_booking_demo1" model="guesthouse.booking">-->
-<!--            <field name="guest_house_id" ref="guesthouse_demo1"/>-->
-<!--            <field name="member_count">3</field>-->
-<!--            <field name="total_charge">1320</field>-->
-<!--            &lt;!&ndash;            <field name="price_per_person"></field>&ndash;&gt;-->
-<!--            <field name="check_in_date">2026-06-10 06:00:00</field>-->
-<!--            &lt;!&ndash;            <field name="check_out_date"></field>&ndash;&gt;-->
-<!--            <field name="is_occupied">True</field>-->
-<!--            <field name="days_booked">3</field>-->
-<!--            <field name="booking_members_ids" eval="[(6,0,[ref('guest_member_demo1'),-->
-<!--                        ref('guest_member_demo2'),-->
-<!--                        ref('guest_member_demo3')])]"/>-->
-<!--            <field name="members_history_ids"  eval="[(6,0,[ref('guest_member_history_demo1'),-->
-<!--                        ref('guest_member_history_demo2')])]"/>-->
-<!--        </record>-->
-
-<!--        <record id="guesthouse_booking_demo2" model="guesthouse.booking">-->
-<!--            <field name="guest_house_id" ref="guesthouse_demo2"/>-->
-<!--            <field name="member_count">2</field>-->
-<!--            <field name="total_charge">1760</field>-->
-<!--            &lt;!&ndash;            <field name="price_per_person"></field>&ndash;&gt;-->
-<!--            <field name="check_in_date">2026-06-10 06:00:00</field>-->
-<!--            &lt;!&ndash;            <field name="check_out_date"></field>&ndash;&gt;-->
-<!--            <field name="is_occupied">True</field>-->
-<!--            <field name="days_booked">3</field>-->
-<!--            <field name="booking_members_ids" eval="[(6,0,[ref('guest_member_demo4'),-->
-<!--                        ref('guest_member_demo5')])]"/>-->
-<!--        </record>-->
-
-<!--        <record id="guesthouse_booking_demo3" model="guesthouse.booking">-->
-<!--            <field name="guest_house_id" ref="guesthouse_demo3"/>-->
-<!--            <field name="member_count">2</field>-->
-<!--            <field name="total_charge">1760</field>-->
-<!--            <field name="members_history_ids"  eval="[(6,0,[ref('guest_member_history_demo3'),-->
-<!--                        ref('guest_member_history_demo4')])]"/>-->
-<!--        </record>-->
+        <record id="clubhouse_booking_demo1" model="clubhouse.booking">
+            <field name="name">Clubhouse booking</field>
+            <field name="resident_id" eval="[(6,0,[ref('resident_demo_3'),
+                        ref('resident_demo_4')])]"/>
+            <field name="society_id" ref="society_setup_demo1"/>
+        </record>
 
 
-<!--        <record id="guest_member_demo1" model="guesthouse.booking.members">-->
-<!--            <field name="guest_house_id" ref="guesthouse_demo1"/>-->
-<!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo1"/>-->
-<!--            <field name="member_name">Sharlene Rhodes</field>-->
-<!--            <field name="member_age">30</field>-->
-<!--            <field name="member_mobile">7362536172</field>-->
-<!--            <field name="member_id_proof">736278728171</field>-->
-<!--            <field name="emergency_number">9344559863</field>-->
-<!--        </record>-->
+        <record id="guesthouse_demo1" model="society.guesthouse">
+            <field name="name">tower1 guesthouse</field>
+            <field name="floor_number">1</field>
+            <field name="flat_type">2bhk</field>
+            <field name="gh_status">occupied</field>
+            <field name="tower_id" ref="society_tower_demo_1"/>
+            <field name="price_per_person">440</field>
+            <field name="is_occupied">True</field>
+        </record>
 
-<!--        <record id="guest_member_demo2" model="guesthouse.booking.members">-->
-<!--            <field name="guest_house_id" ref="guesthouse_demo1"/>-->
-<!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo1"/>-->
-<!--            <field name="member_name">Randall Lewis</field>-->
-<!--            <field name="member_age">35</field>-->
-<!--            <field name="member_mobile">7362536179</field>-->
-<!--            <field name="member_id_proof">736278728172</field>-->
-<!--            <field name="emergency_number">9344559865</field>-->
-<!--        </record>-->
-<!--        <record id="guest_member_demo3" model="guesthouse.booking.members">-->
-<!--            <field name="guest_house_id" ref="guesthouse_demo1"/>-->
-<!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo1"/>-->
-<!--            <field name="member_name">Jennie Fletcher</field>-->
-<!--            <field name="member_age">40</field>-->
-<!--            <field name="member_mobile">7362536178</field>-->
-<!--            <field name="member_id_proof">736278728173</field>-->
-<!--            <field name="emergency_number">9344559867</field>-->
-<!--        </record>-->
+        <record id="guesthouse_demo2" model="society.guesthouse">
+            <field name="name">tower2 guesthouse</field>
+            <field name="floor_number">1</field>
+            <field name="flat_type">3bhk</field>
+            <field name="gh_status">occupied</field>
+            <field name="tower_id" ref="society_tower_demo_2"/>
+            <field name="price_per_person">440</field>
+            <field name="is_occupied">True</field>
+        </record>
 
-<!--        <record id="guest_member_demo4" model="guesthouse.booking.members">-->
-<!--            <field name="guest_house_id" ref="guesthouse_demo2"/>-->
-<!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo2"/>-->
-<!--            <field name="member_name">Paul Williams</field>-->
-<!--            <field name="member_age">45</field>-->
-<!--            <field name="member_mobile">7362536176</field>-->
-<!--            <field name="member_id_proof">736278728174</field>-->
-<!--            <field name="emergency_number">9344559866</field>-->
-<!--        </record>-->
-<!--        <record id="guest_member_demo5" model="guesthouse.booking.members">-->
-<!--            <field name="guest_house_id" ref="guesthouse_demo3"/>-->
-<!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo2"/>-->
-<!--            <field name="member_name">Walter Horton</field>-->
-<!--            <field name="member_age">43</field>-->
-<!--            <field name="member_mobile">7362536175</field>-->
-<!--            <field name="member_id_proof">736278728175</field>-->
-<!--            <field name="emergency_number">9344559861</field>-->
-<!--        </record>-->
+        <record id="guesthouse_demo3" model="society.guesthouse">
+            <field name="name">tower3 guesthouse</field>
+            <field name="floor_number">1</field>
+            <field name="flat_type">2bhk</field>
+            <field name="gh_status">vacant</field>
+            <field name="tower_id" ref="society_tower_demo_3"/>
+            <field name="price_per_person">440</field>
+            <field name="is_occupied">True</field>
+        </record>
 
-<!--        <record id="guest_member_history_demo1" model="guesthouse.members.history">-->
-<!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo1"/>-->
-<!--            <field name="guest_house_id" ref="guesthouse_demo1"/>-->
-<!--            <field name="check_in_date">2026-06-05 06:00:00</field>-->
-<!--            <field name="check_out_date">2026-06-07 06:00:00</field>-->
-<!--            <field name="member_name">Beth Evans</field>-->
-<!--            <field name="member_age">55</field>-->
-<!--            <field name="member_mobile">7826371827</field>-->
-<!--            <field name="member_id_proof">817281627162</field>-->
-<!--            <field name="emergency_number">4435162738</field>-->
-<!--        </record>-->
 
-<!--        <record id="guest_member_history_demo2" model="guesthouse.members.history">-->
-<!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo1"/>-->
-<!--            <field name="guest_house_id" ref="guesthouse_demo1"/>-->
-<!--            <field name="check_in_date">2026-06-05 06:00:00</field>-->
-<!--            <field name="check_out_date">2026-06-07 06:00:00</field>-->
-<!--            <field name="member_name">Santa Barbara</field>-->
-<!--            <field name="member_age">33</field>-->
-<!--            <field name="member_mobile">7826371821</field>-->
-<!--            <field name="member_id_proof">817281627161</field>-->
-<!--            <field name="emergency_number">4435162731</field>-->
-<!--        </record>-->
+        <record id="guest_member_demo1" model="guesthouse.booking.members">
+            <field name="guest_house_id" ref="guesthouse_demo1"/>
+            <!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo1"/>-->
+            <field name="member_name">Sharlene Rhodes</field>
+            <field name="member_age">30</field>
+            <field name="member_mobile">7362536172</field>
+            <field name="member_id_proof">736278728171</field>
+            <field name="emergency_number">9344559863</field>
+        </record>
 
-<!--        <record id="guest_member_history_demo3" model="guesthouse.members.history">-->
-<!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo3"/>-->
-<!--            <field name="guest_house_id" ref="guesthouse_demo3"/>-->
-<!--            <field name="check_in_date">2026-06-05 06:00:00</field>-->
-<!--            <field name="check_out_date">2026-06-07 06:00:00</field>-->
-<!--            <field name="member_name">Ready Mat</field>-->
-<!--            <field name="member_age">43</field>-->
-<!--            <field name="member_mobile">7826371822</field>-->
-<!--            <field name="member_id_proof">817281627163</field>-->
-<!--            <field name="emergency_number">4435162732</field>-->
-<!--        </record>-->
+        <record id="guest_member_demo2" model="guesthouse.booking.members">
+            <field name="guest_house_id" ref="guesthouse_demo1"/>
+            <!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo1"/>-->
+            <field name="member_name">Randall Lewis</field>
+            <field name="member_age">35</field>
+            <field name="member_mobile">7362536179</field>
+            <field name="member_id_proof">736278728172</field>
+            <field name="emergency_number">9344559865</field>
+        </record>
+        <record id="guest_member_demo3" model="guesthouse.booking.members">
+            <field name="guest_house_id" ref="guesthouse_demo1"/>
+            <!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo1"/>-->
+            <field name="member_name">Jennie Fletcher</field>
+            <field name="member_age">40</field>
+            <field name="member_mobile">7362536178</field>
+            <field name="member_id_proof">736278728173</field>
+            <field name="emergency_number">9344559867</field>
+        </record>
 
-<!--        <record id="guest_member_history_demo4" model="guesthouse.members.history">-->
-<!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo3"/>-->
-<!--            <field name="guest_house_id" ref="guesthouse_demo3"/>-->
-<!--            <field name="check_in_date">2026-06-05 06:00:00</field>-->
-<!--            <field name="check_out_date">2026-06-07 06:00:00</field>-->
-<!--            <field name="member_name">Willie Burke</field>-->
-<!--            <field name="member_age">34</field>-->
-<!--            <field name="member_mobile">7826371824</field>-->
-<!--            <field name="member_id_proof">817281627164</field>-->
-<!--            <field name="emergency_number">4435162734</field>-->
-<!--        </record>-->
+        <record id="guest_member_demo4" model="guesthouse.booking.members">
+            <field name="guest_house_id" ref="guesthouse_demo2"/>
+            <!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo2"/>-->
+            <field name="member_name">Paul Williams</field>
+            <field name="member_age">45</field>
+            <field name="member_mobile">7362536176</field>
+            <field name="member_id_proof">736278728174</field>
+            <field name="emergency_number">9344559866</field>
+        </record>
+        <record id="guest_member_demo5" model="guesthouse.booking.members">
+            <field name="guest_house_id" ref="guesthouse_demo3"/>
+            <!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo2"/>-->
+            <field name="member_name">Walter Horton</field>
+            <field name="member_age">43</field>
+            <field name="member_mobile">7362536175</field>
+            <field name="member_id_proof">736278728175</field>
+            <field name="emergency_number">9344559861</field>
+        </record>
 
+        <record id="guest_member_history_demo1" model="guesthouse.members.history">
+            <!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo1"/>-->
+            <field name="guest_house_id" ref="guesthouse_demo1"/>
+            <field name="check_in_date">2026-06-05 06:00:00</field>
+            <field name="check_out_date">2026-06-07 06:00:00</field>
+            <field name="member_name">Beth Evans</field>
+            <field name="member_age">55</field>
+            <field name="member_mobile">7826371827</field>
+            <field name="member_id_proof">817281627162</field>
+            <field name="emergency_number">4435162738</field>
+        </record>
+
+        <record id="guest_member_history_demo2" model="guesthouse.members.history">
+            <!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo1"/>-->
+            <field name="guest_house_id" ref="guesthouse_demo1"/>
+            <field name="check_in_date">2026-06-05 06:00:00</field>
+            <field name="check_out_date">2026-06-07 06:00:00</field>
+            <field name="member_name">Santa Barbara</field>
+            <field name="member_age">33</field>
+            <field name="member_mobile">7826371821</field>
+            <field name="member_id_proof">817281627161</field>
+            <field name="emergency_number">4435162731</field>
+        </record>
+
+        <record id="guest_member_history_demo3" model="guesthouse.members.history">
+            <!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo3"/>-->
+            <field name="guest_house_id" ref="guesthouse_demo3"/>
+            <field name="check_in_date">2026-06-05 06:00:00</field>
+            <field name="check_out_date">2026-06-07 06:00:00</field>
+            <field name="member_name">Ready Mat</field>
+            <field name="member_age">43</field>
+            <field name="member_mobile">7826371822</field>
+            <field name="member_id_proof">817281627163</field>
+            <field name="emergency_number">4435162732</field>
+        </record>
+
+        <record id="guest_member_history_demo4" model="guesthouse.members.history">
+            <!--            <field name="guesthouse_booking_id" ref="guesthouse_booking_demo3"/>-->
+            <field name="guest_house_id" ref="guesthouse_demo3"/>
+            <field name="check_in_date">2026-06-05 06:00:00</field>
+            <field name="check_out_date">2026-06-07 06:00:00</field>
+            <field name="member_name">Willie Burke</field>
+            <field name="member_age">34</field>
+            <field name="member_mobile">7826371824</field>
+            <field name="member_id_proof">817281627164</field>
+            <field name="emergency_number">4435162734</field>
+        </record>
+
+
+        <record id="guesthouse_booking_demo1" model="guesthouse.booking">
+            <field name="guest_house_id" ref="guesthouse_demo1"/>
+            <field name="member_count">3</field>
+            <field name="total_charge">1320</field>
+            <!--            <field name="price_per_person"></field>-->
+            <field name="check_in_date">2026-06-10 06:00:00</field>
+            <!--            <field name="check_out_date"></field>-->
+            <field name="is_occupied">True</field>
+            <field name="days_booked">3</field>
+            <field name="booking_members_ids" eval="[(6,0,[ref('guest_member_demo1'),
+                        ref('guest_member_demo2'),
+                        ref('guest_member_demo3')])]"/>
+            <field name="members_history_ids" eval="[(6,0,[ref('guest_member_history_demo1'),
+                        ref('guest_member_history_demo2')])]"/>
+        </record>
+
+        <record id="guesthouse_booking_demo2" model="guesthouse.booking">
+            <field name="guest_house_id" ref="guesthouse_demo2"/>
+            <field name="member_count">2</field>
+            <field name="total_charge">1760</field>
+            <!--            <field name="price_per_person"></field>-->
+            <field name="check_in_date">2026-06-10 06:00:00</field>
+            <!--            <field name="check_out_date"></field>-->
+            <field name="is_occupied">True</field>
+            <field name="days_booked">3</field>
+            <field name="booking_members_ids" eval="[(6,0,[ref('guest_member_demo4'),
+                        ref('guest_member_demo5')])]"/>
+        </record>
+
+        <!--        <record id="guesthouse_booking_demo3" model="guesthouse.booking">-->
+        <!--            <field name="guest_house_id" ref="guesthouse_demo3"/>-->
+        <!--            <field name="member_count">0</field>-->
+        <!--&lt;!&ndash;            <field name="total_charge">1760</field>&ndash;&gt;-->
+        <!--            <field name="members_history_ids"  eval="[(6,0,[ref('guest_member_history_demo3'),-->
+        <!--                        ref('guest_member_history_demo4')])]"/>-->
+        <!--        </record>-->
+
+        <record id="guesthouse_booking_demo3" model="guesthouse.booking">
+            <field name="guest_house_id" ref="guesthouse_demo3"/>
+            <field name="member_count">0</field>
+            <field name="check_in_date">2026-06-05 06:00:00</field>
+            <field name="check_out_date">2026-06-07 06:00:00</field>
+
+            <field name="members_history_ids"
+                   eval="[(6,0,[ref('guest_member_history_demo3'),
+                        ref('guest_member_history_demo4')])]"/>
+        </record>
 
 <!--        <record id="maintenance_bill_demo1" model="maintenance.bill">-->
-<!--            <field name="name">Maintenance Bill Tower1</field>-->
-<!--            <field name="tower_id" ref="society_tower_demo_1"/>-->
-<!--            <field name="maintenance_amount">200</field>-->
-<!--            <field name="due_day">15</field>-->
-<!--            <field name="maintenance_ids" ref="resident_maintenance_demo1"/>-->
-<!--        </record>-->
+<!--    <field name="name">Maintenance Bill Tower1</field>-->
+<!--    <field name="tower_id" ref="society_tower_demo_1"/>-->
+<!--    <field name="maintenance_amount">200</field>-->
+<!--    <field name="due_day">15</field>-->
+<!--    <field name="penalty_per_day">10</field>-->
+<!--</record>-->
+<!--        -->
 
-<!--        <record id="maintenance_bill_demo2" model="maintenance.bill">-->
-<!--            <field name="name">Maintenance Bill Tower2</field>-->
-<!--            <field name="tower_id" ref="society_tower_demo_2"/>-->
-<!--            <field name="maintenance_amount">200</field>-->
-<!--            <field name="due_day">15</field>-->
-<!--            <field name="maintenance_ids" ref="resident_maintenance_demo2"/>-->
-<!--        </record>-->
+                <record id="maintenance_bill_demo1" model="maintenance.bill">
+                    <field name="name">Maintenance Bill Tower1</field>
+                    <field name="tower_id" ref="society_tower_demo_1"/>
+                    <field name="maintenance_amount">200</field>
+                    <field name="due_day">15</field>
+                        <field name="penalty_per_day">10</field>
 
-<!--        <record id="maintenance_bill_demo3" model="maintenance.bill">-->
-<!--            <field name="name">Maintenance Bill Tower3</field>-->
-<!--            <field name="tower_id" ref="society_tower_demo_3"/>-->
-<!--            <field name="maintenance_amount">200</field>-->
-<!--            <field name="due_day">15</field>-->
-<!--        </record>-->
 
+<!--                    <field name="maintenance_ids" ref="resident_maintenance_demo1"/>-->
+                </record>
+
+                <record id="maintenance_bill_demo2" model="maintenance.bill">
+                    <field name="name">Maintenance Bill Tower2</field>
+                    <field name="tower_id" ref="society_tower_demo_2"/>
+                    <field name="maintenance_amount">200</field>
+                    <field name="due_day">15</field>
+                        <field name="penalty_per_day">10</field>
+
+
+<!--                    <field name="maintenance_ids" ref="resident_maintenance_demo2"/>-->
+                </record>
+
+                <record id="maintenance_bill_demo3" model="maintenance.bill">
+                    <field name="name">Maintenance Bill Tower3</field>
+                    <field name="tower_id" ref="society_tower_demo_3"/>
+                    <field name="maintenance_amount">200</field>
+                        <field name="penalty_per_day">10</field>
+                        <field name="due_day">15</field>
+
+                </record>
 
 <!--        <record id="resident_maintenance_demo1" model="society.maintenance">-->
-<!--            <field name="maintenance_bill_id" ref="maintenance_bill_demo1"/>-->
-<!--            <field name="flat_id" ref="society_flat_demo_1"/>-->
-<!--            <field name="resident_id" ref="resident_demo_1"/>-->
-<!--            <field name="tower_id" ref="society_tower_demo_1"/>-->
-<!--            <field name="due_date">15</field>-->
-<!--            <field name="month">6</field>-->
-<!--            <field name="year">2026</field>-->
-<!--            <field name="maintenance_amount">200</field>-->
-<!--            <field name="penalty_per_day">10</field>-->
-<!--            <field name="penalty_amount">0</field>-->
-<!--            <field name="total_amount">200</field>-->
-<!--            <field name="is_paid">True</field>-->
-<!--            <field name="state">paid</field>-->
-<!--            <field name="payment_date">2026-06-10 06:00:00</field>-->
-<!--        </record>-->
+<!--    <field name="maintenance_bill_id" ref="maintenance_bill_demo1"/>-->
+<!--    <field name="flat_id" ref="society_flat_demo_1"/>-->
+<!--    <field name="due_date">2026-06-15</field>-->
+<!--    <field name="month">6</field>-->
+<!--    <field name="year">2026</field>-->
+<!--    <field name="is_paid">True</field>-->
+<!--    <field name="state">paid</field>-->
+<!--    <field name="payment_date">2026-06-10</field>-->
+<!--</record>-->
 
-<!--        <record id="resident_maintenance_demo2" model="society.maintenance">-->
-<!--            <field name="maintenance_bill_id" ref="maintenance_bill_demo2"/>-->
-<!--            <field name="flat_id" ref="society_flat_demo_4"/>-->
-<!--            <field name="resident_id" ref="resident_demo_3"/>-->
-<!--            <field name="tower_id" ref="society_tower_demo_2"/>-->
-<!--            <field name="due_date">15</field>-->
-<!--            <field name="month">6</field>-->
-<!--            <field name="year">2026</field>-->
-<!--            <field name="maintenance_amount">200</field>-->
-<!--            <field name="penalty_per_day">15</field>-->
-<!--            <field name="penalty_amount">0</field>-->
-<!--            <field name="total_amount">200</field>-->
-<!--            <field name="is_paid">True</field>-->
-<!--            <field name="state">paid</field>-->
-<!--            <field name="payment_date">2026-06-10 06:00:00</field>-->
-<!--        </record>-->
+
+                <record id="resident_maintenance_demo1" model="society.maintenance">
+                    <field name="maintenance_bill_id" ref="maintenance_bill_demo1"/>
+                    <field name="flat_id" ref="society_flat_demo_1"/>
+                    <field name="resident_id" eval="[(6,0,[ref('resident_demo_1'),ref('resident_demo_2')])]"/>
+                    <field name="tower_id" ref="society_tower_demo_1"/>
+    <field name="due_date">2026-06-15</field>
+                    <field name="month">6</field>
+                    <field name="year">2026</field>
+                    <field name="maintenance_amount">200</field>
+                    <field name="penalty_per_day">10</field>
+<!--                    <field name="penalty_amount">0</field>-->
+                    <field name="total_amount">200</field>
+                    <field name="is_paid">True</field>
+                    <field name="state">paid</field>
+                    <field name="payment_date">2026-06-10 06:00:00</field>
+                </record>
+
+                <record id="resident_maintenance_demo2" model="society.maintenance">
+                    <field name="maintenance_bill_id" ref="maintenance_bill_demo2"/>
+                    <field name="flat_id" ref="society_flat_demo_4"/>
+                    <field name="resident_id" eval="[(6,0,[ref('resident_demo_3'),ref('resident_demo_4')])]"/>
+                    <field name="tower_id" ref="society_tower_demo_2"/>
+    <field name="due_date">2026-06-15</field>
+                    <field name="month">6</field>
+                    <field name="year">2026</field>
+                    <field name="maintenance_amount">200</field>
+                    <field name="penalty_per_day">15</field>
+<!--                    <field name="penalty_amount">0</field>-->
+                    <field name="total_amount">200</field>
+                    <field name="is_paid">True</field>
+                    <field name="state">paid</field>
+                    <field name="payment_date">2026-06-10 06:00:00</field>
+                </record>
     </data>
 </odoo>
 

@@ -14,7 +14,7 @@ class ResidentAlerts(models.Model):
     tower_id=fields.Many2many('society.tower',string='Tower')
     user_id=fields.Many2one('res.users',string='resident',default=lambda self: self.env.user)
     location=fields.Char(string='Location',required=True)
-    alert_type=fields.Selection(required=True,selection=[('sos_alert','SOS Alert'),('fire_alert','Fire Alert'),
+    alert_type=fields.Selection(selection=[('sos_alert','SOS Alert'),('fire_alert','Fire Alert'),
     ('panic_alert','Panic Alert'),('emergency_alert','Emergency Alert')])
     security_id=fields.Many2many('security.guard',string='Security')
     resident_id=fields.Many2many('resident.registrations',string='Resident')
@@ -25,42 +25,60 @@ class ResidentAlerts(models.Model):
         compute='_compute_committee_emails'
     )
     flat_id_save=fields.Char(compute='_compute_flat_id_save')
-
+    
     @api.depends('to_committee')
     def _compute_committee_emails(self):
         for record in self:
             emails = []
-            for security in record.security_id:
-                if security.email:
-                    emails.append(security.email)
-            for resident in record.resident_id:
-                if resident.email:
-                    emails.append(resident.email)
-            for flat in record.flat_id:
-                resident=self.env['resident.registrations'].search([
-                    ('flat_id','=',flat.id),
-                ])
-                if resident.email:
-                    emails.append(resident.email)
-            for tower in record.tower_id:
-                resident=self.env['resident.registrations'].search([
-                    ('tower_id','=',tower.id),
-                ])
-                if resident.email:
-                    emails.append(resident.email)
-
             for partner in record.to_committee.committee_name_id:
                 if partner.email:
                     emails.append(partner.email)
-
             if record.to_committee.chairman_id.email:
                 emails.append(record.to_committee.chairman_id.email)
-
             if record.to_committee.secretary_id.email:
                 emails.append(record.to_committee.secretary_id.email)
+            record.committee_emails = ",".join(set(emails))
 
-            emails = list(set(emails))
-            record.committee_emails = ",".join(emails)
+    # @api.depends('to_committee')
+    # def _compute_committee_emails(self):
+    #     for record in self:
+    #         emails = []
+    #         for security in record.security_id:
+    #             print('\n\n\n..........security',security)
+    #             if security.email:
+    #                 emails.append(security.email)
+    #         for resident in record.resident_id:
+    #             print('\n\n\n..........resident',resident)
+    #             if resident.email:
+    #                 emails.append(resident.email)
+    #         for flat in record.flat_id:
+    #             print('\n\n\n..........flat',flat)
+    #             resident=self.env['resident.registrations'].search([
+    #                 ('flat_id','=',flat.id),
+    #             ])
+    #             for res in resident:
+    #                 if res.email:
+    #                     emails.append(resident.email)
+    #         for tower in record.tower_id:
+    #             resident=self.env['resident.registrations'].search([
+    #                 ('tower_id','=',tower.id),
+    #             ])
+    #             for res in resident:
+    #                 if res.email:
+    #                     emails.append(resident.email)
+    #
+    #         for partner in record.to_committee.committee_name_id:
+    #             if partner.email:
+    #                 emails.append(partner.email)
+    #
+    #         if record.to_committee.chairman_id.email:
+    #             emails.append(record.to_committee.chairman_id.email)
+    #
+    #         if record.to_committee.secretary_id.email:
+    #             emails.append(record.to_committee.secretary_id.email)
+    #
+    #         emails = list(set(emails))
+    #         record.committee_emails = ",".join(emails)
 
     @api.depends('flat_id')
     def _compute_flat_id_save(self):

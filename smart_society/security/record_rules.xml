@@ -3,18 +3,18 @@
         <record id="vehicle_user_rule" model="ir.rule">
             <field name="name">Resident Own Vehicles</field>
             <field name="model_id" ref="model_vehicle_registrations"/>
-            <field name="groups" eval="[(4, ref('smart_society.group_registration_user'))]"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
             <field name="domain_force">[('owner_id', '=', user.id)]</field>
             <field name="perm_read" eval="True"/>
         </record>
 
-        <record id="complaint_user_rule" model="ir.rule">
-            <field name="name">Resident Own Complaints</field>
-            <field name="model_id" ref="model_complaint_desk"/>
-            <field name="groups" eval="[(4, ref('smart_society.group_registration_user')),(4,ref('base.group_portal'))]"/>
-            <field name="domain_force">[('user_id', '=', user.id)]</field>
+<!--        <record id="complaint_user_rule" model="ir.rule">-->
+<!--            <field name="name">Resident Own Complaints</field>-->
+<!--            <field name="model_id" ref="model_complaint_desk"/>-->
+<!--            <field name="groups" eval="[(4,ref('base.group_portal'))]"/>-->
+<!--            <field name="domain_force">[('user_id', '=', user.id)]</field>-->
 
-        </record>
+<!--        </record>-->
 
         <record id="all_complaints_admin_rule" model="ir.rule">
             <field name="name">All Complaints</field>
@@ -24,17 +24,24 @@
 
         </record>
 
+<!--        <record id="views_own_profile_rule" model="ir.rule">-->
+<!--            <field name="name">View Profile</field>-->
+<!--            <field name="model_id" ref="model_resident_registrations"/>-->
+<!--            <field name="groups" eval="[(4, ref('smart_society.group_registration_user'))]"/>-->
+<!--            <field name="domain_force">[('user_id', '=', user.id)]</field>-->
+<!--        </record>-->
+
         <record id="views_own_profile_rule" model="ir.rule">
-            <field name="name">View Profile</field>
+            <field name="name">View Own Profile</field>
             <field name="model_id" ref="model_resident_registrations"/>
-            <field name="groups" eval="[(4, ref('smart_society.group_registration_user'))]"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
             <field name="domain_force">[('user_id', '=', user.id)]</field>
         </record>
 
         <record id="rule_resident_own_maintenance" model="ir.rule">
             <field name="name">Resident Own Maintenance</field>
             <field name="model_id" ref="model_society_maintenance"/>
-            <field name="groups" eval="[(4, ref('smart_society.group_registration_user'))]"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
             <field name="domain_force">[('user_id', '=', user.id)]</field>
 <!--            <field name="domain_force">[('flat_id', '=', user.flat_id.id)]</field>-->
             <field name="perm_read" eval="True"/>
@@ -46,17 +53,17 @@
         <record id="visitor_security_rule" model="ir.rule">
             <field name="name">Security Visitor Access</field>
             <field name="model_id" ref="model_visitor_registrations"/>
-            <field name="groups" eval="[(4, ref('smart_society.group_registration_security'))]"/>
+            <field name="groups" eval="[(4, ref('smart_society.group_registration_security')),(4,ref('smart_society.group_registration_administration'))]"/>
             <field name="domain_force">[(1,'=',1)]</field>
         </record>
 
 
-        <record id="portal_complaint_rule" model="ir.rule">
-            <field name="name">Own Complaint</field>
-            <field name="model_id" ref="model_complaint_desk"/>
-            <field name="groups" eval="[(4,ref('base.group_portal'))]"/>
-            <field name="domain_force">[('user_id','=',user.id)]</field>
-        </record>
+<!--        <record id="portal_complaint_rule" model="ir.rule">-->
+<!--            <field name="name">Own Complaint</field>-->
+<!--            <field name="model_id" ref="model_complaint_desk"/>-->
+<!--            <field name="groups" eval="[(4,ref('base.group_portal'))]"/>-->
+<!--            <field name="domain_force">[('user_id','=',user.id)]</field>-->
+<!--        </record>-->
     </data>
 </odoo>
 

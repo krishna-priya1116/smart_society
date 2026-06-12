@@ -11,7 +11,7 @@
                 <!--                <field name="city"/>-->
                 <field name="country_id"/>
                 <field name="state_id"/>
-                <field name="pincode"/>
+                <field name="zip"/>
                 <!--            <field name="society_owner" widget="Many2one"/>-->
             </list>
         </field>
@@ -29,12 +29,17 @@
                             <field name="name"/>
                             <field name="society_reg_number"/>
                             <field name="society_address"/>
+                            <field name="street"/>
+                            <field name="street2"/>
                             <field name="country_id" placeholder="Country" class="o_address_country"
                                    options='{"no_open": True, "no_create": True}'/>
                             <field name="state_id" domain="[('country_id','=',country_id)]" options='{"no_create":True}'
                                    widget="Many2one"/>
-                            <!--                        <field name="city_id" domain="[('country_id','=',country_id),('state_id','=',state_id)]" options="{'no_create':True}" widget="Many2one"/>-->
-                            <field name="pincode"/>
+                            <field name="city"/>
+
+                            <!--                            <field name="city_id" domain="[('country_id','=',country_id),('state_id','=',state_id)]" options="{'no_create':True}" widget="Many2one"/>-->
+
+                            <field name="zip"/>
                         </group>
                         <group>
                             <field name="tower_count"/>
@@ -60,17 +65,17 @@
                                 </list>
                             </field>
                         </page>
-                        <page string="gym slots">
-                            <field name="gym_slot_ids">
-                                <list editable="bottom">
-                                    <field name="name"/>
-                                    <field name="shift"/>
-                                    <field name="gym_booking_charge"/>
-                                    <field name="is_occupied"/>
-                                    <field name="resident_id"/>
-                                </list>
-                            </field>
-                        </page>
+                        <!--                        <page string="gym slots">-->
+                        <!--                            <field name="gym_slot_ids">-->
+                        <!--                                <list editable="bottom">-->
+                        <!--                                    <field name="name"/>-->
+                        <!--                                    <field name="shift"/>-->
+                        <!--                                    <field name="gym_booking_charge"/>-->
+                        <!--                                    <field name="is_occupied"/>-->
+                        <!--                                    <field name="resident_id"/>-->
+                        <!--                                </list>-->
+                        <!--                            </field>-->
+                        <!--                        </page>-->
                         <page string="Society rules">
                             <h2>Common Society Rules and RegulationsMaintenance Payments</h2>
                             <p>Residents must pay monthly or quarterly maintenance fees by the due date,
@@ -150,6 +155,7 @@
                             <field name="stair_case"/>
                             <field name="fire_exit"/>
                             <field name="parking_area"/>
+
                         </group>
                         <group>
                             <field name="society_id" widget="Many2one"/>
@@ -399,18 +405,18 @@
         </field>
     </record>
 
-        <record id="view_guest_house_form" model="ir.ui.view">
+    <record id="view_guest_house_form" model="ir.ui.view">
         <field name="name">society.guesthouse.form</field>
         <field name="model">society.guesthouse</field>
-            <field name="arch" type="xml">
-                <form>
-                    <sheet>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
                         <group>
-                        <group>
-                        <field name="name"/>
-                        <field name="floor_number"/>
-                        <field name="gh_booking_charge"/>
-                        <field name="flat_type"/>
+                            <field name="name"/>
+                            <field name="floor_number"/>
+                            <field name="gh_booking_charge"/>
+                            <field name="flat_type"/>
                         </group>
                         <group>
                             <field name="gh_status"/>
@@ -418,24 +424,25 @@
                             <field name="price_per_person"/>
                             <field name="is_occupied"/>
                         </group>
-                        </group>
-                    </sheet>
-                </form>
-            </field></record>
-
-    <record id="view_gym_slots" model="ir.ui.view">
-        <field name="name">gym.slots.list</field>
-        <field name="model">gym.slots</field>
-        <field name="arch" type="xml">
-            <list>
-                <field name="name"/>
-                <field name="shift"/>
-                <field name="gym_booking_charge"/>
-                <field name="resident_id"/>
-                <field name="is_occupied"/>
-            </list>
+                    </group>
+                </sheet>
+            </form>
         </field>
     </record>
+
+    <!--    <record id="view_gym_slots" model="ir.ui.view">-->
+    <!--        <field name="name">gym.slots.list</field>-->
+    <!--        <field name="model">gym.slots</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <list>-->
+    <!--                <field name="name"/>-->
+    <!--                <field name="shift"/>-->
+    <!--                <field name="gym_booking_charge"/>-->
+    <!--                <field name="resident_id"/>-->
+    <!--                <field name="is_occupied"/>-->
+    <!--            </list>-->
+    <!--        </field>-->
+    <!--    </record>-->
 
 
 </odoo>

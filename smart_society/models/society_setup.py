@@ -8,9 +8,14 @@ class SocietySetup(models.Model):
     name=fields.Char(string='Society Name' , required=True)
     society_reg_number=fields.Char(string='Society Registration Number')
     society_address=fields.Char(string='Society Address')
-    country_id = fields.Many2one('res.country', string='Country',required=True)
+    street=fields.Char(string='Street')
+    street2=fields.Char(string='Street2')
+    city=fields.Char(string='City')
+    # city_id = fields.Many2one('res.city', string='City ID')
     state_id=fields.Many2one('res.country.state',string='State')
-    pincode=fields.Char(string='Pincode')
+    country_id = fields.Many2one('res.country', string='Country',required=True)
+    zip=fields.Char(string='zip')
+    # pincode=fields.Char(string='Pincode')
     society_ids=fields.One2many('society.tower','society_id',string='Tower')
     tower_count=fields.Integer(string='Tower Count')
     has_gym=fields.Boolean(string='Has Gym')
@@ -22,64 +27,68 @@ class SocietySetup(models.Model):
     # guesthouse_count=fields.Integer(string='Guest House Count')
     gym_booking_charge=fields.Float(string='Gym Booking Charge per day')
     cbh_booking_charge=fields.Float(string='Clubhouse Booking Charge')
-    gym_slot_ids=fields.One2many('gym.slots','society_id',string='Gym Slots')
+    # gym_slot_ids=fields.One2many('gym.slots','society_id',string='Gym Slots')
     # gh_ids=fields.One2many('society.guesthouse','society_id',string='Towers')
 
     @api.constrains('tower_count')
     def generate_tower(self):
         for record in self:
             for tower in range(record.tower_count):
-                self.env['society.tower'].create({
-                'name':f'tower-{tower+1}',
-                'society_id':record.id,
-                })
+                tower=self.env['society.tower'].search([
+                    ('society_id','=',record.id)
+                ])
+                if not tower:
+                    self.env['society.tower'].create({
+                    'name':f'{record.id}-tower-{tower+1}',
+                    'society_id':record.id,
+                    })
 
-    @api.constrains('gym_capacity')
-    def create_gym_slot(self):
-        for record in self:
-            print('..............record........',record)
-            list1=['morning','afternoon','evening','night']
-            for shift in range(len(list1)):
-                print('.........shift....',shift)
-                first_letter=(list1[shift][0]).upper()
-                print('\n\n\n\n........first_letter.....',first_letter)
-                print('\n\n\n....record.gym_capacity....',record.gym_capacity)
-                for slot in range(record.gym_capacity):
-                    # print('\n\n...slot.....',slot)
-                    exist_slot=self.env['gym.slots'].search([
-                        ('name','=',f'{first_letter}-slot{slot + 1}'),
-                        ('society_id', '=', record.id),
+    # @api.constrains('gym_capacity')
+    # def create_gym_slot(self):
+    #     for record in self:
+    #         print('..............record........',record)
+    #         list1=['morning','afternoon','evening','night']
+    #         for shift in range(len(list1)):
+    #             print('.........shift....',shift)
+    #             first_letter=(list1[shift][0]).upper()
+    #             print('\n\n\n\n........first_letter.....',first_letter)
+    #             print('\n\n\n....record.gym_capacity....',record.gym_capacity)
+    #             for slot in range(record.gym_capacity):
+    #                 # print('\n\n...slot.....',slot)
+    #                 exist_slot=self.env['gym.slots'].search([
+    #                     ('name','=',f'{first_letter}-slot{slot + 1}'),
+    #                     ('society_id', '=', record.id),
+    #
+    #                 ])
+    #                 # ('name','=',f'res-{park.parking_place}-t{park.tower_id.id}-{i + 1}'),
+    #                 if not exist_slot:
+    #                     print('\n\n\n......not.exist_slot..', exist_slot)
+    #                     g_slots=self.env['gym.slots'].create({
+    #                         'name':f'{first_letter}-slot{slot + 1}',
+    #                         'society_id':record.id,
+    #                         'shift':list1[shift],
+    #                     })
+    #                     print('.....g_slots......',g_slots)
 
-                    ])
-                    # ('name','=',f'res-{park.parking_place}-t{park.tower_id.id}-{i + 1}'),
-                    if not exist_slot:
-                        print('\n\n\n......not.exist_slot..', exist_slot)
-                        g_slots=self.env['gym.slots'].create({
-                            'name':f'{first_letter}-slot{slot + 1}',
-                            'society_id':record.id,
-                            'shift':list1[shift],
-                        })
-                        print('.....g_slots......',g_slots)
 
-
-class GymSlots(models.Model):
-    _name='gym.slots'
-    _description='Gym Slots Model'
-
-    society_id=fields.Many2one('society.setup',string='Society')
-    name=fields.Char(string='Gym Slots Name')
-    shift=fields.Selection(selection=[('morning','Morning'),('afternoon','Afternoon'),('evening','Evening'),('night','Night')])
-    gym_booking_charge=fields.Float(related='society_id.gym_booking_charge',string='Gym Booking Charge')
-    is_occupied=fields.Boolean(string='Is Occupied')
-    resident_id=fields.Many2one('resident.registrations',string='Resident ID')
-
-    @api.onchange('resident_id')
-    def is_occupied_resident(self):
-        for record in self:
-            if record.resident_id:
-                record.is_occupied=True
-            elif not record.resident_id:
-                record.is_occupied=False
+# class GymSlots(models.Model):
+#     _name='gym.slots'
+#     _description='Gym Slots Model'
+# 
+#     society_id=fields.Many2one('society.setup',string='Society')
+#     name=fields.Char(string='Gym Slots Name')
+#     shift=fields.Selection(selection=[('morning','Morning'),('afternoon','Afternoon'),('evening','Evening'),('night','Night')])
+#     gym_booking_charge=fields.Float(related='society_id.gym_booking_charge',string='Gym Booking Charge')
+#     is_occupied=fields.Boolean(string='Is Occupied')
+#     resident_id=fields.Many2one('resident.registrations',string='Resident ID')
+#
+#     @api.onchange('resident_id')
+#     def is_occupied_resident(self):
+#         for record in self:
+#             if record.resident_id:
+#                 record.is_occupied=True
+#             elif not record.resident_id:
+#                 record.is_occupied=False
 
 
 

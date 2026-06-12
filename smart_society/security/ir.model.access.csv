@@ -95,10 +95,6 @@ access_clubhouse_booking,clubhouse.booking,model_clubhouse_booking,smart_society
 access_clubhouse_booking_user,clubhouse.booking.user,model_clubhouse_booking,smart_society.group_registration_committee,1,1,1,1
 access_clubhouse_booking_committee,clubhouse.booking.committee,model_clubhouse_booking,smart_society.group_registration_security,1,1,1,0
 access_clubhouse_booking_security,clubhouse.booking.security,model_clubhouse_booking,smart_society.group_registration_user,1,0,0,0
-access_gym_slots,gym.slots,model_gym_slots,smart_society.group_registration_administration,1,1,1,1
-access_gym_slots_user,gym.slots.user,model_gym_slots,smart_society.group_registration_committee,1,1,1,1
-access_gym_slots_committee,gym.slots.committee,model_gym_slots,smart_society.group_registration_security,1,1,1,0
-access_gym_slots_security,gym.slots.security,model_gym_slots,smart_society.group_registration_user,1,1,0,0
 access_society_maintenance,society.maintenance,model_society_maintenance,smart_society.group_registration_administration,1,1,1,1
 access_society_maintenance_user,society.maintenance.user,model_society_maintenance,smart_society.group_registration_user,1,1,1,1
 access_society_maintenance_committee,society.maintenance.committee,model_society_maintenance,smart_society.group_registration_committee,1,1,1,1

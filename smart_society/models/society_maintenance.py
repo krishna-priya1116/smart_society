@@ -103,6 +103,7 @@ class SocietyMaintenance(models.Model):
                 if resident.email:
                     emails.append(resident.email)
             record.resident_emails = ",".join(list(set(emails)))
+            print('\n\n\n........record.resident_emails ...........',record.resident_emails )
 
     @api.depends('flat_id')
     def _compute_resident_id(self):

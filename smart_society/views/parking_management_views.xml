@@ -64,9 +64,9 @@
         <field name="arch" type="xml">
             <list>
                 <field name="person_type"/>
-                <field name="flat_id"/>
-                <field name="tower_id"/>
-                <field name="flat_id"/>
+<!--                <field name="flat_id"/>-->
+<!--                <field name="tower_id"/>-->
+<!--                <field name="flat_id"/>-->
                 <field name="entry_time"/>
                 <field name="exit_time"/>
             </list>
@@ -92,7 +92,7 @@
                             <field name="visiting_tower" invisible="person_type in 'resident'"/>
                             <field name="flat_id" invisible="person_type not in 'resident'"/>
                             <field name="tower_id" invisible="person_type not in 'resident'"/>
-                            <field name="visit_purpose" invisible="person_type not in 'other'"/>
+                            <field name="visit_purpose" invisible="person_type in 'resident'"/>
                         </group>
                         <group>
                             <field name="entry_time"/>
