@@ -33,15 +33,31 @@ class SocietySetup(models.Model):
     @api.constrains('tower_count')
     def generate_tower(self):
         for record in self:
-            for tower in range(record.tower_count):
-                tower=self.env['society.tower'].search([
-                    ('society_id','=',record.id)
-                ])
-                if not tower:
+            for i in range(record.tower_count):
+                existing_tower = self.env['society.tower'].search([
+                    ('society_id', '=', record.name),
+                    ('name', '=', f'{record.id}-tower-{i + 1}')
+                ], limit=1)
+
+                if not existing_tower:
                     self.env['society.tower'].create({
-                    'name':f'{record.id}-tower-{tower+1}',
-                    'society_id':record.id,
+                        'name': f'{record.name}-tower-{i + 1}',
+                        'society_id': record.id,
                     })
+
+    # @api.constrains('tower_count')
+    # def generate_tower(self):
+    #     for record in self:
+    #         for tower in range(record.tower_count):
+    #             tower=self.env['society.tower'].search([
+    #                 ('society_id','=',record.id),
+    #                 ('name', '=', f'{record.id}-tower-{tower + 1}')
+    #             ])
+    #             if not tower:
+    #                 self.env['society.tower'].create({
+    #                 'name':f'{record.id}-tower-{tower+1}',
+    #                 'society_id':record.id,
+    #                 })
 
     # @api.constrains('gym_capacity')
     # def create_gym_slot(self):

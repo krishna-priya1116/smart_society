@@ -25,10 +25,18 @@ class ResidentRegistrations(models.Model):
     has_vehicle=fields.Boolean(string='Has Vehicle',default=False)
     vehicle_count=fields.Integer(string='Vehicle Count')
     vehicle_ids=fields.One2many('vehicle.registrations','resident_id',string='Vehicle ID')
-    real_owner=fields.Char(string='Real Owner',required=True)
+    real_owner=fields.Char(string='Real Owner')
     tenant_certificate=fields.Binary(string='Tenant Certificate')
     user_id = fields.Many2one( 'res.users',string='User',readonly=False)
 
+
+
+    @api.constrains('resident_type')
+    def have_real_owner(self):
+        for record in self:
+            if record.resident_type=='tenant' or record.resident_type=='temporary_resident':
+                if not record.real_owner:
+                    raise ValidationError('Need real owner')
 
 
     @api.model_create_multi
@@ -85,9 +93,6 @@ class ResidentRegistrations(models.Model):
                 # print('\n\n\n....fs.......',fs)
 
 
-
-
-
          # 'name': 'Marc Demo',
          #    'email': 'mark.brown23@example.com',
          #    'image_1920': False,
@@ -95,9 +100,6 @@ class ResidentRegistrations(models.Model):
          #    'login': 'demo_1',
          #    'password': 'demo_1',
          #    'partner_id': partner_without_image.id,
-
-
-
 
     @api.constrains('vehicle_count','vehicle_ids')
     def check_vehicle(self):
@@ -113,6 +115,7 @@ class ResidentRegistrations(models.Model):
     def check_mobile_number(self):
         for registration in self:
             if registration.resident_type=='owner' and not registration.mobile_number:
+                registration.real_owner=registration.name
                 print('.................................',registration.mobile_number)
                 raise ValidationError('enter mobile number')
             if registration.mobile_number:
@@ -190,7 +193,7 @@ class SecurityGuard(models.Model):
             check_partner=self.env['res.users'].search([
                 # ('partner_id','=',record.security_id.id),
                 ('partner_id','=',record.security_id.id),
-                ('email','=',record.email),
+                # ('email','=',record.email),
             ],limit=1)
             print('\n\n\n............check_partner..........',check_partner)
             if not check_partner and record.email:

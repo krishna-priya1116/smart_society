@@ -10,44 +10,64 @@ class Committee(models.Model):
     chairman_id = fields.Many2one('res.partner',string='Chairman')
     secretary_id = fields.Many2one('res.partner',string='Secretary')
     tower_id = fields.Many2one('society.tower',string='Tower')
+    society_id=fields.Many2one(related='tower_id.society_id')
 
 
     def _create_or_update_committee_users(self):
         committee_group = self.env.ref('smart_society.group_registration_committee')
+        portal_group = self.env.ref('base.group_portal')
+        internal_group = self.env.ref('base.group_user')
+
         for record in self:
-            partner_ids = record.committee_name_id.ids
+            partner_ids = []
             if record.chairman_id:
                 partner_ids.append(record.chairman_id.id)
             if record.secretary_id:
                 partner_ids.append(record.secretary_id.id)
+            if not record.committee_name_id:
+                record.committee_name_id=[(6,0,list(set(partner_ids)))]
+
             partners = self.env['res.partner'].browse(
                 list(set(partner_ids))
             )
+
+
+            # record.committee_name_id=list(set(partner_ids))
+            # record.write({
+            #     'committee_name_id': [(6, 0, list(set(partner_ids)))]
+            # })
             print('\n\n\n\n...................................partners',partners)
             for partner in partners:
                 user = self.env['res.users'].search([
                     ('partner_id', '=', partner.id)
                 ], limit=1)
+                if user.has_group('base.group_portal'):
+                    print('\n\n\n if user .....has group..............',user.has_group('base.group_portal'))
+                    print('\n\n\n..............user.....',user)
 
-                if not user:
-                    self.env['res.users'].create({
-                        'name': partner.name,
-                        'login': partner.email,
-                        'email': partner.email,
-                        'partner_id': partner.id,
-                        'password': f'{partner.name.replace(" ", "")}1234',
-                        'group_ids': [
-                            (4, committee_group.id),
-                            # (4, self.env.ref('base.group_portal').id),
-                        ],
+                    user.write({
+                        'group_ids':[
+                            (3,portal_group.id),
+                            (4,internal_group.id),
+                            (4,committee_group.id),
+                        ]
                     })
-                print('......................user.....',self.env['res.users'].search([]))
-                # else:
-                #     user.write({
+                    print('\n\n\n if user .....has group........group_portal......',user.has_group('base.group_portal'))
+                print('\n\n\n if user .....has group.........smart_society.group_registration_committee.....', user.has_group('smart_society.group_registration_committee'))
+                print('\n\n\n if user .....has group.......group_user.......', user.has_group('base.group_user'))
+                # if not user:
+                #     self.env['res.users'].create({
+                #         'name': partner.name,
+                #         'login': partner.email,
+                #         'email': partner.email,
+                #         'partner_id': partner.id,
+                #         'password': f'{partner.name.replace(" ", "")}1234',
                 #         'group_ids': [
                 #             (4, committee_group.id),
-                #         ]
+                #             # (4, self.env.ref('base.group_portal').id),
+                #         ],
                 #     })
+                print('......................user.....',self.env['res.users'].search([]))
 
     @api.model_create_multi
     def create(self, vals_list):

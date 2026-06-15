@@ -1084,46 +1084,46 @@
             <field name="create_date">2026-05-01 11:30:00</field>
         </record>
 
-        <record id="gym_slot_demo1" model="gym.slots">
-            <field name="name">gym_slot1</field>
-            <field name="society_id" ref="society_setup_demo1"/>
-            <field name="shift">morning</field>
-            <field name="gym_booking_charge">100</field>
-            <field name="is_occupied">True</field>
-            <field name="resident_id" ref="resident_demo_1"/>
-        </record>
-        <record id="gym_slot_demo2" model="gym.slots">
-            <field name="name">gym_slot2</field>
-            <field name="society_id" ref="society_setup_demo1"/>
-            <field name="shift">afternoon</field>
-            <field name="gym_booking_charge">100</field>
-            <field name="is_occupied">True</field>
-            <field name="resident_id" ref="resident_demo_2"/>
+<!--        <record id="gym_slot_demo1" model="gym.slots">-->
+<!--            <field name="name">gym_slot1</field>-->
+<!--            <field name="society_id" ref="society_setup_demo1"/>-->
+<!--            <field name="shift">morning</field>-->
+<!--            <field name="gym_booking_charge">100</field>-->
+<!--            <field name="is_occupied">True</field>-->
+<!--            <field name="resident_id" ref="resident_demo_1"/>-->
+<!--        </record>-->
+<!--        <record id="gym_slot_demo2" model="gym.slots">-->
+<!--            <field name="name">gym_slot2</field>-->
+<!--            <field name="society_id" ref="society_setup_demo1"/>-->
+<!--            <field name="shift">afternoon</field>-->
+<!--            <field name="gym_booking_charge">100</field>-->
+<!--            <field name="is_occupied">True</field>-->
+<!--            <field name="resident_id" ref="resident_demo_2"/>-->
 
-        </record>
-        <record id="gym_slot_demo3" model="gym.slots">
-            <field name="name">gym_slot3</field>
-            <field name="society_id" ref="society_setup_demo1"/>
-            <field name="shift">morning</field>
-            <field name="gym_booking_charge">100</field>
-            <field name="is_occupied">True</field>
-            <field name="resident_id" ref="resident_demo_3"/>
+<!--        </record>-->
+<!--        <record id="gym_slot_demo3" model="gym.slots">-->
+<!--            <field name="name">gym_slot3</field>-->
+<!--            <field name="society_id" ref="society_setup_demo1"/>-->
+<!--            <field name="shift">morning</field>-->
+<!--            <field name="gym_booking_charge">100</field>-->
+<!--            <field name="is_occupied">True</field>-->
+<!--            <field name="resident_id" ref="resident_demo_3"/>-->
 
-        </record>
-        <record id="gym_slot_demo4" model="gym.slots">
-            <field name="name">gym_slot4</field>
-            <field name="society_id" ref="society_setup_demo1"/>
-            <field name="shift">evening</field>
-            <field name="is_occupied">True</field>
-            <field name="gym_booking_charge">100</field>
-        </record>
-        <record id="gym_slot_demo5" model="gym.slots">
-            <field name="name">gym_slot5</field>
-            <field name="society_id" ref="society_setup_demo1"/>
-            <field name="is_occupied">True</field>
-            <field name="shift">evening</field>
-            <field name="gym_booking_charge">100</field>
-        </record>
+<!--        </record>-->
+<!--        <record id="gym_slot_demo4" model="gym.slots">-->
+<!--            <field name="name">gym_slot4</field>-->
+<!--            <field name="society_id" ref="society_setup_demo1"/>-->
+<!--            <field name="shift">evening</field>-->
+<!--            <field name="is_occupied">True</field>-->
+<!--            <field name="gym_booking_charge">100</field>-->
+<!--        </record>-->
+<!--        <record id="gym_slot_demo5" model="gym.slots">-->
+<!--            <field name="name">gym_slot5</field>-->
+<!--            <field name="society_id" ref="society_setup_demo1"/>-->
+<!--            <field name="is_occupied">True</field>-->
+<!--            <field name="shift">evening</field>-->
+<!--            <field name="gym_booking_charge">100</field>-->
+<!--        </record>-->
 
 
         <record id="resident_gym_booking1" model="gym.booking">

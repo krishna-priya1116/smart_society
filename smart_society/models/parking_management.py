@@ -11,7 +11,7 @@ class ParkingManagement(models.Model):
 
     name=fields.Char(string='Parking name',required=True)
     tower_id=fields.Many2one('society.tower',string='Tower',required=True)
-    society_id=fields.Many2one('society.setup')
+    society_id=fields.Many2one(related='tower_id.society_id')
     parking_place=fields.Selection(string='Parking Place',selection=[
         ('basement1','Basement 1'),('basement2','Basement 2'),('ground','Ground')
     ],required=True)
@@ -67,14 +67,14 @@ class ParkingManagement(models.Model):
                 exist_slot=self.env['parking.slot'].search([
                     ('parking_id','=',park.id),
                     ('tower_id','=',park.tower_id.id),
-                    ('name','=',f'res-{park.parking_place}-{park.society_id.id}-t{park.tower_id.id}-{i + 1}'),
+                    ('name','=',f'res-{park.parking_place}-{park.society_id.name}-t{park.tower_id.id}-{i + 1}'),
                 ])
                 if not exist_slot:
                     self.env['parking.slot'].create({
                         'parking_id': park.id,
                         'tower_id':park.tower_id.id,
                         # 'name':f'res-{park.parking_place[0-5]}-t{park.tower_id}-{park.resident_parking+i+1}',
-                        'name': f'res-{park.parking_place}-{park.society_id.id}-t{park.tower_id.id}-{i + 1}',
+                        'name': f'res-{park.parking_place}-{park.society_id.name}-t{park.tower_id.id}-{i + 1}',
                         'parking_place':park.parking_place,
                         'parking_type': 'resident_parking',
                     })
@@ -87,13 +87,13 @@ class ParkingManagement(models.Model):
                 exist_slot=self.env['parking.slot'].search([
                     ('parking_id','=',park.id),
                     ('tower_id','=',park.tower_id.id),
-                    ('name','=',f'vis-{park.parking_place}-t{park.tower_id.id}-{j + 1}'),
+                    ('name','=',f'vis-{park.parking_place}-{park.society_id.name}-t{park.tower_id.id}-{j + 1}'),
                 ])
                 if not exist_slot:
                     self.env['parking.slot'].create({
                         'parking_id':park.id,
                         'tower_id':park.tower_id.id,
-                        'name':f'vis-{park.parking_place}-t{park.tower_id.id}-{j + 1}',
+                        'name':f'vis-{park.parking_place}-{park.society_id.name}-t{park.tower_id.id}-{j + 1}',
                         'parking_place':park.parking_place,
                         'parking_type':'visitor_parking',
                     })
@@ -105,13 +105,13 @@ class ParkingManagement(models.Model):
                 exist_slot=self.env['parking.slot'].search([
                     ('parking_id','=',park.id),
                     ('tower_id','=',park.tower_id.id),
-                    ('name','=',f'ev-{park.parking_place}-t{park.tower_id.id}-{k + 1}'),
+                    ('name','=',f'ev-{park.parking_place}-{park.society_id.name}-t{park.tower_id.id}-{k + 1}'),
                 ])
                 if not exist_slot:
                     self.env['parking.slot'].create({
                         'parking_id':park.id,
                         'tower_id':park.tower_id.id,
-                        'name':f'ev-{park.parking_place}-t{park.tower_id.id}-{k + 1}',
+                        'name':f'ev-{park.parking_place}-{park.society_id.name}-t{park.tower_id.id}-{k + 1}',
                         'parking_place':park.parking_place,
                         'parking_type':'ev_charging',
                     })
@@ -123,13 +123,13 @@ class ParkingManagement(models.Model):
                 exist_slot=self.env['parking.slot'].search([
                     ('parking_id','=',park.id),
                     ('tower_id','=',park.tower_id.id),
-                    ('name','=',f'oth-{park.parking_place}-t{park.tower_id.id}-{l + 1}'),
+                    ('name','=',f'oth-{park.parking_place}-{park.society_id.name}-t{park.tower_id.id}-{l + 1}'),
                 ])
                 if not exist_slot:
                     self.env['parking.slot'].create({
                         'parking_id':park.id,
                         'tower_id':park.tower_id.id,
-                        'name':f'oth-{park.parking_place}-t{park.tower_id.id}-{l + 1}',
+                        'name':f'oth-{park.parking_place}-{park.society_id.name}-t{park.tower_id.id}-{l + 1}',
                         'parking_place':park.parking_place,
                         'parking_type':'other_parking',
                     })

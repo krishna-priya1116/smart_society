@@ -3,6 +3,7 @@ from . import society_tower
 from . import society_flat
 from . import society_committee
 from . import resident_registrations
+from . import res_users
 from . import vehicle_registrations
 from . import parking_management
 from . import help_desk

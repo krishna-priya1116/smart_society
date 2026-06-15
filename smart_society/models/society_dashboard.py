@@ -7,10 +7,12 @@ class SocietyDashboard(models.Model):
 
     name = fields.Char(default='Dashboard')
 
+    society_id=fields.Many2one('society.setup',string='Society')
+    tower_id=fields.Many2one('society.tower',string='Tower')
     total_notices = fields.Integer(string='Total Notices',compute='_compute_dashboard_data')
     total_events = fields.Integer(string='Total Events',compute='_compute_dashboard_data')
     total_complaints = fields.Integer(string='Total Complaints',compute='_compute_dashboard_data')
-    total_visitors = fields.Integer(string='Total Visitors',compute='_compute_dashboard_data')
+    # total_visitors = fields.Integer(string='Total Visitors',compute='_compute_dashboard_data')
     user_ids = fields.Many2one('res.users' ,default=lambda self:self.env.user.id)
     notice_ids = fields.Many2many('notice.board',compute='_compute_dashboard_data')
     event_ids = fields.Many2many('event.announcement',compute='_compute_dashboard_data')
@@ -128,7 +130,7 @@ class SocietyDashboard(models.Model):
         for record in self:
             record.total_notices = self.env['notice.board'].search_count([])
             record.total_events = self.env['event.announcement'].search_count([])
-            record.total_visitors = self.env['visitor.registrations'].search_count([])
+            # record.total_visitors = self.env['visitor.registrations'].search_count([])
             record.notice_ids = self.env['notice.board'].search([],order='create_date desc')
             record.event_ids = self.env['event.announcement'].search([],order='event_time_start asc')
             # Complaints
@@ -146,7 +148,25 @@ class SocietyDashboard(models.Model):
                 record.complaint_ids = self.env['complaint.desk'].search([])
                 record.total_complaints = self.env['complaint.desk'].search_count([])
 
+            if self.env.user.has_group('smart_society.group_registration_committee') or self.env.user.has_group('smart_society.group_registration_security'):
+                user=self.env.user
+                print('\n\n\n..........user.tower_id',user.tower_id.id)
+                # print('\n\n\n..........user.society_id')
+                # print('\n\n\n..........user.tower_id')
+                record.total_notices = self.env['notice.board'].search_count([('tower_id','=',user.tower_id.id)])
+                record.total_events = self.env['event.announcement'].search_count([('tower_id','=',user.tower_id.id)])
+                # record.total_visitors = self.env['visitor.registrations'].search_count([('tower_id','=',record.tower_id)])
+                record.notice_ids = self.env['notice.board'].search([('tower_id','=',user.tower_id.id)], order='create_date desc')
+                record.event_ids = self.env['event.announcement'].search([('tower_id','=',user.tower_id.id)], order='event_time_start asc')
 
+            if self.env.user.has_group('smart_society.group_registration_administration'):
+                record.total_notices = self.env['notice.board'].search_count([])
+                record.total_events = self.env['event.announcement'].search_count([])
+                # record.total_visitors = self.env['visitor.registrations'].search_count([('tower_id','=',record.tower_id)])
+                record.notice_ids = self.env['notice.board'].search([],
+                                                                    order='create_date desc')
+                record.event_ids = self.env['event.announcement'].search([],
+                                                                         order='event_time_start asc')
 
     def action_open_notice(self):
         return {

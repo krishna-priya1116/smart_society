@@ -1057,7 +1057,7 @@
 <!--        View Invoice-->
 <!--    </a>-->
 <!--</t>-->
-                        <t>
+                        <t t-if="bill.state=='paid'">
                             <a t-att-href="bill.invoice_id.get_portal_url()" class="btn btn-primary">View Invoice</a>
                         </t>
 

@@ -1,5 +1,21 @@
 <odoo>
     <data noupdate="1">
+
+
+        <record id="view_users_form_inherit_tower" model="ir.ui.view">
+            <field name="name">res.users.form.tower</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='preferences']" position="inside">
+                    <group string="Smart Society">
+                        <field name="tower_id"/>
+                        <field name="society_id"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
         <record id="vehicle_user_rule" model="ir.rule">
             <field name="name">Resident Own Vehicles</field>
             <field name="model_id" ref="model_vehicle_registrations"/>
@@ -8,6 +24,295 @@
             <field name="perm_read" eval="True"/>
         </record>
 
+        <record id="own_tower_complaints_admin" model="ir.rule">
+            <field name="name">own_tower_complaints_admin</field>
+            <field name="model_id" ref="model_complaint_desk"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="own_tower_complaints_committees" model="ir.rule">
+            <field name="name">Own Tower Complaints Committees</field>
+            <field name="model_id" ref="model_complaint_desk"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[('tower_id','=',user.tower_id.id)]</field>
+        </record>
+
+        <record id="own_tower_flats_admin" model="ir.rule">
+            <field name="name">own_tower_flats_admin </field>
+            <field name="model_id" ref="model_society_flat"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="own_tower_flats_committees" model="ir.rule">
+            <field name="name">Own Tower Flats Committees</field>
+            <field name="model_id" ref="model_society_flat"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">[('tower_id','=',user.tower_id.id)]</field>
+        </record>
+
+        <record id="own_society_notice_admin" model="ir.rule">
+            <field name="name">own_society_notice_admin </field>
+            <field name="model_id" ref="model_notice_board"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="own_society_notice_commitees" model="ir.rule">
+            <field name="name">Own society Notice Committees</field>
+            <field name="model_id" ref="model_notice_board"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">[('tower_id','=',user.tower_id.id)]</field>
+        </record>
+
+        <record id="own_tower_events_admin" model="ir.rule">
+            <field name="name">own_tower_events_admin </field>
+            <field name="model_id" ref="model_event_announcement"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="own_tower_events_committes" model="ir.rule">
+            <field name="name">Tower Events Committees</field>
+            <field name="model_id" ref="model_event_announcement"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">['|',('id','=',False),('tower_id','=',user.tower_id.id)]</field>
+        </record>
+
+
+<!--        -->
+<!--        <record id="own_tower_alerts_commitees" model="ir.rule">-->
+<!--            <field name="name">Tower alerts Committees</field>-->
+<!--            <field name="model_id" ref="model_resident_alerts"/>-->
+<!--            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>-->
+<!--            <field name="domain_force">[('tower_id','=',user.tower_id.id)]</field>-->
+<!--        </record>-->
+
+
+
+        <record id="own_tower_guesthouse_admin" model="ir.rule">
+            <field name="name">own_tower_guesthouse_admin </field>
+            <field name="model_id" ref="model_society_guesthouse"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="own_tower_guesthouse_committees" model="ir.rule">
+            <field name="name">Tower Guesthouse Committees</field>
+            <field name="model_id" ref="model_society_guesthouse"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">[('tower_id','=',user.tower_id.id)]</field>
+        </record>
+
+                <record id="own_tower_guesthouse_booking_admin" model="ir.rule">
+            <field name="name">own_tower_guesthouse_booking_admin </field>
+            <field name="model_id" ref="model_guesthouse_booking"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="own_tower_guesthouse_booking_committees" model="ir.rule">
+            <field name="name">own tower guesthouse booking committees</field>
+            <field name="model_id" ref="model_guesthouse_booking"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">[('tower_id','=',user.tower_id.id)]</field>
+        </record>
+
+        <record id="own_tower_guests_admin" model="ir.rule">
+            <field name="name">own_tower_guests_admin </field>
+            <field name="model_id" ref="model_guesthouse_booking_members"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="own_tower_guests_committees" model="ir.rule">
+            <field name="name">Own tower guesthouse members</field>
+            <field name="model_id" ref="model_guesthouse_booking_members"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">[('tower_id','=',user.tower_id.id)]</field>
+        </record>
+
+        <record id="own_tower_clubhouse_admin" model="ir.rule">
+            <field name="name">own_tower_clubhouse_admin </field>
+            <field name="model_id" ref="model_clubhouse_booking"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="own_tower_clubhouse_committees" model="ir.rule">
+            <field name="name">own tower clubhouse committees</field>
+            <field name="model_id" ref="model_clubhouse_booking"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">[('society_id','=',user.tower_id.society_id.id)]</field>
+        </record>
+
+        <record id="own_tower_gym_booking_admin" model="ir.rule">
+            <field name="name">own_tower_gym_booking_admin </field>
+            <field name="model_id" ref="model_gym_booking"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="own_tower_gym_booking_committees" model="ir.rule">
+            <field name="name">own tower gym booking</field>
+            <field name="model_id" ref="model_gym_booking"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">[('tower_id','=',user.tower_id.id)]</field>
+        </record>
+
+        <record id="guesthouse_members_history_admin" model="ir.rule">
+            <field name="name">guesthouse_members_history_admin </field>
+            <field name="model_id" ref="model_guesthouse_members_history"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="own_tower_guesthouse_members_history" model="ir.rule">
+            <field name="name">guesthouse members history committees</field>
+            <field name="model_id" ref="model_guesthouse_members_history"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">[('tower_id','=',user.tower_id.id)]</field>
+        </record>
+
+        <record id="own_tower_alerts_admin" model="ir.rule">
+            <field name="name">own_tower_alerts_admin </field>
+            <field name="model_id" ref="model_resident_alerts"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="own_tower_alerts_committees" model="ir.rule">
+            <field name="name">own tower alerts committees</field>
+            <field name="model_id" ref="model_resident_alerts"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">[('tower_id','=',user.tower_id.id)]</field>
+        </record>
+
+        <record id="views_profile_admin" model="ir.rule">
+            <field name="name">views_profile_admin </field>
+            <field name="model_id" ref="model_resident_registrations"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="views_profile_committees" model="ir.rule">
+            <field name="name">View Own Profile Committee</field>
+            <field name="model_id" ref="model_resident_registrations"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">[('tower_id','=',user.tower_id.id)]</field>
+        </record>
+
+        <record id="view_bill_template_admin" model="ir.rule">
+            <field name="name">view_bill_template_admin </field>
+            <field name="model_id" ref="model_maintenance_bill"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="view_bill_template_committees" model="ir.rule">
+            <field name="name">View Own bill template Committees</field>
+            <field name="model_id" ref="model_maintenance_bill"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">[('tower_id','=',user.tower_id.id)]</field>
+        </record>
+
+        <record id="view_resident_bills_admin" model="ir.rule">
+            <field name="name">view_resident_bills_admin </field>
+            <field name="model_id" ref="model_society_maintenance"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="view_resident_bills_committees" model="ir.rule">
+            <field name="name">View Own resident bill</field>
+            <field name="model_id" ref="model_society_maintenance"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee'))]"/>
+<!--            ,(4,ref('smart_society.group_registration_security')-->
+            <field name="domain_force">[('tower_id','=',user.tower_id.id)]</field>
+        </record>
+
+        <record id="own_tower_emergency_broadcasts_admin" model="ir.rule">
+            <field name="name">own_tower_emergency_broadcasts_admin </field>
+            <field name="model_id" ref="model_emergency_broadcasts"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+<!--        emergency.broadcasts-->
+        <record id="own_tower_emergency_broadcasts_committees" model="ir.rule">
+            <field name="name">own tower emergency broadcasts</field>
+            <field name="model_id" ref="model_emergency_broadcasts"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">[('tower_ids','in',user.tower_id.id)]</field>
+        </record>
+
+
+        <record id="own_tower_committee_committees" model="ir.rule">
+            <field name="name">own_tower_committee_committees</field>
+            <field name="model_id" ref="model_society_committee"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">[('tower_id','in',user.tower_id.id)]</field>
+        </record>
+        <record id="own_tower_committee_admin" model="ir.rule">
+            <field name="name">own_tower_committee_admin </field>
+            <field name="model_id" ref="model_society_committee"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+
+
+        <record id="own_help_desk_committees" model="ir.rule">
+            <field name="name">own_help_desk_committees</field>
+            <field name="model_id" ref="model_help_desk"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">[('tower_id','in',user.tower_id.id)]</field>
+        </record>
+        <record id="own_help_desk_admin" model="ir.rule">
+            <field name="name">own_help_desk_admin </field>
+            <field name="model_id" ref="model_help_desk"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+
+        <record id="own_tower_security_committees" model="ir.rule">
+            <field name="name">own_tower_security_committees</field>
+            <field name="model_id" ref="model_security_guard"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))]"/>
+            <field name="domain_force">[('tower_id','in',user.tower_id.id)]</field>
+        </record>
+        <record id="own_tower_security_admin" model="ir.rule">
+            <field name="name">own_tower_security_admin </field>
+            <field name="model_id" ref="model_security_guard"/>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_administration'))]"/>
+<!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+
+
+
+<!--        tower_ids-->
 <!--        <record id="complaint_user_rule" model="ir.rule">-->
 <!--            <field name="name">Resident Own Complaints</field>-->
 <!--            <field name="model_id" ref="model_complaint_desk"/>-->
@@ -37,6 +342,11 @@
             <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
             <field name="domain_force">[('user_id', '=', user.id)]</field>
         </record>
+
+
+
+
+
 
         <record id="rule_resident_own_maintenance" model="ir.rule">
             <field name="name">Resident Own Maintenance</field>

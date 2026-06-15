@@ -44,7 +44,7 @@
                             <field name="total_notices" readonly="1"/>
                             <field name="total_events" readonly="1"/>
                             <field name="total_complaints" readonly="1"/>
-                            <field name="total_visitors" readonly="1"/>
+<!--                            <field name="total_visitors" readonly="1"/>-->
                         </group>
                     </group>
                     <notebook>

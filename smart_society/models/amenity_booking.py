@@ -9,6 +9,7 @@ class GuesthouseBooking(models.Model):
 
     # name = fields.Char(string='Name')
     guest_house_id=fields.Many2one('society.guesthouse',string='Guest House',required=True)
+    tower_id=fields.Many2one(related='guest_house_id.tower_id')
     member_count=fields.Integer(string='Member Count',required=True)
     total_charge=fields.Float(string='Total Charge',compute="_compute_days_booked",store=True)
     price_per_person=fields.Float(related='guest_house_id.price_per_person',string='Per Day Charge')
@@ -101,6 +102,7 @@ class GuesthouseBookingMembers(models.Model):
     _description = 'Guesthouse Booking Members'
 
     guest_house_id=fields.Many2one('society.guesthouse',string='Guest House',required=True)
+    tower_id=fields.Many2one(related='guest_house_id.tower_id')
     guesthouse_booking_id = fields.Many2one('guesthouse.booking', string='Guest House')
     member_name = fields.Char(string='Member Name', required=True)
     member_age = fields.Integer(string='Member Age', required=True)
@@ -135,6 +137,8 @@ class GuesthouseMemberHistory(models.Model):
     guesthouse_booking_id = fields.Many2one('guesthouse.booking', string='Guest House')
     # guest_house_id=fields.Many2one('society.guesthouse',string='Guest House',required=True)
     guest_house_id = fields.Many2one('society.guesthouse', string='Guest House')
+    tower_id=fields.Many2one(related='guest_house_id.tower_id')
+
     check_in_date = fields.Datetime(string='Check In Date')
     check_out_date = fields.Datetime(string='Check Out Date')
     # gh_booking_member_id = fields.Many2one('guesthouse.booking.members', string='Guest House')
@@ -153,6 +157,7 @@ class GymBooking(models.Model):
     name = fields.Char(string='Name')
     resident_id=fields.Many2one('resident.registrations',string='Resident ID',default=lambda self:self.env.user.id)
     flat_id=fields.Many2one(related='resident_id.flat_id',string='Flat')
+    tower_id=fields.Many2one(related='flat_id.tower_id')
     society_id=fields.Many2one('society.setup')
     shift=fields.Selection(selection=[('morning','Morning'),('afternoon','Afternoon'),('evening','Evening'),('night','Night')])
     booked_date=fields.Datetime(string='Starting Date')

@@ -193,7 +193,7 @@ class SocietyPortal(CustomerPortal):
             'stage': 'send',
         })
 
-        complaint.send_complaint()
+        complaint.action_send()
         return request.redirect('/my/complaints')
 
 

@@ -249,7 +249,7 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="name"/>
+                            <field name="name" domain="[('tower_id','=',tower_id)]"/>
                             <field name="tower_id" widget="Many2one"/>
                             <field name="flat_type"/>
                             <field name="block"/>
@@ -383,9 +383,10 @@
                 <group>
                     <field name="name"/>
                     <field name="tower_id"/>
-                    <field name="committee_name_id" widget="many2many_tags"/>
                     <field name="chairman_id"/>
                     <field name="secretary_id"/>
+                    <field name="committee_name_id" widget="many2many_tags"/>
+
                 </group>
             </form>
         </field>

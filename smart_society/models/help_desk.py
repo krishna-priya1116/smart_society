@@ -45,8 +45,8 @@ class Complaint(models.Model):
 
     def action_send(self):
         for record in self:
-            if record.stage not in ('draft',):
-                raise ValidationError("Only a Draft complaint can be sent.")
+            # if record.stage in ('draft',):
+            #     raise ValidationError("Only a Draft complaint can be sent.")
             record.stage = 'send'
             record._send_complaint_email()
 
