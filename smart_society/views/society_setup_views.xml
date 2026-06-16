@@ -249,7 +249,7 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="name" domain="[('tower_id','=',tower_id)]"/>
+                            <field name="name"/>
                             <field name="tower_id" widget="Many2one"/>
                             <field name="flat_type"/>
                             <field name="block"/>
@@ -416,7 +416,7 @@
                         <group>
                             <field name="name"/>
                             <field name="floor_number"/>
-                            <field name="gh_booking_charge"/>
+<!--                            <field name="gh_booking_charge"/>-->
                             <field name="flat_type"/>
                         </group>
                         <group>

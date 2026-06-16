@@ -9,10 +9,11 @@ class GuesthouseBooking(models.Model):
 
     # name = fields.Char(string='Name')
     guest_house_id=fields.Many2one('society.guesthouse',string='Guest House',required=True)
-    tower_id=fields.Many2one(related='guest_house_id.tower_id')
+    tower_id=fields.Many2one(related='guest_house_id.tower_id',store=True,readonly=False)
     member_count=fields.Integer(string='Member Count',required=True)
     total_charge=fields.Float(string='Total Charge',compute="_compute_days_booked",store=True)
-    price_per_person=fields.Float(related='guest_house_id.price_per_person',string='Per Day Charge')
+    price_per_person=fields.Float(related='guest_house_id.price_per_person',string='Per Day Charge',store=True,readonly=True)
+    # price_per_person
     check_in_date=fields.Datetime(string='CheckIn Date',required=True)
     check_out_date=fields.Datetime(string='CheckOut Date')
     # is_occupied=fields.Boolean(string='Is Occupied',compute='_compute_is_occupied')
@@ -101,9 +102,14 @@ class GuesthouseBookingMembers(models.Model):
     _name = 'guesthouse.booking.members'
     _description = 'Guesthouse Booking Members'
 
-    guest_house_id=fields.Many2one('society.guesthouse',string='Guest House',required=True)
-    tower_id=fields.Many2one(related='guest_house_id.tower_id')
+
     guesthouse_booking_id = fields.Many2one('guesthouse.booking', string='Guest House')
+    guest_house_id = fields.Many2one('society.guesthouse', string='Guest House')
+    tower_id=fields.Many2one(related='guesthouse_booking_id.tower_id',store=True,readonly=False)
+
+    # guest_house_id=fields.Many2one('society.guesthouse',string='Guest House')
+    # tower_id=fields.Many2one(related='guest_house_id.tower_id')
+    # guesthouse_booking_id = fields.Many2one('guesthouse.booking', string='Guest House')
     member_name = fields.Char(string='Member Name', required=True)
     member_age = fields.Integer(string='Member Age', required=True)
     member_mobile = fields.Char(string='Member Mobile')
@@ -137,7 +143,7 @@ class GuesthouseMemberHistory(models.Model):
     guesthouse_booking_id = fields.Many2one('guesthouse.booking', string='Guest House')
     # guest_house_id=fields.Many2one('society.guesthouse',string='Guest House',required=True)
     guest_house_id = fields.Many2one('society.guesthouse', string='Guest House')
-    tower_id=fields.Many2one(related='guest_house_id.tower_id')
+    tower_id=fields.Many2one(related='guesthouse_booking_id.tower_id',store=True,readonly=False)
 
     check_in_date = fields.Datetime(string='Check In Date')
     check_out_date = fields.Datetime(string='Check Out Date')
@@ -155,9 +161,10 @@ class GymBooking(models.Model):
     _description = 'Gym Booking'
 
     name = fields.Char(string='Name')
-    resident_id=fields.Many2one('resident.registrations',string='Resident ID',default=lambda self:self.env.user.id)
-    flat_id=fields.Many2one(related='resident_id.flat_id',string='Flat')
-    tower_id=fields.Many2one(related='flat_id.tower_id')
+    # resident_id=fields.Many2one('resident.registrations',string='Resident ID',default=lambda self:self.env.user.id)
+    resident_id=fields.Many2one('res.users',string='Resident')
+    # flat_id=fields.Many2one(related='resident_id.flat_id',string='Flat',store=True,readonly=True)
+    tower_id=fields.Many2one(related='resident_id.tower_id',string="Tower",store=True,readonly=True)
     society_id=fields.Many2one('society.setup')
     shift=fields.Selection(selection=[('morning','Morning'),('afternoon','Afternoon'),('evening','Evening'),('night','Night')])
     booked_date=fields.Datetime(string='Starting Date')
@@ -165,32 +172,50 @@ class GymBooking(models.Model):
     gym_for_months=fields.Boolean(string='Gym For months')
     days=fields.Integer(string=' how many Days')
     months=fields.Integer(string='how many Months')
-    gym_booking_charge=fields.Float(related='society_id.gym_booking_charge',string='Gym Booking Charge/day')
-    total_charge=fields.Float(string='Total Charge')
+    gym_booking_charge=fields.Float(related='society_id.gym_booking_charge',string='Gym Booking Charge/day',store=True,readonly=True)
+    total_amount=fields.Float(string='Total Charge' ,compute="_compute_booking_charge")
     is_occupied=fields.Boolean(string='Is Occupied')
     # slots=fields.Many2one('gym.slots',string='Slots')
 
-    @api.depends('days','months')
+    @api.depends('days', 'months', 'gym_for_days', 'gym_for_months', 'gym_booking_charge')
     def _compute_booking_charge(self):
         for record in self:
+            record.name=record.id
+            record.society_id=record.tower_id.society_id
+            amount = 0.0
             if record.gym_for_days:
-                print('..........booking_charge_id........',record.gym_booking_charge)
-                record.total_amount=record.gym_booking_charge*record.days
+                amount = record.gym_booking_charge * record.days
             elif record.gym_for_months:
-                print('..........booking_charge_id........',record.gym_booking_charge)
-                record.days=30
-                record.total_amount=record.gym_booking_charge*record.days
+                record.days = 30
+                amount = record.gym_booking_charge * record.days
+            print('\n\\n\n')
+            record.total_amount = amount
 
-    @api.depends('booked_date','days','months')
-    def _compute_booking_occupied(self):
-        for record in self:
-            if record.days:
-                expires =record.days
-                print('\n\n\n....expires......',expires)
-                valid_days=record.booked_date+timedelta(days=expires)
-                print('\n\n\n..valid_days..expires......',expires)
-                print('\n\n\n...valid_days......',valid_days)
-                print('\n\n\n....booked_date......',record.booked_date)
+    # @api.depends('days','months')
+    # def _compute_booking_charge(self):
+    #     for record in self:
+    #         print('\n\n\n.......record.tower_id.society_id....',record.tower_id.society_id)
+    #         record.society_id=record.tower_id.society_id
+    #         print('\n\n\n.......record.society_id....',record.society_id)
+    #
+    #         if record.gym_for_days:
+    #             print('..........booking_charge_id........',record.gym_booking_charge)
+    #             record.total_amount=record.gym_booking_charge*record.days
+    #         elif record.gym_for_months:
+    #             print('..........booking_charge_id........',record.gym_booking_charge)
+    #             record.days=30
+    #             record.total_amount=record.gym_booking_charge*record.days
+    #
+    # @api.depends('booked_date','days','months')
+    # def _compute_booking_occupied(self):
+    #     for record in self:
+    #         if record.days:
+    #             expires =record.days
+    #             print('\n\n\n....expires......',expires)
+    #             valid_days=record.booked_date+timedelta(days=expires)
+    #             print('\n\n\n..valid_days..expires......',expires)
+    #             print('\n\n\n...valid_days......',valid_days)
+    #             print('\n\n\n....booked_date......',record.booked_date)
 
 
 
@@ -200,19 +225,30 @@ class ClubhouseBooking(models.Model):
     _description = 'Clubhouse Booking'
 
     name=fields.Char(string='Name')
-    resident_id=fields.Many2many('resident.registrations',string='Resident ID')
+    resident_id=fields.Many2many('res.users',string='Resident ID')
+    tower_id=fields.Many2one(related='resident_id.tower_id')
     society_id=fields.Many2one('society.setup')
-    cbh_booking_charge_id=fields.Float(related='society_id.cbh_booking_charge',string='Clubhouse Booking Charge')
+    cbh_booking_charge_id=fields.Float(related='society_id.cbh_booking_charge',string='Clubhouse Booking Charge',store=True,readonly=True)
+    total_charge=fields.Float(string='Total charge',compute="_compute_cbh_booking_charge")
     # price_per_person=fields.Float(related='society_id.cbh_booking_charge')
 
-    @api.depends('society_id.cbh_booking_charge','resident_id')
-    def compute_cbh_booking_charge(self):
+    # @api.depends('society_id.cbh_booking_charge','resident_id')
+    # def _compute_cbh_booking_charge(self):
+    #     for record in self:
+    #         record.society_id=record.tower_id.society_id
+    #         resident_list = []
+    #         if record.resident_id:
+    #             resident_list.append(record.resident_id)
+    #         print('.....len(resident_list).....',len(resident_list))
+    #         print('....cbh_booking_charge_id....',record.cbh_booking_charge_id)
+    #         record.total_charge=len(resident_list)*record.cbh_booking_charge_id
+
+    @api.depends('society_id', 'resident_id')
+    def _compute_cbh_booking_charge(self):
         for record in self:
-            resident_list = []
-            if record.resident_id:
-                resident_list.append(record.resident_id.mapped('name'))
-
-
+            record.society_id = record.tower_id.society_id
+            resident_count = len(record.resident_id)
+            record.total_charge = resident_count * record.cbh_booking_charge_id
 
 
 

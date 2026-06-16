@@ -325,15 +325,32 @@ class SocietyPortal(CustomerPortal):
             # print('bill.resident[:1].user_id.partner_id................',bill.resident[:1].user_id.partner_id)
             # print('bill.resident_id[:1].user_id.partner_id..................',bill.resident_id[:1].user_id.partner_id)
             # print('\n\n\n.......partner...',partner)
+            # payment_term = request.env['account.payment.term'].sudo().search([], limit=1)
+            # 'move_type': 'out_invoice',
+            # 'partner_id': partner.id,
+            income = request.env['account.account'].sudo().search(
+                [('account_type', '=', 'income')],
+                limit=1
+            )
+            print("\n\n..........Partner:", resident.partner_id)
+            print("\n\n............Receivable Account:", resident.partner_id.property_account_receivable_id)
+            print("\n\n.............Payable Account:", resident.partner_id.property_account_payable_id)
+            print("Partner:", resident.partner_id.id)
+            print("Amount:", bill.total_amount)
+            print("Income:", income.id)
 
+            
             invoice=request.env['account.move'].sudo().create({
             'move_type':'out_invoice',
             'partner_id': resident.partner_id.id,
             'invoice_date':fields.Date.today(),
+            'invoice_date_due': fields.Date.today(),
+            # 'invoice_payment_term_id': payment_term.id,
             'invoice_line_ids':[(0, 0, {
                 'name':f'Maintenance Bill{bill.month}/{bill.year}',
                 'quantity':1,
                 'price_unit':bill.total_amount,
+                'account_id': income.id,
             })],
         })
             bill.invoice_id = invoice.id

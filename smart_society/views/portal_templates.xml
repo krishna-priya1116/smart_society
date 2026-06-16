@@ -803,7 +803,7 @@
 
                             <dt class="col-sm-3">tower</dt>
                             <dd class="col-sm-9">
-                                <t t-foreach="b.tower_ids" t-as="tower">
+                                <t t-foreach="broadcast.tower_ids" t-as="tower">
                                     <span class="badge bg-secondary me-1">
                                         <t t-esc="tower.name"/>
                                     </span>
@@ -819,7 +819,7 @@
                             <dt class="col-sm-3">Flat</dt>
                             <dd class="col-sm-9">
 <!--                                <t t-esc="broadcast.flat_ids"/>-->
-                                     <t t-foreach="b.flat_ids" t-as="flat">
+                                     <t t-foreach="broadcast.flat_ids" t-as="flat">
                                     <span class="badge bg-secondary me-1">
                                         <t t-esc="flat.name"/>
                                     </span>
@@ -925,65 +925,7 @@
 
     </xpath>
 </template>
-<!--    <template id="custom_bill_portal_invoice" inherit_id="account.portal_my_invoices">-->
-<!--        <xpath expr="//t[@t-call='portal.portal_table']" position="before">-->
-<!--            <t t-set="placeholder_count" t-value="'bill_count'"/>-->
-<!--            <t t-set="count" t-value="bill_count"/>-->
 
-<!--            <div class="alert alert-info mb-3">You have-->
-<!--                <strong>-->
-<!--                    <t t-esc="bill_count"/>-->
-<!--                </strong>-->
-<!--                maintenance bill(s).-->
-<!--            </div>-->
-
-<!--            <t t-foreach="maintenance_bills" t-as="bill">-->
-<!--            <div class="list-group-item list-group-item-action">-->
-<!--&lt;!&ndash;                &ndash;&gt;-->
-<!--                <div class="d-flex justify-content-between align-items-center mb-1">-->
-<!--                    <h6 class="mb-0">-->
-<!--                        Maintenance Bill - -->
-<!--                    </h6>-->
-<!--                    Flat:<t t-esc="bill.flat_id.name"/>-->
-<!--                    <small class="text-muted ms-3 text-nowrap">-->
-<!--                        Month:<t t-esc="bill.month"/>/<t t-esc="bill.year"/>-->
-<!--                    </small>-->
-<!--                </div>-->
-
-<!--                <div class="d-flex align-items-center gap-2 flex-wrap">-->
-<!--                    <small class="text-muted">Due:-->
-<!--                        <t t-esc="bill.due_date"/>-->
-<!--                    </small>-->
-
-<!--                    <t t-if="bill.state == 'paid'">-->
-<!--                        <span class="badge bg-success">Paid</span>-->
-<!--                    </t>-->
-<!--                    <t t-if="bill.state == 'unpaid'">-->
-<!--                        <span class="badge bg-danger">Unpaid</span>-->
-<!--                    </t>-->
-
-<!--                    <small>Total:-->
-<!--                        <strong>-->
-<!--                            <t t-esc="bill.total_amount"/>-->
-<!--                        </strong>-->
-<!--                    </small>-->
-
-<!--                    <t t-if="bill.invoice_id">-->
-<!--                        <a t-att-href="bill.invoice_id.get_portal_url()"-->
-<!--                           class="btn btn-outline-primary btn-sm ms-auto">-->
-<!--                            View Invoice-->
-<!--                        </a>-->
-<!--                    <a t-att-href="'/my/maintenance/%s/' % bill.id"  class="btn btn-outline-primary btn-sm ms-auto">Open</a>-->
-
-<!--                    </t>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            </t>-->
-
-<!--        </xpath>-->
-
-<!--    </template>-->
     <!--    bill detail-->
     <template id="portal_maintenance_detail">
         <t t-call="portal.portal_layout">
@@ -1077,7 +1019,8 @@
 
         <template id="portal_invoice_page_inherited" inherit_id="account.portal_invoice_page">
         <xpath expr="//t[@t-set='entries']/div/div/div[hasclass('o_download_pdf')]" position="after">
-            <t t-if="invoice.timesheet_count > 0 and invoice.env['account.analytic.line']._show_portal_timesheets()">
+<!--            <t t-if="invoice.timesheet_count > 0 and invoice.env['account.analytic.line']._show_portal_timesheets()">-->
+            <t t-if="'timesheet_count' in invoice._fields and invoice.timesheet_count > 0 and invoice.env['account.analytic.line']._show_portal_timesheets()">
                 <t t-set="search_value" t-value="invoice.name"/>
                 <t t-if="invoice.state == 'draft'" t-set="search_value" t-value="invoice.id"/>
                 <a t-if="invoice.move_type == 'out_invoice' and invoice.state in ('draft', 'posted') and invoice.timesheet_count > 0"
@@ -1096,7 +1039,65 @@
 
 
 
+<!--    <template id="custom_bill_portal_invoice" inherit_id="account.portal_my_invoices">-->
+<!--        <xpath expr="//t[@t-call='portal.portal_table']" position="before">-->
+<!--            <t t-set="placeholder_count" t-value="'bill_count'"/>-->
+<!--            <t t-set="count" t-value="bill_count"/>-->
 
+<!--            <div class="alert alert-info mb-3">You have-->
+<!--                <strong>-->
+<!--                    <t t-esc="bill_count"/>-->
+<!--                </strong>-->
+<!--                maintenance bill(s).-->
+<!--            </div>-->
+
+<!--            <t t-foreach="maintenance_bills" t-as="bill">-->
+<!--            <div class="list-group-item list-group-item-action">-->
+<!--&lt;!&ndash;                &ndash;&gt;-->
+<!--                <div class="d-flex justify-content-between align-items-center mb-1">-->
+<!--                    <h6 class="mb-0">-->
+<!--                        Maintenance Bill - -->
+<!--                    </h6>-->
+<!--                    Flat:<t t-esc="bill.flat_id.name"/>-->
+<!--                    <small class="text-muted ms-3 text-nowrap">-->
+<!--                        Month:<t t-esc="bill.month"/>/<t t-esc="bill.year"/>-->
+<!--                    </small>-->
+<!--                </div>-->
+
+<!--                <div class="d-flex align-items-center gap-2 flex-wrap">-->
+<!--                    <small class="text-muted">Due:-->
+<!--                        <t t-esc="bill.due_date"/>-->
+<!--                    </small>-->
+
+<!--                    <t t-if="bill.state == 'paid'">-->
+<!--                        <span class="badge bg-success">Paid</span>-->
+<!--                    </t>-->
+<!--                    <t t-if="bill.state == 'unpaid'">-->
+<!--                        <span class="badge bg-danger">Unpaid</span>-->
+<!--                    </t>-->
+
+<!--                    <small>Total:-->
+<!--                        <strong>-->
+<!--                            <t t-esc="bill.total_amount"/>-->
+<!--                        </strong>-->
+<!--                    </small>-->
+
+<!--                    <t t-if="bill.invoice_id">-->
+<!--                        <a t-att-href="bill.invoice_id.get_portal_url()"-->
+<!--                           class="btn btn-outline-primary btn-sm ms-auto">-->
+<!--                            View Invoice-->
+<!--                        </a>-->
+<!--                    <a t-att-href="'/my/maintenance/%s/' % bill.id"  class="btn btn-outline-primary btn-sm ms-auto">Open</a>-->
+
+<!--                    </t>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            </t>-->
+
+<!--        </xpath>-->
+
+<!--    </template>-->
 
 
 <!--<?xml version="1.0" encoding="utf-8"?>-->

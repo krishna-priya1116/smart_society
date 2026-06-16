@@ -117,7 +117,7 @@ class GuestHouse(models.Model):
 
     name=fields.Char(string='Guest House Name')
     floor_number=fields.Integer(string='Floor Number' ,default=0)
-    gh_booking_charge=fields.Float(string='Booking Price per day')
+    # gh_booking_charge=fields.Float(string='Booking Price per day')
     flat_type=fields.Selection(string='Flat Type',
                                    selection=[('1bhk','1 BHK'),('2bhk','2 BHK'),
                                    ('3bhk','3 BHK')])

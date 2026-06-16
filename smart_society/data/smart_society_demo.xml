@@ -811,6 +811,7 @@
                     <field name="person_type">resident</field>
                     <field name="resident_id" ref="resident_demo_1"/>
                     <field name="flat_id" ref="society_flat_demo_1"/>
+                    <field name="visiting_flat" ref="society_flat_demo_1"/>
                     <field name="tower_id" ref="society_tower_demo_1"/>
                     <field name="entry_time">2026-06-11 09:00:00</field>
                     <!--            <field name="exit_time">2026-06-11 16:30:0</field>-->
@@ -828,6 +829,8 @@
                     <field name="person_type">resident</field>
                     <field name="resident_id" ref="resident_demo_3"/>
                     <field name="flat_id" ref="society_flat_demo_4"/>
+                    <field name="visiting_flat" ref="society_flat_demo_4"/>
+
                     <field name="tower_id" ref="society_tower_demo_2"/>
                     <field name="entry_time">2026-06-11 09:00:00</field>
                     <!--            <field name="exit_time">2026-06-11 16:30:0</field>-->
@@ -1129,13 +1132,13 @@
         <record id="resident_gym_booking1" model="gym.booking">
             <field name="name">Morning Gym Session</field>
             <field name="resident_id" ref="resident_demo_1"/>
-            <field name="flat_id" ref="society_flat_demo_1"/>
+<!--            <field name="flat_id" ref="society_flat_demo_1"/>-->
             <field name="society_id" ref="society_setup_demo1"/>
             <field name="shift">morning</field>
             <field name="booked_date">2026-06-10 06:00:00</field>
             <field name="gym_for_days">True</field>
             <field name="days">7</field>
-            <field name="total_charge">700</field>
+            <field name="total_amount">700</field>
             <field name="is_occupied">True</field>
 <!--            <field name="slots" ref="gym_slot_demo1"/>-->
         </record>
@@ -1144,13 +1147,13 @@
         <record id="resident_gym_booking2" model="gym.booking">
             <field name="name">Afternoon Gym Session</field>
             <field name="resident_id" ref="resident_demo_2"/>
-            <field name="flat_id" ref="society_flat_demo_1"/>
+<!--            <field name="flat_id" ref="society_flat_demo_1"/>-->
             <field name="society_id" ref="society_setup_demo1"/>
             <field name="shift">afternoon</field>
             <field name="booked_date">2026-06-10 06:00:00</field>
             <field name="gym_for_days">True</field>
             <field name="days">10</field>
-            <field name="total_charge">1000</field>
+            <field name="total_amount">1000</field>
             <field name="is_occupied">True</field>
 <!--            <field name="slots" ref="gym_slot_demo2"/>-->
         </record>
@@ -1158,13 +1161,13 @@
         <record id="resident_gym_booking3" model="gym.booking">
             <field name="name">Morning Gym Session</field>
             <field name="resident_id" ref="resident_demo_3"/>
-            <field name="flat_id" ref="society_flat_demo_4"/>
+<!--            <field name="flat_id" ref="society_flat_demo_4"/>-->
             <field name="society_id" ref="society_setup_demo1"/>
             <field name="shift">morning</field>
             <field name="booked_date">2026-06-10 06:00:00</field>
             <field name="gym_for_months">2</field>
             <!--            <field name="days">7</field>-->
-            <field name="total_charge">10000</field>
+            <field name="total_amount">10000</field>
             <field name="is_occupied">True</field>
 <!--            <field name="slots" ref="gym_slot_demo3"/>-->
         </record>

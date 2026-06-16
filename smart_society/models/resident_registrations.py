@@ -187,17 +187,10 @@ class SecurityGuard(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         security=super().create(vals_list)
-
         for record in security:
-            print('\n\n\n...........record..........',record)
-            check_partner=self.env['res.users'].search([
-                # ('partner_id','=',record.security_id.id),
-                ('partner_id','=',record.security_id.id),
-                # ('email','=',record.email),
-            ],limit=1)
-            print('\n\n\n............check_partner..........',check_partner)
-            if not check_partner and record.email:
-                self.env['res.users'].create({
+    
+            if record.email:
+                user=self.env['res.users'].create({
                     'name':record.name,
                     # 'partner_id'
                     'login':record.email,
@@ -206,77 +199,129 @@ class SecurityGuard(models.Model):
                     'phone': record.mobile_number,
                     'group_ids': [(4,self.env.ref('smart_society.group_registration_security').id)],
                 })
-                print('\n\n\n............check_partner..........',check_partner)
+                # print('\n\n\n............check_partner..........',check_partner)
+                record.security_id.user_id = user.id
 
         return security
 
 
-
-
+# print('\n\n\n...........record..........',record)
+# check_partner=self.env['res.users'].search([
+#     # ('partner_id','=',record.security_id.id),
+#     ('partner_id','=',record.security_id.id),
+#     # ('email','=',record.email),
+# ],limit=1)
+# print('\n\n\n............check_partner..........',check_partner)
+# if not check_partner and record.email:
+# class VisitorRegistrations(models.Model):
+#     _name='visitor.registrations'
+#     _description='Visitor Registrations'
 
 class VisitorRegistrations(models.Model):
-    _name='visitor.registrations'
-    _description='Visitor Registrations'
+    _name = 'visitor.registrations'
 
-    partner_id=fields.Many2one('res.partner',required=True)
-    name=fields.Char(related='partner_id.name')
-    mobile_number = fields.Char(string='Mobile Number', required=True)
-    has_vehicle=fields.Boolean(string='Has Vehicle',default=False)
-    vehicle_number=fields.Char(string='Vehicle Number',compute='vehicle_number_validation', required=True)
-
+    name = fields.Char(required=True,string='Name')
+    partner_id = fields.Many2one('res.partner',string='Visitor')
+    mobile_number = fields.Char(required=True,string='Mobile Number')
+    has_vehicle = fields.Boolean(string='Has Vehicle')
+    vehicle_number = fields.Char(string='Vehicle Number')
 
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            partner = self.env['res.partner'].create({
+                'name': vals.get('name'),
+            })
+            vals['partner_id'] = partner.id
 
-    @api.constrains('mobile_number')
-    def check_mobile_number(self):
-        for registration in self:
-            if not registration.mobile_number:
-                print('.................................',registration.mobile_number)
-                raise ValidationError('enter mobile number')
-            if registration.mobile_number:
-                regex=r'^\d{10}$'
-                if not re.match(regex,registration.mobile_number):
-                    raise ValidationError('enter 10 digit mobile number')
-
-    @api.constrains('vehicle_number','vehicle_type')
-    def vehicle_number_validation(self):
-        regex=r'^[A-Z]{2}[ ]?[0-9]{2}[ ]?[A-Z]{1,2}[ ]?[0-9]{4}$'
-        for record in self:
-            if not record.vehicle_number:
-                raise ValidationError('Enter Proper Vehicle Number')
-            else:
-                if not re.match(regex, record.vehicle_number) or not record.vehicle_number:
-                    raise ValidationError('Vehicle Number Error')
+        return super().create(vals_list)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # @api.constrains('resident_type')
-    # @api.depends('vehicle_count','vehicle_ids')
-    # @api.onchange('vehicle_count','vehicle_ids')
-    # def check_vehicle_count(self):
-        # for registration in self:
-            # if registration.has_vehicle:
-                # print('\n\n\n\n.....registration.has_vehicle',registration.has_vehicle)
-                # count=len(registration.vehicle_ids)
-                # print('\n\n\n\n.....registration.vehicle_ids',registration.vehicle_ids)
-                # count=registration.search_count['vehicle.registrations']
-                # print('\n\n\n\n.....registration.vehicle_ids count......',count)
+#
+#
+#     partner_id=fields.Many2one('res.partner')
+#     # name=fields.Char(related='partner_id.name')
+#     mobile_number = fields.Char(string='Mobile Number')
+#     has_vehicle=fields.Boolean(string='Has Vehicle')
+#     vehicle_number=fields.Char(string='Vehicle Number')
+#     # tower_id=fields.Many2one('society.tower',compute=)
+#
+#
+#
+#     @api.model_create_multi
+#     def create(self, vals_list):
+#         visitor=super().create(vals_list)
+#
+#         for record in visitor:
+#             print('\n\n\n...........record..........',record)
+#             check_partner=self.env['res.partner'].search([
+#                 # ('partner_id','=',record.security_id.id),
+#                 ('id','=',record.partner_id.id),
+#                 # ('email','=',record.email),
+#             ],limit=1)
+#             print('\n\n\n............check_partner..........',check_partner)
+#             if not check_partner and record.email:
+#                 self.env['res.partner'].create({
+#                     'name':record.name,
+#                 })
+#                 print('\n\n\n............check_partner..........',check_partner)
+#
+#         return visitor
+#
+#
+#
+#     @api.constrains('mobile_number')
+#     def check_mobile_number(self):
+#         for registration in self:
+#             if not registration.mobile_number:
+#                 print('.................................',registration.mobile_number)
+#                 raise ValidationError('enter mobile number')
+#             if registration.mobile_number:
+#                 regex=r'^\d{10}$'
+#                 if not re.match(regex,registration.mobile_number):
+#                     raise ValidationError('enter 10 digit mobile number')
+#
+#     # @api.constrains('vehicle_number','vehicle_type')
+#     @api.constrains('has_vehicle')
+#     def vehicle_number_validation(self):
+#         regex=r'^[A-Z]{2}[ ]?[0-9]{2}[ ]?[A-Z]{1,2}[ ]?[0-9]{4}$'
+#         for record in self:
+#             if record.has_vehicle and not record.vehicle_number:
+#                 raise ValidationError('Enter Proper Vehicle Number')
+#             else:
+#                 if record.has_vehicle and not re.match(regex, record.vehicle_number):
+#                     raise ValidationError('Vehicle Number Error')
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#     # @api.constrains('resident_type')
+#     # @api.depends('vehicle_count','vehicle_ids')
+#     # @api.onchange('vehicle_count','vehicle_ids')
+#     # def check_vehicle_count(self):
+#         # for registration in self:
+#             # if registration.has_vehicle:
+#                 # print('\n\n\n\n.....registration.has_vehicle',registration.has_vehicle)
+#                 # count=len(registration.vehicle_ids)
+#                 # print('\n\n\n\n.....registration.vehicle_ids',registration.vehicle_ids)
+#                 # count=registration.search_count['vehicle.registrations']
+#                 # print('\n\n\n\n.....registration.vehicle_ids count......',count)
 
 
 
