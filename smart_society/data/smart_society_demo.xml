@@ -595,40 +595,40 @@
 
 
         <!-- Tower 1 Committee -->
-        <record id="committee_tower_1" model="society.committee">
-            <field name="name">Tower A Committee</field>
-            <field name="tower_id" ref="society_tower_demo_1"/>
-            <field name="chairman_id" ref="partner_committee_1"/>
-            <field name="secretary_id" ref="partner_committee_2"/>
-            <field name="committee_name_id"
-                   eval="[(6,0,[ref('partner_committee_1'),
-                        ref('partner_committee_2'),
-                        ref('partner_committee_3')])]"/>
-        </record>
+<!--        <record id="committee_tower_1" model="society.committee">-->
+<!--            <field name="name">Tower A Committee</field>-->
+<!--            <field name="tower_id" ref="society_tower_demo_1"/>-->
+<!--            <field name="chairman_id" ref="partner_committee_1"/>-->
+<!--            <field name="secretary_id" ref="partner_committee_2"/>-->
+<!--            <field name="committee_name_id"-->
+<!--                   eval="[(6,0,[ref('partner_committee_1'),-->
+<!--                        ref('partner_committee_2'),-->
+<!--                        ref('partner_committee_3')])]"/>-->
+<!--        </record>-->
 
         <!-- Tower 2 Committee -->
-        <record id="committee_tower_2" model="society.committee">
-            <field name="name">Tower B Committee</field>
-            <field name="tower_id" ref="society_tower_demo_2"/>
-            <field name="chairman_id" ref="partner_committee_3"/>
-            <field name="secretary_id" ref="partner_committee_4"/>
-            <field name="committee_name_id"
-                   eval="[(6,0,[ref('partner_committee_3'),
-                        ref('partner_committee_4'),
-                        ref('partner_committee_5')])]"/>
-        </record>
+<!--        <record id="committee_tower_2" model="society.committee">-->
+<!--            <field name="name">Tower B Committee</field>-->
+<!--            <field name="tower_id" ref="society_tower_demo_2"/>-->
+<!--            <field name="chairman_id" ref="partner_committee_3"/>-->
+<!--            <field name="secretary_id" ref="partner_committee_4"/>-->
+<!--            <field name="committee_name_id"-->
+<!--                   eval="[(6,0,[ref('partner_committee_3'),-->
+<!--                        ref('partner_committee_4'),-->
+<!--                        ref('partner_committee_5')])]"/>-->
+<!--        </record>-->
 
         <!-- Tower 3 Committee -->
-        <record id="committee_tower_3" model="society.committee">
-            <field name="name">Tower C</field>
-            <field name="tower_id" ref="society_tower_demo_3"/>
-            <field name="chairman_id" ref="partner_committee_5"/>
-            <field name="secretary_id" ref="partner_committee_6"/>
-            <field name="committee_name_id"
-                   eval="[(6,0,[ref('partner_committee_1'),
-                        ref('partner_committee_5'),
-                        ref('partner_committee_6')])]"/>
-        </record>
+<!--        <record id="committee_tower_3" model="society.committee">-->
+<!--            <field name="name">Tower C</field>-->
+<!--            <field name="tower_id" ref="society_tower_demo_3"/>-->
+<!--            <field name="chairman_id" ref="partner_committee_5"/>-->
+<!--            <field name="secretary_id" ref="partner_committee_6"/>-->
+<!--            <field name="committee_name_id"-->
+<!--                   eval="[(6,0,[ref('partner_committee_1'),-->
+<!--                        ref('partner_committee_5'),-->
+<!--                        ref('partner_committee_6')])]"/>-->
+<!--        </record>-->
 
         <!--        res.partner for visitor1-->
         <record id="partner1_demo" model="res.partner">
@@ -873,7 +873,7 @@
                 to coordinate a time.
             </field>
             <!--            <field name="create_date">2026-06-11 9:00:00</field>-->
-            <field name="to_committee" ref="committee_tower_1"/>
+<!--            <field name="to_committee" ref="committee_tower_1"/>-->
             <field name="help_desk_id" ref="help_desk_tower1"/>
             <field name="resident_id" ref="resident_demo_1"/>
             <field name="flat_id" ref="society_flat_demo_1"/>
@@ -892,7 +892,7 @@
                 to coordinate a time.
             </field>
             <!--            <field name="create_date">2026-06-11 9:00:00</field>-->
-            <field name="to_committee" ref="committee_tower_2"/>
+<!--            <field name="to_committee" ref="committee_tower_2"/>-->
             <field name="help_desk_id" ref="help_desk_tower2"/>
             <field name="resident_id" ref="resident_demo_3"/>
             <field name="flat_id" ref="society_flat_demo_4"/>
@@ -1014,7 +1014,7 @@
             <field name="tower_id" eval="[(6,0,[ref('society_tower_demo_1')])]"/>
             <field name="security_id" eval="[(6,0,[ref('security_demo_1')])]"/>
             <field name="resident_id" eval="[(6,0,[ref('resident_demo_1'),ref('resident_demo_2')])]"/>
-            <field name="to_committee" ref="committee_tower_1"/>
+<!--            <field name="to_committee" ref="committee_tower_1"/>-->
             <field name="create_date">2026-06-10 09:30:00</field>
         </record>
 
@@ -1029,7 +1029,7 @@
             <field name="flat_id" eval="[(6,0,[ref('society_flat_demo_3')])]"/>
             <field name="tower_id" eval="[(6,0,[ref('society_tower_demo_2')])]"/>
             <field name="resident_id" eval="[(6,0,[ref('resident_demo_3')])]"/>
-            <field name="to_committee" ref="committee_tower_2"/>
+<!--            <field name="to_committee" ref="committee_tower_2"/>-->
             <field name="create_date">2026-06-11 08:15:00</field>
         </record>
 

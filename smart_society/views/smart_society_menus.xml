@@ -15,24 +15,28 @@
               parent="smart_society_root" sequence="20"
               groups="smart_society.group_registration_security,smart_society.group_registration_administration"/>
 
-    <menuitem id="smart_society_help_desk" name="Help Desk"
+    <menuitem id="smart_society_committee_tab" name="Committee"
               parent="smart_society_root" sequence="30"
+              groups="smart_society.group_registration_committee,smart_society.group_registration_administration"/>
+
+    <menuitem id="smart_society_help_desk" name="Help Desk"
+              parent="smart_society_root" sequence="40"
               groups="smart_society.group_registration_user,smart_society.group_registration_committee,smart_society.group_registration_security,base.group_portal"/>
 
     <menuitem id="smart_society_emergency" name="Emergency"
-            parent="smart_society_root" sequence="40"
+            parent="smart_society_root" sequence="50"
             groups="smart_society.group_registration_user,smart_society.group_registration_committee,smart_society.group_registration_security,base.group_portal"/>
 
     <menuitem id="smart_society_booking" name="Booking"
-            parent="smart_society_root" sequence="50"
+            parent="smart_society_root" sequence="60"
             groups="smart_society.group_registration_committee,smart_society.group_registration_security,smart_society.group_registration_administration"/>
 
     <menuitem id="smart_society_profile" name="Profile"
-            parent="smart_society_root" sequence="60" action="views_own_profile_action"
+            parent="smart_society_root" sequence="70" action="views_own_profile_action"
             groups="smart_society.group_registration_user,base.group_portal"/>
 
-    <menuitem id="smart_society_configration" name="Configration"
-            parent="smart_society_root" sequence="70"
+    <menuitem id="smart_society_configration" name="Configuration"
+            parent="smart_society_root" sequence="80"
             groups="smart_society.group_registration_administration"/>
 
 <!--        -->
@@ -44,7 +48,7 @@
 <!--            parent="smart_society_root" sequence="80" action="views_maintenance_form_action"-->
 <!--            groups="smart_society.group_registration_committee"/>-->
     <menuitem id="smart_society_maintenance_root" name="Maintenance"
-              parent="smart_society_root" sequence="70"/>
+              parent="smart_society_root" sequence="90"/>
 
     <menuitem id="society_maintenance_bill" name="Maintenance Templates"
               parent="smart_society_maintenance_root" action="maintenance_bill_action" sequence="11"
@@ -60,7 +64,7 @@
         parent="smart_society_emergency"  action="emergency_emails_residents"
         groups="smart_society.group_registration_user,smart_society.group_registration_committee,smart_society.group_registration_security"/>
 
-    <menuitem id="smart_society_emergency_emails_committee" name="Emergency Broadcast "
+    <menuitem id="smart_society_emergency_emails_committee" name="Emergency Broadcast"
         parent="smart_society_emergency"  action="emergency_emails_committee"
         groups="smart_society.group_registration_user,smart_society.group_registration_committee,smart_society.group_registration_security"/>
 
@@ -128,6 +132,23 @@
     <menuitem id="smart_society_booking_clubhouse" name="Club House Booking"
         parent="smart_society_booking" action="clubhouse_booking_action"
         groups="smart_society.group_registration_committee,smart_society.group_registration_security,smart_society.group_registration_administration"/>
+
+
+    <menuitem id="smart_society_society_committee" name="Society Committee"
+              parent="smart_society_committee_tab" action="view_society_committee_action"
+              groups="smart_society.group_registration_committee,smart_society.group_registration_administration"/>
+
+    <menuitem id="smart_society_tower_committee" name="Tower Committee"
+                  parent="smart_society_committee_tab" action="view_tower_committee_action"
+                  groups="smart_society.group_registration_committee,smart_society.group_registration_administration"/>
+
+    <menuitem id="smart_society_block_committee" name="Block Committee"
+                  parent="smart_society_committee_tab" action="view_block_committee_action"
+                  groups="smart_society.group_registration_committee,smart_society.group_registration_administration"/>
+
+<!--    <menuitem id="society_committee_annual_meeting" name="Annual Meeting"-->
+<!--            parent="smart_society_committee_tab"  action=""-->
+<!--            groups="smart_society.group_registration_committee,smart_society.group_registration_administration"/>-->
 
 <!--    <menuitem id="smart_society_gym_slots" name="Gym slots"-->
 <!--        parent="smart_society_booking" action="gym_slot_action"-->

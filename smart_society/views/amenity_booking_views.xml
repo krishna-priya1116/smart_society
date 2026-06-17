@@ -27,7 +27,7 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="resident_id"/>
+                            <field name="resident_id" domain="[('tower_id','=',tower_id)]"/>
 <!--                            <field name="flat_id"/>-->
                             <field name="shift"/>
                             <field name="gym_for_days" invisible="gym_for_months"/>
@@ -200,7 +200,7 @@
                 <field name="name"/>
                 <field name="resident_id"/>
                 <field name="cbh_booking_charge_id"/>
-                <!--                <field name="price_per_person"/>-->
+                <field name="total_charge"/>
             </list>
         </field>
     </record>
@@ -212,7 +212,7 @@
                 <sheet>
                     <group>
                         <field name="name"/>
-                        <field name="resident_id" widget="many2many_tags"/>
+                        <field name="resident_id" widget="many2many_tags" domain="[('tower_id','=',tower_id)]"/>
                         <field name="cbh_booking_charge_id"/>
                         <field name="total_charge"/>
                         <!--                        <field name="price_per_person"/>-->

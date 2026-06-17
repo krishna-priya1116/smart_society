@@ -361,36 +361,36 @@
     </record>
 
 
-    <record id="view_society_committee_list" model="ir.ui.view">
-        <field name="name">society.committee.list</field>
-        <field name="model">society.committee</field>
-        <field name="arch" type="xml">
-            <list>
-                <field name="name"/>
-                <field name="tower_id"/>
-                <field name="committee_name_id"/>
-                <field name="chairman_id"/>
-                <field name="secretary_id"/>
-            </list>
-        </field>
-    </record>
+<!--    <record id="view_society_committee_list" model="ir.ui.view">-->
+<!--        <field name="name">society.committee.list</field>-->
+<!--        <field name="model">society.committee</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <list>-->
+<!--                <field name="name"/>-->
+<!--                <field name="tower_id"/>-->
+<!--                <field name="committee_name_id"/>-->
+<!--                <field name="chairman_id"/>-->
+<!--                <field name="secretary_id"/>-->
+<!--            </list>-->
+<!--        </field>-->
+<!--    </record>-->
 
-    <record id="view_society_committee_form" model="ir.ui.view">
-        <field name="name">society.committee.form</field>
-        <field name="model">society.committee</field>
-        <field name="arch" type="xml">
-            <form>
-                <group>
-                    <field name="name"/>
-                    <field name="tower_id"/>
-                    <field name="chairman_id"/>
-                    <field name="secretary_id"/>
-                    <field name="committee_name_id" widget="many2many_tags"/>
+<!--    <record id="view_society_committee_form" model="ir.ui.view">-->
+<!--        <field name="name">society.committee.form</field>-->
+<!--        <field name="model">society.committee</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form>-->
+<!--                <group>-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="tower_id"/>-->
+<!--                    <field name="chairman_id"/>-->
+<!--                    <field name="secretary_id"/>-->
+<!--                    <field name="committee_name_id" widget="many2many_tags"/>-->
 
-                </group>
-            </form>
-        </field>
-    </record>
+<!--                </group>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <record id="view_guest_house_list" model="ir.ui.view">
         <field name="name">society.guesthouse.list</field>

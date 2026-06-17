@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="society_committee_list_view" model="ir.ui.view">
+        <field name="name">society.committee.list.view</field>
+        <field name="model">society.committee</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="chairman_id"/>
+                <field name="secretary_id"/>
+                <field name="treasurer_id"/>
+                <field name="society_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="society_committee_form_view" model="ir.ui.view">
+        <field name="name">society.committee.form.view</field>
+        <field name="model">society.committee</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                        <button name="action_new_society_committee" type="object" string="Unlink Committee" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="chairman_id"/>
+                        <field name="secretary_id"/>
+                        <field name="treasurer_id"/>
+                        <field name="society_id"/>
+                        <field name="society_committee_members" widget="many2many_tags"/>
+
+                    </group>
+                    <group string="Committee Term Period">
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <notebook>
+                        <page string="Tower Committees">
+                            <field name="tower_committee_ids">
+                                <list editable="bottom">
+                                    <field name="tower_id"/>
+                                    <!--                                     domain="[('society_id','=',society_id)]"-->
+                                    <field name="tower_member_id"/>
+                                    <!--  domain="[('tower_id','=',tower_id)]"  domain="[('tower_id','=',tower_id)]"-->
+                                    <field name="society_committee_id"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Society Committee History">
+                            <field name="society_committee_history_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="date_from"/>
+                                    <field name="date_to"/>
+                                    <field name="society_id" optional="hide"/>
+                                    <field name="chairman_id"/>
+                                    <field name="secretary_id"/>
+                                    <field name="treasurer_id"/>
+                                    <field name="society_committee_id" optional="hide"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="tower_committee_list_view" model="ir.ui.view">
+        <field name="name">tower.committee.list.view</field>
+        <field name="model">tower.committee</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <!--                <field name="tower_member_id"/>-->
+                <!--                 domain="[('society_id','=',society_id)]"-->
+                <!--                 domain="['|',(1,'=',1),('society_id','=',society_id)]"-->
+                <!--                domain="['|',(1,'=',1),('tower_id','=',tower_id)]"-->
+                <field name="tower_id"/>
+                <field name="tower_member_id"/>
+                <!-- domain="[('tower_id','=',tower_id)]"-->
+                <field name="society_committee_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="tower_committee_form_view" model="ir.ui.view">
+        <field name="name">tower.committee.form.view</field>
+        <field name="model">tower.committee</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                        <button name="action_new_tower_committee" type="object" string="Unlink Committee" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="tower_id"/>
+                        <!--                        domain="[('society_id','=',society_id)]"-->
+                        <field name="tower_member_id" domain="[('tower_id','=',tower_id)]"/>
+                        <!--                        domain="[('tower_id','=',tower_id)]"-->
+                        <field name="society_committee_id"/>
+                    </group>
+                    <group string="Committee term period">
+                                    <field name="date_from"/>
+                                    <field name="date_to"/>
+                    </group>
+                    <notebook>
+                        <page string="Block Committee">
+                            <field name="block_member_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="block_member_id" domain="[('tower_id','=',tower_id)]"/>
+                                    <!--   domain="[('tower_id','=',tower_id)]"      -->
+                                    <field name="tower_committee_id"/>
+                                    <field name="tower_id"/>
+                                    <field name="block"/>
+                                    <field name="date_from"/>
+                                    <field name="date_to"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Tower Committee History">
+                            <field name="tower_committee_history_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="tower_member_id"/>
+                                    <field name="tower_id"/>
+                                    <field name="society_committee_id" optional="hide"/>
+                                    <field name="tower_committee_id" optional="hide"/>
+                                    <field name="date_from"/>
+                                    <field name="date_to"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="block_committee_list_view" model="ir.ui.view">
+        <field name="name">block.committee.list.view</field>
+        <field name="model">block.committee</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="block_member_id"/>
+                <!--                 domain="[('tower_id','=',tower_id)]"-->
+                <field name="tower_committee_id"/>
+                <field name="tower_id"/>
+                <field name="block"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="block_committee_form_view" model="ir.ui.view">
+        <field name="name">block.committee.form.view</field>
+        <field name="model">block.committee</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                        <button name="action_new_block_committee" type="object" string="Unlink Committee" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="tower_committee_id"/>
+                        <field name="tower_id"/>
+                        <field name="block_member_id" domain="[('tower_id','=',tower_id)]"/>
+                        <!--                     domain="[('tower_id','=',tower_id)]"-->
+                        <field name="block"/>
+                    </group>
+                    <group string="Committee Term Period">
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <notebook>
+                        <page string="Block Committee History">
+                            <field name="block_committee_history_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="block_member_id"/>
+                                    <field name="tower_committee_id" optioal="hide"/>
+                                    <field name="tower_id"/>
+                                    <!-- <field name="block_committee_id"/>-->
+                                    <field name="block"/>
+                                    <field name="date_from"/>
+                                    <field name="date_to"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+</odoo>

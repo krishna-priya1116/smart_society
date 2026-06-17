@@ -30,7 +30,8 @@ class Complaint(models.Model):
     to_committee = fields.Many2one('society.committee')
     help_desk_id = fields.Many2one('help.desk', string='Helpdesk')
     user_id = fields.Many2one('res.users', string='Resident', default=lambda self: self.env.user)
-    committee_emails = fields.Char(string='Committee Emails', compute='_compute_committee_emails')
+    # committee_emails = fields.Char(string='Committee Emails', compute='_compute_committee_emails')
+    committee_emails = fields.Char(string='Committee Emails')
     proof = fields.Binary(string='Proof Photo/video')
 
     stage = fields.Selection([

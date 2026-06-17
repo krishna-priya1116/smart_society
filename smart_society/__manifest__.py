@@ -14,6 +14,7 @@
         'views/society_dashboard_views.xml',
         'views/society_setup_views.xml',
         'views/resident_registrations_views.xml',
+        'views/society_committee_views.xml',
         'views/parking_management_views.xml',
         'views/help_desk_views.xml',
         'views/society_alert_views.xml',

@@ -36,13 +36,18 @@
                            class="list-group-item list-group-item-action">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <strong><t t-esc="c.name"/></strong>
+                                    <strong>
+                                        <t t-esc="c.name"/>
+                                    </strong>
                                     <br/>
                                     <small>
-                                <t t-esc="c.create_date" t-options="{'widget': 'datetime', 'time_zone': 'user'}"/>
+                                        <t t-esc="c.create_date"
+                                           t-options="{'widget': 'datetime', 'time_zone': 'user'}"/>
                                     </small>
                                 </div>
-                                <span class="badge bg-primary"><t t-esc="c.stage"/></span>
+                                <span class="badge bg-primary">
+                                    <t t-esc="c.stage"/>
+                                </span>
                             </div>
                         </a>
                     </t>
@@ -52,32 +57,41 @@
     </template>
 
 
-  <!-- Complaint Detail -->
+    <!-- Complaint Detail -->
     <template id="portal_complaint_detail">
         <t t-call="portal.portal_layout">
             <div class="container mt-4">
-           <div class="card-header">
-                        <a href="/my/complaints" class="btn btn-secondary">&#8592; Back to My Complaints</a>
-                    </div>
+                <div class="card-header">
+                    <a href="/my/complaints" class="btn btn-secondary">&#8592; Back to My Complaints</a>
+                </div>
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="mb-0">Complaint Detail</h4>
-                        <span class="badge bg-primary"><t t-esc="complaint.stage"/></span>
+                        <span class="badge bg-primary">
+                            <t t-esc="complaint.stage"/>
+                        </span>
                     </div>
                     <div class="card-body">
                         <dl class="row">
                             <dt class="col-sm-3">Subject</dt>
-                            <dd class="col-sm-9"><t t-esc="complaint.name"/></dd>
+                            <dd class="col-sm-9">
+                                <t t-esc="complaint.name"/>
+                            </dd>
 
                             <dt class="col-sm-3">Description</dt>
-                            <dd class="col-sm-9"><t t-esc="complaint.description"/></dd>
+                            <dd class="col-sm-9">
+                                <t t-esc="complaint.description"/>
+                            </dd>
 
                             <dt class="col-sm-3">Committee</dt>
-                            <dd class="col-sm-9"><t t-esc="complaint.to_committee.name"/></dd>
+                            <dd class="col-sm-9">
+                                <t t-esc="complaint.to_committee.name"/>
+                            </dd>
 
                             <dt class="col-sm-3">Date</dt>
                             <dd class="col-sm-9">
-                                <t t-esc="complaint.create_date" t-options="{'widget': 'datetime', 'time_zone': 'user'}"/>
+                                <t t-esc="complaint.create_date"
+                                   t-options="{'widget': 'datetime', 'time_zone': 'user'}"/>
                             </dd>
                             <t t-if="complaint.proof">
                                 <dt class="col-sm-3">Proof</dt>
@@ -98,7 +112,7 @@
     <template id="portal_complaint_form">
         <t t-call="portal.portal_layout">
             <div class="container mt-4">
-                                <div class="card-header">
+                <div class="card-header">
                     <a href="/my/complaints" class="btn btn-secondary">&#8592; Back to Home</a>
                 </div>
                 <h3>Create Complaint</h3>
@@ -117,7 +131,9 @@
                         <select name="committee_id" class="form-control" required="1">
                             <option value="">-- Select Committee --</option>
                             <t t-foreach="committees" t-as="cm">
-                                <option t-att-value="cm.id"><t t-esc="cm.name"/></option>
+                                <option t-att-value="cm.id">
+                                    <t t-esc="cm.name"/>
+                                </option>
                             </t>
                         </select>
                     </div>
@@ -166,8 +182,11 @@
                         <a t-att-href="'/my/notice/%s/'% n.id" class="list-group-item list-group-item-action">
                             <div class="d-flex justify-content-between align-items-start">
                                 <div>
-                                    <strong><t t-esc="n.name"/></strong><br/>
-                                          <small class="text-muted">
+                                    <strong>
+                                        <t t-esc="n.name"/>
+                                    </strong>
+                                    <br/>
+                                    <small class="text-muted">
                                         <t t-esc="n.create_date.strftime('%d %b %Y, %I:%M %p') if n.create_date else ''"/>
                                     </small>
                                     <div class="text-end">
@@ -200,29 +219,39 @@
                             <t t-esc="notice.stage"/>
                         </span>
                     </div>
-                        <div class="card-body">
-                            <dl class="row">
-                                <dt class="col-sm-3">Subject</dt>
-                                <dd class="col-sm-9"><t t-esc="notice.name"/></dd>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-3">Subject</dt>
+                            <dd class="col-sm-9">
+                                <t t-esc="notice.name"/>
+                            </dd>
 
-                                <dt class="col-sm-3">Tower</dt>
-                                <dd class="col-sm-9"><t t-esc="notice.tower_id"/></dd>
+                            <dt class="col-sm-3">Tower</dt>
+                            <dd class="col-sm-9">
+                                <t t-esc="notice.tower_id"/>
+                            </dd>
 
-                                <dt class="col-sm-3">Date</dt>
-                                <dd class="col-sm-9"><t t-esc="notice.create_date"/></dd>
+                            <dt class="col-sm-3">Date</dt>
+                            <dd class="col-sm-9">
+                                <t t-esc="notice.create_date"/>
+                            </dd>
 
-                                <dt class="col-sm-3">Description</dt>
-                                <dd class="col-sm-9"><t t-esc="notice.description"/></dd>
+                            <dt class="col-sm-3">Description</dt>
+                            <dd class="col-sm-9">
+                                <t t-esc="notice.description"/>
+                            </dd>
 
-                                <dt class="col-sm-3">Notice</dt>
-                                <dd class="col-sm-9"><t t-esc="notice.stage"/></dd>
+                            <dt class="col-sm-3">Notice</dt>
+                            <dd class="col-sm-9">
+                                <t t-esc="notice.stage"/>
+                            </dd>
 
-                            </dl>
-                        </div>
-
+                        </dl>
                     </div>
 
                 </div>
+
+            </div>
         </t>
     </template>
 
@@ -259,8 +288,11 @@
                         <a t-att-href="'/my/event/%s/'% e.id" class="list-group-item list-group-item-action">
                             <div class="d-flex justify-content-between align-items-start">
                                 <div>
-                                    <strong><t t-esc="e.name"/></strong><br/>
-                                          <small class="text-muted">
+                                    <strong>
+                                        <t t-esc="e.name"/>
+                                    </strong>
+                                    <br/>
+                                    <small class="text-muted">
                                         <t t-esc="e.create_date.strftime('%d %b %Y, %I:%M %p') if e.create_date else ''"/>
                                     </small>
                                     <div class="text-end">
@@ -283,45 +315,58 @@
     <template id="portal_event_detail">
         <t t-call="portal.portal_layout">
             <div class="card">
-                                <div class="card-header">
+                <div class="card-header">
                     <a href="/my/events" class="btn btn-secondary">&#8592; Back to Home</a>
                 </div>
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h4 class="mb-0">Event Detail</h4>
                     <span class="badge bg-primary">
                         <t t-esc="event.stage"/>
-                    </span></div>
-                    <div class="card-body">
-                        <dl class="row">
-                            <dt class="col-sm-3">Event</dt>
-                            <dd class="col-sm-9"><t t-esc="event.name"/></dd>
-
-                            <dt class="col-sm-3">tower</dt>
-                            <dd class="col-sm-9"><t t-esc="event.tower_id"/></dd>
-
-                            <dt class="col-sm-3">Event Starts</dt>
-                            <dd class="col-sm-9"><t t-esc="event.event_time_start"/></dd>
-
-                            <dt class="col-sm-3">Event Ends</dt>
-                            <dd class="col-sm-9"><t t-esc="event.event_time_end"/></dd>
-
-                            <dt class="col-sm-3">Event Place</dt>
-                            <dd class="col-sm-9"><t t-esc="event.event_place"/></dd>
-
-                            <dt class="col-sm-3">Stage</dt>
-                            <dd class="col-sm-9"><t t-esc="event.stage"/></dd>
-                        </dl>
-                    </div>
+                    </span>
                 </div>
-             </t>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Event</dt>
+                        <dd class="col-sm-9">
+                            <t t-esc="event.name"/>
+                        </dd>
+
+                        <dt class="col-sm-3">tower</dt>
+                        <dd class="col-sm-9">
+                            <t t-esc="event.tower_id"/>
+                        </dd>
+
+                        <dt class="col-sm-3">Event Starts</dt>
+                        <dd class="col-sm-9">
+                            <t t-esc="event.event_time_start"/>
+                        </dd>
+
+                        <dt class="col-sm-3">Event Ends</dt>
+                        <dd class="col-sm-9">
+                            <t t-esc="event.event_time_end"/>
+                        </dd>
+
+                        <dt class="col-sm-3">Event Place</dt>
+                        <dd class="col-sm-9">
+                            <t t-esc="event.event_place"/>
+                        </dd>
+
+                        <dt class="col-sm-3">Stage</dt>
+                        <dd class="col-sm-9">
+                            <t t-esc="event.stage"/>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </t>
     </template>
 
-        <!-- Portal Home Alert Tab -->
+    <!-- Portal Home Alert Tab -->
     <template id="portal_my_home_alert" inherit_id="portal.portal_my_home">
         <xpath expr="//div[contains(@class,'o_portal_docs')]" position="inside">
             <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Alerts</t>
-                <t t-set="text">Alerts home </t>
+                <t t-set="text">Alerts home</t>
                 <t t-set="url" t-value="'/my/alerts'"/>
                 <t t-set="icon" t-value="'/web/static/img/rfq.svg'"/>
                 <t t-set="placeholder_count" t-value="'alert_count'"/>
@@ -333,10 +378,10 @@
     <!-- My Alerts List -->
     <template id="portal_my_alerts">
         <t t-call="portal.portal_layout">
-             <div class="container mt-4">
-                 <div class="card-header">
-                     <a href="/my" class="btn btn-secondary">&#8592; Back to Home</a>
-                 </div>
+            <div class="container mt-4">
+                <div class="card-header">
+                    <a href="/my" class="btn btn-secondary">&#8592; Back to Home</a>
+                </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h3>My Alerts</h3>
                     <a href="/my/alert/new" class="btn btn-primary">+ New Alert</a>
@@ -350,15 +395,18 @@
                            class="list-group-item list-group-item-action">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <strong><t t-esc="a.name"/></strong>
+                                    <strong>
+                                        <t t-esc="a.name"/>
+                                    </strong>
                                     <br/>
                                     <small>
-<!--                                        <t t-esc="a.create_date.strftime('%d %b %Y, %I:%M %p') if a.create_date else ''"/>-->
-                                        <t t-esc="a.create_date" t-options="{'widget': 'datetime', 'time_zone': 'user'}"/>
+                                        <!--                                        <t t-esc="a.create_date.strftime('%d %b %Y, %I:%M %p') if a.create_date else ''"/>-->
+                                        <t t-esc="a.create_date"
+                                           t-options="{'widget': 'datetime', 'time_zone': 'user'}"/>
 
                                     </small>
                                 </div>
-<!--                                <span class="badge bg-primary"><t t-esc="a.stage"/></span>-->
+                                <!--                                <span class="badge bg-primary"><t t-esc="a.stage"/></span>-->
                             </div>
                         </a>
                     </t>
@@ -367,19 +415,19 @@
         </t>
     </template>
 
-        <!--Alert Detail    -->
+    <!--Alert Detail    -->
     <template id="portal_alert_detail">
         <t t-call="portal.portal_layout">
             <div class="container mt-4">
                 <div class="card">
-                                    <div class="card-header">
-                    <a href="/my/alerts" class="btn btn-secondary">&#8592; Back to Home</a>
-                </div>
+                    <div class="card-header">
+                        <a href="/my/alerts" class="btn btn-secondary">&#8592; Back to Home</a>
+                    </div>
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="mb-0">Alert Detail</h4>
-<!--                        <span class="badge bg-primary">-->
-<!--                            <t t-esc="alert.stage"/>-->
-<!--                        </span>-->
+                        <!--                        <span class="badge bg-primary">-->
+                        <!--                            <t t-esc="alert.stage"/>-->
+                        <!--                        </span>-->
                     </div>
                     <div class="card-body">
                         <dl class="row">
@@ -396,12 +444,12 @@
                             <dt class="col-sm-3">Committee</dt>
                             <dd class="col-sm-9">
                                 <t t-esc="alert.to_committee.name"/>
-<!--                                <t t-esc="alert.to_committee.name"/>-->
+                                <!--                                <t t-esc="alert.to_committee.name"/>-->
                             </dd>
 
                             <dt class="col-sm-3">Date</dt>
                             <dd class="col-sm-9">
-<!--                                <t t-esc="alert.create_date.strftime('%d %b %Y, %I:%M %p') if alert.create_date else ''"/>-->
+                                <!--                                <t t-esc="alert.create_date.strftime('%d %b %Y, %I:%M %p') if alert.create_date else ''"/>-->
                                 <t t-esc="alert.create_date" t-options="{'widget': 'datetime', 'time_zone': 'user'}"/>
                             </dd>
 
@@ -421,7 +469,7 @@
                                         <t t-esc="flat.name"/>
                                     </span>
                                 </t>
-<!--                                <t t-esc="alert.flat_id.name"/>-->
+                                <!--                                <t t-esc="alert.flat_id.name"/>-->
                             </dd>
 
                             <dt class="col-sm-3">Tower</dt>
@@ -431,7 +479,7 @@
                                         <t t-esc="tower.name"/>
                                     </span>
                                 </t>
-<!--                                <t t-esc="alert.tower_id.name"/>-->
+                                <!--                                <t t-esc="alert.tower_id.name"/>-->
                             </dd>
 
                             <dt class="col-sm-3">Alert Type</dt>
@@ -439,25 +487,25 @@
                                 <t t-esc="alert.alert_type"/>
                             </dd>
 
-<!--                            <dt class="col-sm-3">Resident</dt>-->
-<!--                            <dd class="col-sm-9">-->
-<!--                                <t t-esc="alert.resident_id.name"/>-->
-<!--                            </dd>-->
+                            <!--                            <dt class="col-sm-3">Resident</dt>-->
+                            <!--                            <dd class="col-sm-9">-->
+                            <!--                                <t t-esc="alert.resident_id.name"/>-->
+                            <!--                            </dd>-->
                             <!--                        security_id alert_type flat_id tower_id user_id location resident_id-->
                         </dl>
                     </div>
-<!--                    <div class="card-footer">-->
-<!--                        <a href="/my/alerts" class="btn btn-secondary">&#8592; Back to My Alerts</a>-->
-<!--                    </div>-->
+                    <!--                    <div class="card-footer">-->
+                    <!--                        <a href="/my/alerts" class="btn btn-secondary">&#8592; Back to My Alerts</a>-->
+                    <!--                    </div>-->
                 </div>
             </div>
         </t>
     </template>
-        <!-- new alert form -->
+    <!-- new alert form -->
     <template id="portal_alert_form">
         <t t-call="portal.portal_layout">
             <div class="container mt-4">
-                                <div class="card-header">
+                <div class="card-header">
                     <a href="/my/alerts" class="btn btn-secondary">&#8592; Back to Home</a>
                 </div>
                 <h3>Submit Alert</h3>
@@ -490,40 +538,40 @@
                         const alertType = document.getElementById('alert_type');
                         const alertName = document.getElementById('alert_name');
                         if (alertType &amp;&amp; alertName){
-                                alertType.addEventListener('change', function () {
-            alertName.value =
-                this.options[this.selectedIndex].text;
-        });
-    }
+                        alertType.addEventListener('change', function () {
+                        alertName.value =
+                        this.options[this.selectedIndex].text;
+                        });
+                        }
 
-});
-<!--                        document.getElementById('alert_type').addEventListener('change', function () {-->
-<!--                        const selectedText =-->
-<!--                        this.options[this.selectedIndex].text;-->
+                        });
+                        <!--                        document.getElementById('alert_type').addEventListener('change', function () {-->
+                        <!--                        const selectedText =-->
+                        <!--                        this.options[this.selectedIndex].text;-->
 
-<!--                        document.getElementById('alert_name').value =-->
-<!--                        selectedText;-->
-<!--                        });-->
-<!--                        <script>-->
-<!--document.addEventListener('DOMContentLoaded', function () {-->
+                        <!--                        document.getElementById('alert_name').value =-->
+                        <!--                        selectedText;-->
+                        <!--                        });-->
+                        <!--                        <script>-->
+                        <!--document.addEventListener('DOMContentLoaded', function () {-->
 
-<!--    const alertType = document.getElementById('alert_type');-->
-<!--    const alertName = document.getElementById('alert_name');-->
+                        <!--    const alertType = document.getElementById('alert_type');-->
+                        <!--    const alertName = document.getElementById('alert_name');-->
 
-<!--    if (alertType && alertName) {-->
-<!--        alertType.addEventListener('change', function () {-->
-<!--            alertName.value =-->
-<!--                this.options[this.selectedIndex].text;-->
-<!--        });-->
-<!--    }-->
+                        <!--    if (alertType && alertName) {-->
+                        <!--        alertType.addEventListener('change', function () {-->
+                        <!--            alertName.value =-->
+                        <!--                this.options[this.selectedIndex].text;-->
+                        <!--        });-->
+                        <!--    }-->
 
-<!--});-->
-<!--</script>-->
+                        <!--});-->
+                        <!--</script>-->
                     </script>
-<!--                    <div class="mb-3">-->
-<!--                        <label class="form-label">Alert Subject</label>-->
-<!--                        <input type="text" name="name" required="1" class="form-control"/>-->
-<!--                    </div>-->
+                    <!--                    <div class="mb-3">-->
+                    <!--                        <label class="form-label">Alert Subject</label>-->
+                    <!--                        <input type="text" name="name" required="1" class="form-control"/>-->
+                    <!--                    </div>-->
                     <div class="mb-3">
                         <label class="form-label">Description</label>
                         <textarea name="description" class="form-control" rows="4"/>
@@ -543,16 +591,19 @@
                         <select name="committee_id" class="form-select">
                             <option value="">-- Select Committee --</option>
                             <t t-foreach="committees" t-as="cm">
-                                <option t-att-value="cm.id" t-att-selected="cm.id in default_committee.ids and 'selected' or None "><t t-esc="cm.name"/></option>
+                                <option t-att-value="cm.id"
+                                        t-att-selected="cm.id in default_committee.ids and 'selected' or None ">
+                                    <t t-esc="cm.name"/>
+                                </option>
                             </t>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Security</label>
-                        <select name="security_id"  class="form-select" >
+                        <select name="security_id" class="form-select">
                             <option value="">-- Select Security --</option>
                             <t t-foreach="security" t-as="sc">
-<!--                                <option t-att-value="sc.id"><t t-esc="sc.name"/></option>-->
+                                <!--                                <option t-att-value="sc.id"><t t-esc="sc.name"/></option>-->
                                 <option t-att-value="sc.id" t-att-selected="sc.id in default_security.ids">
                                     <t t-esc="sc.name"/>
                                 </option>
@@ -561,89 +612,91 @@
                     </div>
 
 
-<!--                     t-attf-class="form-control select2_box"-->
-<!--       required="" multiple="" -->
+                    <!--                     t-attf-class="form-control select2_box"-->
+                    <!--       required="" multiple="" -->
 
-<div class="mb-3">
-    <label class="form-label">Tower</label>
-    <!-- Hidden inputs will be added here dynamically -->
-    <div id="tower_hidden_inputs"></div>
-    <!-- Selected Tags Display -->
-    <div id="tower_tags" class="d-flex flex-wrap gap-1 mb-1"></div>
-    <!-- Dropdown -->
-    <select class="form-select" id="tower_dropdown">
-        <option value="">-- Select Tower (optional) --</option>
-        <t t-foreach="tower" t-as="tw">
-            <option t-att-value="tw.id"><t t-esc="tw.name"/></option>
-        </t>
-    </select>
-</div>
+                    <div class="mb-3">
+                        <label class="form-label">Tower</label>
+                        <!-- Hidden inputs will be added here dynamically -->
+                        <div id="tower_hidden_inputs"></div>
+                        <!-- Selected Tags Display -->
+                        <div id="tower_tags" class="d-flex flex-wrap gap-1 mb-1"></div>
+                        <!-- Dropdown -->
+                        <select class="form-select" id="tower_dropdown">
+                            <option value="">-- Select Tower (optional) --</option>
+                            <t t-foreach="tower" t-as="tw">
+                                <option t-att-value="tw.id">
+                                    <t t-esc="tw.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
 
-            <script>
-                const selectedTowers = {};
+                    <script>
+                        const selectedTowers = {};
 
-                document.getElementById('tower_dropdown').addEventListener('change', function () {
-                const id = this.value;
-                const text = this.options[this.selectedIndex].text;
+                        document.getElementById('tower_dropdown').addEventListener('change', function () {
+                        const id = this.value;
+                        const text = this.options[this.selectedIndex].text;
 
-                if (!id || selectedTowers[id]) {
-                this.value = "";
-                return;
-                }
+                        if (!id || selectedTowers[id]) {
+                        this.value = "";
+                        return;
+                        }
 
-                // Store selection
-                selectedTowers[id] = text;
+                        // Store selection
+                        selectedTowers[id] = text;
 
-                // Add hidden input
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'tower_id';
-                input.value = id;
-                input.id = 'tower_input_' + id;
-                document.getElementById('tower_hidden_inputs').appendChild(input);
+                        // Add hidden input
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'tower_id';
+                        input.value = id;
+                        input.id = 'tower_input_' + id;
+                        document.getElementById('tower_hidden_inputs').appendChild(input);
 
-                // Add tag
-                const tag = document.createElement('span');
-                tag.className = 'badge bg-primary d-flex align-items-center gap-1';
-                tag.id = 'tower_tag_' + id;
-                const removeBtn = document.createElement('span');
-                removeBtn.innerHTML = '&#x2715;';
-                removeBtn.style.cursor = 'pointer';
+                        // Add tag
+                        const tag = document.createElement('span');
+                        tag.className = 'badge bg-primary d-flex align-items-center gap-1';
+                        tag.id = 'tower_tag_' + id;
+                        const removeBtn = document.createElement('span');
+                        removeBtn.innerHTML = '&#x2715;';
+                        removeBtn.style.cursor = 'pointer';
 
-                removeBtn.addEventListener('click',function(){
-                removeTower(id);})
+                        removeBtn.addEventListener('click',function(){
+                        removeTower(id);})
 
-                tag.appendChild(document.createTextNode(text));
-                tag.appendChild(removeBtn);
-                <!--        tag.innerHTML = text + ' <span style="cursor:pointer;" onclick="removeTower('+id+')">&#x2715;</span>';-->
-<!--                tag.innerHTML = text + ' <span style="cursor:pointer;" onclick="removeTower(' + id + ')">&#x2715;</span>';-->
-                document.getElementById('tower_tags').appendChild(tag);
+                        tag.appendChild(document.createTextNode(text));
+                        tag.appendChild(removeBtn);
+                        <!--        tag.innerHTML = text + ' <span style="cursor:pointer;" onclick="removeTower('+id+')">&#x2715;</span>';-->
+                        <!--                tag.innerHTML = text + ' <span style="cursor:pointer;" onclick="removeTower(' + id + ')">&#x2715;</span>';-->
+                        document.getElementById('tower_tags').appendChild(tag);
 
-                // Reset dropdown
-                this.value = "";
-                });
+                        // Reset dropdown
+                        this.value = "";
+                        });
 
 
-                <!--    removeBtn.onclick = function () {-->
-                <!--    removeTower(id);-->
-                <!--    };-->
+                        <!--    removeBtn.onclick = function () {-->
+                        <!--    removeTower(id);-->
+                        <!--    };-->
 
-                function removeTower(id) {
-                console.log('Removing:', id);
-                console.log(document.getElementById('tower_input_ '+ id ));
-                <!--    console.log(document.getElementById('tower_input_' + id));-->
-                console.log(document.getElementById('tower_tag_' + id));
-                delete selectedTowers[id];
-                <!--    document.getElementById('tower_input_' + id).remove();-->
-                <!--    document.getElementById('tower_tag_' + id).remove();-->
-                const input = document.getElementById('tower_input_' + id);
-                const tag = document.getElementById('tower_tag_' + id);
+                        function removeTower(id) {
+                        console.log('Removing:', id);
+                        console.log(document.getElementById('tower_input_ '+ id ));
+                        <!--    console.log(document.getElementById('tower_input_' + id));-->
+                        console.log(document.getElementById('tower_tag_' + id));
+                        delete selectedTowers[id];
+                        <!--    document.getElementById('tower_input_' + id).remove();-->
+                        <!--    document.getElementById('tower_tag_' + id).remove();-->
+                        const input = document.getElementById('tower_input_' + id);
+                        const tag = document.getElementById('tower_tag_' + id);
 
-                if (input) input.remove();
-                if (tag) tag.remove();
-                }
+                        if (input) input.remove();
+                        if (tag) tag.remove();
+                        }
 
-            </script>
+                    </script>
                     <div class="mb-3">
                         <label class="form-label">Flat</label>
                         <div id="flat_hidden_inputs"></div>
@@ -651,76 +704,78 @@
                         <select class="form-select" id="flat_dropdown">
                             <option value="">-- Select Flat(optional) --</option>
                             <t t-foreach="flat" t-as="fl">
-                                <option t-att-value="fl.id"><t t-esc="fl.name"/></option>
+                                <option t-att-value="fl.id">
+                                    <t t-esc="fl.name"/>
+                                </option>
                             </t>
                         </select>
                     </div>
 
-            <script>
-                const selectedFlats = {};
+                    <script>
+                        const selectedFlats = {};
 
-                document.getElementById('flat_dropdown').addEventListener('change', function () {
-                const id = this.value;
-                const text = this.options[this.selectedIndex].text;
+                        document.getElementById('flat_dropdown').addEventListener('change', function () {
+                        const id = this.value;
+                        const text = this.options[this.selectedIndex].text;
 
-                if (!id || selectedFlats[id]) {
-                this.value = "";
-                return;
-                }
+                        if (!id || selectedFlats[id]) {
+                        this.value = "";
+                        return;
+                        }
 
-                // Store selection
-                selectedFlats[id] = text;
+                        // Store selection
+                        selectedFlats[id] = text;
 
-                // Add hidden input
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'flat_id';
-                input.value = id;
-                input.id = 'flat_input_' + id;
-                document.getElementById('flat_hidden_inputs').appendChild(input);
+                        // Add hidden input
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'flat_id';
+                        input.value = id;
+                        input.id = 'flat_input_' + id;
+                        document.getElementById('flat_hidden_inputs').appendChild(input);
 
-                // Add tag
-                const tag = document.createElement('span');
-                tag.className = 'badge bg-primary d-flex align-items-center gap-1';
-                tag.id = 'flat_tag_' + id;
-                const removeBtn = document.createElement('span');
-                removeBtn.innerHTML = '&#x2715;';
-                removeBtn.style.cursor = 'pointer';
+                        // Add tag
+                        const tag = document.createElement('span');
+                        tag.className = 'badge bg-primary d-flex align-items-center gap-1';
+                        tag.id = 'flat_tag_' + id;
+                        const removeBtn = document.createElement('span');
+                        removeBtn.innerHTML = '&#x2715;';
+                        removeBtn.style.cursor = 'pointer';
 
-                removeBtn.addEventListener('click',function(){
-                removeFlat(id);})
+                        removeBtn.addEventListener('click',function(){
+                        removeFlat(id);})
 
-                tag.appendChild(document.createTextNode(text));
-                tag.appendChild(removeBtn);
-                <!--        tag.innerHTML = text + ' <span style="cursor:pointer;" onclick="removeTower('+id+')">&#x2715;</span>';-->
-<!--                tag.innerHTML = text + ' <span style="cursor:pointer;" onclick="removeTower(' + id + ')">&#x2715;</span>';-->
-                document.getElementById('flat_tags').appendChild(tag);
+                        tag.appendChild(document.createTextNode(text));
+                        tag.appendChild(removeBtn);
+                        <!--        tag.innerHTML = text + ' <span style="cursor:pointer;" onclick="removeTower('+id+')">&#x2715;</span>';-->
+                        <!--                tag.innerHTML = text + ' <span style="cursor:pointer;" onclick="removeTower(' + id + ')">&#x2715;</span>';-->
+                        document.getElementById('flat_tags').appendChild(tag);
 
-                // Reset dropdown
-                this.value = "";
-                });
+                        // Reset dropdown
+                        this.value = "";
+                        });
 
 
-                <!--    removeBtn.onclick = function () {-->
-                <!--    removeTower(id);-->
-                <!--    };-->
+                        <!--    removeBtn.onclick = function () {-->
+                        <!--    removeTower(id);-->
+                        <!--    };-->
 
-                function removeFlat(id) {
-                console.log('Removing:', id);
-                console.log(document.getElementById('flat_input_ '+ id ));
-                <!--    console.log(document.getElementById('tower_input_' + id));-->
-                console.log(document.getElementById('flat_tag_' + id));
-                delete selectedFlats[id];
-                <!--    document.getElementById('tower_input_' + id).remove();-->
-                <!--    document.getElementById('tower_tag_' + id).remove();-->
-                const input = document.getElementById('flat_input_' + id);
-                const tag = document.getElementById('flat_tag_' + id);
+                        function removeFlat(id) {
+                        console.log('Removing:', id);
+                        console.log(document.getElementById('flat_input_ '+ id ));
+                        <!--    console.log(document.getElementById('tower_input_' + id));-->
+                        console.log(document.getElementById('flat_tag_' + id));
+                        delete selectedFlats[id];
+                        <!--    document.getElementById('tower_input_' + id).remove();-->
+                        <!--    document.getElementById('tower_tag_' + id).remove();-->
+                        const input = document.getElementById('flat_input_' + id);
+                        const tag = document.getElementById('flat_tag_' + id);
 
-                if (input) input.remove();
-                if (tag) tag.remove();
-                }
+                        if (input) input.remove();
+                        if (tag) tag.remove();
+                        }
 
-            </script>
+                    </script>
 
 
                     <a href="/my/alerts" class="btn btn-secondary">Cancel</a>
@@ -730,7 +785,7 @@
         </t>
     </template>
 
-<!--   Portal Home Broadcast Tab -->
+    <!--   Portal Home Broadcast Tab -->
     <template id="portal_my_home_emergency_broadcast" inherit_id="portal.portal_my_home">
         <xpath expr="//div[contains(@class,'o_portal_docs')]" position="inside">
             <t t-call="portal.portal_docs_entry">
@@ -762,8 +817,11 @@
                         <a t-att-href="'/my/broadcast/%s/'% b.id" class="list-group-item list-group-item-action">
                             <div class="d-flex justify-content-between align-items-start">
                                 <div>
-                                    <strong><t t-esc="b.name"/></strong><br/>
-                                          <small class="text-muted">
+                                    <strong>
+                                        <t t-esc="b.name"/>
+                                    </strong>
+                                    <br/>
+                                    <small class="text-muted">
                                         <t t-esc="b.create_date.strftime('%d %b %Y, %I:%M %p') if b.create_date else ''"/>
                                     </small>
                                     <div class="text-end">
@@ -783,148 +841,159 @@
     </template>
 
 
-<!--    Broadcast detail form-->
-        <template id="portal_broadcast_detail">
+    <!--    Broadcast detail form-->
+    <template id="portal_broadcast_detail">
         <t t-call="portal.portal_layout">
             <div class="card">
-                                <div class="card-header">
+                <div class="card-header">
                     <a href="/my/broadcasts" class="btn btn-secondary">&#8592; Back to Home</a>
                 </div>
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h4 class="mb-0">Emergency Broadcast Detail</h4>
-<!--                    <span class="badge bg-primary">-->
-<!--                        <t t-esc="broadcast.stage"/>-->
-<!--                    </span>-->
-</div>
-                    <div class="card-body">
-                        <dl class="row">
-                            <dt class="col-sm-3">Broadcast</dt>
-                            <dd class="col-sm-9"><t t-esc="broadcast.name"/></dd>
-
-                            <dt class="col-sm-3">tower</dt>
-                            <dd class="col-sm-9">
-                                <t t-foreach="broadcast.tower_ids" t-as="tower">
-                                    <span class="badge bg-secondary me-1">
-                                        <t t-esc="tower.name"/>
-                                    </span>
-                                </t>
-                            </dd>
-
-                            <dt class="col-sm-3">Description</dt>
-                            <dd class="col-sm-9"><t t-esc="broadcast.description"/></dd>
-
-                            <dt class="col-sm-3">Date</dt>
-                            <dd class="col-sm-9"><t t-esc="broadcast.create_date"/></dd>
-
-                            <dt class="col-sm-3">Flat</dt>
-                            <dd class="col-sm-9">
-<!--                                <t t-esc="broadcast.flat_ids"/>-->
-                                     <t t-foreach="broadcast.flat_ids" t-as="flat">
-                                    <span class="badge bg-secondary me-1">
-                                        <t t-esc="flat.name"/>
-                                    </span>
-                                </t>
-                            </dd>
-
-<!--                            <dt class="col-sm-3">Stage</dt>-->
-<!--                            <dd class="col-sm-9"><t t-esc="broadcast.stage"/></dd>-->
-                        </dl>
-                    </div>
+                    <!--                    <span class="badge bg-primary">-->
+                    <!--                        <t t-esc="broadcast.stage"/>-->
+                    <!--                    </span>-->
                 </div>
-             </t>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Broadcast</dt>
+                        <dd class="col-sm-9">
+                            <t t-esc="broadcast.name"/>
+                        </dd>
+
+                        <dt class="col-sm-3">tower</dt>
+                        <dd class="col-sm-9">
+                            <t t-foreach="broadcast.tower_ids" t-as="tower">
+                                <span class="badge bg-secondary me-1">
+                                    <t t-esc="tower.name"/>
+                                </span>
+                            </t>
+                        </dd>
+
+                        <dt class="col-sm-3">Description</dt>
+                        <dd class="col-sm-9">
+                            <t t-esc="broadcast.description"/>
+                        </dd>
+
+                        <dt class="col-sm-3">Date</dt>
+                        <dd class="col-sm-9">
+                            <t t-esc="broadcast.create_date"/>
+                        </dd>
+
+                        <dt class="col-sm-3">Flat</dt>
+                        <dd class="col-sm-9">
+                            <!--                                <t t-esc="broadcast.flat_ids"/>-->
+                            <t t-foreach="broadcast.flat_ids" t-as="flat">
+                                <span class="badge bg-secondary me-1">
+                                    <t t-esc="flat.name"/>
+                                </span>
+                            </t>
+                        </dd>
+
+                        <!--                            <dt class="col-sm-3">Stage</dt>-->
+                        <!--                            <dd class="col-sm-9"><t t-esc="broadcast.stage"/></dd>-->
+                    </dl>
+                </div>
+            </div>
+        </t>
     </template>
 
 
-<!--portal_vendor_category-->
-<!--    list of bills-->
-<!--    <template id="custom_bill_portal_invoice" inherit_id="account.portal_my_invoices">-->
-<!--        <xpath expr="//t[@t-call='portal.portal_table']" position="before">-->
-<!--            <div class="alert alert-info">Important payment notice!</div>-->
-<!--            <t t-set="placeholder_count" t-value="'bill_count'"/>-->
-<!--            <t t-set="count" t-value="bill_count"/>-->
-<!--        </xpath>-->
-<!--    </template>-->
-
+    <!--portal_vendor_category-->
+    <!--    list of bills-->
+    <!--    <template id="custom_bill_portal_invoice" inherit_id="account.portal_my_invoices">-->
+    <!--        <xpath expr="//t[@t-call='portal.portal_table']" position="before">-->
+    <!--            <div class="alert alert-info">Important payment notice!</div>-->
+    <!--            <t t-set="placeholder_count" t-value="'bill_count'"/>-->
+    <!--            <t t-set="count" t-value="bill_count"/>-->
+    <!--        </xpath>-->
+    <!--    </template>-->
 
 
     <!--    table of bill in invoice tab-->
     <template id="custom_bill_portal_invoice" inherit_id="account.portal_my_invoices">
-<!--          <xpath expr="//div[hasclass('o_portal_my_doc_table')]" position="replace">-->
-<!--        <div/>-->
-<!--    </xpath>-->
-    <xpath expr="//t[@t-call='portal.portal_table']" position="before">
+        <!--          <xpath expr="//div[hasclass('o_portal_my_doc_table')]" position="replace">-->
+        <!--        <div/>-->
+        <!--    </xpath>-->
+        <xpath expr="//t[@t-call='portal.portal_table']" position="before">
 
             <div class="mb-3">
-        <a href="/my" class="btn btn-sm btn-outline-secondary">
-            <i class="fa fa-arrow-left me-1"/>Back to Home
-        </a>
-    </div>
-        <t t-set="placeholder_count" t-value="'bill_count'"/>
-        <t t-set="count" t-value="bill_count"/>
+                <a href="/my" class="btn btn-sm btn-outline-secondary">
+                    <i class="fa fa-arrow-left me-1"/>Back to Home
+                </a>
+            </div>
+            <t t-set="placeholder_count" t-value="'bill_count'"/>
+            <t t-set="count" t-value="bill_count"/>
 
-        <div class="d-flex align-items-center gap-2 text-muted small mb-3 p-2 rounded bg-light border">
-            <i class="fa fa-info-circle"/>
-            You have <strong class="text-dark ms-1 me-1"><t t-esc="bill_count"/></strong> maintenance bill(s)
-        </div>
+            <div class="d-flex align-items-center gap-2 text-muted small mb-3 p-2 rounded bg-light border">
+                <i class="fa fa-info-circle"/>
+                You have
+                <strong class="text-dark ms-1 me-1">
+                    <t t-esc="bill_count"/>
+                </strong>
+                maintenance bill(s)
+            </div>
 
-        <div class="d-flex flex-column gap-2 mb-3">
-            <t t-foreach="maintenance_bills" t-as="bill">
-                <div class="card border shadow-none">
-                    <div class="card-body p-3">
+            <div class="d-flex flex-column gap-2 mb-3">
+                <t t-foreach="maintenance_bills" t-as="bill">
+                    <div class="card border shadow-none">
+                        <div class="card-body p-3">
 
-                        <div class="d-flex align-items-center gap-3 mb-2">
-                            <div class="d-flex align-items-center justify-content-center rounded bg-light"
-                                 style="width:36px; height:36px; flex-shrink:0;">
-                                <i class="fa fa-file-text-o text-muted"/>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden">
-                                <div class="fw-semibold text-truncate" style="font-size:14px;">
-                                    Maintenance Bill —
-                                    <t t-esc="bill.flat_id.name"/>
+                            <div class="d-flex align-items-center gap-3 mb-2">
+                                <div class="d-flex align-items-center justify-content-center rounded bg-light"
+                                     style="width:36px; height:36px; flex-shrink:0;">
+                                    <i class="fa fa-file-text-o text-muted"/>
                                 </div>
-                                <div class="text-muted" style="font-size:12px;">
-                                    <t t-esc="bill.month"/>/<t t-esc="bill.year"/>
+                                <div class="flex-grow-1 overflow-hidden">
+                                    <div class="fw-semibold text-truncate" style="font-size:14px;">
+                                        Maintenance Bill —
+                                        <t t-esc="bill.flat_id.name"/>
+                                    </div>
+                                    <div class="text-muted" style="font-size:12px;">
+                                        <t t-esc="bill.month"/>/
+                                        <t t-esc="bill.year"/>
+                                    </div>
                                 </div>
+                                <t t-if="bill.state == 'paid'">
+                                    <span class="badge rounded-pill bg-success">Paid</span>
+                                </t>
+                                <t t-if="bill.state == 'unpaid'">
+                                    <span class="badge rounded-pill bg-danger">Unpaid</span>
+                                </t>
                             </div>
-                            <t t-if="bill.state == 'paid'">
-                                <span class="badge rounded-pill bg-success">Paid</span>
-                            </t>
-                            <t t-if="bill.state == 'unpaid'">
-                                <span class="badge rounded-pill bg-danger">Unpaid</span>
-                            </t>
-                        </div>
 
-                        <div class="d-flex align-items-center flex-wrap gap-2 pt-2 border-top">
-                            <span class="text-muted d-flex align-items-center gap-1" style="font-size:12px;">
-                                <i class="fa fa-calendar-o"/>
-                                Due: <t t-esc="bill.due_date"/>
-                            </span>
-                            <span class="fw-semibold ms-1" style="font-size:14px;">
-                                <t t-esc="bill.total_amount"/>
-                            </span>
+                            <div class="d-flex align-items-center flex-wrap gap-2 pt-2 border-top">
+                                <span class="text-muted d-flex align-items-center gap-1" style="font-size:12px;">
+                                    <i class="fa fa-calendar-o"/>
+                                    Due:
+                                    <t t-esc="bill.due_date"/>
+                                </span>
+                                <span class="fw-semibold ms-1" style="font-size:14px;">
+                                    <t t-esc="bill.total_amount"/>
+                                </span>
 
                                 <div class="ms-auto d-flex gap-2">
                                     <t t-if="bill.invoice_id">
-                                    <a t-att-href="bill.invoice_id.get_portal_url()"
-                                       class="btn btn-sm btn-outline-secondary">
-                                        <i class="fa fa-receipt me-1"/>Invoice
-                                    </a>
-                            </t>
+                                        <a t-att-href="bill.invoice_id.get_portal_url()"
+                                           class="btn btn-sm btn-outline-secondary">
+                                            <i class="fa fa-receipt me-1"/>Invoice
+                                        </a>
+                                    </t>
 
                                     <a t-att-href="'/my/maintenance/%s/' % bill.id"
                                        class="btn btn-sm btn-outline-secondary">
                                         <i class="fa fa-external-link me-1"/>Open
                                     </a>
                                 </div>
+                            </div>
+
                         </div>
-
                     </div>
-                </div>
-            </t>
-        </div>
+                </t>
+            </div>
 
-    </xpath>
-</template>
+        </xpath>
+    </template>
 
     <!--    bill detail-->
     <template id="portal_maintenance_detail">
@@ -933,9 +1002,9 @@
             <div class="container mt-4">
 
                 <div class="card">
-                             <div class="card-header">
-                    <a href="/my/invoices" class="btn btn-secondary">&#8592; Back to Home</a>
-                </div>
+                    <div class="card-header">
+                        <a href="/my/invoices" class="btn btn-secondary">&#8592; Back to Home</a>
+                    </div>
                     <div class="card-header">
                         <h3>Maintenance Bill</h3>
                     </div>
@@ -993,12 +1062,12 @@
                                 Pay Now
                             </a>
                         </t>
-<!--                        <t t-if="bill.invoice_id">-->
-<!--    <a t-att-href="bill.invoice_id.get_portal_url()"-->
-<!--       class="btn btn-primary">-->
-<!--        View Invoice-->
-<!--    </a>-->
-<!--</t>-->
+                        <!--                        <t t-if="bill.invoice_id">-->
+                        <!--    <a t-att-href="bill.invoice_id.get_portal_url()"-->
+                        <!--       class="btn btn-primary">-->
+                        <!--        View Invoice-->
+                        <!--    </a>-->
+                        <!--</t>-->
                         <t t-if="bill.state=='paid'">
                             <a t-att-href="bill.invoice_id.get_portal_url()" class="btn btn-primary">View Invoice</a>
                         </t>
@@ -1017,187 +1086,183 @@
         </t>
     </template>
 
-        <template id="portal_invoice_page_inherited" inherit_id="account.portal_invoice_page">
+    <template id="portal_invoice_page_inherited" inherit_id="account.portal_invoice_page">
         <xpath expr="//t[@t-set='entries']/div/div/div[hasclass('o_download_pdf')]" position="after">
-<!--            <t t-if="invoice.timesheet_count > 0 and invoice.env['account.analytic.line']._show_portal_timesheets()">-->
+            <!--            <t t-if="invoice.timesheet_count > 0 and invoice.env['account.analytic.line']._show_portal_timesheets()">-->
             <t t-if="'timesheet_count' in invoice._fields and invoice.timesheet_count > 0 and invoice.env['account.analytic.line']._show_portal_timesheets()">
                 <t t-set="search_value" t-value="invoice.name"/>
                 <t t-if="invoice.state == 'draft'" t-set="search_value" t-value="invoice.id"/>
                 <a t-if="invoice.move_type == 'out_invoice' and invoice.state in ('draft', 'posted') and invoice.timesheet_count > 0"
-                    target="_blank" t-att-href="'/my/timesheets?search_in=invoice&amp;search=%s' % search_value" class="btn btn-light" role="button" title="View Timesheet">View Timesheets</a>
+                   target="_blank" t-att-href="'/my/timesheets?search_in=invoice&amp;search=%s' % search_value"
+                   class="btn btn-light" role="button" title="View Timesheet">View Timesheets
+                </a>
             </t>
         </xpath>
     </template>
 
 
-
-
 </odoo>
 
 
+        <!--    <template id="custom_bill_portal_invoice" inherit_id="account.portal_my_invoices">-->
+        <!--        <xpath expr="//t[@t-call='portal.portal_table']" position="before">-->
+        <!--            <t t-set="placeholder_count" t-value="'bill_count'"/>-->
+        <!--            <t t-set="count" t-value="bill_count"/>-->
+
+        <!--            <div class="alert alert-info mb-3">You have-->
+        <!--                <strong>-->
+        <!--                    <t t-esc="bill_count"/>-->
+        <!--                </strong>-->
+        <!--                maintenance bill(s).-->
+        <!--            </div>-->
+
+        <!--            <t t-foreach="maintenance_bills" t-as="bill">-->
+        <!--            <div class="list-group-item list-group-item-action">-->
+        <!--&lt;!&ndash;                &ndash;&gt;-->
+        <!--                <div class="d-flex justify-content-between align-items-center mb-1">-->
+        <!--                    <h6 class="mb-0">-->
+        <!--                        Maintenance Bill - -->
+        <!--                    </h6>-->
+        <!--                    Flat:<t t-esc="bill.flat_id.name"/>-->
+        <!--                    <small class="text-muted ms-3 text-nowrap">-->
+        <!--                        Month:<t t-esc="bill.month"/>/<t t-esc="bill.year"/>-->
+        <!--                    </small>-->
+        <!--                </div>-->
+
+        <!--                <div class="d-flex align-items-center gap-2 flex-wrap">-->
+        <!--                    <small class="text-muted">Due:-->
+        <!--                        <t t-esc="bill.due_date"/>-->
+        <!--                    </small>-->
+
+        <!--                    <t t-if="bill.state == 'paid'">-->
+        <!--                        <span class="badge bg-success">Paid</span>-->
+        <!--                    </t>-->
+        <!--                    <t t-if="bill.state == 'unpaid'">-->
+        <!--                        <span class="badge bg-danger">Unpaid</span>-->
+        <!--                    </t>-->
+
+        <!--                    <small>Total:-->
+        <!--                        <strong>-->
+        <!--                            <t t-esc="bill.total_amount"/>-->
+        <!--                        </strong>-->
+        <!--                    </small>-->
+
+        <!--                    <t t-if="bill.invoice_id">-->
+        <!--                        <a t-att-href="bill.invoice_id.get_portal_url()"-->
+        <!--                           class="btn btn-outline-primary btn-sm ms-auto">-->
+        <!--                            View Invoice-->
+        <!--                        </a>-->
+        <!--                    <a t-att-href="'/my/maintenance/%s/' % bill.id"  class="btn btn-outline-primary btn-sm ms-auto">Open</a>-->
+
+        <!--                    </t>-->
+        <!--                </div>-->
+        <!--            </div>-->
+
+        <!--            </t>-->
+
+        <!--        </xpath>-->
+
+        <!--    </template>-->
 
 
+        <!--<?xml version="1.0" encoding="utf-8"?>-->
+        <!--<odoo>-->
+        <!-- Portal Home: Notices Tab -->
+        <!--    <template id="portal_my_home_notice" inherit_id="portal.portal_my_home">-->
+        <!--        <xpath expr="//div[contains(@class,'o_portal_docs')]" position="inside">-->
+        <!--            <t t-call="portal.portal_docs_entry">-->
+        <!--                <t t-set="title" t-value="'Notices'"/>-->
+        <!--                <t t-set="url" t-value="'/my/notices'"/>-->
+        <!--                <t t-set="count" t-value="notice_count"/>-->
+        <!--                <t t-set="placeholder_count" t-value="'notice_count'"/>-->
+        <!--            </t>-->
+        <!--        </xpath>-->
+        <!--    </template>-->
 
 
-<!--    <template id="custom_bill_portal_invoice" inherit_id="account.portal_my_invoices">-->
-<!--        <xpath expr="//t[@t-call='portal.portal_table']" position="before">-->
-<!--            <t t-set="placeholder_count" t-value="'bill_count'"/>-->
-<!--            <t t-set="count" t-value="bill_count"/>-->
+        <!--    &lt;!&ndash; Notice List &ndash;&gt;-->
+        <!--    <template id="portal_notice_board">-->
+        <!--        <t t-call="portal.portal_layout">-->
+        <!--            <div class="container mt-4">-->
+        <!--                <div class="d-flex justify-content-between align-items-center mb-3">-->
+        <!--                    <h3>Notice Board</h3>-->
+        <!--                </div>-->
 
-<!--            <div class="alert alert-info mb-3">You have-->
-<!--                <strong>-->
-<!--                    <t t-esc="bill_count"/>-->
-<!--                </strong>-->
-<!--                maintenance bill(s).-->
-<!--            </div>-->
+        <!--                <t t-if="not notices">-->
+        <!--                    <div class="alert alert-info">No notices available for your tower.</div>-->
+        <!--                </t>-->
 
-<!--            <t t-foreach="maintenance_bills" t-as="bill">-->
-<!--            <div class="list-group-item list-group-item-action">-->
-<!--&lt;!&ndash;                &ndash;&gt;-->
-<!--                <div class="d-flex justify-content-between align-items-center mb-1">-->
-<!--                    <h6 class="mb-0">-->
-<!--                        Maintenance Bill - -->
-<!--                    </h6>-->
-<!--                    Flat:<t t-esc="bill.flat_id.name"/>-->
-<!--                    <small class="text-muted ms-3 text-nowrap">-->
-<!--                        Month:<t t-esc="bill.month"/>/<t t-esc="bill.year"/>-->
-<!--                    </small>-->
-<!--                </div>-->
-
-<!--                <div class="d-flex align-items-center gap-2 flex-wrap">-->
-<!--                    <small class="text-muted">Due:-->
-<!--                        <t t-esc="bill.due_date"/>-->
-<!--                    </small>-->
-
-<!--                    <t t-if="bill.state == 'paid'">-->
-<!--                        <span class="badge bg-success">Paid</span>-->
-<!--                    </t>-->
-<!--                    <t t-if="bill.state == 'unpaid'">-->
-<!--                        <span class="badge bg-danger">Unpaid</span>-->
-<!--                    </t>-->
-
-<!--                    <small>Total:-->
-<!--                        <strong>-->
-<!--                            <t t-esc="bill.total_amount"/>-->
-<!--                        </strong>-->
-<!--                    </small>-->
-
-<!--                    <t t-if="bill.invoice_id">-->
-<!--                        <a t-att-href="bill.invoice_id.get_portal_url()"-->
-<!--                           class="btn btn-outline-primary btn-sm ms-auto">-->
-<!--                            View Invoice-->
-<!--                        </a>-->
-<!--                    <a t-att-href="'/my/maintenance/%s/' % bill.id"  class="btn btn-outline-primary btn-sm ms-auto">Open</a>-->
-
-<!--                    </t>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            </t>-->
-
-<!--        </xpath>-->
-
-<!--    </template>-->
+        <!--                <div class="list-group">-->
+        <!--                    <t t-foreach="notices" t-as="n">-->
+        <!--                        <a t-att-href="'/my/notice/%s/' % n.id"-->
+        <!--                           class="list-group-item list-group-item-action">-->
+        <!--                            <div class="d-flex justify-content-between align-items-start">-->
+        <!--                                <div>-->
+        <!--                                    <strong><t t-esc="n.name"/></strong>-->
+        <!--                                    <br/>-->
+        <!--                                    <small class="text-muted"><t t-esc="n.description"/></small>-->
+        <!--                                    <br/>-->
+        <!--                                    <small class="text-muted">-->
+        <!--                                        <t t-esc="n.create_date.strftime('%d %b %Y, %I:%M %p') if n.create_date else ''"/>-->
+        <!--                                    </small>-->
+        <!--                                </div>-->
+        <!--                                <div class="text-end">-->
+        <!--                                    &lt;!&ndash; Show each tower tag &ndash;&gt;-->
+        <!--                                    <t t-foreach="n.tower_id" t-as="tower">-->
+        <!--                                        <span class="badge bg-secondary me-1">-->
+        <!--                                            <t t-esc="tower.name"/>-->
+        <!--                                        </span>-->
+        <!--                                    </t>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </a>-->
+        <!--                    </t>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </t>-->
+        <!--    </template>-->
 
 
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<odoo>-->
-    <!-- Portal Home: Notices Tab -->
-<!--    <template id="portal_my_home_notice" inherit_id="portal.portal_my_home">-->
-<!--        <xpath expr="//div[contains(@class,'o_portal_docs')]" position="inside">-->
-<!--            <t t-call="portal.portal_docs_entry">-->
-<!--                <t t-set="title" t-value="'Notices'"/>-->
-<!--                <t t-set="url" t-value="'/my/notices'"/>-->
-<!--                <t t-set="count" t-value="notice_count"/>-->
-<!--                <t t-set="placeholder_count" t-value="'notice_count'"/>-->
-<!--            </t>-->
-<!--        </xpath>-->
-<!--    </template>-->
+        <!--    &lt;!&ndash; Notice Detail &ndash;&gt;-->
+        <!--    <template id="portal_notice_detail">-->
+        <!--        <t t-call="portal.portal_layout">-->
+        <!--            <div class="container mt-4">-->
+        <!--                <div class="card">-->
+        <!--                    <div class="card-header d-flex justify-content-between align-items-center">-->
+        <!--                        <h4 class="mb-0"><t t-esc="notice.name"/></h4>-->
+        <!--                        <span class="badge bg-success">-->
+        <!--                            <t t-esc="notice.stage"/>-->
+        <!--                        </span>-->
+        <!--                    </div>-->
+        <!--                    <div class="card-body">-->
+        <!--                        <dl class="row">-->
+        <!--                            <dt class="col-sm-3">Topic</dt>-->
+        <!--                            <dd class="col-sm-9"><t t-esc="notice.name"/></dd>-->
 
+        <!--                            <dt class="col-sm-3">Description</dt>-->
+        <!--                            <dd class="col-sm-9"><t t-esc="notice.description"/></dd>-->
 
-<!--    &lt;!&ndash; Notice List &ndash;&gt;-->
-<!--    <template id="portal_notice_board">-->
-<!--        <t t-call="portal.portal_layout">-->
-<!--            <div class="container mt-4">-->
-<!--                <div class="d-flex justify-content-between align-items-center mb-3">-->
-<!--                    <h3>Notice Board</h3>-->
-<!--                </div>-->
+        <!--                            <dt class="col-sm-3">Date</dt>-->
+        <!--                            <dd class="col-sm-9">-->
+        <!--                                <t t-esc="notice.create_date.strftime('%d %b %Y, %I:%M %p') if notice.create_date else ''"/>-->
+        <!--                            </dd>-->
 
-<!--                <t t-if="not notices">-->
-<!--                    <div class="alert alert-info">No notices available for your tower.</div>-->
-<!--                </t>-->
+        <!--                            <dt class="col-sm-3">Tower(s)</dt>-->
+        <!--                            <dd class="col-sm-9">-->
+        <!--                                <t t-foreach="notice.tower_id" t-as="tower">-->
+        <!--                                    <span class="badge bg-secondary me-1">-->
+        <!--                                        <t t-esc="tower.name"/>-->
+        <!--                                    </span>-->
+        <!--                                </t>-->
+        <!--                            </dd>-->
+        <!--                        </dl>-->
+        <!--                    </div>-->
+        <!--                    <div class="card-footer">-->
+        <!--                        <a href="/my/notices" class="btn btn-secondary">&#8592; Back to Notices</a>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </t>-->
+        <!--    </template>-->
 
-<!--                <div class="list-group">-->
-<!--                    <t t-foreach="notices" t-as="n">-->
-<!--                        <a t-att-href="'/my/notice/%s/' % n.id"-->
-<!--                           class="list-group-item list-group-item-action">-->
-<!--                            <div class="d-flex justify-content-between align-items-start">-->
-<!--                                <div>-->
-<!--                                    <strong><t t-esc="n.name"/></strong>-->
-<!--                                    <br/>-->
-<!--                                    <small class="text-muted"><t t-esc="n.description"/></small>-->
-<!--                                    <br/>-->
-<!--                                    <small class="text-muted">-->
-<!--                                        <t t-esc="n.create_date.strftime('%d %b %Y, %I:%M %p') if n.create_date else ''"/>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                                <div class="text-end">-->
-<!--                                    &lt;!&ndash; Show each tower tag &ndash;&gt;-->
-<!--                                    <t t-foreach="n.tower_id" t-as="tower">-->
-<!--                                        <span class="badge bg-secondary me-1">-->
-<!--                                            <t t-esc="tower.name"/>-->
-<!--                                        </span>-->
-<!--                                    </t>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </a>-->
-<!--                    </t>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </t>-->
-<!--    </template>-->
-
-
-<!--    &lt;!&ndash; Notice Detail &ndash;&gt;-->
-<!--    <template id="portal_notice_detail">-->
-<!--        <t t-call="portal.portal_layout">-->
-<!--            <div class="container mt-4">-->
-<!--                <div class="card">-->
-<!--                    <div class="card-header d-flex justify-content-between align-items-center">-->
-<!--                        <h4 class="mb-0"><t t-esc="notice.name"/></h4>-->
-<!--                        <span class="badge bg-success">-->
-<!--                            <t t-esc="notice.stage"/>-->
-<!--                        </span>-->
-<!--                    </div>-->
-<!--                    <div class="card-body">-->
-<!--                        <dl class="row">-->
-<!--                            <dt class="col-sm-3">Topic</dt>-->
-<!--                            <dd class="col-sm-9"><t t-esc="notice.name"/></dd>-->
-
-<!--                            <dt class="col-sm-3">Description</dt>-->
-<!--                            <dd class="col-sm-9"><t t-esc="notice.description"/></dd>-->
-
-<!--                            <dt class="col-sm-3">Date</dt>-->
-<!--                            <dd class="col-sm-9">-->
-<!--                                <t t-esc="notice.create_date.strftime('%d %b %Y, %I:%M %p') if notice.create_date else ''"/>-->
-<!--                            </dd>-->
-
-<!--                            <dt class="col-sm-3">Tower(s)</dt>-->
-<!--                            <dd class="col-sm-9">-->
-<!--                                <t t-foreach="notice.tower_id" t-as="tower">-->
-<!--                                    <span class="badge bg-secondary me-1">-->
-<!--                                        <t t-esc="tower.name"/>-->
-<!--                                    </span>-->
-<!--                                </t>-->
-<!--                            </dd>-->
-<!--                        </dl>-->
-<!--                    </div>-->
-<!--                    <div class="card-footer">-->
-<!--                        <a href="/my/notices" class="btn btn-secondary">&#8592; Back to Notices</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </t>-->
-<!--    </template>-->
-
-<!--</odoo>-->
+        <!--</odoo>-->

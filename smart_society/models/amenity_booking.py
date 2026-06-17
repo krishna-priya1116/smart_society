@@ -102,11 +102,9 @@ class GuesthouseBookingMembers(models.Model):
     _name = 'guesthouse.booking.members'
     _description = 'Guesthouse Booking Members'
 
-
     guesthouse_booking_id = fields.Many2one('guesthouse.booking', string='Guest House')
     guest_house_id = fields.Many2one('society.guesthouse', string='Guest House')
     tower_id=fields.Many2one(related='guesthouse_booking_id.tower_id',store=True,readonly=False)
-
     # guest_house_id=fields.Many2one('society.guesthouse',string='Guest House')
     # tower_id=fields.Many2one(related='guest_house_id.tower_id')
     # guesthouse_booking_id = fields.Many2one('guesthouse.booking', string='Guest House')
@@ -115,25 +113,6 @@ class GuesthouseBookingMembers(models.Model):
     member_mobile = fields.Char(string='Member Mobile')
     member_id_proof = fields.Char(string='Member ID Proof', required=True)
     emergency_number = fields.Char(string='Emergency Number')
-
-    # @api.onchange('guesthouse_booking_id.check_out_date')
-    # def check_out_history(self):
-    #     for record in self:
-    #         if record.guesthouse_booking_id.check_out_date:
-    #             print('\n\n\n..........record.guesthouse_booking_id.check_out_date.....')
-    #             self.env['guesthouse.members.history'].create({
-    #                 'gh_booking_member_id': record.id,
-    #                 'guesthouse_booking_id': record.guesthouse_booking_id.id,
-    #                 'member_name': record.member_name,
-    #                 'member_age': record.member_age,
-    #                 'member_mobile': record.member_mobile,
-    #                 'member_id_proof': record.member_id_proof,
-    #                 'emergency_number': record.emergency_number,
-    #             })
-    #             # record.booking_members_ids.unlink()
-    #             # record.guesthouse_booking_id.check_in_date.unlink()
-    #             # record.guesthouse_booking_id.check_out_date.unlink()
-    #             record.guesthouse_booking_id.is_occupied=False
 
 
 class GuesthouseMemberHistory(models.Model):
@@ -144,7 +123,6 @@ class GuesthouseMemberHistory(models.Model):
     # guest_house_id=fields.Many2one('society.guesthouse',string='Guest House',required=True)
     guest_house_id = fields.Many2one('society.guesthouse', string='Guest House')
     tower_id=fields.Many2one(related='guesthouse_booking_id.tower_id',store=True,readonly=False)
-
     check_in_date = fields.Datetime(string='Check In Date')
     check_out_date = fields.Datetime(string='Check Out Date')
     # gh_booking_member_id = fields.Many2one('guesthouse.booking.members', string='Guest House')
@@ -161,7 +139,7 @@ class GymBooking(models.Model):
     _description = 'Gym Booking'
 
     name = fields.Char(string='Name')
-    # resident_id=fields.Many2one('resident.registrations',string='Resident ID',default=lambda self:self.env.user.id)
+    # resident_id=fields.Many2one('resident.registrations',string='Resident')
     resident_id=fields.Many2one('res.users',string='Resident')
     # flat_id=fields.Many2one(related='resident_id.flat_id',string='Flat',store=True,readonly=True)
     tower_id=fields.Many2one(related='resident_id.tower_id',string="Tower",store=True,readonly=True)
@@ -180,6 +158,9 @@ class GymBooking(models.Model):
     @api.depends('days', 'months', 'gym_for_days', 'gym_for_months', 'gym_booking_charge')
     def _compute_booking_charge(self):
         for record in self:
+            if self.env.user.tower_id:
+                print('\n\n\n....................self.env.user.tower_id.....................',self.env.user.tower_id)
+                record.tower_id=self.env.user.tower_id
             record.name=record.id
             record.society_id=record.tower_id.society_id
             amount = 0.0
@@ -247,6 +228,9 @@ class ClubhouseBooking(models.Model):
     def _compute_cbh_booking_charge(self):
         for record in self:
             record.society_id = record.tower_id.society_id
+            if self.env.user.tower_id:
+                print('\n\n\n....................self.env.user.tower_id.....................',self.env.user.tower_id)
+                record.tower_id=self.env.user.tower_id
             resident_count = len(record.resident_id)
             record.total_charge = resident_count * record.cbh_booking_charge_id
 

@@ -37,7 +37,6 @@
         <field name="name">Committee Registration</field>
         <field name="res_model">society.committee</field>
         <field name="view_mode">list,form</field>
-
     </record>
 
         <record id="resident_security_action" model="ir.actions.act_window">
@@ -137,6 +136,24 @@
     <record id="clubhouse_booking_action" model="ir.actions.act_window">
         <field name="name">Clubhouse Booking</field>
         <field name="res_model">clubhouse.booking</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    
+    <record id="view_society_committee_action" model="ir.actions.act_window">
+        <field name="name">Society Committee</field>
+        <field name="res_model">society.committee</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="view_tower_committee_action" model="ir.actions.act_window">
+        <field name="name">Tower Committee</field>
+        <field name="res_model">tower.committee</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="view_block_committee_action" model="ir.actions.act_window">
+        <field name="name">Block Committee</field>
+        <field name="res_model">block.committee</field>
         <field name="view_mode">list,form</field>
     </record>
 

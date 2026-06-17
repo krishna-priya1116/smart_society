@@ -214,7 +214,7 @@ class VehicleTracking(models.Model):
     flat_id = fields.Many2one(related='resident_id.flat_id', string='Flat')
     tower_id = fields.Many2one(related='flat_id.tower_id', string='Tower')
 
-    visitor_phone = fields.Char(related='visitor_id.mobile_number',string='Phone number')
+    visitor_phone = fields.Char(related='visitor_id.mobile_number',string='Phone number',readonly=False)
     has_vehicle = fields.Boolean(string='Has Vehicle', default=False)
     vehicle_id = fields.Many2one('vehicle.registrations', string='Vehicle')
     vehicle_number = fields.Char(related="visitor_id.vehicle_number", string='Vehicle number')
@@ -227,6 +227,7 @@ class VehicleTracking(models.Model):
     security_id = fields.Many2one('security.guard', string='Security',
                                   default=lambda self: self.env['security.guard'].search(
                                       [('security_id', '=', self.env.user.id)], limit=1))
+    # , compute = '_compute_current_security'
     # not assinging
     visiting_flat = fields.Many2one('society.flat', string='Visiting Flat')
     # visiting_tower=fields.Many2one('society.tower',string='Visiting Tower')
@@ -237,6 +238,14 @@ class VehicleTracking(models.Model):
         ('ev_charging', 'Ev Charging'), ('other', 'Other')
     ])
     visit_purpose = fields.Char(string='Visit Purpose')
+
+    #
+    # def _compute_current_security(self):
+    #     for record in self:
+    #         guard=self.env['security.guard'].search([
+    #             ('security_id','=',self.env.user.id)
+    #         ],limit=1)
+    #         print('..............guard',guard)
 
     @api.constrains('person_type', 'resident_id', 'flat_id', 'tower_id', 'parking_slot_id', 'entry_time', 'exit_time')
     def track_according_type(self):
@@ -274,11 +283,11 @@ class VehicleTracking(models.Model):
     @api.constrains('person_type')
     def assign_parking_type(self):
         for record in self:
-
-            if not record.visiting_tower and not record.visiting_flat:
-                raise ValidationError('Visiting tower or flat is required!')
-            if not record.visit_purpose:
-                raise ValidationError('Visiting Purpose required')
+            if record.person_type != 'resident':
+                if not record.visiting_tower and not record.visiting_flat:
+                    raise ValidationError('Visiting tower or flat is required!')
+                if not record.visit_purpose:
+                    raise ValidationError('Visiting Purpose required')
 
             if record.person_type == 'other':
                 record.parking_type = 'other_parking'

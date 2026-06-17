@@ -6,7 +6,7 @@
         <field name="model_id" ref="smart_society.model_complaint_desk"/>
         <field name="subject">Complaint Notification - {{ object.name or 'Complaint' }}</field>
         <field name="email_from">{{ user.email_formatted }}</field>
-        <field name="email_to">{{ object.committee_emails }}</field>
+<!--        <field name="email_to">{{ object.committee_emails }}</field>-->
         <field name="auto_delete" eval="True"/>
         <field name="body_html" type="html">
             <div>
@@ -92,7 +92,7 @@
         <field name="model_id" ref="smart_society.model_resident_alerts"/>
         <field name="subject">Alert Notification - {{ object.name or 'Alerts'}}</field>
         <field name="email_from">{{ user.email_formatted }}</field>
-        <field name="email_to">{{ object.committee_emails }}</field>
+<!--        <field name="email_to">{{ object.committee_emails }}</field>-->
         <field name="auto_delete" eval="True"/>
         <field name="body_html" type="html">
             <div>

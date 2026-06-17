@@ -20,10 +20,11 @@ class ResidentAlerts(models.Model):
     resident_id=fields.Many2many('resident.registrations',string='Resident')
     create_date=fields.Datetime(string='Date and Time',default=fields.Datetime.now)
     to_committee = fields.Many2one('society.committee')
-    committee_emails = fields.Char(
-        string='Committee Emails',
-        compute='_compute_committee_emails'
-    )
+    # committee_emails = fields.Char(
+    #     string='Committee Emails',
+    #     compute='_compute_committee_emails'
+    # )
+    committee_emails = fields.Char(string='Committee Emails')
     flat_id_save=fields.Char(compute='_compute_flat_id_save')
     
     @api.depends('to_committee')
