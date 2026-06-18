@@ -20,18 +20,35 @@ class Committee(models.Model):
     society_committee_members=fields.Many2many('res.users',string='Committee Members',
                                                compute='_compute_committee_members',store=True)
 
+    #         committee_group = self.env.ref('smart_society.group_registration_committee')
+    #         portal_group = self.env.ref('base.group_portal')
+    #         internal_group = self.env.ref('base.group_user')
     @api.depends('chairman_id','secretary_id','treasurer_id')
     def _compute_committee_members(self):
         for record in self:
-            print('\n\n\n........record...',record)
-            # member_list= [record.chairman_id, record.secretary_id, record.treasurer_id]
-            # print('\n\n\n............member_list .................',member_list)
+            print('\n\n\n........record...', record)
             member=(record.chairman_id | record.secretary_id | record.treasurer_id)
-            record.society_committee_members=member
+            record.society_committee_members = member
 
+    def action_assign_committee(self):
+        for record in self:
+            committee_group=self.env.ref('smart_society.group_registration_committee')
+            portal_group=self.env.ref('base.group_portal')
+            if record.society_committee_members:
+                record.society_committee_members.write({
+                    'group_ids': [
+                        (3, portal_group.id),
+                        (4, committee_group.id),
+                        # (4,internal_group.id),
+                    ]
+                })
 
     def action_new_society_committee(self):
         for record in self:
+            committee_group=self.env.ref('smart_society.group_registration_committee')
+            portal_group=self.env.ref('base.group_portal')
+            # internal_group=self.env.ref('base.group_user')
+
             print('\n\n\n........record...',record)
             self.env['society.committee.history'].create({
                 'name':record.name,
@@ -43,13 +60,23 @@ class Committee(models.Model):
                 'date_to':fields.Date.today(),
                 'society_committee_id':record.id,
             })
+            members = record.society_committee_members
+            if members:
+                members.write({
+                    'group_ids': [
+                        (3, committee_group.id),
+                        # (3, internal_group.id),
+                        (4, portal_group.id),
+                    ]
+                })
+
             record.write({
                 'chairman_id': False,
                 'secretary_id': False,
                 'treasurer_id': False,
                 'date_from': fields.Date.today(),
                 'date_to': False,
-                'society_committee_members': False,
+                # 'society_committee_members': False,
             })
 
 
@@ -87,18 +114,44 @@ class TowerCommittee(models.Model):
     date_from = fields.Date(string='From')
     date_to = fields.Date(string='To')
 
+
+    def action_assign_tower_committee(self):
+        for record in self:
+            committee_group=self.env.ref('smart_society.group_registration_tower_committee')
+            portal_group=self.env.ref('base.group_portal')
+            if record.tower_member_id:
+                record.tower_member_id.write({
+                    'group_ids': [
+                        (3, portal_group.id),
+                        (4, committee_group.id),
+                        # (4,internal_group.id),
+                    ]
+                })
+
     def action_new_tower_committee(self):
         for record in self:
+            committee_group = self.env.ref('smart_society.group_registration_tower_committee')
+            portal_group = self.env.ref('base.group_portal')
             print('\n\n\n........record...', record)
             self.env['tower.committee.history'].create({
-                'name':record.name,
-                'tower_member_id':record.tower_member_id.id,
-                'tower_id':record.tower_id.id,
-                'society_committee_id':record.society_committee_id.id,
-                'date_from':record.date_from,
-                'date_to':fields.Date.today(),
-                'tower_committee_id':record.id,
+                'name': record.name,
+                'tower_member_id': record.tower_member_id.id,
+                'tower_id': record.tower_id.id,
+                'society_committee_id': record.society_committee_id.id,
+                'date_from': record.date_from,
+                'date_to': fields.Date.today(),
+                'tower_committee_id': record.id,
             })
+
+            members = record.tower_member_id
+            if members:
+                members.write({
+                    'group_ids': [
+                        (3, committee_group.id),
+                        # (3, internal_group.id),
+                        (4, portal_group.id),
+                    ]
+                })
 
             record.write({
                 'tower_member_id':False,
@@ -141,8 +194,25 @@ class BlockCommittee(models.Model):
     date_from = fields.Date(string='From')
     date_to = fields.Date(string='To')
 
+
+
+    def action_assign_block_committee(self):
+        for record in self:
+            committee_group=self.env.ref('smart_society.group_registration_block_committee')
+            portal_group=self.env.ref('base.group_portal')
+            if record.block_member_id:
+                record.block_member_id.write({
+                    'group_ids': [
+                        (3, portal_group.id),
+                        (4, committee_group.id),
+                        # (4,internal_group.id),
+                    ]
+                })
+
     def action_new_block_committee(self):
         for record in self:
+            committee_group=self.env.ref('smart_society.group_registration_block_committee')
+            portal_group=self.env.ref('base.group_portal')
             print('\n\n\n........record...', record)
             self.env['block.committee.history'].create({
                 'name':record.name,
@@ -154,6 +224,16 @@ class BlockCommittee(models.Model):
                 'date_from':record.date_from,
                 'date_to':fields.Date.today(),
             })
+
+            members = record.block_member_id
+            if members:
+                members.write({
+                    'group_ids': [
+                        (3, committee_group.id),
+                        # (3, internal_group.id),
+                        (4, portal_group.id),
+                    ]
+                })
             record.write({
                 'block_member_id':False,
                 'date_from':fields.Date.today(),
@@ -232,7 +312,7 @@ class BlockCommitteeHistory(models.Model):
 #         print('\n\n\n..............user.....',user)
 #
 #         user.write({
-#             'group_ids':[
+#             ' s':[
 #                 (3,portal_group.id),
 #                 (4,internal_group.id),
 #                 (4,committee_group.id),

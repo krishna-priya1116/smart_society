@@ -57,8 +57,8 @@
             <list>
                 <field name="name"/>
                 <field name="resident_id"/>
-                <field name="tower_id"/>
                 <field name="flat_id"/>
+                <field name="tower_id"/>
                 <field name="description" optional="hide"/>
                 <field name="stage"/>
             </list>
@@ -107,6 +107,16 @@
                             type="object"
                             invisible="stage not in ('reject', 'hold')"/>
 
+                    <button name="action_not_resolved_block"
+                            string="Move To Tower Committee"
+                            type="object"
+                            invisible="stage in ('reject','on_process','resolve','not_resolved_block')"/>
+
+                    <button name="action_not_resolved_tower"
+                            string="Move To Society Committee"
+                            type="object"
+                            invisible="stage in ('reject','on_process','resolve','not_resolved_tower')"/>
+
                     <field name="stage" widget="statusbar"
                            statusbar_visible="draft,send,on_process,resolve"
                            options="{'clickable': '0'}"/>
@@ -121,7 +131,12 @@
                             <field name="tower_id"/>
                         </group>
                         <group>
-                            <field name="to_committee"/>
+                            <field name="block_committee_id"/>
+                            <field name="tower_committee_id"/>
+                            <field name="society_committee_id"/>
+                        </group>
+                        <group>
+<!--                            <field name="to_committee"/>-->
                             <field name="help_desk_id"/>
                             <field name="description"/>
                             <field name="proof" widget="image"/>
@@ -134,6 +149,7 @@
                 <!--                <field name="activity_ids"/>-->
                 <!--                <field name="message_ids"/>-->
                 <!--            </div>-->
+                <chatter/>
             </form>
         </field>
     </record>

@@ -19,26 +19,66 @@ class ResidentAlerts(models.Model):
     security_id=fields.Many2many('security.guard',string='Security')
     resident_id=fields.Many2many('resident.registrations',string='Resident')
     create_date=fields.Datetime(string='Date and Time',default=fields.Datetime.now)
-    to_committee = fields.Many2one('society.committee')
-    # committee_emails = fields.Char(
-    #     string='Committee Emails',
-    #     compute='_compute_committee_emails'
-    # )
-    committee_emails = fields.Char(string='Committee Emails')
+    society_committee_id = fields.Many2one('society.committee')
+    tower_committee_id = fields.Many2one('tower.committee')
+    block_committee_id=fields.Many2one('block.committee')
+    committee_emails = fields.Char(string='Committee Emails',compute='_compute_committee_emails')
+    # committee_emails = fields.Char(string='Committee Emails')
     flat_id_save=fields.Char(compute='_compute_flat_id_save')
-    
-    @api.depends('to_committee')
+
+
+    @api.depends('user_id')
     def _compute_committee_emails(self):
         for record in self:
-            emails = []
-            for partner in record.to_committee.committee_name_id:
-                if partner.email:
-                    emails.append(partner.email)
-            if record.to_committee.chairman_id.email:
-                emails.append(record.to_committee.chairman_id.email)
-            if record.to_committee.secretary_id.email:
-                emails.append(record.to_committee.secretary_id.email)
-            record.committee_emails = ",".join(set(emails))
+            emails=[]
+            resident=self.env['resident.registrations'].search([
+                ('user_id','=',record.user_id.id)
+            ])
+            print('resident.........',resident)
+            print('resident flat_id.........',resident.flat_id)
+            print('resident.........',resident.tower_id)
+            print('resident.........',resident.tower_id.block)
+
+            block_committee = self.env['block.committee'].search([
+                ('tower_id', '=', record.tower_id.id),
+                ('block', '=', resident.tower_id.block),
+            ], limit=1)
+            print('block,................',block_committee)
+            if block_committee.block_member_id.email:
+                print('block_committee.block_committee_id.email....................',block_committee.block_committee_id.email)
+                emails.append(block_committee.block_member_id.email)
+
+            tower_committee=self.env['tower.committee'].search([
+                ('tower_id','=',resident.tower_id.id)
+            ])
+            print('tower committee..............',tower_committee)
+            if tower_committee.tower_member_id.email:
+                print('block_committee.block_committee_id.email....................',tower_committee.tower_member_id.email)
+                emails.append(tower_committee.tower_member_id.email)
+
+            society_committee=self.env['society.committee'].search([
+                ('society_id','=',resident.tower_id.society_id.id)
+            ])
+            print('society_committee..................', society_committee)
+            members = record.society_committee_id.society_committee_members
+            emails.extend(members.mapped('partner_id.email'))
+            print('society_id.....emails..............',emails)
+
+            record.committee_emails = ",".join(emails)
+
+
+    # @api.depends('to_committee')
+    # def _compute_committee_emails(self):
+    #     for record in self:
+    #         emails = []
+    #         for partner in record.to_committee.committee_name_id:
+    #             if partner.email:
+    #                 emails.append(partner.email)
+    #         if record.to_committee.chairman_id.email:
+    #             emails.append(record.to_committee.chairman_id.email)
+    #         if record.to_committee.secretary_id.email:
+    #             emails.append(record.to_committee.secretary_id.email)
+    #         record.committee_emails = ",".join(set(emails))
 
     # @api.depends('to_committee')
     # def _compute_committee_emails(self):
@@ -178,48 +218,3 @@ class EmergencyBroadcasts(models.Model):
                 email_layout_xmlid='mail.mail_notification_layout_with_responsible_signature',
                 subtype_xmlid='mail.mt_comment',
             )
-        # self.save_to_model()
-
-
-    # def save_to_model(self):
-    #     self.ensure_one()
-    #
-    #     save_record=self.env['emergency.broadcast'].create({
-    #         'name':self.name,
-    #         'description':self.description,
-    #         'flat_id':self.flat_ids,
-    #         'tower_ids':self.tower_ids,
-    #         'datetime':self.datetime,
-    #         # 'resident_emails':self.resident_emails,
-    #     })
-    #     return {
-    #         'type': 'ir.actions.act_window',
-    #         'res_model': 'emergency.broadcast.save',
-    #         'res_id': save_record.id,
-    #         'view_mode': 'form,list',
-    #         'target': 'current',
-    #     }
-
-
-  # def save_to_model(self):
-    #     self.ensure_one()
-    #
-    #     save_record=self.env['society.alert'].create({
-    #         'name':self.name,
-    #         'description':self.description,
-    #         'flat_id':self.flat_id,
-    #         # 'tower_id':self.tower_id,
-    #         'user_id':self.user_id,
-    #         'location':self.location,
-    #         'datetime':self.datetime,
-    #         'to_committee':self.to_committee,
-    #         # 'committee_emails':self.committee_emails,
-    #     })
-    #     return {
-    #         'type': 'ir.actions.act_window',
-    #         'res_model': 'society.alert.save',
-    #         'res_id': save_record.id,
-    #         'view_mode': 'form,list',
-    #         'target': 'current',
-    #     }
-

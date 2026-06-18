@@ -1,5 +1,5 @@
-from odoo import api,fields,models
-from odoo.exceptions import UserError, ValidationError
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError, UserError
 
 
 class Helpdesk(models.Model):
@@ -12,26 +12,24 @@ class Helpdesk(models.Model):
     notice_ids=fields.Many2many('notice.board',string='Notices')
 
 
-from odoo import models, fields, api
-from odoo.exceptions import ValidationError, UserError
-
-
 class Complaint(models.Model):
     _name = 'complaint.desk'
     _description = 'Complaint desk'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Complaint', required=True)
-    tower_id = fields.Many2one(related='flat_id.tower_id', string='Tower', required=True)
-    flat_id = fields.Many2one(related='resident_id.flat_id', string='Flat', required=True)
     resident_id = fields.Many2one('resident.registrations', string='Resident')
+    flat_id = fields.Many2one(related='resident_id.flat_id', string='Flat', required=True)
+    tower_id = fields.Many2one(related='flat_id.tower_id', string='Tower', required=True)
     description = fields.Char(string='Description', required=True)
     create_date = fields.Datetime(string='Create Date', default=fields.Date.today())
-    to_committee = fields.Many2one('society.committee')
+    block_committee_id = fields.Many2one('block.committee')
+    tower_committee_id=fields.Many2one('tower.committee')
+    society_committee_id=fields.Many2one('society.committee')
     help_desk_id = fields.Many2one('help.desk', string='Helpdesk')
     user_id = fields.Many2one('res.users', string='Resident', default=lambda self: self.env.user)
     # committee_emails = fields.Char(string='Committee Emails', compute='_compute_committee_emails')
-    committee_emails = fields.Char(string='Committee Emails')
+    committee_emails = fields.Char(string='Committee Emails',compute='_compute_committee_emails')
     proof = fields.Binary(string='Proof Photo/video')
 
     stage = fields.Selection([
@@ -41,7 +39,52 @@ class Complaint(models.Model):
         ('hold',       'Hold'),
         ('resolve',    'Resolved'),
         ('reject',     'Rejected'),
+        ('not_resolved_block','Move to Tower'),
+        ('not_resolved_tower', 'Move to Committee'),
     ], string='Stage', default='draft', tracking=True)
+
+    @api.constrains('stage')
+    def action_committee_complaints(self):
+
+        if self.env.user.has_group('smart_society.group_registration_tower_committee'):
+            tower_committee = self.env['tower.committee'].search([
+                ('tower_member_id', '=', self.env.user.id)
+            ], limit=1)
+
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Tower Complaints',
+                'res_model': 'complaint.desk',
+                'view_mode': 'list,form',
+                'domain': [
+                    ('stage', '=', 'not_resolved_block'),
+                    ('tower_id', '=', tower_committee.tower_id.id),
+                ],
+            }
+
+    # def committee_wise_complaints(self):
+    #     if self.env.user.has_group('smart_society.group_registration_tower_committee'):
+    #         tower_committee = self.env['tower.committee'].search([
+    #             ('tower_member_id', '=', self.env.user.id)
+    #         ], limit=1)
+    #
+    #         complaints = self.env['complaint.desk'].search([
+    #             ('stage', '=', 'not_resolved_block'),
+    #             ('tower_id', '=', tower_committee.tower_id.id),
+    #         ])
+    #
+    #         return complaints
+
+
+    # def committee_wise_complaints(self):
+    #     for record in self:
+    #         if self.env.user.has_group('smart_society.group_registration_tower_committee'):
+    #             complaints=self.env['complaint.desk'].search([
+    #                 ('stage','=','not_resolved_block')
+    #             ])
+    #             return complaints
+
+
 
 
     def action_send(self):
@@ -81,6 +124,36 @@ class Complaint(models.Model):
                 raise ValidationError("Only Rejected or Hold complaints can be reset to Draft.")
             record.stage = 'draft'
 
+    def action_not_resolved_block(self):
+        for record in self:
+            if record.stage in ('resolve','reject','on_process'):
+                raise ValidationError('Cant Move the resolve or rejected Complaint.')
+            record.stage='not_resolved_block'
+            print('record.stage..........',record.stage)
+
+            if record.stage=='not_resolved_block':
+                tower_committee = self.env['tower.committee'].search([
+                    ('tower_id', '=', record.tower_id.id),
+                ], limit=1)
+                if not record.tower_committee_id:
+                    record.tower_committee_id = tower_committee
+
+    def action_not_resolved_tower(self):
+        for record in self:
+            if record.stage in ('resolve','reject','on_process'):
+                raise ValidationError('Cant Move the resolve or rejected Complaint.')
+            record.stage='not_resolved_tower'
+            print('record.stage..........',record.stage)
+
+            if record.stage=='not_resolved_tower':
+                society_committee=self.env['society.committee'].search([
+                    ('society_id','=',record.tower_id.society_id.id)
+                ])
+                if not record.society_committee_id:
+                    record.society_committee_id=society_committee
+
+
+
 
     def _send_complaint_email(self):
         template = self.env.ref(
@@ -96,7 +169,7 @@ class Complaint(models.Model):
         )
 
 
-    @api.onchange('resident_id')
+    @api.onchange('stage','resident_id','flat_id','tower_id')
     def help_desk_id_check(self):
         for record in self:
             help_desk = self.env['help.desk'].search([
@@ -105,18 +178,76 @@ class Complaint(models.Model):
             if not record.help_desk_id:
                 record.help_desk_id = help_desk
 
-    @api.depends('to_committee')
+            block_committee=self.env['block.committee'].search([
+                ('tower_id','=',record.tower_id.id),
+                ('block','=',record.tower_id.block),
+            ],limit=1)
+            print('\n\n\n............block_committee............')
+            if not record.block_committee_id:
+                print('\n\n.....before record.block_committee_id......',record.block_committee_id)
+                record.block_committee_id=block_committee
+                print('\n\n\n...after...record.block_committee_id...',record.block_committee_id)
+
+            if record.stage=='not_resolved_block':
+                tower_committee = self.env['tower.committee'].search([
+                    ('tower_id', '=', record.tower_id.id),
+                ], limit=1)
+                if not record.tower_committee_id:
+                    record.tower_committee_id = tower_committee
+
+            if record.stage=='not_resolved_tower':
+                society_committee=self.env['society.committee'].search([
+                    ('society_id','=',record.tower_id.society_id.id)
+                ])
+                if not record.society_committee_id:
+                    record.society_committee_id=society_committee
+
+
+
+
+
+    @api.depends('stage','block_committee_id','tower_committee_id','society_committee_id')
     def _compute_committee_emails(self):
         for record in self:
-            emails = []
-            for partner in record.to_committee.committee_name_id:
-                if partner.email:
-                    emails.append(partner.email)
-            if record.to_committee.chairman_id.email:
-                emails.append(record.to_committee.chairman_id.email)
-            if record.to_committee.secretary_id.email:
-                emails.append(record.to_committee.secretary_id.email)
-            record.committee_emails = ",".join(set(emails))
+            emails=[]
+            if record.stage=='send':
+                print('\n\n......it should go to block committee.........')
+                if record.block_committee_id.block_member_id.email:
+                    print('record.block_committee_id.block_member_id....................',record.block_committee_id.block_member_id)
+                    emails.append(record.block_committee_id.block_member_id.email)
+
+            elif record.stage=='not_resolved_block':
+                print('\n\n........it should go to tower committee.....')
+                if record.tower_committee_id.tower_member_id.email:
+                    print('record.tower_committee_id.tower_member_id.email....................',record.tower_committee_id.tower_member_id.emaild)
+                    emails.append(record.tower_committee_id.tower_member_id.email)
+
+            # elif record.stage=='not_resolved_tower':
+
+            elif record.stage == 'not_resolved_tower':
+                print('\n\n\n.......it should go to society committee.......')
+                members = record.society_committee_id.society_committee_members
+                emails.extend(members.mapped('partner_id.email'))
+
+            record.committee_emails = ",".join(
+                filter(None, set(emails))
+            )
+            print('\n\n\n.......record.committee_emails...........',record.committee_emails)
+
+
+
+    # @api.depends('to_committee')
+    # def _compute_committee_emails(self):
+    #     for record in self:
+    #         emails = []
+    #         for partner in record.to_committee.committee_name_id:
+    #             if partner.email:
+    #                 emails.append(partner.email)
+    #         if record.to_committee.chairman_id.email:
+    #             emails.append(record.to_committee.chairman_id.email)
+    #         if record.to_committee.secretary_id.email:
+    #             emails.append(record.to_committee.secretary_id.email)
+    #         record.committee_emails = ",".join(set(emails))
 
 class NoticeBoard(models.Model):
     _name = 'notice.board'
@@ -268,132 +399,6 @@ class SocietyEvent(models.Model):
 
 
 
-    # @api.onchange('tower_id')
-    # def _check_tower_id(self):
-    #     for record in self:
-    #
-    #         list_tower=[]
-    #         if record.tower_id:
-    #             print('\n\n\n......record.tower_id.....',record.tower_id)
-    #             if len(record.tower_id)>1:
-    #                 list_tower.append(record.tower_id)
-    #         print('\n\n\n......record.tower_id.....',list_tower)
-    # #
-
-
-
-
-    # @api.constrains('tower_id')
-    # def _check_tower_id(self):
-    #     for record in self:
-    #         list1=[]
-    #         if record.tower_id:
-    #             print('\n\n\nrecord.tower_id.....................',record.tower_id)
-    #         help_desk_id=self.env['help.desk'].search([
-    #             ('tower_id','=',record.tower_id.id),
-    #         ])
-    #         print('.........help_desk_id.....................',help_desk_id)
-    #
-    #         list1.append(help_desk_id)
-    #         print('\n\n\n.........list1............',list1)
-    #         for i in list1:
-    #             record.write({
-    #                 'help_desk_id':i,
-    #             })
-    #         print('\n\n\n.......record.help_desk_id.....',record.help_desk_id)
-
-
-
-
-            # , limit = 1
-            # record.help_desk_id=record.help_desk_id.mapped(list1)
-            # if not help_desk_id:
-            #     print('')
-            # record.help_desk_id.mapped('help_desk_id')
-
-
-
-
-# class Complaint(models.Model):
-#     _name = 'complaint.desk'
-#     _description = 'Complaint desk'
-#     _inherit = ['mail.thread', 'mail.activity.mixin']
-#
-#     name = fields.Char(string='Complaint', required=True)
-#     tower_id = fields.Many2one(related='flat_id.tower_id', string='Tower', required=True)
-#     # tower_id = fields.Many2one('society.tower', string='Tower', required=True)
-#     # flat_id = fields.Many2one('society.flat', string='Flat', required=True)
-#     flat_id = fields.Many2one(related='resident_id.flat_id', string='Flat', required=True)
-#     resident_id = fields.Many2one('resident.registrations', string='Resident')
-#     description = fields.Char(string='Description', required=True)
-#     create_date=fields.Datetime(string='Create Date',default=fields.Date.today())
-#     to_committee = fields.Many2one('society.committee')
-#     help_desk_id = fields.Many2one('help.desk', string='Helpdesk')
-#     user_id = fields.Many2one('res.users',string='Resident',default=lambda self: self.env.user)
-#     committee_emails = fields.Char( string='Committee Emails',compute='_compute_committee_emails')
-#     stage = fields.Selection([
-#         ('draft', 'Draft'),
-#         ('send', 'Sent'),
-#         ('on_process', 'On Process'),
-#         ('hold', 'Hold'),
-#         ('resolve', 'Resolved'),
-#         ('reject', 'Rejected'),
-#     ], string='Stage', default='draft', tracking=True)
-#     proof = fields.Binary(string='Proof Photo/video')
-#
-#     def draft_complaint(self):
-#         for record in self:
-#             if record.stage=='send' or record.stage=='cancel':
-#                 record.stage = 'draft'
-#
-#     def cancel_complaint(self):
-#         for record in self:
-#             if record.stage == 'send':
-#                 raise ValidationError("The complaint is already send, can't cancel")
-#             record.stage = 'cancel'
-#
-#     @api.onchange('resident_id')
-#     def help_desk_id_check(self):
-#         for record in self:
-#             help_desk_id=self.env['help.desk'].search([
-#                 ('tower_id','=',record.tower_id.id),
-#             ],limit=1)
-#             print('\n\n\n\n.............................help_desk_id.......',help_desk_id)
-#             if not record.help_desk_id:
-#                 record.help_desk_id = help_desk_id
-#
-#     @api.depends('to_committee')
-#     def _compute_committee_emails(self):
-#         for record in self:
-#             emails = []
-#             for partner in record.to_committee.committee_name_id:
-#                 if partner.email:
-#                     emails.append(partner.email)
-#
-#             if record.to_committee.chairman_id.email:
-#                 emails.append(record.to_committee.chairman_id.email)
-#
-#             if record.to_committee.secretary_id.email:
-#                 emails.append(record.to_committee.secretary_id.email)
-#
-#             emails = list(set(emails))
-#             record.committee_emails = ",".join(emails)
-#
-#     def send_complaint(self):
-#         template = self.env.ref(
-#             'smart_society.complaint_email_template_smart_society',
-#             raise_if_not_found=False
-#         )
-#         if not template:
-#             raise UserError("Mail Template not found. Please check the template.")
-#         for record in self:
-#             record.stage = 'send'
-#             # This sends the email AND logs it in the chatter
-#             record.message_post_with_source(
-#                 template,
-#                 email_layout_xmlid='mail.mail_notification_layout_with_responsible_signature',
-#                 subtype_xmlid='mail.mt_comment',
-#             )
 
 
 

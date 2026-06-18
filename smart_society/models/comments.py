@@ -1,3 +1,276 @@
+   # related = 'flat_id.society_id',
+
+    # @api.constrains('flat_id')
+    # def check_flat(self):
+    #     for record in self:
+    #         pass
+
+
+
+    # @api.model
+    # def create(self, vals_list):
+    #     guest_house=super().create(vals_list)
+    #     print('\n\n\n.........guest_house........',guest_house)
+    #     for house in guest_house:
+    #         print('\n........house.........',house)
+    #         search_house=self.env['society.flat'].search([
+    #             ('flat_status','=','guest_house')
+    #         ],limit=1)
+    #         print('..................search_house...............',search_house)
+
+
+
+
+# class Committee(models.Model):
+#     _name='society.committee'
+#     _description='Committees in society'
+#
+#     name=fields.Char(string='Committee name')
+#     committee_name=fields.Many2many('res.partner',string='Committee members',required=True)
+#     chairman_name=fields.Many2one('res.partner',string='Chairman')
+#     secretary_name=fields.Many2one('res.partner',string='Secretary')
+#     society_id=fields.Many2one('society.setup',string='Society')
+#
+
+
+
+# @api.depends('price_per_person','person_count','days')
+# def calculate_person_price(self):
+#     for record in self:
+#         record.total_price = (record.person_count * record.price_per_person)*record.days
+#
+
+# @api.constrains('tower_count')
+    # def generate_tower(self):
+    #     for record in self:
+    #         for tower in range(record.tower_count):
+    #             tower=self.env['society.tower'].search([
+    #                 ('society_id','=',record.id),
+    #                 ('name', '=', f'{record.id}-tower-{tower + 1}')
+    #             ])
+    #             if not tower:
+    #                 self.env['society.tower'].create({
+    #                 'name':f'{record.id}-tower-{tower+1}',
+    #                 'society_id':record.id,
+    #                 })
+
+    # @api.constrains('gym_capacity')
+    # def create_gym_slot(self):
+    #     for record in self:
+    #         print('..............record........',record)
+    #         list1=['morning','afternoon','evening','night']
+    #         for shift in range(len(list1)):
+    #             print('.........shift....',shift)
+    #             first_letter=(list1[shift][0]).upper()
+    #             print('\n\n\n\n........first_letter.....',first_letter)
+    #             print('\n\n\n....record.gym_capacity....',record.gym_capacity)
+    #             for slot in range(record.gym_capacity):
+    #                 # print('\n\n...slot.....',slot)
+    #                 exist_slot=self.env['gym.slots'].search([
+    #                     ('name','=',f'{first_letter}-slot{slot + 1}'),
+    #                     ('society_id', '=', record.id),
+    #
+    #                 ])
+    #                 # ('name','=',f'res-{park.parking_place}-t{park.tower_id.id}-{i + 1}'),
+    #                 if not exist_slot:
+    #                     print('\n\n\n......not.exist_slot..', exist_slot)
+    #                     g_slots=self.env['gym.slots'].create({
+    #                         'name':f'{first_letter}-slot{slot + 1}',
+    #                         'society_id':record.id,
+    #                         'shift':list1[shift],
+    #                     })
+    #                     print('.....g_slots......',g_slots)
+
+
+# class GymSlots(models.Model):
+#     _name='gym.slots'
+#     _description='Gym Slots Model'
+#
+#     society_id=fields.Many2one('society.setup',string='Society')
+#     name=fields.Char(string='Gym Slots Name')
+#     shift=fields.Selection(selection=[('morning','Morning'),('afternoon','Afternoon'),('evening','Evening'),('night','Night')])
+#     gym_booking_charge=fields.Float(related='society_id.gym_booking_charge',string='Gym Booking Charge')
+#     is_occupied=fields.Boolean(string='Is Occupied')
+#     resident_id=fields.Many2one('resident.registrations',string='Resident ID')
+#
+#     @api.onchange('resident_id')
+#     def is_occupied_resident(self):
+#         for record in self:
+#             if record.resident_id:
+#                 record.is_occupied=True
+#             elif not record.resident_id:
+#                 record.is_occupied=False
+# self.save_to_model()
+
+
+# def save_to_model(self):
+#     self.ensure_one()
+#
+#     save_record=self.env['emergency.broadcast'].create({
+#         'name':self.name,
+#         'description':self.description,
+#         'flat_id':self.flat_ids,
+#         'tower_ids':self.tower_ids,
+#         'datetime':self.datetime,
+#         # 'resident_emails':self.resident_emails,
+#     })
+#     return {
+#         'type': 'ir.actions.act_window',
+#         'res_model': 'emergency.broadcast.save',
+#         'res_id': save_record.id,
+#         'view_mode': 'form,list',
+#         'target': 'current',
+#     }
+
+
+# def save_to_model(self):
+#     self.ensure_one()
+#
+#     save_record=self.env['society.alert'].create({
+#         'name':self.name,
+#         'description':self.description,
+#         'flat_id':self.flat_id,
+#         # 'tower_id':self.tower_id,
+#         'user_id':self.user_id,
+#         'location':self.location,
+#         'datetime':self.datetime,
+#         'to_committee':self.to_committee,
+#         # 'committee_emails':self.committee_emails,
+#     })
+#     return {
+#         'type': 'ir.actions.act_window',
+#         'res_model': 'society.alert.save',
+#         'res_id': save_record.id,
+#         'view_mode': 'form,list',
+#         'target': 'current',
+#     }
+
+# @api.onchange('tower_id')
+    # def _check_tower_id(self):
+    #     for record in self:
+    #
+    #         list_tower=[]
+    #         if record.tower_id:
+    #             print('\n\n\n......record.tower_id.....',record.tower_id)
+    #             if len(record.tower_id)>1:
+    #                 list_tower.append(record.tower_id)
+    #         print('\n\n\n......record.tower_id.....',list_tower)
+    # #
+
+
+
+
+    # @api.constrains('tower_id')
+    # def _check_tower_id(self):
+    #     for record in self:
+    #         list1=[]
+    #         if record.tower_id:
+    #             print('\n\n\nrecord.tower_id.....................',record.tower_id)
+    #         help_desk_id=self.env['help.desk'].search([
+    #             ('tower_id','=',record.tower_id.id),
+    #         ])
+    #         print('.........help_desk_id.....................',help_desk_id)
+    #
+    #         list1.append(help_desk_id)
+    #         print('\n\n\n.........list1............',list1)
+    #         for i in list1:
+    #             record.write({
+    #                 'help_desk_id':i,
+    #             })
+    #         print('\n\n\n.......record.help_desk_id.....',record.help_desk_id)
+
+
+
+
+            # , limit = 1
+            # record.help_desk_id=record.help_desk_id.mapped(list1)
+            # if not help_desk_id:
+            #     print('')
+            # record.help_desk_id.mapped('help_desk_id')
+
+
+
+
+# class Complaint(models.Model):
+#     _name = 'complaint.desk'
+#     _description = 'Complaint desk'
+#     _inherit = ['mail.thread', 'mail.activity.mixin']
+#
+#     name = fields.Char(string='Complaint', required=True)
+#     tower_id = fields.Many2one(related='flat_id.tower_id', string='Tower', required=True)
+#     # tower_id = fields.Many2one('society.tower', string='Tower', required=True)
+#     # flat_id = fields.Many2one('society.flat', string='Flat', required=True)
+#     flat_id = fields.Many2one(related='resident_id.flat_id', string='Flat', required=True)
+#     resident_id = fields.Many2one('resident.registrations', string='Resident')
+#     description = fields.Char(string='Description', required=True)
+#     create_date=fields.Datetime(string='Create Date',default=fields.Date.today())
+#     to_committee = fields.Many2one('society.committee')
+#     help_desk_id = fields.Many2one('help.desk', string='Helpdesk')
+#     user_id = fields.Many2one('res.users',string='Resident',default=lambda self: self.env.user)
+#     committee_emails = fields.Char( string='Committee Emails',compute='_compute_committee_emails')
+#     stage = fields.Selection([
+#         ('draft', 'Draft'),
+#         ('send', 'Sent'),
+#         ('on_process', 'On Process'),
+#         ('hold', 'Hold'),
+#         ('resolve', 'Resolved'),
+#         ('reject', 'Rejected'),
+#     ], string='Stage', default='draft', tracking=True)
+#     proof = fields.Binary(string='Proof Photo/video')
+#
+#     def draft_complaint(self):
+#         for record in self:
+#             if record.stage=='send' or record.stage=='cancel':
+#                 record.stage = 'draft'
+#
+#     def cancel_complaint(self):
+#         for record in self:
+#             if record.stage == 'send':
+#                 raise ValidationError("The complaint is already send, can't cancel")
+#             record.stage = 'cancel'
+#
+#     @api.onchange('resident_id')
+#     def help_desk_id_check(self):
+#         for record in self:
+#             help_desk_id=self.env['help.desk'].search([
+#                 ('tower_id','=',record.tower_id.id),
+#             ],limit=1)
+#             print('\n\n\n\n.............................help_desk_id.......',help_desk_id)
+#             if not record.help_desk_id:
+#                 record.help_desk_id = help_desk_id
+#
+#     @api.depends('to_committee')
+#     def _compute_committee_emails(self):
+#         for record in self:
+#             emails = []
+#             for partner in record.to_committee.committee_name_id:
+#                 if partner.email:
+#                     emails.append(partner.email)
+#
+#             if record.to_committee.chairman_id.email:
+#                 emails.append(record.to_committee.chairman_id.email)
+#
+#             if record.to_committee.secretary_id.email:
+#                 emails.append(record.to_committee.secretary_id.email)
+#
+#             emails = list(set(emails))
+#             record.committee_emails = ",".join(emails)
+#
+#     def send_complaint(self):
+#         template = self.env.ref(
+#             'smart_society.complaint_email_template_smart_society',
+#             raise_if_not_found=False
+#         )
+#         if not template:
+#             raise UserError("Mail Template not found. Please check the template.")
+#         for record in self:
+#             record.stage = 'send'
+#             # This sends the email AND logs it in the chatter
+#             record.message_post_with_source(
+#                 template,
+#                 email_layout_xmlid='mail.mail_notification_layout_with_responsible_signature',
+#                 subtype_xmlid='mail.mt_comment',
+#             )
 
 # class NoticeBoardPortal(CustomerPortal):
 #

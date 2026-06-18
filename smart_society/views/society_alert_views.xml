@@ -39,7 +39,7 @@
                         </group>
 
                         <group string="Select Who All To Inform">
-                        <field name="to_committee"/>
+<!--                        <field name="to_committee"/>-->
                         <field name="tower_id" widget="many2many_tags" invisible="flat_id"/>
                         <field name="flat_id" widget="many2many_tags" invisible="tower_id"/>
                         <field name="security_id" widget="many2many_tags"/>

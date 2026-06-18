@@ -150,9 +150,22 @@ class SocietyPortal(CustomerPortal):
 
     @http.route('/my/complaint/new', type='http', auth='user', website=True)
     def complaint_form(self, **kw):
-        committees = request.env['society.committee'].sudo().search([])
+        resident = request.env['resident.registrations'].sudo().search([
+            ('user_id', '=', request.env.user.id)
+        ], limit=1)
+
+        block_committee = False
+        if resident and resident.flat_id:
+            block_committee = request.env['block.committee'].sudo().search([
+                ('tower_id', '=', resident.tower_id.id),
+                ('block', '=', resident.flat_id.block),
+            ], limit=1)
+
+        committees = request.env['block.committee'].sudo().search([])
+
         return request.render('smart_society.portal_complaint_form', {
-            'committees': committees
+            'committees': committees,
+            'default_committee': block_committee,
         })
 
 
@@ -172,11 +185,11 @@ class SocietyPortal(CustomerPortal):
             ('user_id', '=', request.env.user.id)
         ], limit=1)
 
-        committee_id = post.get('committee_id')
-        try:
-            committee_id = int(committee_id) if committee_id else False
-        except (ValueError, TypeError):
-            committee_id = False
+        # committee_id = post.get('committee_id')
+        # try:
+        #     committee_id = int(committee_id) if committee_id else False
+        # except (ValueError, TypeError):
+        #     committee_id = False
 
         proof = post.get('proof')
         proof_data = False
@@ -188,7 +201,12 @@ class SocietyPortal(CustomerPortal):
             'name': post.get('name'),
             'description': post.get('description'),
             'resident_id': resident.id if resident else False,
-            'to_committee': committee_id,
+            'flat_id':post.get('flat_id'),
+            'tower_id':post.get('tower_id'),
+            'block_committee_id':post.get('block_committee_id'),
+            'tower_committee_id':post.get('tower_committee_id'),
+            'society_committee_id':post.get('society_committee_id'),
+            # 'to_committee': committee_id,
             'proof': proof_data,
             'stage': 'send',
         })
@@ -476,7 +494,7 @@ class SocietyPortal(CustomerPortal):
             ('user_id', '=', request.env.user.id)
         ], limit=1)
 
-        committees=request.env['society.committee'].sudo().search([
+        committees=request.env['block.committee'].sudo().search([
             ('tower_id','=',resident.tower_id.id),
         ])
         security=request.env['security.guard'].sudo().search([

@@ -85,7 +85,7 @@
 
                             <dt class="col-sm-3">Committee</dt>
                             <dd class="col-sm-9">
-                                <t t-esc="complaint.to_committee.name"/>
+                                <t t-esc="complaint.block_committee_id.name"/>
                             </dd>
 
                             <dt class="col-sm-3">Date</dt>
@@ -126,12 +126,25 @@
                         <label class="form-label">Description</label>
                         <textarea name="description" class="form-control" rows="4"/>
                     </div>
+
+
+<!--                    <select name="block_committee_id" class="form-control" required="1">-->
+<!--    <option value="">&#45;&#45; Select Committee &#45;&#45;</option>-->
+
+<!--    <t t-foreach="committees" t-as="cm">-->
+<!--        <option t-att-value="cm.id"-->
+<!--                t-att-selected="'selected' if default_committee and cm.id == default_committee.id else None">-->
+<!--            <t t-esc="cm.name"/>-->
+<!--        </option>-->
+<!--    </t>-->
+<!--</select>-->
+
                     <div class="mb-3">
                         <label class="form-label">Committee</label>
-                        <select name="committee_id" class="form-control" required="1">
+                        <select name="block_committee_id" class="form-control" required="1">
                             <option value="">-- Select Committee --</option>
                             <t t-foreach="committees" t-as="cm">
-                                <option t-att-value="cm.id">
+                                <option t-att-value="cm.id" t-att-selected="'selected' if default_committee and cm.id==default_committee.id else None">
                                     <t t-esc="cm.name"/>
                                 </option>
                             </t>
@@ -443,7 +456,7 @@
 
                             <dt class="col-sm-3">Committee</dt>
                             <dd class="col-sm-9">
-                                <t t-esc="alert.to_committee.name"/>
+<!--                                <t t-esc="alert.to_committee.name"/>-->
                                 <!--                                <t t-esc="alert.to_committee.name"/>-->
                             </dd>
 

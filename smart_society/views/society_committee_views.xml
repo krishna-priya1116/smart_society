@@ -20,7 +20,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                        <button name="action_new_society_committee" type="object" string="Unlink Committee" class="btn-primary"/>
+                        <button name="action_assign_committee" type="object" string="Assign Committee" class="btn-primary"/>
+                        <button name="action_new_society_committee" type="object" string="New Committee" class="btn-primary"/>
                 </header>
                 <sheet>
                     <group>
@@ -94,8 +95,10 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                        <button name="action_assign_tower_committee" type="object" string="Assign Committee" class="btn-primary"/>
                         <button name="action_new_tower_committee" type="object" string="Unlink Committee" class="btn-primary"/>
                 </header>
+
                 <sheet>
                     <group>
                         <field name="name"/>
@@ -166,7 +169,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                        <button name="action_new_block_committee" type="object" string="Unlink Committee" class="btn-primary"/>
+                        <button name="action_assign_block_committee" type="object" string="Assign Committee" class="btn-primary"/>
+                        <button name="action_new_block_committee" type="object" string="New Committee" class="btn-primary"/>
                 </header>
                 <sheet>
                     <group>
