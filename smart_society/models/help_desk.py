@@ -31,7 +31,6 @@ class Complaint(models.Model):
     # committee_emails = fields.Char(string='Committee Emails', compute='_compute_committee_emails')
     committee_emails = fields.Char(string='Committee Emails',compute='_compute_committee_emails')
     proof = fields.Binary(string='Proof Photo/video')
-
     stage = fields.Selection([
         ('draft',      'Draft'),
         ('send',       'Sent'),
@@ -45,12 +44,10 @@ class Complaint(models.Model):
 
     @api.constrains('stage')
     def action_committee_complaints(self):
-
         if self.env.user.has_group('smart_society.group_registration_tower_committee'):
             tower_committee = self.env['tower.committee'].search([
                 ('tower_member_id', '=', self.env.user.id)
             ], limit=1)
-
             return {
                 'type': 'ir.actions.act_window',
                 'name': 'Tower Complaints',
@@ -61,31 +58,6 @@ class Complaint(models.Model):
                     ('tower_id', '=', tower_committee.tower_id.id),
                 ],
             }
-
-    # def committee_wise_complaints(self):
-    #     if self.env.user.has_group('smart_society.group_registration_tower_committee'):
-    #         tower_committee = self.env['tower.committee'].search([
-    #             ('tower_member_id', '=', self.env.user.id)
-    #         ], limit=1)
-    #
-    #         complaints = self.env['complaint.desk'].search([
-    #             ('stage', '=', 'not_resolved_block'),
-    #             ('tower_id', '=', tower_committee.tower_id.id),
-    #         ])
-    #
-    #         return complaints
-
-
-    # def committee_wise_complaints(self):
-    #     for record in self:
-    #         if self.env.user.has_group('smart_society.group_registration_tower_committee'):
-    #             complaints=self.env['complaint.desk'].search([
-    #                 ('stage','=','not_resolved_block')
-    #             ])
-    #             return complaints
-
-
-
 
     def action_send(self):
         for record in self:
@@ -152,9 +124,6 @@ class Complaint(models.Model):
                 if not record.society_committee_id:
                     record.society_committee_id=society_committee
 
-
-
-
     def _send_complaint_email(self):
         template = self.env.ref(
             'smart_society.complaint_email_template_smart_society',
@@ -167,7 +136,6 @@ class Complaint(models.Model):
             email_layout_xmlid='mail.mail_notification_layout_with_responsible_signature',
             subtype_xmlid='mail.mt_comment',
         )
-
 
     @api.onchange('stage','resident_id','flat_id','tower_id')
     def help_desk_id_check(self):
@@ -202,10 +170,6 @@ class Complaint(models.Model):
                 if not record.society_committee_id:
                     record.society_committee_id=society_committee
 
-
-
-
-
     @api.depends('stage','block_committee_id','tower_committee_id','society_committee_id')
     def _compute_committee_emails(self):
         for record in self:
@@ -233,6 +197,30 @@ class Complaint(models.Model):
                 filter(None, set(emails))
             )
             print('\n\n\n.......record.committee_emails...........',record.committee_emails)
+
+
+
+    # def committee_wise_complaints(self):
+    #     if self.env.user.has_group('smart_society.group_registration_tower_committee'):
+    #         tower_committee = self.env['tower.committee'].search([
+    #             ('tower_member_id', '=', self.env.user.id)
+    #         ], limit=1)
+    #
+    #         complaints = self.env['complaint.desk'].search([
+    #             ('stage', '=', 'not_resolved_block'),
+    #             ('tower_id', '=', tower_committee.tower_id.id),
+    #         ])
+    #
+    #         return complaints
+
+
+    # def committee_wise_complaints(self):
+    #     for record in self:
+    #         if self.env.user.has_group('smart_society.group_registration_tower_committee'):
+    #             complaints=self.env['complaint.desk'].search([
+    #                 ('stage','=','not_resolved_block')
+    #             ])
+    #             return complaints
 
 
 

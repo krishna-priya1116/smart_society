@@ -19,6 +19,7 @@ class Committee(models.Model):
     date_to = fields.Date(string='To')
     society_committee_members=fields.Many2many('res.users',string='Committee Members',
                                                compute='_compute_committee_members',store=True)
+    society_complaints_history_ids=fields.One2many('complaint.desk','society_committee_id',string='Complaints')
 
     #         committee_group = self.env.ref('smart_society.group_registration_committee')
     #         portal_group = self.env.ref('base.group_portal')
@@ -111,6 +112,8 @@ class TowerCommittee(models.Model):
                                        , string='Block Committee')
     tower_committee_history_ids = fields.One2many('tower.committee.history', 'tower_committee_id',
                                                   string='Tower Committee History')
+    tower_complaints_history_ids=fields.One2many('complaint.desk','tower_committee_id',string='Complaints')
+
     date_from = fields.Date(string='From')
     date_to = fields.Date(string='To')
 
@@ -191,6 +194,7 @@ class BlockCommittee(models.Model):
     block_committee_history_ids = fields.One2many('block.committee.history', 'block_committee_id',
                                                  string='Block Committee History')
 
+    block_complaints_history_ids=fields.One2many('complaint.desk','block_committee_id',string='Complaints')
     date_from = fields.Date(string='From')
     date_to = fields.Date(string='To')
 

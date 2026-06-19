@@ -10,11 +10,40 @@
                 <xpath expr="//page[@name='preferences']" position="inside">
                     <group string="Smart Society">
                         <field name="tower_id"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+
+
+        <record id="view_users_form_inherit_society" model="ir.ui.view">
+            <field name="name">res.users.form.society</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='preferences']" position="inside">
+                    <group string="Smart Society">
                         <field name="society_id"/>
                     </group>
                 </xpath>
             </field>
         </record>
+
+
+<!--        <record id="view_users_form_inherit_block" model="ir.ui.view">-->
+<!--            <field name="name">res.users.form.block</field>-->
+<!--            <field name="model">res.users</field>-->
+<!--            <field name="inherit_id" ref="base.view_users_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//page[@name='preferences']" position="inside">-->
+<!--                    <group string="Smart Society">-->
+<!--                        <field name="block"/>-->
+<!--                    </group>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
 
         <record id="vehicle_user_rule" model="ir.rule">
             <field name="name">Resident Own Vehicles</field>
@@ -24,6 +53,8 @@
             <field name="perm_read" eval="True"/>
         </record>
 
+
+<!--        this-->
         <record id="own_tower_complaints_admin" model="ir.rule">
             <field name="name">own_tower_complaints_admin</field>
             <field name="model_id" ref="model_complaint_desk"/>
@@ -32,29 +63,86 @@
             <field name="domain_force">[(1,'=',1)]</field>
         </record>
 
-        <record id="new_own_tower_complaints_committees" model="ir.rule">
-            <field name="name">New Own Tower Complaints Committees</field>
+
+
+<!--        <record id="new_own_tower_complaints_committees" model="ir.rule">-->
+<!--            <field name="name">New Own Tower Complaints Committees</field>-->
+<!--            <field name="model_id" ref="model_complaint_desk"/>-->
+<!--            <field name="groups"-->
+<!--                   eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security')),-->
+<!--                   (4,ref('smart_society.group_registration_tower_committee')),(4,ref('smart_society.group_registration_block_committee'))]"/>-->
+<!--            &lt;!&ndash;            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>&ndash;&gt;-->
+<!--            <field name="domain_force">[('tower_id','=',user.tower_id.id)]</field>-->
+<!--        </record>-->
+
+<!--        <record id="rule_tower_committee_complaints" model="ir.rule">-->
+<!--            <field name="name">Tower Committee Complaints</field>-->
+<!--            <field name="model_id" ref="model_complaint_desk"/>-->
+<!--            <field name="groups"-->
+<!--                   eval="[(4, ref('smart_society.group_registration_tower_committee'))]"/>-->
+<!--            <field name="domain_force">-->
+<!--                [('stage', '=', 'not_resolved_block')]-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        this-->
+        <record id="updated_own_tower_complaints_committees" model="ir.rule">
+            <field name="name">Updated Own Tower Complaints Committees</field>
             <field name="model_id" ref="model_complaint_desk"/>
             <field name="groups"
-                   eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security')),
-                   (4,ref('smart_society.group_registration_tower_committee')),(4,ref('smart_society.group_registration_block_committee'))]"/>
+                   eval="[(4,ref('smart_society.group_registration_security'))]"/>
+
+<!--            (4,ref('smart_society.group_registration_block_committee'))-->
             <!--            <field name="domain_force">[('tower_id','=',user.partner_id.tower_id.id)]</field>-->
             <field name="domain_force">[('tower_id','=',user.tower_id.id)]</field>
         </record>
 
-        <record id="new_own_tower_complaint_tower_committees" model="ir.rule">
-            <field name="name">New Own Tower Complaints Tower Committees</field>
+<!--        this-->
+        <record id="updated_own_block_compliants_committees" model="ir.rule">
+            <field name="name">Updated Own Block Complaint Committees</field>
             <field name="model_id" ref="model_complaint_desk"/>
-            <field name="groups" eval="[(4, ref('smart_society.group_registration_tower_committee'))]"/>
-            <field name="domain_force">[('stage','in','not_resolved_block')]</field>
+            <field name="groups" eval="[(4,ref('smart_society.group_registration_block_committee'))]"/>
+            <field name="domain_force">[
+                ('tower_id', '=', user.tower_id.id),
+                ('tower_id.block', '=', user.block)
+                ]
+            </field>
         </record>
 
-        <record id="new_own_tower_complaint_society_committees" model="ir.rule">
-            <field name="name">New Own Society Complaints Society Committees</field>
+<!--        this-->
+        <record id="updated_tower_committee_complaints" model="ir.rule">
+            <field name="name">Updated Committee Complaints After</field>
             <field name="model_id" ref="model_complaint_desk"/>
-            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee'))]"/>
-            <field name="domain_force">[('stage','in','not_resolved_tower')]</field>
+            <field name="groups" eval="[(4, ref('smart_society.group_registration_tower_committee'))]"/>
+            <field name="domain_force">
+                [('tower_id','=',user.tower_id.id), ('stage','=','not_resolved_block')]
+            </field>
         </record>
+
+<!--        this-->
+        <record id="updated_rule_society_committee_complaints" model="ir.rule">
+            <field name="name">Updated Society Committee Complaints After</field>
+            <field name="model_id" ref="model_complaint_desk"/>
+            <field name="groups"
+                   eval="[(4, ref('smart_society.group_registration_committee'))]"/>
+            <field name="domain_force">
+                [('tower_id','=',user.tower_id.id),('stage', '=', 'not_resolved_tower')]
+            </field>
+        </record>
+
+<!--        <record id="new_own_tower_complaint_tower_committees" model="ir.rule">-->
+<!--            <field name="name">New Own Tower Complaints Tower Committees</field>-->
+<!--            <field name="model_id" ref="model_complaint_desk"/>-->
+<!--            <field name="groups" eval="[(4, ref('smart_society.group_registration_tower_committee'))]"/>-->
+<!--            <field name="domain_force">[('stage','in','not_resolved_block')]</field>-->
+<!--        </record>-->
+
+<!--        <record id="new_own_tower_complaint_society_committees" model="ir.rule">-->
+<!--            <field name="name">New Own Society Complaints Society Committees</field>-->
+<!--            <field name="model_id" ref="model_complaint_desk"/>-->
+<!--            <field name="groups" eval="[(4,ref('smart_society.group_registration_committee'))]"/>-->
+<!--            <field name="domain_force">[('stage','in','not_resolved_tower')]</field>-->
+<!--        </record>-->
 
         <record id="own_tower_flats_admin" model="ir.rule">
             <field name="name">own_tower_flats_admin</field>
@@ -320,8 +408,14 @@
             <field name="groups"
                    eval="[(4,ref('smart_society.group_registration_committee')),(4,ref('smart_society.group_registration_security'))
                    ,(4,ref('smart_society.group_registration_tower_committee')),(4,ref('smart_society.group_registration_block_committee'))]"/>
-            <field name="domain_force">[('tower_id','in',user.tower_id.id)]</field>
-        </record>
+            <!--            <field name="domain_force">[('tower_id','in',user.tower_id.id)]</field>-->
+            <field name="domain_force">[1,'=',1]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+<!--        </field>-->
+    </record>
         <record id="own_tower_committee_admin" model="ir.rule">
             <field name="name">own_tower_committee_admin</field>
             <field name="model_id" ref="model_society_committee"/>

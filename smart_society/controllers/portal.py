@@ -172,8 +172,8 @@ class SocietyPortal(CustomerPortal):
     @http.route('/my/complaint/<int:complaint_id>/', type='http', auth='user', website=True)
     def complaint_detail(self, complaint_id, access_token=None, **kw):
         complaint = request.env['complaint.desk'].sudo().browse(complaint_id)
-        if complaint.user_id.id != request.env.user.id:
-            return request.redirect('/my/complaints')
+        # if complaint.user_id.id != request.env.user.id:
+        #     return request.redirect('/my/complaints')
         return request.render('smart_society.portal_complaint_detail', {
             'complaint': complaint
         })
@@ -436,11 +436,17 @@ class SocietyPortal(CustomerPortal):
             ('user_id', '=', request.env.user.id)
         ], limit=1)
 
-        committee_id = post.get('')
+        block_committee_id = post.get('block_committee_id')
+        tower_committee_id = post.get('tower_committee_id')
+        committee_id = post.get('society_committee_id')
         try:
             committee_id = int(committee_id) if committee_id else False
+            tower_committee_id = int(tower_committee_id) if tower_committee_id else False
+            block_committee_id = int(block_committee_id) if block_committee_id else False
         except (ValueError, TypeError):
             committee_id = False
+            tower_committee_id = False
+            block_committee_id = False
 
         security_id=post.get('')
         try:
@@ -465,15 +471,18 @@ class SocietyPortal(CustomerPortal):
             # [(6, 0, [int(x) for x in request.httprequest.form.getlist('flat_id') if x])],
             # 'tower_id':post.get('tower_id'),
             'tower_id':[(6,0,[int(x) for x in request.httprequest.form.getlist('tower_id') if x])],
-            'to_committee':committee_id,
-            # 'security_id':security_id,
+            'society_committee_id': committee_id,
+            'tower_committee_id': tower_committee_id,
+            'block_committee_id': block_committee_id,            # 'security_id':security_id,
             'security_id': [(6,0,[int(x) for x in request.httprequest.form.getlist('security_id') if x])],
-            'resident_id': resident_id,
+            'resident_id':  [(6,0,[int(x) for x in request.httprequest.form.getlist('resident_id') if x])],
             'location':post.get('location'),
             'alert_type':post.get('alert_type'),
-            'create_date':post.get('create_date'),
+            # 'create_date':post.get('create_date'),
             # 'stage':'draft',
         })
+
+
 
         print('\n\n\n................',[int(x) for x in request.httprequest.form.getlist('flat_id')])
         alert.action_send_email()
@@ -482,8 +491,8 @@ class SocietyPortal(CustomerPortal):
     @http.route('/my/alert/<int:alert_id>',type='http',auth='user',website=True)
     def alert_detail(self, alert_id, access_token=None,**kw):
         alert=request.env['resident.alerts'].sudo().browse(alert_id)
-        if alert.user_id.id != request.env.user.id:
-            return request.redirect('/my/alerts')
+        # if alert.user_id.id != request.env.user.id:
+        #     return request.redirect('/my/alerts')
         return request.render('smart_society.portal_alert_detail', {
             'alert': alert
         })
@@ -494,13 +503,35 @@ class SocietyPortal(CustomerPortal):
             ('user_id', '=', request.env.user.id)
         ], limit=1)
 
-        committees=request.env['block.committee'].sudo().search([
-            ('tower_id','=',resident.tower_id.id),
+
+
+        block_committees = False
+        if resident and resident.flat_id:
+            block_committees = request.env['block.committee'].sudo().search([
+                ('tower_id', '=', resident.tower_id.id),
+                ('block', '=', resident.flat_id.block),
+            ], limit=1)
+
+        # committees = request.env['block.committee'].sudo().search([])
+
+
+        # block_committees=request.env['block.committee'].sudo().search([
+        #     ('tower_id','=',resident.tower_id.id),
+        #     ('', '=', resident.tower_id.block),
+        # ])
+        tower_committees=request.env['tower.committee'].sudo().search([
+            ('tower_id','=',resident.tower_id.id)
+        ])
+        society_committees=request.env['society.committee'].sudo().search([
+            ('society_id', '=', resident.tower_id.society_id.id)
         ])
         security=request.env['security.guard'].sudo().search([
             ('tower_id', '=', resident.tower_id.id),
         ])
         print('\n\n\n....security  ......security[:]....',security[:])
+        print('\n\n\n....block_committee  ......block_committees[:]....',block_committees[:])
+        print('\n\n\n....tower_committees  ......tower_committees[:]....',tower_committees[:])
+        print('\n\n\n....society_committees  ......society_committees[:]....',society_committees[:])
         tower=request.env['society.tower'].sudo().search([])
         flat=request.env['society.flat'].sudo().search([])
         resident_id=request.env['resident.registrations'].sudo().search([])
@@ -508,12 +539,16 @@ class SocietyPortal(CustomerPortal):
         # alert_type=request.env['resident.alert'].sudo().search([])
 
         return request.render('smart_society.portal_alert_form', {
-            'committees': committees,
+            'block_committees': block_committees,
+            'tower_committees': tower_committees,
+            'society_committees': society_committees,
             'security': security,
             'tower':tower,
             'flat':flat,
             # 'resident_id':resident.id,
-            'default_committee': committees[:],
+            'default_block_committee': block_committees,
+            'default_tower_committee': tower_committees[:1],
+            'default_society_committee': society_committees[:1],
             'default_security': security[:],
             'alert_types': alert_types,
             # 'default_name':alert_types,

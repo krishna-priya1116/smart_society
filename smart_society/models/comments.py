@@ -1,4 +1,111 @@
-   # related = 'flat_id.society_id',
+# John Smith  Shilp Aron Society Committee
+#
+# john_smith@example.com
+#
+# Ron Gibson Shilp Aron Society Committee
+# ron_gibson12@example.com
+# 
+# San Joaquin  Shilp Aron Society Committee
+# san_joaquin22@example.com
+#
+# Robert Wilson  SA t1 Committee
+# robert_wilson13@example.com
+#
+# William Davis  SA t2 Committee
+# william_davis@example.com
+#
+#
+# Richard Moore   SA t1 Block A committee
+# richard_moore11@example.com
+#
+# Jennifer White     SA t1 Block B Committee
+# jennifier_white2@example.com
+#
+#
+# Jessica Thompson  SA t1 Block C committee
+# jessica78@example.com
+#
+#
+# Michael Johnson SA t2 Block A committee
+# michael_johnson12@example.com
+#
+# Christopher Anderson   SA t2 Block B committee
+# chirst78@example.com
+#
+# Daniel Thomas  SA t2 Block C committee
+# daniel_thomas88@example.com
+#
+#
+# Sarah Martin  SA t2 Block D committee
+# sarah89@example.com
+#
+#
+
+
+
+
+
+# select_committee = self.env['society.committee'].search([
+#     ('tower_id', '=', search_user.tower_id.id)
+# ])
+# print('\n\n\n.............select_committee....', select_committee)
+# record.to_committee = select_committee
+# print('\n\n\n............to_committee..........', record.to_committee)
+
+# @api.depends('to_committee')
+# def _compute_committee_emails(self):
+#     for record in self:
+#         emails = []
+#         for partner in record.to_committee.committee_name_id:
+#             if partner.email:
+#                 emails.append(partner.email)
+#         if record.to_committee.chairman_id.email:
+#             emails.append(record.to_committee.chairman_id.email)
+#         if record.to_committee.secretary_id.email:
+#             emails.append(record.to_committee.secretary_id.email)
+#         record.committee_emails = ",".join(set(emails))
+
+# @api.depends('to_committee')
+# def _compute_committee_emails(self):
+#     for record in self:
+#         emails = []
+#         for security in record.security_id:
+#             print('\n\n\n..........security',security)
+#             if security.email:
+#                 emails.append(security.email)
+#         for resident in record.resident_id:
+#             print('\n\n\n..........resident',resident)
+#             if resident.email:
+#                 emails.append(resident.email)
+#         for flat in record.flat_id:
+#             print('\n\n\n..........flat',flat)
+#             resident=self.env['resident.registrations'].search([
+#                 ('flat_id','=',flat.id),
+#             ])
+#             for res in resident:
+#                 if res.email:
+#                     emails.append(resident.email)
+#         for tower in record.tower_id:
+#             resident=self.env['resident.registrations'].search([
+#                 ('tower_id','=',tower.id),
+#             ])
+#             for res in resident:
+#                 if res.email:
+#                     emails.append(resident.email)
+#
+#         for partner in record.to_committee.committee_name_id:
+#             if partner.email:
+#                 emails.append(partner.email)
+#
+#         if record.to_committee.chairman_id.email:
+#             emails.append(record.to_committee.chairman_id.email)
+#
+#         if record.to_committee.secretary_id.email:
+#             emails.append(record.to_committee.secretary_id.email)
+#
+#         emails = list(set(emails))
+#         record.committee_emails = ",".join(emails)
+# related = 'flat_id.society_id',
 
     # @api.constrains('flat_id')
     # def check_flat(self):

@@ -66,60 +66,65 @@ class ResidentAlerts(models.Model):
 
             record.committee_emails = ",".join(emails)
 
+    @api.onchange('alert_from')
+    def assign_to_send(self):
+        for record in self:
 
-    # @api.depends('to_committee')
-    # def _compute_committee_emails(self):
-    #     for record in self:
-    #         emails = []
-    #         for partner in record.to_committee.committee_name_id:
-    #             if partner.email:
-    #                 emails.append(partner.email)
-    #         if record.to_committee.chairman_id.email:
-    #             emails.append(record.to_committee.chairman_id.email)
-    #         if record.to_committee.secretary_id.email:
-    #             emails.append(record.to_committee.secretary_id.email)
-    #         record.committee_emails = ",".join(set(emails))
+            search_user = self.env['resident.registrations'].search([
+                ('user_id', '=', record.alert_from.id)
+            ], limit=1)
 
-    # @api.depends('to_committee')
-    # def _compute_committee_emails(self):
+            if not search_user:
+                continue
+
+            block_committee = self.env['block.committee'].search([
+                ('tower_id', '=', search_user.tower_id.id),
+                ('block', '=', search_user.tower_id.block),
+            ], limit=1)
+            record.block_committee_id = block_committee
+
+            tower_committee = self.env['tower.committee'].search([
+                ('tower_id', '=', search_user.tower_id.id)
+            ], limit=1)
+            record.tower_committee_id = tower_committee
+
+            society_committee = self.env['society.committee'].search([
+                ('society_id', '=', search_user.tower_id.society_id.id)
+            ], limit=1)
+            record.society_committee_id = society_committee
+
+            select_security = self.env['security.guard'].search([
+                ('tower_id', '=', search_user.tower_id.id)
+            ])
+            record.security_id = select_security
+
+    # @api.onchange('resident_id', 'flat_id', 'tower_id')
+    # def assign_to_send(self):
     #     for record in self:
-    #         emails = []
-    #         for security in record.security_id:
-    #             print('\n\n\n..........security',security)
-    #             if security.email:
-    #                 emails.append(security.email)
-    #         for resident in record.resident_id:
-    #             print('\n\n\n..........resident',resident)
-    #             if resident.email:
-    #                 emails.append(resident.email)
-    #         for flat in record.flat_id:
-    #             print('\n\n\n..........flat',flat)
-    #             resident=self.env['resident.registrations'].search([
-    #                 ('flat_id','=',flat.id),
-    #             ])
-    #             for res in resident:
-    #                 if res.email:
-    #                     emails.append(resident.email)
-    #         for tower in record.tower_id:
-    #             resident=self.env['resident.registrations'].search([
-    #                 ('tower_id','=',tower.id),
-    #             ])
-    #             for res in resident:
-    #                 if res.email:
-    #                     emails.append(resident.email)
-    #
-    #         for partner in record.to_committee.committee_name_id:
-    #             if partner.email:
-    #                 emails.append(partner.email)
-    #
-    #         if record.to_committee.chairman_id.email:
-    #             emails.append(record.to_committee.chairman_id.email)
-    #
-    #         if record.to_committee.secretary_id.email:
-    #             emails.append(record.to_committee.secretary_id.email)
-    #
-    #         emails = list(set(emails))
-    #         record.committee_emails = ",".join(emails)
+    #         search_user = self.env['resident.registrations'].search([
+    #             ('user_id', '=', record.alert_from.id)
+    #         ])
+    #         block_committee=self.env['block.committee'].search([
+    #             ('tower_id', '=', record.tower_id.id),
+    #             ('block', '=', search_user.tower_id.block),
+    #         ], limit=1)
+    #         record.block_committee_id=block_committee
+    #         tower_committee=self.env['tower.committee'].search([
+    #             ('tower_id', '=', search_user.tower_id.id)
+    #         ])
+    #         record.tower_committee_id=tower_committee
+    #         print('\n\n\n.............search_user....', search_user)
+    #         society_committee=self.env['society.committee'].search([
+    #             ('society_id','=',search_user.tower_id.society_id.id)
+    #         ])
+    #         print('society_committee..................', society_committee)
+    #         members = record.society_committee_id.society_committee_members
+    #         record.society_committee_id=members
+    #         select_security = self.env['security.guard'].search([
+    #             ('tower_id', '=', search_user.tower_id.id)
+    #         ])
+    #         record.security_id = select_security
+
 
     @api.depends('flat_id')
     def _compute_flat_id_save(self):
@@ -127,23 +132,6 @@ class ResidentAlerts(models.Model):
             for flat in record.flat_id:
                 print('\n\n\n.......flat.name.................',flat.name)
 
-    @api.onchange('resident_id','flat_id','tower_id')
-    def assign_to_send(self):
-        for record in self:
-            search_user=self.env['resident.registrations'].search([
-                ('user_id','=',record.alert_from.id)
-            ])
-            print('\n\n\n.............search_user....',search_user)
-            select_committee=self.env['society.committee'].search([
-                ('tower_id','=',search_user.tower_id.id)
-            ])
-            print('\n\n\n.............select_committee....',select_committee)
-            record.to_committee=select_committee
-            print('\n\n\n............to_committee..........',record.to_committee)
-            select_security=self.env['security.guard'].search([
-                ('tower_id','=',search_user.tower_id.id)
-            ])
-            record.security_id=select_security
 
 
     def action_send_email(self):

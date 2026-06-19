@@ -128,28 +128,18 @@
                     </div>
 
 
-<!--                    <select name="block_committee_id" class="form-control" required="1">-->
-<!--    <option value="">&#45;&#45; Select Committee &#45;&#45;</option>-->
+                                        <select name="block_committee_id" class="form-control" required="1">
+                        <option value="">-- Select Committee --</option>
 
-<!--    <t t-foreach="committees" t-as="cm">-->
-<!--        <option t-att-value="cm.id"-->
-<!--                t-att-selected="'selected' if default_committee and cm.id == default_committee.id else None">-->
-<!--            <t t-esc="cm.name"/>-->
-<!--        </option>-->
-<!--    </t>-->
-<!--</select>-->
+                        <t t-foreach="committees" t-as="cm">
+                            <option t-att-value="cm.id"
+                                    t-att-selected="'selected' if default_committee and cm.id == default_committee.id else None">
+                                <t t-esc="cm.name"/>
+                            </option>
+                        </t>
+                    </select>
 
-                    <div class="mb-3">
-                        <label class="form-label">Committee</label>
-                        <select name="block_committee_id" class="form-control" required="1">
-                            <option value="">-- Select Committee --</option>
-                            <t t-foreach="committees" t-as="cm">
-                                <option t-att-value="cm.id" t-att-selected="'selected' if default_committee and cm.id==default_committee.id else None">
-                                    <t t-esc="cm.name"/>
-                                </option>
-                            </t>
-                        </select>
-                    </div>
+
                     <div class="mb-3">
                         <label class="form-label">Proof (optional)</label>
                         <input type="file" name="proof" class="form-control"/>
@@ -241,8 +231,13 @@
 
                             <dt class="col-sm-3">Tower</dt>
                             <dd class="col-sm-9">
-                                <t t-esc="notice.tower_id"/>
+                                <t t-foreach="notice.tower_id" t-as="tower">
+                                    <span class="badge bg-secondary me-1">
+                                        <t t-esc="tower.name"/>
+                                    </span>
+                                </t>
                             </dd>
+
 
                             <dt class="col-sm-3">Date</dt>
                             <dd class="col-sm-9">
@@ -454,9 +449,21 @@
                                 <t t-esc="alert.description"/>
                             </dd>
 
+                            <dt class="col-sm-3">Block Committee</dt>
+                            <dd class="col-sm-9">
+                                <t t-esc="alert.block_committee_id.name"/>
+                                <!--                                <t t-esc="alert.to_committee.name"/>-->
+                            </dd>
+
+                            <dt class="col-sm-3">Tower Committee</dt>
+                            <dd class="col-sm-9">
+                                <t t-esc="alert.tower_committee_id.name"/>
+                                <!--                                <t t-esc="alert.to_committee.name"/>-->
+                            </dd>
+
                             <dt class="col-sm-3">Committee</dt>
                             <dd class="col-sm-9">
-<!--                                <t t-esc="alert.to_committee.name"/>-->
+                                <t t-esc="alert.society_committee_id.name"/>
                                 <!--                                <t t-esc="alert.to_committee.name"/>-->
                             </dd>
 
@@ -592,20 +599,50 @@
 
                     <div class="mb-3">
                         <label class="form-label">Date</label>
-                        <input type="datetime-local" name="datetime" class="form-control"/>
+                        <input type="datetime-local"
+                               name="create_date"
+                               class="form-control"
+                               t-att-value="alert.create_date.strftime('%Y-%m-%dT%H:%M') if alert and alert.create_date else ''"/>
                     </div>
+                    
                     <div class="mb-3">
                         <label class="form-label">Location</label>
                         <textarea name="location" class="form-control" rows="4"/>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Committee</label>
-                        <select name="committee_id" class="form-select">
+                        <label class="form-label">Block Committee</label>
+                        <select name="block_committee_id" class="form-control" required="1">
                             <option value="">-- Select Committee --</option>
-                            <t t-foreach="committees" t-as="cm">
+                            <t t-foreach="block_committees" t-as="cm">
                                 <option t-att-value="cm.id"
-                                        t-att-selected="cm.id in default_committee.ids and 'selected' or None ">
+                                        t-att-selected="'selected' if default_block_committee and cm.id==default_block_committee.id else None">
+                                    <t t-esc="cm.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Tower Committee</label>
+                        <select name="tower_committee_id" class="form-control" required="1">
+                            <option value="">-- Select Committee --</option>
+                            <t t-foreach="tower_committees" t-as="cm">
+                                <option t-att-value="cm.id"
+                                        t-att-selected="'selected' if default_tower_committee and cm.id==default_tower_committee.id else None">
+                                    <t t-esc="cm.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Society Committee</label>
+                        <select name="society_committee_id" class="form-control" required="1">
+                            <option value="">-- Select Committee --</option>
+                            <t t-foreach="society_committees" t-as="cm">
+                                <option t-att-value="cm.id"
+                                        t-att-selected="'selected' if default_society_committee and cm.id==default_society_committee.id else None">
                                     <t t-esc="cm.name"/>
                                 </option>
                             </t>

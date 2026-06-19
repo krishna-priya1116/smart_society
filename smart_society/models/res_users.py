@@ -1,20 +1,4 @@
-from odoo import models, fields,api
-
-
-# class ResUsers(models.Model):
-#     _inherit = 'res.users'
-#
-#     resident_id = fields.Many2one( 'resident.registrations',string='Resident')
-#     security_id=fields.Many2one( 'security.guard',string='Security')
-#     committee_id=fields.Many2one( 'society.committee',string='Committee')
-#     flat_id = fields.Many2one('society.flat',string='Flat')
-#     tower_id = fields.Many2one('society.tower',string='Tower')
-#     vehicle_ids = fields.One2many('vehicle.registrations','owner_id',string='Vehicles')
-#     complaint_ids = fields.One2many('complaint.desk','user_id',string='Complaints')
-
-
-from odoo import models, fields, api
-from odoo.api import readonly
+from odoo import models,fields,api
 
 
 class ResUsers(models.Model):
@@ -26,7 +10,7 @@ class ResUsers(models.Model):
         compute='_compute_tower_id',
         store=True,readonly=False
     )
-
+    block=fields.Char(string='block')
     society_id=fields.Many2one(related='tower_id.society_id')
 
     @api.depends('partner_id')
@@ -34,35 +18,52 @@ class ResUsers(models.Model):
         for user in self:
             tower = False
 
-            # Committee user
+            # Society committee members
             committee = self.env['society.committee'].search([
-                '|',
-                ('chairman_id', '=', user.partner_id.id),
-                ('secretary_id', '=', user.partner_id.id),
+                ('society_committee_members', 'in', user.id)
             ], limit=1)
-
-            if not committee:
-                committee = self.env['society.committee'].search([
-                    ('committee_name_id', 'in', user.partner_id.id)
-                ], limit=1)
+            # if not committee:
+            #     committee = self.env['society.committee'].search([
+            #         ('committee_name_id', 'in', user.partner_id.id)
+            #     ], limit=1)
 
             if committee:
                 tower = committee.tower_id
 
-            # Security user
+            # Tower committee member
+            if not tower:
+                tower_committee = self.env['tower.committee'].search([
+                    ('tower_member_id', '=', user.id)
+                ], limit=1)
+
+                if tower_committee:
+                    tower = tower_committee.tower_id
+
+            # Block committee member
+            if not tower:
+                block_committee = self.env['block.committee'].search([
+                    ('block_member_id', '=', user.id)
+                ], limit=1)
+
+                if block_committee:
+                    tower = block_committee.tower_id
+
+            # Security
             if not tower:
                 security = self.env['security.guard'].search([
-                    ('security_id', '=', user.partner_id.id)
+                    ('security_id', '=', user.id)
                 ], limit=1)
 
                 if security:
                     tower = security.tower_id
 
+            # Resident
             if not tower:
-                resident=self.env['resident.registrations'].search([
-                    ('partner_id','=',user.partner_id.id)
-                ],limit=1)
+                resident = self.env['resident.registrations'].search([
+                    ('partner_id', '=', user.partner_id.id)
+                ], limit=1)
+
                 if resident:
-                    tower=resident.tower_id
+                    tower = resident.tower_id
 
             user.tower_id = tower

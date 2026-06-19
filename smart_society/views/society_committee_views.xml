@@ -64,6 +64,17 @@
                                 </list>
                             </field>
                         </page>
+                        <page string="Society Complaints History">
+                            <field name="society_complaints_history_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="resident_id"/>
+                                    <field name="description"/>
+                                    <field name="society_committee_id" />
+                                    <field name="stage"/>
+                                </list>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
                 <chatter/>
@@ -141,6 +152,17 @@
                                 </list>
                             </field>
                         </page>
+                        <page string="Tower Complaints History">
+                            <field name="tower_complaints_history_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="resident_id"/>
+                                    <field name="description"/>
+                                    <field name="tower_committee_id"/>
+                                    <field name="stage"/>
+                                </list>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
                 <chatter/>
@@ -197,6 +219,17 @@
                                     <field name="block"/>
                                     <field name="date_from"/>
                                     <field name="date_to"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Block Complaints History">
+                            <field name="block_complaints_history_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="resident_id"/>
+                                    <field name="description"/>
+                                    <field name="block_committee_id"/>
+                                    <field name="stage"/>
                                 </list>
                             </field>
                         </page>

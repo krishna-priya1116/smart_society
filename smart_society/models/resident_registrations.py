@@ -58,6 +58,8 @@ class ResidentRegistrations(models.Model):
                     'login':record.email,
                     'email':record.email,
                     'password':f'{record.name}1234',
+                    'tower_id': record.tower_id.id if record.tower_id else False,
+                    # 'block':record.tower_id.block,
                     # 'implied_ids':[(4, self.env.ref('smart_society.group_registration_user'))],
                     # "group_ids": [Command.set([self.ref("base.group_portal")])]
                     'group_ids': [(4,self.env.ref('smart_society.group_registration_user').id),
