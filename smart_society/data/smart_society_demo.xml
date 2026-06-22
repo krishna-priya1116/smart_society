@@ -467,7 +467,7 @@
             <field name="mobile_number">9872673735</field>
             <field name="email">rachel_perry11@example.com</field>
             <field name="emergency_contacts">9876500001</field>
-            <field name="resident_type">tenant</field>
+            <field name="resident_type">temporary_resident</field>
             <field name="real_owner">Anita Oliver</field>
 
         </record>
@@ -708,10 +708,10 @@
             <field name="mobile_number">8273917382</field>
             <field name="email">tina_williamson@example11.com</field>
             <field name="age">40</field>
-            <field name="aadhaar_number">837282738273</field>
-            <field name="pan_number">GHJY1829</field>
+<!--            <field name="aadhaar_number">837282738273</field>-->
+<!--            <field name="pan_number">GHJY1829</field>-->
             <field name="address">: Av. App 6410 Of. 212 Las Toronto, (RM)</field>
-            <field name="shift">morning</field>
+<!--            <field name="shift">morning</field>-->
         </record>
 
         <!--        security.guard hr.employee for security 2-->
@@ -722,10 +722,10 @@
             <field name="mobile_number">8371637281</field>
             <field name="email">marc_demo@example11.com</field>
             <field name="age">41</field>
-            <field name="aadhaar_number">8372839182</field>
-            <field name="pan_number">JHJY1820</field>
+<!--            <field name="aadhaar_number">8372839182</field>-->
+<!--            <field name="pan_number">JHJY1820</field>-->
             <field name="address">: Av. Las Toronto 6410 Of. 212 Alaska</field>
-            <field name="shift">night</field>
+<!--            <field name="shift">night</field>-->
         </record>
 
         <!--        security.guard hr.employee for security 3-->
@@ -736,10 +736,10 @@
             <field name="mobile_number">9987037281</field>
             <field name="email">jeffrey_kelly11@example.com</field>
             <field name="age">45</field>
-            <field name="aadhaar_number">9923817218</field>
-            <field name="pan_number">JKJI0192</field>
+<!--            <field name="aadhaar_number">9923817218</field>-->
+<!--            <field name="pan_number">JKJI0192</field>-->
             <field name="address">: Av. Amber 6410 Of. 212 Las Conda, (RM)</field>
-            <field name="shift">morning</field>
+<!--            <field name="shift">morning</field>-->
         </record>
 
                 <!--        visitor tracking-->

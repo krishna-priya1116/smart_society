@@ -114,15 +114,16 @@
         <field name="model">security.guard</field>
         <field name="arch" type="xml">
             <list>
+                <field name="name"/>
                 <field name="security_id"/>
                 <field name="tower_id"/>
                 <field name="mobile_number"/>
                 <field name="email"/>
-                <field name="age"/>
-                <field name="aadhaar_number" optional="hide"/>
-                <field name="pan_number" optional="hide"/>
+                <field name="age" optional="hide"/>
+<!--                <field name="aadhaar_number" optional="hide"/>-->
+<!--                <field name="pan_number" optional="hide"/>-->
                 <field name="address" optional="hide"/>
-                <field name="shift"/>
+                <field name="working_hours_id"/>
             </list>
         </field>
     </record>
@@ -132,27 +133,130 @@
         <field name="model">security.guard</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_new_security" type="object" string="New"/>
+                </header>
                 <sheet>
                     <group>
                         <group>
-                            <field name="security_id"/>
+                            <field name="name"/>
                             <field name="tower_id"/>
+                            <field name="security_id"/>
                             <field name="mobile_number"/>
                             <field name="email"/>
-                        </group>
-                        <group>
                             <field name="age"/>
-                            <field name="aadhaar_number"/>
-                            <field name="pan_number"/>
                             <field name="address"/>
-                            <field name="shift"/>
+
                         </group>
+                        <group string="Security Documents">
+                            <field name="aadhaar_card_copy"/>
+                            <field name="pan_card_copy"/>
+                            <field name="police_verification_proof"/>
+                        </group>
+                        <group string="work Related">
+                            <field name="working_hours_id"/>
+                            <field name="join_date"/>
+                            <field name="leave_date"/>
+                            <field name="state"/>
+                        </group>
+
+
                     </group>
+                    <notebook>
+                        <page string="Security History">
+                            <field name="security_history_ids">
+                                <list editable="bottom">
+                                    <field name="security_guard_id"/>
+                                    <field name="security_id"/>
+                                    <field name="tower_id"/>
+                                    <field name="mobile_number"/>
+                                    <field name="email"/>
+                                    <field name="age"/>
+                                    <field name="aadhaar_card_copy"/>
+                                    <field name="pan_card_copy"/>
+                                    <field name="police_verification_proof"/>
+                                    <field name="leave_date"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Security Documents">
+                            <field name="security_documents_ids">
+                                <list editable="bottom">
+                                    <field name="security_guard_id"/>
+                                    <field name="security_id"/>
+                                    <field name="aadhaar_card_copy"/>
+                                    <field name="pan_card_copy"/>
+                                    <field name="police_verification_proof"/>
+                                    <field name="mobile_number"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
+                <chatter/>
             </form>
         </field>
     </record>
+
+    <record id="view_security_document_form" model="ir.ui.view">
+        <field name="name">security.guard.document.form</field>
+        <field name="model">security.guard.document</field>
+        <field name="arch" type="xml">
+            <form>
+                
+            </form>
+            <list>
+                <field name="security_guard_id"/>
+                <field name="security_id"/>
+                <field name="aadhaar_card_copy"/>
+                <field name="pan_card_copy"/>
+                <field name="police_verification_proof"/>
+                <field name="mobile_number"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="hr_attendance_security_form_view" model="ir.ui.view">
+        <field name="name">hr.attendance.form</field>
+        <field name="model">hr.attendance</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+        <field name="arch" type="xml">
+            <field name="overtime_status" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <xpath expr="//field[@id='employee_no_manager']" position="replace"/>
+            <xpath expr="//field[@id='employee_manager']" position="replace"/>
+            <xpath expr="//field[@id='employee_no_officer']" position="attributes">
+                <attribute name="groups"/>
+            </xpath>
+            <field name="employee_id" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="check_in" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="check_out" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+
+
+        </field>
+    </record>
+
 </odoo>
+
+<!--            <field name="validated_overtime_hours" position="attributes">-->
+<!--                <attribute name="readonly">1</attribute>-->
+<!--            </field>-->
+<!--            <button name="action_approve_overtime" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </button>-->
+<!--            <button name="action_refuse_overtime" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </button>-->
         <!--name,mobile_number,email,flat_number,id_proof,vehicle_count,-->
 
         <!--            <field name="name"/>-->

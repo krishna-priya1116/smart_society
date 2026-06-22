@@ -83,7 +83,7 @@
                             string="Mark On Process"
                             type="object"
                             class="btn-primary"
-                            invisible="stage not in ('send', 'hold')"/>
+                            invisible="stage not in ('send', 'hold','not_resolved_tower','not_resolved_block')"/>
 
                     <button name="action_hold"
                             string="Put On Hold"
@@ -94,7 +94,7 @@
                             string="Mark Resolved"
                             type="object"
                             class="btn-success"
-                            invisible="stage not in ('on_process', 'hold')"/>
+                            invisible="stage not in ('on_process', 'hold','not_resolved_block','not_resolved_tower')"/>
 
                     <button name="action_reject"
                             string="Reject"
@@ -105,12 +105,12 @@
                     <button name="action_reset_draft"
                             string="Reset to Draft"
                             type="object"
-                            invisible="stage not in ('reject', 'hold')"/>
+                            invisible="stage not in ('reject', 'hold','not_resolved_tower','not_resolved_block')"/>
 
                     <button name="action_not_resolved_block"
                             string="Move To Tower Committee"
                             type="object"
-                            invisible="stage in ('reject','on_process','resolve','not_resolved_block')"/>
+                            invisible="stage in ('reject','on_process','resolve','not_resolved_block','not_resolved_tower')"/>
 
                     <button name="action_not_resolved_tower"
                             string="Move To Society Committee"

@@ -86,6 +86,12 @@
     <menuitem id="smart_society_security_registration" name="Security Registration"
         parent="smart_society_registration" action="resident_security_action"/>
 
+    <menuitem id="smart_society_security_documents" name="Security Document"
+    parent="smart_society_registration" action="view_security_documents_action"/>
+
+    <menuitem id="smart_society_resident_proof" name="Resident Proof"
+    parent="smart_society_registration" action="view_resident_documents_action"/>
+
     <menuitem id="smart_society_parking_management" name="Parking Management"
           parent="smart_society_configration" action="parking_management_action"/>
 <!--            groups="smart_society.group_registration_security,smart_society.group_registration_committee"/>-->

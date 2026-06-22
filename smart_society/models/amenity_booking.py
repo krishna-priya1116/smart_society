@@ -24,7 +24,16 @@ class GuesthouseBooking(models.Model):
     members_history_ids=fields.One2many('guesthouse.members.history',
                                         'guesthouse_booking_id',string='Members History')
 
-    @api.onchange('days_booked', 'check_in_date', 'check_out_date', 'member_count')
+    # @api.onchange('days_booked', 'check_in_date', 'check_out_date', 'member_count')
+    # def _compute_days_booked(self):
+    #     for record in self:
+    #         record.total_charge = (
+    #                 record.days_booked *
+    #                 record.member_count *
+    #                 record.price_per_person
+    #         )
+
+    @api.depends('days_booked', 'member_count', 'price_per_person')
     def _compute_days_booked(self):
         for record in self:
             record.total_charge = (

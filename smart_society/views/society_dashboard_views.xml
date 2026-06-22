@@ -5,187 +5,860 @@
         <field name="arch" type="xml">
             <form string="Smart Society Dashboard">
                 <sheet>
-                    <group>
-                        <div class="oe_title">
-                            <h1>Society Dashboard</h1>
+                    <style>
+                        .dashboard-header-enhanced {
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+                        color: white;
+                        padding: 40px;
+                        border-radius: 16px;
+                        margin-bottom: 30px;
+                        box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+                        position: relative;
+                        overflow: hidden;
+                        }
+                        .dashboard-header-enhanced::before {
+                        content: '';
+                        position: absolute;
+                        top: -50%;
+                        right: -10%;
+                        width: 500px;
+                        height: 500px;
+                        background: rgba(255, 255, 255, 0.1);
+                        border-radius: 50%;
+                        animation: float 6s ease-in-out infinite;
+                        }
+                        @keyframes float {
+                        0%, 100% { transform: translateY(0px); }
+                        50% { transform: translateY(20px); }
+                        }
+                        .dashboard-header-content {
+                        position: relative;
+                        z-index: 1;
+                        }
+                        .dashboard-header-enhanced h1 {
+                        margin: 0;
+                        font-size: 40px;
+                        font-weight: 800;
+                        letter-spacing: -1px;
+                        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                        margin-bottom: 10px;
+                        }
+                        .dashboard-header-enhanced p {
+                        margin: 0;
+                        font-size: 16px;
+                        opacity: 0.95;
+                        font-weight: 500;
+                        letter-spacing: 0.3px;
+                        }
+                        .header-stats {
+                        display: flex;
+                        gap: 30px;
+                        margin-top: 20px;
+                        padding-top: 20px;
+                        border-top: 1px solid rgba(255, 255, 255, 0.2);
+                        }
+                        .header-stat-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                        }
+                        .header-stat-icon {
+                        width: 50px;
+                        height: 50px;
+                        background: rgba(255, 255, 255, 0.2);
+                        border-radius: 10px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 24px;
+                        backdrop-filter: blur(10px);
+                        }
+                        .header-stat-text h3 {
+                        margin: 0;
+                        font-size: 14px;
+                        opacity: 0.85;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        }
+                        .header-stat-text p {
+                        margin: 4px 0 0 0;
+                        font-size: 18px;
+                        font-weight: 700;
+                        border: none;
+                        }
+                        .dashboard-header {
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                        color: white;
+                        padding: 30px;
+                        border-radius: 12px;
+                        margin-bottom: 20px;
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                        }
+                        .dashboard-header h1 {
+                        margin: 0;
+                        font-size: 32px;
+                        font-weight: 700;
+                        letter-spacing: -0.5px;
+                        }
+                        .dashboard-header p {
+                        margin: 8px 0 0 0;
+                        opacity: 0.95;
+                        font-size: 14px;
+                        }
+                        .emergency-section {
+                        margin-bottom: 30px;
+                        }
+                        .emergency-title {
+                        font-size: 16px;
+                        font-weight: 700;
+                        color: #2d3436;
+                        margin-bottom: 16px;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        }
+                        .emergency-btn {
+                        width: 100%;
+                        height: 90px;
+                        border: none;
+                        border-radius: 14px;
+                        font-weight: 700;
+                        font-size: 15px;
+                        cursor: pointer;
+                        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 8px;
+                        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+                        position: relative;
+                        overflow: hidden;
+                        }
+                        .emergency-btn::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: -100%;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(255, 255, 255, 0.2);
+                        transition: left 0.5s ease;
+                        z-index: 0;
+                        }
+                        .emergency-btn:hover::before {
+                        left: 100%;
+                        }
+                        .emergency-btn-content {
+                        position: relative;
+                        z-index: 1;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 6px;
+                        }
+                        .emergency-btn-icon {
+                        font-size: 28px;
+                        line-height: 1;
+                        }
+                        .emergency-btn-text {
+                        font-size: 13px;
+                        font-weight: 700;
+                        letter-spacing: 0.5px;
+                        }
+                        .btn-sos {
+                        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+                        color: white;
+                        }
+                        .btn-sos:hover {
+                        transform: translateY(-6px);
+                        box-shadow: 0 12px 32px rgba(255, 107, 107, 0.4);
+                        }
+                        .btn-fire {
+                        background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
+                        color: white;
+                        }
+                        .btn-fire:hover {
+                        transform: translateY(-6px);
+                        box-shadow: 0 12px 32px rgba(255, 140, 66, 0.4);
+                        }
+                        .btn-medical {
+                        background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+                        color: white;
+                        }
+                        .btn-medical:hover {
+                        transform: translateY(-6px);
+                        box-shadow: 0 12px 32px rgba(255, 107, 157, 0.4);
+                        }
+                        .btn-broadcast {
+                        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+                        color: #2d3436;
+                        }
+                        .btn-broadcast:hover {
+                        transform: translateY(-6px);
+                        box-shadow: 0 12px 32px rgba(168, 237, 234, 0.4);
+                        }
+
+
+                        .stats-grid {
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 16px;
+                        margin-bottom: 30px;
+                        max-width: 600px;
+                        }
+
+
+                        .stat-card {
+                        background: white;
+                        border-radius: 12px;
+                        padding: 16px;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+                        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                        position: relative;
+                        overflow: hidden;
+                        }
+                        .stat-card::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        height: 3px;
+                        background: linear-gradient(90deg, var(--color-start, #667eea), var(--color-end, #764ba2));
+                        }
+                        .stat-card:hover {
+                        transform: translateY(-4px);
+                        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+                        }
+                        .stat-card-header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: flex-start;
+                        gap: 8px;
+                        }
+                        .stat-card-icon {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 8px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 20px;
+                        background: linear-gradient(135deg, var(--color-start, #667eea), var(--color-end, #764ba2));
+                        color: white;
+                        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+                        flex-shrink: 0;
+                        }
+                        .stat-card-value {
+                        font-size: 24px;
+                        font-weight: 800;
+                        color: #2d3436;
+                        line-height: 1;
+                        background: linear-gradient(135deg, var(--color-start, #667eea), var(--color-end, #764ba2));
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        background-clip: text;
+                        }
+                        .stat-card-label {
+                        font-size: 12px;
+                        font-weight: 700;
+                        color: #636e72;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        margin-top: 8px;
+                        }
+                        .stat-card-desc {
+                        font-size: 11px;
+                        color: #95a5a6;
+                        margin-top: 4px;
+                        }
+                        .stat-card:nth-child(1) { --color-start: #667eea; --color-end: #764ba2; }
+                        .stat-card:nth-child(2) { --color-start: #f093fb; --color-end: #f5576c; }
+                        .stat-card:nth-child(3) { --color-start: #4facfe; --color-end: #00f2fe; }
+<!--                        .stat-card {-->
+<!--                        background: white;-->
+<!--                        border-radius: 16px;-->
+<!--                        padding: 28px;-->
+<!--                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);-->
+<!--                        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);-->
+<!--                        position: relative;-->
+<!--                        overflow: hidden;-->
+<!--                        }-->
+<!--                        .stat-card::before {-->
+<!--                        content: '';-->
+<!--                        position: absolute;-->
+<!--                        top: 0;-->
+<!--                        left: 0;-->
+<!--                        right: 0;-->
+<!--                        height: 4px;-->
+<!--                        background: linear-gradient(90deg, var(&#45;&#45;color-start, #667eea), var(&#45;&#45;color-end, #764ba2));-->
+<!--                        }-->
+<!--                        .stat-card:hover {-->
+<!--                        transform: translateY(-8px);-->
+<!--                        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);-->
+<!--                        }-->
+<!--                        .stat-card-header {-->
+<!--                        display: flex;-->
+<!--                        justify-content: space-between;-->
+<!--                        align-items: flex-start;-->
+<!--                        margin-bottom: 16px;-->
+<!--                        }-->
+<!--                        .stat-card-icon {-->
+<!--                        width: 60px;-->
+<!--                        height: 60px;-->
+<!--                        border-radius: 12px;-->
+<!--                        display: flex;-->
+<!--                        align-items: center;-->
+<!--                        justify-content: center;-->
+<!--                        font-size: 32px;-->
+<!--                        background: linear-gradient(135deg, var(&#45;&#45;color-start, #667eea), var(&#45;&#45;color-end, #764ba2));-->
+<!--                        color: white;-->
+<!--                        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);-->
+<!--                        }-->
+<!--                        .stat-card-value {-->
+<!--                        font-size: 36px;-->
+<!--                        font-weight: 800;-->
+<!--                        color: #2d3436;-->
+<!--                        line-height: 1;-->
+<!--                        background: linear-gradient(135deg, var(&#45;&#45;color-start, #667eea), var(&#45;&#45;color-end, #764ba2));-->
+<!--                        -webkit-background-clip: text;-->
+<!--                        -webkit-text-fill-color: transparent;-->
+<!--                        background-clip: text;-->
+<!--                        }-->
+<!--                        .stat-card-label {-->
+<!--                        font-size: 14px;-->
+<!--                        font-weight: 700;-->
+<!--                        color: #636e72;-->
+<!--                        text-transform: uppercase;-->
+<!--                        letter-spacing: 1px;-->
+<!--                        margin-top: 12px;-->
+<!--                        }-->
+<!--                        .stat-card-desc {-->
+<!--                        font-size: 13px;-->
+<!--                        color: #95a5a6;-->
+<!--                        margin-top: 8px;-->
+<!--                        }-->
+<!--                        .stat-card:nth-child(1) { &#45;&#45;color-start: #667eea; &#45;&#45;color-end: #764ba2; }-->
+<!--                        .stat-card:nth-child(2) { &#45;&#45;color-start: #f093fb; &#45;&#45;color-end: #f5576c; }-->
+<!--                        .stat-card:nth-child(3) { &#45;&#45;color-start: #4facfe; &#45;&#45;color-end: #00f2fe; }-->
+                        .o_notebook .nav-link {
+                        border: none;
+                        border-bottom: 3px solid transparent;
+                        color: #6c757d;
+                        font-weight: 600;
+                        transition: all 0.3s ease;
+                        padding: 12px 20px;
+                        margin-right: 8px;
+                        border-radius: 8px 8px 0 0;
+                        }
+                        .o_notebook .nav-link:hover {
+                        background-color: #f0f0f0;
+                        color: #495057;
+                        border-bottom-color: #667eea;
+                        }
+                        .o_notebook .nav-link.active {
+                        color: #667eea;
+                        background-color: #f8f9ff;
+                        border-bottom-color: #667eea;
+                        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+                        }
+                        .oe_kanban_card {
+                        background: #ffffff;
+                        border: 1px solid #e9ecef;
+                        border-radius: 12px;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+                        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                        overflow: hidden;
+                        }
+                        .oe_kanban_card:hover {
+                        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+                        transform: translateY(-4px);
+                        border-color: #667eea;
+                        }
+                        .oe_kanban_content {
+                        padding: 16px;
+                        }
+                        .oe_kanban_title {
+                        font-size: 15px;
+                        font-weight: 700;
+                        color: #2d3436;
+                        margin: 0 0 12px 0;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        }
+                        .oe_kanban_title b {
+                        display: block;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        flex: 1;
+                        }
+                        .oe_kanban_text {
+                        font-size: 13px;
+                        color: #636e72;
+                        line-height: 1.5;
+                        margin-bottom: 12px;
+                        }
+                        .oe_kanban_text p {
+                        margin: 0 0 8px 0;
+                        }
+                        .oe_kanban_text strong {
+                        color: #2d3436;
+                        font-weight: 600;
+                        }
+                        .oe_kanban_footer {
+                        border-top: 1px solid #f1f3f5;
+                        padding-top: 10px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        }
+                        .status-badge {
+                        display: inline-block;
+                        padding: 4px 10px;
+                        border-radius: 20px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        }
+                        .badge-draft { background-color: #e3f2fd; color: #1976d2; }
+                        .badge-published { background-color: #e8f5e9; color: #388e3c; }
+                        .badge-closed { background-color: #fce4ec; color: #c2185b; }
+                        .badge-in-progress { background-color: #fff3e0; color: #f57c00; }
+                        .kanban-group-header {
+                        font-size: 14px;
+                        font-weight: 700;
+                        color: #667eea;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        padding: 12px 0;
+                        border-bottom: 2px solid #667eea;
+                        margin-bottom: 16px;
+                        }
+                        .empty-state {
+                        text-align: center;
+                        padding: 40px 20px;
+                        color: #95a5a6;
+                        }
+                        .empty-state-icon {
+                        font-size: 48px;
+                        margin-bottom: 12px;
+                        }
+                    </style>
+                    <div class="dashboard-header-enhanced">
+                        <div class="dashboard-header-content">
+                            <h1>Smart Society Dashboard</h1>
+                            <p>Real-time overview of society operations and resident management</p>
+        <!-- HTML Div -->
+<!--                            <div class="stats-grid">-->
+<!--                                <div class="stat-card">-->
+<!--                                    <div class="stat-card-header">-->
+<!--                                        <div>-->
+<!--                                            <div class="stat-card-value">-->
+<!--                                                <field name="total_notices" readonly="1"/>-->
+<!--                                            </div>-->
+<!--                                            <div class="stat-card-label">Total Notices</div>-->
+<!--                                            <div class="stat-card-desc">Active &amp; Archived</div>-->
+<!--                                        </div>-->
+<!--&lt;!&ndash;                                        <div class="stat-card-icon">📋</div>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="stat-card">-->
+<!--                                    <div class="stat-card-header">-->
+<!--                                        <div>-->
+<!--                                            <div class="stat-card-value">-->
+<!--                                                <field name="total_events" readonly="1"/>-->
+<!--                                            </div>-->
+<!--                                            <div class="stat-card-label">Total Events</div>-->
+<!--                                            <div class="stat-card-desc">Upcoming &amp; Past</div>-->
+<!--                                        </div>-->
+<!--&lt;!&ndash;                                        <div class="stat-card-icon">🎉</div>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="stat-card">-->
+<!--                                    <div class="stat-card-header">-->
+<!--                                        <div>-->
+<!--                                            <div class="stat-card-value">-->
+<!--                                                <field name="total_complaints" readonly="1"/>-->
+<!--                                            </div>-->
+<!--                                            <div class="stat-card-label">Total Complaints</div>-->
+<!--                                            <div class="stat-card-desc">All Statuses</div>-->
+<!--                                        </div>-->
+<!--&lt;!&ndash;                                        <div class="stat-card-icon">⚠️</div>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+
                         </div>
-                        <group>
-                            <div class="row g-2">
-                                <div class="col-3">
-                                    <button type="object" name="sos_alerts"
-                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"
-                                            style="width:100%; height:70px;">Emergency SOS Alert
-                                    </button>
+                    </div>
+
+                    <div class="emergency-section">
+                        <div class="emergency-title">
+                            Critical Alert System
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-lg-3 col-md-6">
+                                <button type="object" name="sos_alerts" class="emergency-btn btn-sos">
+                                    <div class="emergency-btn-content">
+                                        <div class="emergency-btn-icon"/>
+                                        <div class="emergency-btn-text">SOS ALERT</div>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <button type="object" name="fire_alerts" class="emergency-btn btn-fire">
+                                    <div class="emergency-btn-content">
+                                        <div class="emergency-btn-icon"/>
+                                        <div class="emergency-btn-text">FIRE ALERT</div>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <button type="object" name="medical_panic_buttons" class="emergency-btn btn-medical">
+                                    <div class="emergency-btn-content">
+                                        <div class="emergency-btn-icon"/>
+                                        <div class="emergency-btn-text">MEDICAL/PANIC</div>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <button type="object" name="emergency_broadcast" class="emergency-btn btn-broadcast"
+                                        groups="smart_society.group_registration_committee,smart_society.group_registration_administration">
+                                    <div class="emergency-btn-content">
+                                        <div class="emergency-btn-icon"/>
+                                        <div class="emergency-btn-text">BROADCAST</div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-card-header">
+                                <div>
+                                    <div class="stat-card-value">
+                                        <field name="total_notices" readonly="1"/>
+                                    </div>
+                                    <div class="stat-card-label">Total Notices</div>
+                                    <div class="stat-card-desc">Active &amp; Archived</div>
                                 </div>
-                                <div class="col-3">
-                                    <button type="object" name="fire_alerts"
-                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"
-                                            style="width:100%; height:70px;">Emergency FIRE Alert
-                                    </button>
+                                <div class="stat-card-icon" icon="fa-list-ul"/>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-header">
+                                <div>
+                                    <div class="stat-card-value">
+                                        <field name="total_events" readonly="1"/>
+                                    </div>
+                                    <div class="stat-card-label">Total Events</div>
+                                    <div class="stat-card-desc">Upcoming &amp; Past</div>
                                 </div>
-                                <div class="col-3">
-                                    <button type="object" name="medical_panic_buttons"
-                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"
-                                            style="width:100%; height:70px;">
-                                        Medical/Panic Button
-                                    </button>
+                                <!--                                <div class="stat-card-icon"></div>-->
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-header">
+                                <div>
+                                    <div class="stat-card-value">
+                                        <field name="total_complaints" readonly="1"/>
+                                    </div>
+                                    <div class="stat-card-label">Total Complaints</div>
+                                    <div class="stat-card-desc">All Statuses</div>
                                 </div>
-                                <div class="col-3">
-                                    <button type="object" name="emergency_broadcast"
-                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"
-                                            style="width:100%; height:70px;"
-                                            groups="smart_society.group_registration_committee,smart_society.group_registration_administration">
-                                        Emergency Broadcast Button
-                                    </button>
+                                <div class="stat-card-icon">
+                                    <i class="fa fa-calendar" title="Date"/>
                                 </div>
                             </div>
-                        </group>
-                        <group col="4">
-                            <field name="total_notices" readonly="1"/>
-                            <field name="total_events" readonly="1"/>
-                            <field name="total_complaints" readonly="1"/>
-<!--                            <field name="total_visitors" readonly="1"/>-->
-                        </group>
-                    </group>
+                        </div>
+                    </div>
                     <notebook>
 
-                        <!-- Notices -->
+                        <!-- Notices Kanban View -->
                         <page string="Notices">
                             <field name="notice_ids" readonly="1">
-                                <list>
+                                <kanban default_group_by="stage">
                                     <field name="name"/>
                                     <field name="description"/>
                                     <field name="create_date"/>
                                     <field name="stage"/>
-                                </list>
+                                    <templates>
+                                        <t t-name="card">
+                                            <div class="oe_kanban_card">
+                                                <div class="oe_kanban_content">
+                                                    <div class="oe_kanban_title">
+                                                        <span style="font-size: 16px;" icon="fa-list-ul"/>
+                                                        <b>
+                                                            <field name="name"/>
+                                                        </b>
+                                                    </div>
+                                                    <div class="oe_kanban_text">
+                                                        <field name="description"/>
+                                                    </div>
+                                                    <div class="oe_kanban_footer">
+                                                        <small class="text-muted">
+                                                            <i class="fa fa-calendar" title="calendar"/>
+                                                            <field name="create_date"/>
+                                                        </small>
+                                                        <span class="status-badge badge-published">
+                                                            <field name="stage"/>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
                             </field>
                         </page>
-                        <!-- Events -->
+
+                        <!-- Events Kanban View -->
                         <page string="Events">
                             <field name="event_ids" readonly="1">
-                                <list>
+                                <kanban default_group_by="stage">
                                     <field name="name"/>
                                     <field name="event_time_start"/>
                                     <field name="event_time_end"/>
                                     <field name="event_place"/>
                                     <field name="stage"/>
-                                </list>
+                                    <templates>
+                                        <t t-name="card">
+                                            <div class="oe_kanban_card">
+                                                <div class="oe_kanban_content">
+                                                    <div class="oe_kanban_title">
+                                                        <!--                                                        <span style="font-size: 16px;"></span>-->
+                                                        <b>
+                                                            <field name="name"/>
+                                                        </b>
+                                                    </div>
+                                                    <div class="oe_kanban_text">
+                                                        <p>
+                                                            <span style="display: inline-block; width: 90px;"
+                                                                  icon="fa fa-map-marker" title="location">Location:
+                                                            </span>
+                                                            <strong>
+                                                                <field name="event_place"/>
+                                                            </strong>
+                                                        </p>
+                                                        <p>
+                                                            <span style="display: inline-block; width: 90px;">
+                                                                <i class="fa fa-clock-o" title="Time"/>
+                                                                Start:
+                                                            </span>
+                                                            <strong>
+                                                                <field name="event_time_start"/>
+                                                            </strong>
+                                                        </p>
+                                                        <p>
+                                                            <span style="display: inline-block; width: 90px;">
+                                                                <i class="fa fa-clock-o" title="Time"/>
+                                                                End:
+                                                            </span>
+                                                            <strong>
+                                                                <field name="event_time_end"/>
+                                                            </strong>
+                                                        </p>
+                                                    </div>
+                                                    <div class="oe_kanban_footer">
+                                                        <span class="status-badge badge-in-progress">
+                                                            <field name="stage"/>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
                             </field>
                         </page>
-                        <!-- Complaints -->
+
+                        <!-- Complaints Kanban View -->
                         <page string="Complaints">
                             <field name="complaint_ids" readonly="1">
-                                <list>
+                                <kanban default_group_by="stage">
                                     <field name="name"/>
                                     <field name="resident_id"/>
                                     <field name="tower_id"/>
                                     <field name="flat_id"/>
                                     <field name="stage"/>
                                     <field name="create_date"/>
-                                </list>
+                                    <templates>
+                                        <t t-name="card">
+                                            <div class="oe_kanban_card">
+                                                <div class="oe_kanban_content">
+                                                    <div class="oe_kanban_title">
+                                                        <span style="font-size: 16px;">
+                                                            <i class="fa fa-bell-o" title="bell"/>
+                                                        </span>
+                                                        <b>
+                                                            <field name="name"/>
+                                                        </b>
+                                                    </div>
+                                                    <div class="oe_kanban_text">
+                                                        <p>
+                                                            <span style="display: inline-block; width: 90px; color: #667eea; font-weight: 600;">
+                                                                <i class="fa-users" title="users"/>Resident:
+                                                            </span>
+                                                            <field name="resident_id"/>
+                                                        </p>
+                                                        <p>
+                                                            <span style="display: inline-block; width: 90px; color: #667eea; font-weight: 600;">
+                                                                <i class="fa-building" title="tower"/>Tower:
+                                                            </span>
+                                                            <field name="tower_id"/>
+                                                        </p>
+                                                        <p>
+                                                            <span style="display: inline-block; width: 90px; color: #667eea; font-weight: 600;">
+                                                                Flat:
+                                                            </span>
+                                                            <field name="flat_id"/>
+                                                        </p>
+                                                    </div>
+                                                    <div class="oe_kanban_footer">
+                                                        <small class="text-muted">
+                                                            <i class="fa fa-clock-o" title="time"/>
+                                                            <field name="create_date"/>
+                                                        </small>
+                                                        <span class="status-badge badge-draft">
+                                                            <field name="stage"/>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
                             </field>
                         </page>
+
                     </notebook>
                 </sheet>
             </form>
         </field>
     </record>
 
-
-<!--    <record id="society_alert_wizard_list_save" model="ir.ui.view">-->
-<!--        <field name="name">society.alert.save.list</field>-->
-<!--        <field name="model">society.alert.save</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <list default_order="datetime desc">-->
-<!--                <field name="name"/>-->
-<!--                <field name="description" optional="hide"/>-->
-<!--                <field name="flat_id"/>-->
-<!--                <field name="tower_id"/>-->
-<!--                <field name="user_id"/>-->
-<!--                <field name="location"/>-->
-<!--                <field name="alert_type" optional="hide"/>-->
-<!--                <field name="datetime"/>-->
-<!--            </list>-->
-<!--        </field>-->
-<!--    </record>-->
-
-<!--    <record id="society_alert_wizard_form_save" model="ir.ui.view">-->
-<!--        <field name="name">society.alert.save.form</field>-->
-<!--        <field name="model">society.alert.save</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <form string="Alert">-->
-<!--                <sheet>-->
-<!--                    <group>-->
-<!--                        <field name="name"/>-->
-<!--                        <field name="description"/>-->
-<!--                        <field name="to_committee"/>-->
-<!--                        <field name="flat_id"/>-->
-<!--                        <field name="tower_id"/>-->
-<!--                        <field name="user_id"/>-->
-<!--                        <field name="location"/>-->
-<!--                        <field name="alert_type"/>-->
-<!--                        <field name="datetime"/>-->
-<!--                    </group>-->
-<!--                </sheet>-->
-<!--                <chatter/>-->
-<!--            </form>-->
-<!--        </field>-->
-<!--    </record>-->
-
-
-<!--    <record id="society_emergency_broadcast_wizard_list_save" model="ir.ui.view">-->
-<!--        <field name="name">emergency.broadcast.save.list</field>-->
-<!--        <field name="model">emergency.broadcast.save</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <list default_order="datetime desc">-->
-<!--                <field name="name"/>-->
-<!--                <field name="description"/>-->
-<!--                <field name="tower_ids"/>-->
-<!--                <field name="flat_ids"/>-->
-<!--                <field name="datetime"/>-->
-<!--            </list>-->
-<!--        </field>-->
-<!--    </record>-->
-
-<!--    <record id="society_emergency_broadcast_wizard_save" model="ir.ui.view">-->
-<!--        <field name="name">emergency.broadcast.save.form</field>-->
-<!--        <field name="model">emergency.broadcast.save</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <form string="Emergency">-->
-<!--                <sheet>-->
-<!--                    <group>-->
-<!--                        <field name="name"/>-->
-<!--                        <field name="description"/>-->
-<!--                        <field name="tower_ids" widget="many2many_tags"/>-->
-<!--                        <field name="flat_ids" widget="many2many_tags" invisible="tower_ids"/>-->
-<!--                        <field name="datetime"/>-->
-<!--                    </group>-->
-<!--                </sheet>-->
-<!--                <chatter/>-->
-<!--            </form>-->
-<!--        </field>-->
-<!--    </record>-->
-
 </odoo>
+        <!-- CSS Styles -->
+<!--<style>-->
+<!--.stats-grid {-->
+<!--display: grid;-->
+<!--grid-template-columns: repeat(3, 1fr);-->
+<!--gap: 16px;-->
+<!--margin-bottom: 30px;-->
+<!--max-width: 600px;-->
+<!--}-->
+<!--.stat-card {-->
+<!--background: white;-->
+<!--border-radius: 12px;-->
+<!--padding: 16px;-->
+<!--box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);-->
+<!--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);-->
+<!--position: relative;-->
+<!--overflow: hidden;-->
+<!--}-->
+<!--.stat-card::before {-->
+<!--content: '';-->
+<!--position: absolute;-->
+<!--top: 0;-->
+<!--left: 0;-->
+<!--right: 0;-->
+<!--height: 3px;-->
+<!--background: linear-gradient(90deg, var(&#45;&#45;color-start, #667eea), var(&#45;&#45;color-end, #764ba2));-->
+<!--}-->
+<!--.stat-card:hover {-->
+<!--transform: translateY(-4px);-->
+<!--box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);-->
+<!--}-->
+<!--.stat-card-header {-->
+<!--display: flex;-->
+<!--justify-content: space-between;-->
+<!--align-items: flex-start;-->
+<!--gap: 8px;-->
+<!--}-->
+<!--.stat-card-icon {-->
+<!--width: 40px;-->
+<!--height: 40px;-->
+<!--border-radius: 8px;-->
+<!--display: flex;-->
+<!--align-items: center;-->
+<!--justify-content: center;-->
+<!--font-size: 20px;-->
+<!--background: linear-gradient(135deg, var(&#45;&#45;color-start, #667eea), var(&#45;&#45;color-end, #764ba2));-->
+<!--color: white;-->
+<!--box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);-->
+<!--flex-shrink: 0;-->
+<!--}-->
+<!--.stat-card-value {-->
+<!--font-size: 24px;-->
+<!--font-weight: 800;-->
+<!--color: #2d3436;-->
+<!--line-height: 1;-->
+<!--background: linear-gradient(135deg, var(&#45;&#45;color-start, #667eea), var(&#45;&#45;color-end, #764ba2));-->
+<!-- -webkit-background-clip: text;-->
+<!-- -webkit-text-fill-color: transparent;-->
+<!--background-clip: text;-->
+<!--}-->
+<!--.stat-card-label {-->
+<!--font-size: 12px;-->
+<!--font-weight: 700;-->
+<!--color: #636e72;-->
+<!--text-transform: uppercase;-->
+<!--letter-spacing: 0.5px;-->
+<!--margin-top: 8px;-->
+<!--}-->
+<!--.stat-card-desc {-->
+<!--font-size: 11px;-->
+<!--color: #95a5a6;-->
+<!--margin-top: 4px;-->
+<!--}-->
+<!--.stat-card:nth-child(1) { &#45;&#45;color-start: #667eea; &#45;&#45;color-end: #764ba2; }-->
+<!--.stat-card:nth-child(2) { &#45;&#45;color-start: #f093fb; &#45;&#45;color-end: #f5576c; }-->
+<!--.stat-card:nth-child(3) { &#45;&#45;color-start: #4facfe; &#45;&#45;color-end: #00f2fe; }-->
+<!--</style>-->
 
+        <!-- HTML Div -->
+<!--<div class="stats-grid">-->
+<!--<div class="stat-card">-->
+<!--    <div class="stat-card-header">-->
+<!--        <div>-->
+<!--            <div class="stat-card-value">-->
+<!--                <field name="total_notices" readonly="1"/>-->
+<!--            </div>-->
+<!--            <div class="stat-card-label">Total Notices</div>-->
+<!--            <div class="stat-card-desc">Active &amp; Archived</div>-->
+<!--        </div>-->
+<!--        <div class="stat-card-icon">📋</div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div class="stat-card">-->
+<!--    <div class="stat-card-header">-->
+<!--        <div>-->
+<!--            <div class="stat-card-value">-->
+<!--                <field name="total_events" readonly="1"/>-->
+<!--            </div>-->
+<!--            <div class="stat-card-label">Total Events</div>-->
+<!--            <div class="stat-card-desc">Upcoming &amp; Past</div>-->
+<!--        </div>-->
+<!--        <div class="stat-card-icon">🎉</div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div class="stat-card">-->
+<!--    <div class="stat-card-header">-->
+<!--        <div>-->
+<!--            <div class="stat-card-value">-->
+<!--                <field name="total_complaints" readonly="1"/>-->
+<!--            </div>-->
+<!--            <div class="stat-card-label">Total Complaints</div>-->
+<!--            <div class="stat-card-desc">All Statuses</div>-->
+<!--        </div>-->
+<!--        <div class="stat-card-icon">⚠️</div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</div>-->
 
-        <!--                                <div class="col-3" style="cursor:pointer;" name="fire_alert">-->
-        <!--                                    <div class="card bg-danger-subtle border-danger border-2 rounded-3 text-center shadow-sm py-2 px-2"-->
-        <!--                                         style="height:70px;">-->
-        <!--                                        <div class="text-danger fw-bold small">Fire Alert</div>-->
-        <!--                                    </div>-->
-        <!--                                </div>-->
-
-        <!--                                <div class="col-3" style="cursor:pointer;" action="medical_panic_button">-->
-        <!--                                    <div class="card bg-danger-subtle border-danger border-2 rounded-3 text-center shadow-sm py-2 px-2"-->
-        <!--                                         style="height:70px;">-->
-        <!--                                        <div class="text-danger fw-bold small">Medical / Panic</div>-->
-        <!--                                    </div>-->
-        <!--                                </div>-->
-
-        <!--                                <div class="col-3" style="cursor:pointer;" action="emergency_broadcast">-->
-        <!--                                    <div class="card bg-danger-subtle border-danger border-2 rounded-3 text-center shadow-sm py-2 px-2"-->
-        <!--                                         style="height:70px;">-->
-        <!--                                        <div class="text-danger fw-bold small">Emergency Broadcast</div>-->
-        <!--                                    </div>-->
-        <!--                                </div>-->

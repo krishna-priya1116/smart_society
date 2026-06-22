@@ -5,7 +5,7 @@
     <template id="portal_my_home_complaint" inherit_id="portal.portal_my_home">
         <xpath expr="//div[contains(@class,'o_portal_docs')]" position="inside">
             <t t-call="portal.portal_docs_entry">
-                <t t-set="title">My Complaints</t>
+                <t t-set="title">Complaints</t>
                 <t t-set="text">Give your Complaints</t>
                 <t t-set="url" t-value="'/my/complaints'"/>
                 <t t-set="icon" t-value="'/web/static/img/rfq.svg'"/>
@@ -62,7 +62,7 @@
         <t t-call="portal.portal_layout">
             <div class="container mt-4">
                 <div class="card-header">
-                    <a href="/my/complaints" class="btn btn-secondary">&#8592; Back to My Complaints</a>
+                    <a href="/my/complaints" class="btn btn-secondary">&#8592; Back to Complaints</a>
                 </div>
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
@@ -391,7 +391,7 @@
                     <a href="/my" class="btn btn-secondary">&#8592; Back to Home</a>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h3>My Alerts</h3>
+                    <h3> Alerts</h3>
                     <a href="/my/alert/new" class="btn btn-primary">+ New Alert</a>
                 </div>
                 <t t-if="not alerts">

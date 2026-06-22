@@ -1,3 +1,704 @@
+# #
+#         <!--<odoo>-->
+# <!--    <record id="view_dashboard_home_forms" model="ir.ui.view">-->
+# <!--        <field name="name">society.dashboard.form</field>-->
+# <!--        <field name="model">society.dashboard</field>-->
+# <!--        <field name="arch" type="xml">-->
+# <!--            <form string="Smart Society Dashboard">-->
+# <!--                <sheet>-->
+# <!--                    <style>-->
+# <!--                        .dashboard-header {-->
+# <!--                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);-->
+# <!--                            color: white;-->
+# <!--                            padding: 30px;-->
+# <!--                            border-radius: 12px;-->
+# <!--                            margin-bottom: 20px;-->
+# <!--                            box-shadow: 0 4px 15px rgba(0,0,0,0.1);-->
+# <!--                        }-->
+# <!--                        .dashboard-header h1 {-->
+# <!--                            margin: 0;-->
+# <!--                            font-size: 32px;-->
+# <!--                            font-weight: 700;-->
+# <!--                            letter-spacing: -0.5px;-->
+# <!--                        }-->
+# <!--                        .dashboard-header p {-->
+# <!--                            margin: 8px 0 0 0;-->
+# <!--                            opacity: 0.95;-->
+# <!--                            font-size: 14px;-->
+# <!--                        }-->
+# <!--                        .o_notebook .nav-link {-->
+# <!--                            border: none;-->
+# <!--                            border-bottom: 3px solid transparent;-->
+# <!--                            color: #6c757d;-->
+# <!--                            font-weight: 600;-->
+# <!--                            transition: all 0.3s ease;-->
+# <!--                            padding: 12px 20px;-->
+# <!--                            margin-right: 8px;-->
+# <!--                            border-radius: 8px 8px 0 0;-->
+# <!--                        }-->
+# <!--                        .o_notebook .nav-link:hover {-->
+# <!--                            background-color: #f0f0f0;-->
+# <!--                            color: #495057;-->
+# <!--                            border-bottom-color: #667eea;-->
+# <!--                        }-->
+# <!--                        .o_notebook .nav-link.active {-->
+# <!--                            color: #667eea;-->
+# <!--                            background-color: #f8f9ff;-->
+# <!--                            border-bottom-color: #667eea;-->
+# <!--                            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);-->
+# <!--                        }-->
+# <!--                        .oe_kanban_card {-->
+# <!--                            background: #ffffff;-->
+# <!--                            border: 1px solid #e9ecef;-->
+# <!--                            border-radius: 12px;-->
+# <!--                            box-shadow: 0 2px 8px rgba(0,0,0,0.08);-->
+# <!--                            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);-->
+# <!--                            overflow: hidden;-->
+# <!--                        }-->
+# <!--                        .oe_kanban_card:hover {-->
+# <!--                            box-shadow: 0 8px 24px rgba(0,0,0,0.15);-->
+# <!--                            transform: translateY(-4px);-->
+# <!--                            border-color: #667eea;-->
+# <!--                        }-->
+# <!--                        .oe_kanban_content {-->
+# <!--                            padding: 16px;-->
+# <!--                        }-->
+# <!--                        .oe_kanban_title {-->
+# <!--                            font-size: 15px;-->
+# <!--                            font-weight: 700;-->
+# <!--                            color: #2d3436;-->
+# <!--                            margin: 0 0 12px 0;-->
+# <!--                            display: flex;-->
+# <!--                            align-items: center;-->
+# <!--                            gap: 8px;-->
+# <!--                        }-->
+# <!--                        .oe_kanban_title b {-->
+# <!--                            display: block;-->
+# <!--                            overflow: hidden;-->
+# <!--                            text-overflow: ellipsis;-->
+# <!--                            white-space: nowrap;-->
+# <!--                            flex: 1;-->
+# <!--                        }-->
+# <!--                        .oe_kanban_text {-->
+# <!--                            font-size: 13px;-->
+# <!--                            color: #636e72;-->
+# <!--                            line-height: 1.5;-->
+# <!--                            margin-bottom: 12px;-->
+# <!--                        }-->
+# <!--                        .oe_kanban_text p {-->
+# <!--                            margin: 0 0 8px 0;-->
+# <!--                        }-->
+# <!--                        .oe_kanban_text strong {-->
+# <!--                            color: #2d3436;-->
+# <!--                            font-weight: 600;-->
+# <!--                        }-->
+# <!--                        .oe_kanban_footer {-->
+# <!--                            border-top: 1px solid #f1f3f5;-->
+# <!--                            padding-top: 10px;-->
+# <!--                            display: flex;-->
+# <!--                            justify-content: space-between;-->
+# <!--                            align-items: center;-->
+# <!--                        }-->
+# <!--                        .status-badge {-->
+# <!--                            display: inline-block;-->
+# <!--                            padding: 4px 10px;-->
+# <!--                            border-radius: 20px;-->
+# <!--                            font-size: 12px;-->
+# <!--                            font-weight: 600;-->
+# <!--                            text-transform: uppercase;-->
+# <!--                            letter-spacing: 0.5px;-->
+# <!--                        }-->
+# <!--                        .badge-draft { background-color: #e3f2fd; color: #1976d2; }-->
+# <!--                        .badge-published { background-color: #e8f5e9; color: #388e3c; }-->
+# <!--                        .badge-closed { background-color: #fce4ec; color: #c2185b; }-->
+# <!--                        .badge-in-progress { background-color: #fff3e0; color: #f57c00; }-->
+# <!--                        .kanban-group-header {-->
+# <!--                            font-size: 14px;-->
+# <!--                            font-weight: 700;-->
+# <!--                            color: #667eea;-->
+# <!--                            text-transform: uppercase;-->
+# <!--                            letter-spacing: 1px;-->
+# <!--                            padding: 12px 0;-->
+# <!--                            border-bottom: 2px solid #667eea;-->
+# <!--                            margin-bottom: 16px;-->
+# <!--                        }-->
+# <!--                        .empty-state {-->
+# <!--                            text-align: center;-->
+# <!--                            padding: 40px 20px;-->
+# <!--                            color: #95a5a6;-->
+# <!--                        }-->
+# <!--                        .empty-state-icon {-->
+# <!--                            font-size: 48px;-->
+# <!--                            margin-bottom: 12px;-->
+# <!--                        }-->
+# <!--                    </style>-->
+# <!--                    <group>-->
+# <!--                        <div class="dashboard-header">-->
+# <!--                            <h1> Smart Society Dashboard</h1>-->
+# <!--                            <p>Real-time overview of society operations and resident management</p>-->
+# <!--                        </div>-->
+# <!--                        <group>-->
+# <!--                            <div class="row g-2">-->
+# <!--                                <div class="col-3">-->
+# <!--                                    <button type="object" name="sos_alerts"-->
+# <!--                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"-->
+# <!--                                            style="width:100%; height:70px; transition: all 0.3s ease;"-->
+# <!--                                            onmouseover="this.style.backgroundColor='#f8d7da'; this.style.boxShadow='0 6px 20px rgba(220, 53, 69, 0.4)';"-->
+# <!--                                            onmouseout="this.style.backgroundColor=''; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)';">-->
+# <!--                                         Emergency SOS Alert-->
+# <!--                                    </button>-->
+# <!--                                </div>-->
+# <!--                                <div class="col-3">-->
+# <!--                                    <button type="object" name="fire_alerts"-->
+# <!--                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"-->
+# <!--                                            style="width:100%; height:70px; transition: all 0.3s ease;"-->
+# <!--                                            onmouseover="this.style.backgroundColor='#f8d7da'; this.style.boxShadow='0 6px 20px rgba(220, 53, 69, 0.4)';"-->
+# <!--                                            onmouseout="this.style.backgroundColor=''; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)';">-->
+# <!--                                         Emergency FIRE Alert-->
+# <!--                                    </button>-->
+# <!--                                </div>-->
+# <!--                                <div class="col-3">-->
+# <!--                                    <button type="object" name="medical_panic_buttons"-->
+# <!--                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"-->
+# <!--                                            style="width:100%; height:70px; transition: all 0.3s ease;"-->
+# <!--                                            onmouseover="this.style.backgroundColor='#f8d7da'; this.style.boxShadow='0 6px 20px rgba(220, 53, 69, 0.4)';"-->
+# <!--                                            onmouseout="this.style.backgroundColor=''; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)';">-->
+# <!--                                         Medical/Panic Button-->
+# <!--                                    </button>-->
+# <!--                                </div>-->
+# <!--                                <div class="col-3">-->
+# <!--                                    <button type="object" name="emergency_broadcast"-->
+# <!--                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"-->
+# <!--                                            style="width:100%; height:70px; transition: all 0.3s ease;"-->
+# <!--                                            groups="smart_society.group_registration_committee,smart_society.group_registration_administration"-->
+# <!--                                            onmouseover="this.style.backgroundColor='#f8d7da'; this.style.boxShadow='0 6px 20px rgba(220, 53, 69, 0.4)';"-->
+# <!--                                            onmouseout="this.style.backgroundColor=''; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)';">-->
+# <!--                                         Emergency Broadcast-->
+# <!--                                    </button>-->
+# <!--                                </div>-->
+# <!--                            </div>-->
+# <!--                        </group>-->
+# <!--                        <group col="4" class="mt-3">-->
+# <!--                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">-->
+# <!--                                <strong style="font-size: 24px; display: block;">-->
+# <!--                                    <field name="total_notices" readonly="1"/>-->
+# <!--                                </strong>-->
+# <!--                                <span style="font-size: 12px; opacity: 0.9;">Total Notices</span>-->
+# <!--                            </div>-->
+# <!--                            <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">-->
+# <!--                                <strong style="font-size: 24px; display: block;">-->
+# <!--                                    <field name="total_events" readonly="1"/>-->
+# <!--                                </strong>-->
+# <!--                                <span style="font-size: 12px; opacity: 0.9;">Total Events</span>-->
+# <!--                            </div>-->
+# <!--                            <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">-->
+# <!--                                <strong style="font-size: 24px; display: block;">-->
+# <!--                                    <field name="total_complaints" readonly="1"/>-->
+# <!--                                </strong>-->
+# <!--                                <span style="font-size: 12px; opacity: 0.9;">Total Complaints</span>-->
+# <!--                            </div>-->
+# <!--                        </group>-->
+# <!--                    </group>-->
+# <!--                    <notebook>-->
+#
+# <!--                        &lt;!&ndash; Notices Kanban View &ndash;&gt;-->
+# <!--                        <page string=" Notices">-->
+# <!--                            <field name="notice_ids" readonly="1">-->
+# <!--                                <kanban default_group_by="stage">-->
+# <!--                                    <field name="name"/>-->
+# <!--                                    <field name="description"/>-->
+# <!--                                    <field name="create_date"/>-->
+# <!--                                    <field name="stage"/>-->
+# <!--                                    <templates>-->
+# <!--                                        <t t-name="card">-->
+# <!--                                            <div class="oe_kanban_card">-->
+# <!--                                                <div class="oe_kanban_content">-->
+# <!--                                                    <div class="oe_kanban_title">-->
+# <!--&lt;!&ndash;                                                        <span style="font-size: 16px;"></span>&ndash;&gt;-->
+# <!--                                                        <b><field name="name"/></b>-->
+# <!--                                                    </div>-->
+# <!--                                                    <div class="oe_kanban_text">-->
+# <!--                                                        <field name="description"/>-->
+# <!--                                                    </div>-->
+# <!--                                                    <div class="oe_kanban_footer">-->
+# <!--                                                        <small class="text-muted">-->
+# <!--&lt;!&ndash;                                                            <i class="fa fa-calendar"></i> &ndash;&gt;-->
+# <!--                                                            <field name="create_date"/>-->
+# <!--                                                        </small>-->
+# <!--                                                        <span class="status-badge badge-published">-->
+# <!--                                                            <field name="stage"/>-->
+# <!--                                                        </span>-->
+# <!--                                                    </div>-->
+# <!--                                                </div>-->
+# <!--                                            </div>-->
+# <!--                                        </t>-->
+# <!--                                    </templates>-->
+# <!--                                </kanban>-->
+# <!--                            </field>-->
+# <!--                        </page>-->
+#
+# <!--                        &lt;!&ndash; Events Kanban View &ndash;&gt;-->
+# <!--                        <page string=" Events">-->
+# <!--                            <field name="event_ids" readonly="1">-->
+# <!--                                <kanban default_group_by="stage">-->
+# <!--                                    <field name="name"/>-->
+# <!--                                    <field name="event_time_start"/>-->
+# <!--                                    <field name="event_time_end"/>-->
+# <!--                                    <field name="event_place"/>-->
+# <!--                                    <field name="stage"/>-->
+# <!--                                    <templates>-->
+# <!--                                        <t t-name="card">-->
+# <!--                                            <div class="oe_kanban_card">-->
+# <!--                                                <div class="oe_kanban_content">-->
+# <!--                                                    <div class="oe_kanban_title">-->
+# <!--&lt;!&ndash;                                                        <span style="font-size: 16px;"></span>&ndash;&gt;-->
+# <!--                                                        <b><field name="name"/></b>-->
+# <!--                                                    </div>-->
+# <!--                                                    <div class="oe_kanban_text">-->
+# <!--                                                        <p>-->
+# <!--                                                            <span style="display: inline-block; width: 90px;"> Location:</span>-->
+# <!--                                                            <strong><field name="event_place"/></strong>-->
+# <!--                                                        </p>-->
+# <!--                                                        <p>-->
+# <!--                                                            <span style="display: inline-block; width: 90px;"> Start:</span>-->
+# <!--                                                            <strong><field name="event_time_start"/></strong>-->
+# <!--                                                        </p>-->
+# <!--                                                        <p>-->
+# <!--                                                            <span style="display: inline-block; width: 90px;"> End:</span>-->
+# <!--                                                            <strong><field name="event_time_end"/></strong>-->
+# <!--                                                        </p>-->
+# <!--                                                    </div>-->
+# <!--                                                    <div class="oe_kanban_footer">-->
+# <!--                                                        <span class="status-badge badge-in-progress">-->
+# <!--                                                            <field name="stage"/>-->
+# <!--                                                        </span>-->
+# <!--                                                    </div>-->
+# <!--                                                </div>-->
+# <!--                                            </div>-->
+# <!--                                        </t>-->
+# <!--                                    </templates>-->
+# <!--                                </kanban>-->
+# <!--                            </field>-->
+# <!--                        </page>-->
+#
+# <!--                        &lt;!&ndash; Complaints Kanban View &ndash;&gt;-->
+# <!--                        <page string="Complaints">-->
+# <!--                            <field name="complaint_ids" readonly="1">-->
+# <!--                                <kanban default_group_by="stage">-->
+# <!--                                    <field name="name"/>-->
+# <!--                                    <field name="resident_id"/>-->
+# <!--                                    <field name="tower_id"/>-->
+# <!--                                    <field name="flat_id"/>-->
+# <!--                                    <field name="stage"/>-->
+# <!--                                    <field name="create_date"/>-->
+# <!--                                    <templates>-->
+# <!--                                        <t t-name="card">-->
+# <!--                                            <div class="oe_kanban_card">-->
+# <!--                                                <div class="oe_kanban_content">-->
+# <!--                                                    <div class="oe_kanban_title">-->
+# <!--&lt;!&ndash;                                                        <span style="font-size: 16px;"></span>&ndash;&gt;-->
+# <!--                                                        <b><field name="name"/></b>-->
+# <!--                                                    </div>-->
+# <!--                                                    <div class="oe_kanban_text">-->
+# <!--                                                        <p>-->
+# <!--                                                            <span style="display: inline-block; width: 90px; color: #667eea; font-weight: 600;"> Resident:</span>-->
+# <!--                                                            <field name="resident_id"/>-->
+# <!--                                                        </p>-->
+# <!--                                                        <p>-->
+# <!--                                                            <span style="display: inline-block; width: 90px; color: #667eea; font-weight: 600;"> Tower:</span>-->
+# <!--                                                            <field name="tower_id"/>-->
+# <!--                                                        </p>-->
+# <!--                                                        <p>-->
+# <!--                                                            <span style="display: inline-block; width: 90px; color: #667eea; font-weight: 600;"> Flat:</span>-->
+# <!--                                                            <field name="flat_id"/>-->
+# <!--                                                        </p>-->
+# <!--                                                    </div>-->
+# <!--                                                    <div class="oe_kanban_footer">-->
+# <!--                                                        <small class="text-muted">-->
+# <!--&lt;!&ndash;                                                            <i class="fa fa-clock-o"></i>&ndash;&gt;-->
+# <!--                                                            <field name="create_date"/>-->
+# <!--                                                        </small>-->
+# <!--                                                        <span class="status-badge badge-draft">-->
+# <!--                                                            <field name="stage"/>-->
+# <!--                                                        </span>-->
+# <!--                                                    </div>-->
+# <!--                                                </div>-->
+# <!--                                            </div>-->
+# <!--                                        </t>-->
+# <!--                                    </templates>-->
+# <!--                                </kanban>-->
+# <!--                            </field>-->
+# <!--                        </page>-->
+#
+# <!--                    </notebook>-->
+# <!--                </sheet>-->
+# <!--            </form>-->
+# <!--        </field>-->
+# <!--    </record>-->
+#
+# <!--</odoo>-->
+#
+#
+#
+# <!--<odoo>-->
+# <!--    <record id="view_dashboard_home_forms" model="ir.ui.view">-->
+# <!--        <field name="name">society.dashboard.form</field>-->
+# <!--        <field name="model">society.dashboard</field>-->
+# <!--        <field name="arch" type="xml">-->
+# <!--            <form string="Smart Society Dashboard">-->
+# <!--                <sheet>-->
+# <!--                    <group>-->
+# <!--                        <div class="oe_title">-->
+# <!--                            <h1>Society Dashboard</h1>-->
+# <!--                        </div>-->
+# <!--                        <group>-->
+# <!--                            <div class="row g-2">-->
+# <!--                                <div class="col-3">-->
+# <!--                                    <button type="object" name="sos_alerts"-->
+# <!--                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"-->
+# <!--                                            style="width:100%; height:70px;">Emergency SOS Alert-->
+# <!--                                    </button>-->
+# <!--                                </div>-->
+# <!--                                <div class="col-3">-->
+# <!--                                    <button type="object" name="fire_alerts"-->
+# <!--                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"-->
+# <!--                                            style="width:100%; height:70px;">Emergency FIRE Alert-->
+# <!--                                    </button>-->
+# <!--                                </div>-->
+# <!--                                <div class="col-3">-->
+# <!--                                    <button type="object" name="medical_panic_buttons"-->
+# <!--                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"-->
+# <!--                                            style="width:100%; height:70px;">-->
+# <!--                                        Medical/Panic Button-->
+# <!--                                    </button>-->
+# <!--                                </div>-->
+# <!--                                <div class="col-3">-->
+# <!--                                    <button type="object" name="emergency_broadcast"-->
+# <!--                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"-->
+# <!--                                            style="width:100%; height:70px;"-->
+# <!--                                            groups="smart_society.group_registration_committee,smart_society.group_registration_administration">-->
+# <!--                                        Emergency Broadcast Button-->
+# <!--                                    </button>-->
+# <!--                                </div>-->
+# <!--                            </div>-->
+# <!--                        </group>-->
+# <!--                        <group col="4">-->
+# <!--                            <field name="total_notices" readonly="1"/>-->
+# <!--                            <field name="total_events" readonly="1"/>-->
+# <!--                            <field name="total_complaints" readonly="1"/>-->
+# <!--&lt;!&ndash;                            <field name="total_visitors" readonly="1"/>&ndash;&gt;-->
+# <!--                        </group>-->
+# <!--                    </group>-->
+# <!--                    <notebook>-->
+#
+# <!--                        &lt;!&ndash; Notices Kanban View &ndash;&gt;-->
+# <!--                        <page string="Notices">-->
+# <!--                            <field name="notice_ids" readonly="1">-->
+# <!--                                <kanban default_group_by="stage">-->
+# <!--                                    <field name="name"/>-->
+# <!--                                    <field name="description"/>-->
+# <!--                                    <field name="create_date"/>-->
+# <!--                                    <field name="stage"/>-->
+# <!--                                    <templates>-->
+# <!--                                        <t t-name="card">-->
+# <!--                                            <div class="oe_kanban_card">-->
+# <!--                                                <div class="oe_kanban_content">-->
+# <!--                                                    <div class="oe_kanban_title">-->
+# <!--                                                        <b><field name="name"/></b>-->
+# <!--                                                    </div>-->
+# <!--                                                    <div class="oe_kanban_text">-->
+# <!--                                                        <field name="description"/>-->
+# <!--                                                    </div>-->
+# <!--                                                    <div class="oe_kanban_footer">-->
+# <!--                                                        <small class="text-muted">-->
+# <!--                                                            <field name="create_date"/>-->
+# <!--                                                        </small>-->
+# <!--                                                    </div>-->
+# <!--                                                </div>-->
+# <!--                                            </div>-->
+# <!--                                        </t>-->
+# <!--                                    </templates>-->
+# <!--                                </kanban>-->
+# <!--                            </field>-->
+# <!--                        </page>-->
+#
+# <!--                        &lt;!&ndash; Events Kanban View &ndash;&gt;-->
+# <!--                        <page string="Events">-->
+# <!--                            <field name="event_ids" readonly="1">-->
+# <!--                                <kanban default_group_by="stage">-->
+# <!--                                    <field name="name"/>-->
+# <!--                                    <field name="event_time_start"/>-->
+# <!--                                    <field name="event_time_end"/>-->
+# <!--                                    <field name="event_place"/>-->
+# <!--                                    <field name="stage"/>-->
+# <!--                                    <templates>-->
+# <!--                                        <t t-name="card">-->
+# <!--                                            <div class="oe_kanban_card">-->
+# <!--                                                <div class="oe_kanban_content">-->
+# <!--                                                    <div class="oe_kanban_title">-->
+# <!--                                                        <b><field name="name"/></b>-->
+# <!--                                                    </div>-->
+# <!--                                                    <div class="oe_kanban_text">-->
+# <!--                                                        <p>-->
+# <!--                                                            <strong>Location:</strong> <field name="event_place"/>-->
+# <!--                                                        </p>-->
+# <!--                                                        <p>-->
+# <!--                                                            <strong>Start:</strong> <field name="event_time_start"/><br/>-->
+# <!--                                                            <strong>End:</strong> <field name="event_time_end"/>-->
+# <!--                                                        </p>-->
+# <!--                                                    </div>-->
+# <!--                                                </div>-->
+# <!--                                            </div>-->
+# <!--                                        </t>-->
+# <!--                                    </templates>-->
+# <!--                                </kanban>-->
+# <!--                            </field>-->
+# <!--                        </page>-->
+#
+# <!--                        &lt;!&ndash; Complaints Kanban View &ndash;&gt;-->
+# <!--                        <page string="Complaints">-->
+# <!--                            <field name="complaint_ids" readonly="1">-->
+# <!--                                <kanban default_group_by="stage">-->
+# <!--                                    <field name="name"/>-->
+# <!--                                    <field name="resident_id"/>-->
+# <!--                                    <field name="tower_id"/>-->
+# <!--                                    <field name="flat_id"/>-->
+# <!--                                    <field name="stage"/>-->
+# <!--                                    <field name="create_date"/>-->
+# <!--                                    <templates>-->
+# <!--                                        <t t-name="card">-->
+# <!--                                            <div class="oe_kanban_card">-->
+# <!--                                                <div class="oe_kanban_content">-->
+# <!--                                                    <div class="oe_kanban_title">-->
+# <!--                                                        <b><field name="name"/></b>-->
+# <!--                                                    </div>-->
+# <!--                                                    <div class="oe_kanban_text">-->
+# <!--                                                        <p>-->
+# <!--                                                            <strong>Resident:</strong> <field name="resident_id"/><br/>-->
+# <!--                                                            <strong>Tower:</strong> <field name="tower_id"/><br/>-->
+# <!--                                                            <strong>Flat:</strong> <field name="flat_id"/>-->
+# <!--                                                        </p>-->
+# <!--                                                    </div>-->
+# <!--                                                    <div class="oe_kanban_footer">-->
+# <!--                                                        <small class="text-muted">-->
+# <!--                                                            <field name="create_date"/>-->
+# <!--                                                        </small>-->
+# <!--                                                    </div>-->
+# <!--                                                </div>-->
+# <!--                                            </div>-->
+# <!--                                        </t>-->
+# <!--                                    </templates>-->
+# <!--                                </kanban>-->
+# <!--                            </field>-->
+# <!--                        </page>-->
+#
+# <!--                    </notebook>-->
+# <!--                </sheet>-->
+# <!--            </form>-->
+# <!--        </field>-->
+# <!--    </record>-->
+#
+# <!--</odoo>-->
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# <!--<odoo>-->
+# <!--    <record id="view_dashboard_home_forms" model="ir.ui.view">-->
+# <!--        <field name="name">society.dashboard.form</field>-->
+# <!--        <field name="model">society.dashboard</field>-->
+# <!--        <field name="arch" type="xml">-->
+# <!--            <form string="Smart Society Dashboard">-->
+# <!--                <sheet>-->
+# <!--                    <group>-->
+# <!--                        <div class="oe_title">-->
+# <!--                            <h1>Society Dashboard</h1>-->
+# <!--                        </div>-->
+# <!--                        <group>-->
+# <!--                            <div class="row g-2">-->
+# <!--                                <div class="col-3">-->
+# <!--                                    <button type="object" name="sos_alerts"-->
+# <!--                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"-->
+# <!--                                            style="width:100%; height:70px;">Emergency SOS Alert-->
+# <!--                                    </button>-->
+# <!--                                </div>-->
+# <!--                                <div class="col-3">-->
+# <!--                                    <button type="object" name="fire_alerts"-->
+# <!--                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"-->
+# <!--                                            style="width:100%; height:70px;">Emergency FIRE Alert-->
+# <!--                                    </button>-->
+# <!--                                </div>-->
+# <!--                                <div class="col-3">-->
+# <!--                                    <button type="object" name="medical_panic_buttons"-->
+# <!--                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"-->
+# <!--                                            style="width:100%; height:70px;">-->
+# <!--                                        Medical/Panic Button-->
+# <!--                                    </button>-->
+# <!--                                </div>-->
+# <!--                                <div class="col-3">-->
+# <!--                                    <button type="object" name="emergency_broadcast"-->
+# <!--                                            class="btn bg-danger-subtle border border-danger border-2 rounded-3 shadow-sm text-danger fw-bold"-->
+# <!--                                            style="width:100%; height:70px;"-->
+# <!--                                            groups="smart_society.group_registration_committee,smart_society.group_registration_administration">-->
+# <!--                                        Emergency Broadcast Button-->
+# <!--                                    </button>-->
+# <!--                                </div>-->
+# <!--                            </div>-->
+# <!--                        </group>-->
+# <!--                        <group col="4">-->
+# <!--                            <field name="total_notices" readonly="1"/>-->
+# <!--                            <field name="total_events" readonly="1"/>-->
+# <!--                            <field name="total_complaints" readonly="1"/>-->
+# <!--&lt;!&ndash;                            <field name="total_visitors" readonly="1"/>&ndash;&gt;-->
+# <!--                        </group>-->
+# <!--                    </group>-->
+# <!--                    <notebook>-->
+#
+# <!--                        &lt;!&ndash; Notices &ndash;&gt;-->
+# <!--                        <page string="Notices">-->
+# <!--                            <field name="notice_ids" readonly="1">-->
+# <!--                                <list>-->
+# <!--                                    <field name="name"/>-->
+# <!--                                    <field name="description"/>-->
+# <!--                                    <field name="create_date"/>-->
+# <!--                                    <field name="stage"/>-->
+# <!--                                </list>-->
+# <!--                            </field>-->
+# <!--                        </page>-->
+# <!--                        &lt;!&ndash; Events &ndash;&gt;-->
+# <!--                        <page string="Events">-->
+# <!--                            <field name="event_ids" readonly="1">-->
+# <!--                                <list>-->
+# <!--                                    <field name="name"/>-->
+# <!--                                    <field name="event_time_start"/>-->
+# <!--                                    <field name="event_time_end"/>-->
+# <!--                                    <field name="event_place"/>-->
+# <!--                                    <field name="stage"/>-->
+# <!--                                </list>-->
+# <!--                            </field>-->
+# <!--                        </page>-->
+# <!--                        &lt;!&ndash; Complaints &ndash;&gt;-->
+# <!--                        <page string="Complaints">-->
+# <!--                            <field name="complaint_ids" readonly="1">-->
+# <!--                                <list>-->
+# <!--                                    <field name="name"/>-->
+# <!--                                    <field name="resident_id"/>-->
+# <!--                                    <field name="tower_id"/>-->
+# <!--                                    <field name="flat_id"/>-->
+# <!--                                    <field name="stage"/>-->
+# <!--                                    <field name="create_date"/>-->
+# <!--                                </list>-->
+# <!--                            </field>-->
+# <!--                        </page>-->
+# <!--                    </notebook>-->
+# <!--                </sheet>-->
+# <!--            </form>-->
+# <!--        </field>-->
+# <!--    </record>-->
+#
+# <!--</odoo>-->
+
+# <!--    <record id="society_alert_wizard_list_save" model="ir.ui.view">-->
+# <!--        <field name="name">society.alert.save.list</field>-->
+# <!--        <field name="model">society.alert.save</field>-->
+# <!--        <field name="arch" type="xml">-->
+# <!--            <list default_order="datetime desc">-->
+# <!--                <field name="name"/>-->
+# <!--                <field name="description" optional="hide"/>-->
+# <!--                <field name="flat_id"/>-->
+# <!--                <field name="tower_id"/>-->
+# <!--                <field name="user_id"/>-->
+# <!--                <field name="location"/>-->
+# <!--                <field name="alert_type" optional="hide"/>-->
+# <!--                <field name="datetime"/>-->
+# <!--            </list>-->
+# <!--        </field>-->
+# <!--    </record>-->
+#
+# <!--    <record id="society_alert_wizard_form_save" model="ir.ui.view">-->
+# <!--        <field name="name">society.alert.save.form</field>-->
+# <!--        <field name="model">society.alert.save</field>-->
+# <!--        <field name="arch" type="xml">-->
+# <!--            <form string="Alert">-->
+# <!--                <sheet>-->
+# <!--                    <group>-->
+# <!--                        <field name="name"/>-->
+# <!--                        <field name="description"/>-->
+# <!--                        <field name="to_committee"/>-->
+# <!--                        <field name="flat_id"/>-->
+# <!--                        <field name="tower_id"/>-->
+# <!--                        <field name="user_id"/>-->
+# <!--                        <field name="location"/>-->
+# <!--                        <field name="alert_type"/>-->
+# <!--                        <field name="datetime"/>-->
+# <!--                    </group>-->
+# <!--                </sheet>-->
+# <!--                <chatter/>-->
+# <!--            </form>-->
+# <!--        </field>-->
+# <!--    </record>-->
+#
+#
+# <!--    <record id="society_emergency_broadcast_wizard_list_save" model="ir.ui.view">-->
+# <!--        <field name="name">emergency.broadcast.save.list</field>-->
+# <!--        <field name="model">emergency.broadcast.save</field>-->
+# <!--        <field name="arch" type="xml">-->
+# <!--            <list default_order="datetime desc">-->
+# <!--                <field name="name"/>-->
+# <!--                <field name="description"/>-->
+# <!--                <field name="tower_ids"/>-->
+# <!--                <field name="flat_ids"/>-->
+# <!--                <field name="datetime"/>-->
+# <!--            </list>-->
+# <!--        </field>-->
+# <!--    </record>-->
+#
+# <!--    <record id="society_emergency_broadcast_wizard_save" model="ir.ui.view">-->
+# <!--        <field name="name">emergency.broadcast.save.form</field>-->
+# <!--        <field name="model">emergency.broadcast.save</field>-->
+# <!--        <field name="arch" type="xml">-->
+# <!--            <form string="Emergency">-->
+# <!--                <sheet>-->
+# <!--                    <group>-->
+# <!--                        <field name="name"/>-->
+# <!--                        <field name="description"/>-->
+# <!--                        <field name="tower_ids" widget="many2many_tags"/>-->
+# <!--                        <field name="flat_ids" widget="many2many_tags" invisible="tower_ids"/>-->
+# <!--                        <field name="datetime"/>-->
+# <!--                    </group>-->
+# <!--                </sheet>-->
+# <!--                <chatter/>-->
+# <!--            </form>-->
+# <!--        </field>-->
+# <!--    </record>-->
+#
+#
+#
+#         <!--                                <div class="col-3" style="cursor:pointer;" name="fire_alert">-->
+#         <!--                                    <div class="card bg-danger-subtle border-danger border-2 rounded-3 text-center shadow-sm py-2 px-2"-->
+#         <!--                                         style="height:70px;">-->
+#         <!--                                        <div class="text-danger fw-bold small">Fire Alert</div>-->
+#         <!--                                    </div>-->
+#         <!--                                </div>-->
+#
+#         <!--                                <div class="col-3" style="cursor:pointer;" action="medical_panic_button">-->
+#         <!--                                    <div class="card bg-danger-subtle border-danger border-2 rounded-3 text-center shadow-sm py-2 px-2"-->
+#         <!--                                         style="height:70px;">-->
+#         <!--                                        <div class="text-danger fw-bold small">Medical / Panic</div>-->
+#         <!--                                    </div>-->
+#         <!--                                </div>-->
+#
+#         <!--                                <div class="col-3" style="cursor:pointer;" action="emergency_broadcast">-->
+#         <!--                                    <div class="card bg-danger-subtle border-danger border-2 rounded-3 text-center shadow-sm py-2 px-2"-->
+#         <!--                                         style="height:70px;">-->
+#         <!--                                        <div class="text-danger fw-bold small">Emergency Broadcast</div>-->
+#         <!--                                    </div>-->
+#         <!--                                </div>-->
 # John Smith  Shilp Aron Society Committee
 #
 # john_smith@example.com

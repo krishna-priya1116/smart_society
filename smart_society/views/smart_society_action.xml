@@ -151,6 +151,19 @@
         <field name="view_mode">list,form</field>
     </record>
 
+
+    <record id="view_security_documents_action" model="ir.actions.act_window">
+        <field name="name">Security Document</field>
+        <field name="res_model">security.guard.document</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+        <record id="view_resident_documents_action" model="ir.actions.act_window">
+        <field name="name">Resident Document</field>
+        <field name="res_model">resident.proof</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
     <record id="view_block_committee_action" model="ir.actions.act_window">
         <field name="name">Block Committee</field>
         <field name="res_model">block.committee</field>

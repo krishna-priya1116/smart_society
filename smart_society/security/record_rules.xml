@@ -104,7 +104,7 @@
             <field name="groups" eval="[(4,ref('smart_society.group_registration_block_committee'))]"/>
             <field name="domain_force">[
                 ('tower_id', '=', user.tower_id.id),
-                ('tower_id.block', '=', user.block)
+                ('tower_id.block', '=', user.tower_id.block)
                 ]
             </field>
         </record>
@@ -126,7 +126,8 @@
             <field name="groups"
                    eval="[(4, ref('smart_society.group_registration_committee'))]"/>
             <field name="domain_force">
-                [('tower_id','=',user.tower_id.id),('stage', '=', 'not_resolved_tower')]
+                [('stage', '=', 'not_resolved_tower')]
+<!--                ('tower_id','=',user.tower_id.id),-->
             </field>
         </record>
 
